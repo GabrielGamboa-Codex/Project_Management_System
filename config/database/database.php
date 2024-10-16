@@ -4,7 +4,6 @@ include 'rb.php';
 //Conexion a la Base De Datos
 try {
     $conexion = R::setup('mysql:host=localhost;dbname=db_project_management_system', 'root', '');
-    echo "Me Conecte Becerro";
 } catch (PDOException $e) {
     echo $e . "No me conecte";
 }
@@ -31,10 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (isset($bean->created_at)) {
             //Actualizar
-            $bean->username = $nombre;
-            $bean->email = $estatus;
-            $bean->password= $descripcion;
-            $beam->team_id= $team;
+            $bean->username = $name;
+            $bean->email = $email;
+            $bean->password= $pass;
+            $bean->team_id= $team;
             $bean->updated_at = $date;
         } else {
             //Crear
@@ -51,3 +50,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 }
+
+// Leer y actualizar LA PAGINA y buscar los datos
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    
+    $resultados = R::find('users');
+            foreach ($resultados as $resultado) {
+                //trae el id de la fila a buscar
+                echo '<tr id="fila-' . $resultado->id . '">';
+                echo '<td>' . $resultado->id . '</td>';
+                //las clases para encontrar las filas
+                echo '<td>' . $resultado->username . '</td>';
+                echo '<td>' . $resultado->email . '</td>';
+                echo '<td>' . $resultado->team_id . '</td>';
+                echo '<td>' . $resultado->created_at . '</td>';
+                echo '<td>' . $resultado->updated_at . '</td>';
+                echo '<td><button type="submit" id="btn-actualizar" class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalTarea" data-id="' . $resultado->id . '">Editar Tarea <i class="bi bi-pencil-square"></i></button></td>';
+                echo '<td><button data-bs-toggle="modal" data-bs-target="#modalEliminar" class="btn btn-danger eliminar" data-id="' . $resultado->id . '">Eliminar <i class="bi bi-trash"></i></button></td>';
+                echo '</tr>';
+            }
+        }
+    

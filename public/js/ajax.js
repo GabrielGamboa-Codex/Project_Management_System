@@ -82,4 +82,15 @@ $(document).ready(function () {
       
   });
 
+  // Obtener datos
+  function loadData() {
+    $.ajax({
+      url: "/Project_Management_System/config/database/database.php",
+      type: "GET",
+      success: function (response) {
+        $("#userTable").html(response);
+         }
+        });
+      }
+  loadData();       
 });           
