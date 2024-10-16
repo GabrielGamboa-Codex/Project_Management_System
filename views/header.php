@@ -7,6 +7,7 @@
      <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css">
      <link rel="stylesheet" href="../public/bootstrap-icons/font/bootstrap-icons.min.css">
      <link rel="stylesheet" href="../public/datatable/datatables.min.css">
+     <link rel="stylesheet" href="../public/datatable/dataTables.bootstrap5.css">
 </head>
 <body>
 
@@ -41,4 +42,5 @@
 <script src="../public/js/jquery-3.7.1.min.js"></script>
 <script src="../public/bootstrap/js/bootstrap.min.js"></script>
 <script src="../public/datatable/datatables.min.js"></script>
+<script src="../public/datatable/dataTables.bootstrap5.js"></script>
 <script src="../public/js/ajax.js"></script>

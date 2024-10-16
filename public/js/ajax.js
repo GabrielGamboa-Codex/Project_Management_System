@@ -1,5 +1,7 @@
 console.log("Hola");
 
+
+
 //Validaciones
 function validation(event) {
     var char = String.fromCharCode(event.which);
@@ -48,7 +50,7 @@ function validateData(formData) {
   //Metodo Ajax
 $(document).ready(function () {
       
-    
+  new DataTable('#example');
     // Crear  datos
 
   $("#registerUser").click(function () {
