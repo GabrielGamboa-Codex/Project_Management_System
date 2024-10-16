@@ -68,7 +68,7 @@ $(document).ready(function () {
         return false;
       }
         $.ajax({
-          url: "/Project_Management_System/models/user.models.php",
+          url: "/Project_Management_System/models/user.controller.php",
           method: "POST",
           data: formData,
           success: function (response) {

@@ -8,22 +8,16 @@ class UsernameModel
     public $email;
     public $pass;
     public $team;
+    public $date;
 
     public function __construct()
     {
         include "../config/database/database.php";
     }
 
-    public function insertUser($id, $name, $email, $pass, $team)
+    public function insertUser($id, $name, $email, $pass, $team, $date)
     {
-        // Crear o actualizar
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $pass = $_POST['password'];
-    $team = $_POST['team'];
-    $date = date('Y-m-d H:i:s');
-
+    
 
     if ($id) {
         $bean = R::load('users', $id);

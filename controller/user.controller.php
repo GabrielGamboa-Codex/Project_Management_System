@@ -1,25 +1,17 @@
 <?php
 //Clase de Usuarios
-class User{
-    
-    
-    //Contructor Property Promotion
-    public function __construct(public $username,public $email,public $password)
-    {
-        $this->username=$username;
-        $this->email=$email;
-        $this->password=$password;
-    }
+include '../models/user.models.php';
 
-    public function Show()
-    {
-        echo "Hola Soy ". $this->username;
-    }
-}
+$user = new UsernameModel;
 
-$gabo = new User("Gabo","gg@ff.com","123");
-
-$gabo -> Show();
+$user->insertUser(    
+    // Crear o actualizar
+    $id = $_POST['id'],
+    $name = $_POST['name'],
+    $email = $_POST['email'],
+    $pass = $_POST['password'],
+    $team = $_POST['team'],
+    $date = date('Y-m-d H:i:s'));
 
 
 
