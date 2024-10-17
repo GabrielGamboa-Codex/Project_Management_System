@@ -1,45 +1,64 @@
 <?php
+include "connection.model.php";
 
-class UsernameModel
+class UsernameModel extends Database
 {
+    private $pdo;
+    private $id;
+    private $name;
+    private $email;
+    private $pass;
+    private $team;
     
-    public $id;
-    public $name;
-    public $email;
-    public $pass;
-    public $team;
-    public $date;
+
+    
 
     public function __construct()
     {
-        include "../config/database/database.php";
+            $this->pdo = Database::Connection();    
     }
 
-    public function insertUser($id, $name, $email, $pass, $team, $date)
+    public function getUserid(){
+        return $this->id;        
+    }
+
+    public function setUserid($id)
     {
+        $this->id = $id;
+    }
     
-
-    if ($id) {
-        $bean = R::load('users', $id);
-    } else {
-        $bean = R::dispense('users');
+    public function getUsername(){
+        return $this->name;        
     }
 
-            //Crear
-            $bean->username = $name;
-            $bean->email = $email;
-            $bean->password= $pass;
-            $bean->team_id= $team;
-            $bean->updated_at = $date;
-            $bean->created_at = $date;
-
-
-
-            R::store($bean);
-            return $bean;
+    public function setUsername($name)
+    {
+        $this->name = $name;
+    }
+    public function getUseremail(){
+        return $this->email;        
     }
 
-    
+    public function setUseremail($email)
+    {
+        $this->email = $email;
+    }
+    public function getUserpass(){
+        return $this->pass;        
+    }
+
+    public function setUserpass($pass)
+    {
+        $this->pass = $pass;
+    }
+    public function getUserteam(){
+        return $this->team;        
+    }
+
+    public function setUserteam($team)
+    {
+        $this->id = $team;
+    } 
 }
 
 

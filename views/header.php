@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Parte del Header -->
-     <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css">
-     <link rel="stylesheet" href="../public/bootstrap-icons/font/bootstrap-icons.min.css">
-     <link rel="stylesheet" href="../public/datatable/datatables.min.css">
-     <link rel="stylesheet" href="../public/datatable/dataTables.bootstrap5.css">
+     <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css">
+     <link rel="stylesheet" href="public/bootstrap-icons/font/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="public/datatable/datatables.min.css">
+     <link rel="stylesheet" href="public/datatable/dataTables.bootstrap5.css">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand"  href="#">
-    <img src="../public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+    <img src="public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         Project Management System
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
           <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="users.views.php">User</a>
+          <a class="nav-link" href="views/users.views.php">User</a>
         </li>
       </ul>
     </div>
@@ -39,8 +39,8 @@
 </nav>
 
 
-<script src="../public/js/jquery-3.7.1.min.js"></script>
-<script src="../public/bootstrap/js/bootstrap.min.js"></script>
-<script src="../public/datatable/datatables.min.js"></script>
-<script src="../public/datatable/dataTables.bootstrap5.js"></script>
-<script src="../public/js/ajax.js"></script>
+<script src="public/js/jquery-3.7.1.min.js"></script>
+<script src="public/bootstrap/js/bootstrap.min.js"></script>
+<script src="public/datatable/datatables.min.js"></script>
+<script src="public/datatable/dataTables.bootstrap5.js"></script>
+<script src="public/js/ajax.js"></script>
