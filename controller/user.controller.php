@@ -12,7 +12,7 @@ $date = date('Y-m-d H:i:s');
 
 $user = new UsernameModel;
 
-$user->insertUser($id, $name, $email,$pass,$team,$date);
+
 
 
 

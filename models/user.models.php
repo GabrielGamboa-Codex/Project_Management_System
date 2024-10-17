@@ -12,7 +12,8 @@ class UsernameModel extends Database
     
 
     
-
+// Funciones para con el Getter traer el las variables
+//y con el Setter darles un valor que se extrae por fuera con la clase
     public function __construct()
     {
             $this->pdo = Database::Connection();    
@@ -59,8 +60,26 @@ class UsernameModel extends Database
     {
         $this->id = $team;
     } 
+
+    public function readUser()
+    {
+        $bean = R::find("users");
+        foreach ($bean as $resultado) {
+            //trae el id de la fila a buscar
+            echo '<tr id="fila-' . $resultado->id . '">';
+            echo '<td>' . $resultado->id . '</td>';
+            //las clases para encontrar las filas
+            echo '<td class="col-nombre">' . $resultado->username . '</td>';
+            echo '<td class="col-descripcion">' . $resultado->email . '</td>';
+            echo '<td class="col-estatus">' . $resultado->team_id . '</td>';
+            echo '<td>' . $resultado->created_at . '</td>';
+            echo '<td>' . $resultado->updated_at . '</td>';
+            echo '<td><button type="submit" id="btn-actualizar" class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalTarea" data-id="' . $resultado->id . '">Editar Tarea <i class="bi bi-pencil-square"></i></button></td>';
+            echo '<td><button data-bs-toggle="modal" data-bs-target="#modalEliminar" class="btn btn-danger eliminar" data-id="' . $resultado->id . '">Eliminar <i class="bi bi-trash"></i></button></td>';
+            echo '</tr>';
+        }
+    }
+
 }
 
 
-
-?>
