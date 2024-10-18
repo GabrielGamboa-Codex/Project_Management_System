@@ -31,7 +31,7 @@
           <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="views/users.views.php">User</a>
+          <a class="nav-link" href="user.controller.php">User</a>
         </li>
       </ul>
     </div>
@@ -39,8 +39,4 @@
 </nav>
 
 
-<script src="public/js/jquery-3.7.1.min.js"></script>
-<script src="public/bootstrap/js/bootstrap.min.js"></script>
-<script src="public/datatable/datatables.min.js"></script>
-<script src="public/datatable/dataTables.bootstrap5.js"></script>
-<script src="public/js/ajax.js"></script>
+

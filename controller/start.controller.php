@@ -1,4 +1,5 @@
 <?php
+include "models/user.models.php";
 
 class StartController
 {
@@ -6,13 +7,13 @@ class StartController
 
     public function __construct()
     {
-        //$this->model = new Productos;
+        
     }
     public function Start()
     {
-        $conection = Database::Connection();
         require_once "views/header.php";
         require_once "views/home.view.php";
+        
     }
 }
 

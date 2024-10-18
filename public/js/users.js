@@ -1,5 +1,8 @@
 console.log("Hola");
-
+  //Metodo Ajax
+  $('.achu').on('click',function(){
+    console.log('Touch');
+ })
 
 
 //Validaciones
@@ -47,50 +50,7 @@ function validateData(formData) {
     return true;
   }
 
-  //Metodo Ajax
-$(document).ready(function () {
-      
-  new DataTable('#example');
-    // Crear  datos
 
-  $("#registerUser").click(function () {
-    var formData = {
-        id: $("#id").val().trim(),
-        name: $("#user_name").val().trim(),
-        email: $("#user_email").val().trim(),      
-        password: $("#user_pass").val(),
-        team: $("#user_team").val().trim(),
-      };
-        console.log(formData);
 
-      // Validar campos vacíos y contenido adecuado
-      if (!validateData(formData)) {
-        return false;
-      }
-        $.ajax({
-          url: "/Project_Management_System/models/user.controller.php",
-          method: "POST",
-          data: formData,
-          success: function (response) {
-            console.log(response);
-            //$("#resultados").html(response);
-            $("#create_user")[0].reset();
-            $("#createUsermodal").modal("hide"); // Cierra el modal después de la actualización
-            alert("Se ha Creado un Nuevo Usuario");
-          },
-        });
-      
-  });
-
-  // Obtener datos
-  function loadData() {
-    $.ajax({
-      url: "/Project_Management_System/config/database/database.php",
-      type: "GET",
-      success: function (response) {
-        $("#userTable").html(response);
-         }
-        });
-      }
-  loadData();       
-});           
+          
+             

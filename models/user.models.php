@@ -1,7 +1,6 @@
 <?php
-include "connection.model.php";
 
-class UsernameModel extends Database
+class UserModel 
 {
     private $pdo;
     private $id;
@@ -58,7 +57,13 @@ class UsernameModel extends Database
     public function setUserteam($team)
     {
         $this->id = $team;
-    } 
+    }
+    
+    public  function showTable()
+    {
+        $result = R::find('users');      
+        return $result;
+    }
 }
 
 

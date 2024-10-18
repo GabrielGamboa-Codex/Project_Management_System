@@ -1,12 +1,12 @@
 <?php
-include "controller/controller.database.php";
+include "config/database/database.php";
 include "config/database/rb.php";
 //FRONTCONTROLLER ;
 //Si no hay ningun controllador devolver al controlador de la vistas
 //Sirve para manejar el envio de informacion del controlador por la URL
 if(!isset($_GET['c'])){
-    require_once "controller/start.controller.php";
-    $controller = new StartController();
+    require "controller/user.controller.php";
+    $controller = new UserController();
     //Me va a llamar a el metodo de un objeto que yo le indique y luego su metodo
     call_user_func(array($controller,"Start"));
 }

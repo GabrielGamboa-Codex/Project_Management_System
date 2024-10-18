@@ -1,20 +1,28 @@
 <?php
 //Clase de Usuarios
-include '../models/user.models.php';
+class UserController
+{
+    public function __construct() {
+       
+    }
+    public function Start()
+    {
+        require_once "views/header.php";
+        require_once "views/users.views.php";
+        require "models/user.models.php";
 
-// Crear o actualizar
-$id = $_POST['id'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$pass = $_POST['password'];
-$team = $_POST['team'];
-$date = date('Y-m-d H:i:s');
+    }
 
-$user = new UsernameModel;
-
-$user->insertUser($id, $name, $email,$pass,$team,$date);
-
+    public function showTable()
+    {
+        $userModel = new UserModel;
+        $data = $userModel->showTable();
+        return json_encode($data);
+        
+    }
+}
 
 
 
+        
 ?>
