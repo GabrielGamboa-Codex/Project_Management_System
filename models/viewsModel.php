@@ -21,7 +21,7 @@
                 }
                 else
                 {
-                    $content ="404";
+                    $content ="404View";
                 }
                 
             }
@@ -31,7 +31,7 @@
             }
             else
             {
-                $content ="404";
+                $content ="404View";
             }
             return $content;
         }

@@ -33,7 +33,7 @@
     $viewsController = new viewsController();
     //Guarda la Url de la vista
     $view =  $viewsController->obtainViewsController($url[0]);
-    if($view == "usersView" || $view == "404")
+    if($view == "usersView" || $view == "404View")
     {
         require_once "./views/".$view.".php";
     }

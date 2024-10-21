@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand"  href="#">
+    <a class="navbar-brand"  href="http://localhost/Project_Management_System/Project_Management_System/">
     <img src="public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         Project Management System
     </a>
@@ -31,7 +31,7 @@
           <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="user.controller.php">User</a>
+          <a class="nav-link" href="http://localhost/Project_Management_System/Project_Management_System/views/usersView.php">User</a>
         </li>
       </ul>
     </div>
