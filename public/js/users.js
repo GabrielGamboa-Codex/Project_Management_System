@@ -1,8 +1,5 @@
 console.log("Hola");
-  //Metodo Ajax
-  $('.achu').on('click',function(){
-    console.log('Touch');
- })
+
 
 
 //Validaciones
@@ -50,7 +47,17 @@ function validateData(formData) {
     return true;
   }
 
-
+  //Metodo Ajax
+  $(document).ready(function() {
+    $('#usuarios').DataTable({
+        "ajax": "get_user.php",
+        "columns": [
+            { "data": "id" },
+            { "data": "username" },
+            { "data": "email" }
+        ]
+    });
+});
 
           
              

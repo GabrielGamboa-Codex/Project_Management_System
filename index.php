@@ -1,26 +1,48 @@
 <?php
-include "config/database/database.php";
-include "config/database/rb.php";
-//FRONTCONTROLLER ;
-//Si no hay ningun controllador devolver al controlador de la vistas
-//Sirve para manejar el envio de informacion del controlador por la URL
-if(!isset($_GET['c'])){
-    require "controller/user.controller.php";
-    $controller = new UserController();
-    //Me va a llamar a el metodo de un objeto que yo le indique y luego su metodo
-    call_user_func(array($controller,"Start"));
-}
-else{
-     
-    $controller = $_GET['c'];
-    require_once "controller/$controller.controller.php";
-    //ucwords pasa el primer caracter de la variable a Mayusculas
-    $controller = ucwords($controller)."Controller"; 
-    //hago instancia del controlador
-    $controller = new $controller;
-    //cargue una visa de inicio
-    $action = isset($_GET['a']) ? $_GET['a'] : "Start";
-    call_user_func(array($controller,$action));
-}
+  require_once "./autoload.php";
+  require_once "config/database/database.php";
+ 
+  //obtener el valor de una variable tipo get
+  //llamado views la cual se inicializo en el htcasses
 
+  if(isset($_GET['views']))
+  {
+    //parte en pedazos un estring mediante un caracter
+        $url =explode("/",$_GET['views']);
+  }
+  else
+  {
+        $url= ['usersView'];
+  }
 ?> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Managetment System</title>
+    <?php require_once "views/header.php"; ?>
+</head>
+<body>
+    
+<?php
+//llamo al controlador
+    use controllers\viewsController;
+//instancio la clase
+    $viewsController = new viewsController();
+    //Guarda la Url de la vista
+    $view =  $viewsController->obtainViewsController($url[0]);
+    if($view == "usersView" || $view == "404")
+    {
+        require_once "./views/".$view.".php";
+    }
+    else
+    {
+        require_once $view; 
+    }
+
+    require_once "views/footer.php";
+?>
+</body>
+</html>
