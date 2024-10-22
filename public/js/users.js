@@ -50,11 +50,18 @@ function validateData(formData) {
   //Metodo Ajax
   $(document).ready(function() {
     $('#usuarios').DataTable({
-        "ajax": "get_user.php",
+        "ajax": {
+            "url": "handler/get_user.php",
+            "type": "GET",
+            "dataSrc": "data"
+        },
         "columns": [
             { "data": "id" },
             { "data": "username" },
-            { "data": "email" }
+            { "data": "email" },
+            { "data": "team_id" },  // Incluye esta columna si la necesitas
+            { "data": "created_at" },
+            { "data": "updated_at" }
         ]
     });
 });

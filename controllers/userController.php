@@ -1,24 +1,25 @@
 <?php
-class userController
+include "./models/userModels.php";
+class userController extends userModel
 {
+    function printTable()
+    {
+        $stmt = $this->readUsers();
+        $user_arr = array();
+        foreach ($stmt as $user) {
+            $user_arr[] = array(
+                "id" => $user->id,
+                "username" => $user->username,
+                "email" => $user->email,
+                "team_id" => $user->team_id,
+                "created_at" => $user->created_at,
+                "updated_at" => $user->updated_at
+                );
+            }
+            return $user_arr;
 
-function __construct()
-{
-    $usuarios_arr = array();
-foreach ($stmt as $usuario) {
-    $usuarios_arr[] = array(
-        "id" => $usuario->id,
-        "username" => $usuario->username,
-        "email" => $usuario->email,
-        "team_id" => $usuario->team_id,
-        "created_at" => $usuario->created_at,
-        "updated_at" => $usuario->updated_at,
-    );  
+    }
 }
-}
-
-}
-
 
 
 ?>
