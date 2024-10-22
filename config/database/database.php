@@ -1,13 +1,16 @@
 <?php
+include "rb.php";
+class Database {
+    public $conn;
 
-include 'rb.php';
-//Conexion a la Base De Datos
-try {
-    $conexion = R::setup('mysql:host=localhost;dbname=db_project_management_system', 'root', '');
-} catch (PDOException $e) {
-    echo $e . "No me conecte";
+    public function getConnection() {
+        $this->conn = null;
+        try {
+            $this->conn = R::setup('mysql:host=localhost;dbname=db_project_management_system', 'root', '');
+        } catch(PDOException $exception) {
+            echo "Connection error: " . $exception->getMessage();
+        }
+        return $this->conn;
+    }
 }
-
-
-
-    
+?>
