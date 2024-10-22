@@ -49,10 +49,9 @@ function validateData(formData) {
 
   //Metodo Ajax
   $(document).ready(function() {
-    $('#usuarios').DataTable({
+    $('#UserTable').DataTable({
         "ajax": {
             "url": "handler/get_user.php",
-            "type": "GET",
             "dataSrc": "data"
         },
         "columns": [

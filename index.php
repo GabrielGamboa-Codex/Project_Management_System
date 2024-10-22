@@ -1,4 +1,8 @@
+<?php
 
+    include "views/header.php";
+    include "config/database/database.php"
+?>
 <body>
     <br>
     <br>
@@ -86,7 +90,12 @@
                             <p class="fw-bold">Select Team</p>
                         </label>
                         <select class="form-select" id="user_team" aria-label="selectTeam">
-                       
+                        <?php  $conn = new Database;
+                        $selection = $conn->getConnection();
+                        $selection= R::find('teams');?>
+                        <?php foreach($selection as $select):?>
+                            <option value="<?php echo $select['id'] ?>"><?php echo $select['name']?></option>
+                        <?php endforeach;?>  
                         </select>
 
 
@@ -102,10 +111,11 @@
     </div>
     
 
-
+<script src="public/js/jquery-3.7.1.min.js"></script>
+<script src="public/bootstrap/js/bootstrap.min.js"></script>
+<script src="public/datatable/datatables.min.js"></script>
+<script src="public/datatable/dataTables.bootstrap5.js"></script>
 <script src="public/js/users.js"></script>
-
-
 </body>
 
 </html>
