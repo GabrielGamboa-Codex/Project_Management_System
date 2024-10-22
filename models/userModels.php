@@ -1,5 +1,5 @@
 <?php
-require './config/database.php';
+require '../config/database/database.php';
 class userModel extends Database{
 
     public $conn;

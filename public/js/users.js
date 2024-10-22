@@ -1,7 +1,5 @@
 console.log("Hola");
 
-
-
 //Validaciones
 function validation(event) {
     var char = String.fromCharCode(event.which);

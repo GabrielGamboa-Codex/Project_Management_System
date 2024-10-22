@@ -1,6 +1,6 @@
 <?php
 
-include "controllers/userController.php";
+include "../controllers/userController.php";
 
 $conn = new userController;
 $show =$conn->printTable();

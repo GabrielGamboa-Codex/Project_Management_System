@@ -1,5 +1,5 @@
 <?php
-include "./models/userModels.php";
+include "../models/userModels.php";
 class userController extends userModel
 {
     function printTable()
