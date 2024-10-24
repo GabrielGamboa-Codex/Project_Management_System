@@ -2,11 +2,13 @@
 include "../models/userModels.php";
 class userController extends userModel
 {
-    function printTable()
+    //Funcion para guardar los datos en un arreglo e imprimirlo
+    public function printTable()
     {
-        $stmt = $this->readUsers();
+        $users = userModel::all();
+;
         $user_arr = array();
-        foreach ($stmt as $user) {
+        foreach ($users as $user) {
             $user_arr[] = array(
                 "id" => $user->id,
                 "username" => $user->username,
@@ -16,9 +18,16 @@ class userController extends userModel
                 "updated_at" => $user->updated_at
                 );
             }
-            return $user_arr;
-
+            //indexas el arreglo con el string data
+            echo json_encode(array("data" => $user_arr));
     }
+
+    public function userCreate($username,$email,$pass,$team_id)
+    {
+         $this->createUser($username,$email,$pass,$team_id);
+    }
+
+
 }
 
 

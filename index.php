@@ -1,7 +1,5 @@
 <?php
-
     include "views/header.php";
-    include "config/database/database.php"
 ?>
 <body>
     <br>
@@ -28,7 +26,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-            <table id="UserTable" class="table table-bordered table-striped" style="width:80%">
+            <table id="userTable" class="table table-bordered table-striped" style="width:80%">
         <thead>
             <tr>
                 <th>id</th>
@@ -39,7 +37,7 @@
                 <th>Updated_at</th>
             </tr>
         </thead>
-        <tbody id=""></tbody>
+        <tbody id="result"></tbody>
         <tfoot>
             <tr>
             <th>id</th>
@@ -90,12 +88,12 @@
                             <p class="fw-bold">Select Team</p>
                         </label>
                         <select class="form-select" id="user_team" aria-label="selectTeam">
-                        <?php  $conn = new Database;
-                        $selection = $conn->getConnection();
-                        $selection= R::find('teams');?>
-                        <?php foreach($selection as $select):?>
-                            <option value="<?php echo $select['id'] ?>"><?php echo $select['name']?></option>
-                        <?php endforeach;?>  
+                            <option value="1">Management</option>
+                            <option value="2">Development</option>
+                            <option value="3">Design</option>  
+                            <option value="4">Testing</option>
+                            <option value="5">Meeting</option>
+                            <option value="6">Code Exploitation</option>
                         </select>
 
 
