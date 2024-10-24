@@ -13,7 +13,7 @@
 
 <!-- Barra de Navegacion-->
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-warning bg-opacity-75">
   <div class="container-fluid">
     <a class="navbar-brand"  href="">
     <img src="public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">

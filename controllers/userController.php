@@ -22,11 +22,23 @@ class userController extends userModel
             echo json_encode(array("data" => $user_arr));
     }
 
+    //envia los datos al modelo para crear un usuario
     public function userCreate($username,$email,$pass,$team_id)
     {
          $this->createUser($username,$email,$pass,$team_id);
     }
 
+    //envia los datos al modelo para editar un usuario
+    public function userEdit($id,$username,$email,$pass,$team_id)
+    {
+         $this->editUser($id,$username,$email,$pass,$team_id);
+    }
+
+    //envia los datos al modelo para editar un usuario
+    public function userDelete($id)
+    {
+         $this->deleteUser($id);
+    }
 
 }
 
