@@ -225,6 +225,11 @@ $(document).ready(function () {
     ],
   });
 
+  // Añade un cursor pointer a todas las filas de la tabla
+  $('#userTable tbody').on('mouseenter', 'tr', function () {
+    $(this).addClass('pointer');
+});
+
   // funcion para recargar la tabla
   function loadTable() {
     userTable.ajax.reload();
