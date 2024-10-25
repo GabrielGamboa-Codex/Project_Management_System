@@ -4,30 +4,20 @@ include "views/header.php";
 
 <body class="bg-body-tertiary">
     <br>
+        <h3 class="text-center">User List</h3>
     <br>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col align-self-start">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">
-                    <i class="bi bi-plus-circle-fill"></i> Create New User
-                </button>
-            </div>
-            <div class="col align-self-center">
-
-            </div>
-            <div class="col align-self-end">
-
-            </div>
+        <div class="container">
+            <!-- Button Crear nuevo Usuario-->
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">
+                                <i class="bi bi-plus-circle-fill"></i> Create New User
+            </button>
         </div>
-    </div>
-    <br>
     <br>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table id="userTable" class="table table-bordered table-striped" style="width:80%">
+                    <table id="userTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -72,16 +62,19 @@ include "views/header.php";
                             <p class="fw-bold">User Name</p>
                         </label>
                         <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Name User" onkeypress="validation(event);" />
+                        <div id="message1"></div>
                         <br>
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Email</p>
                         </label>
                         <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                        <div id="message2"></div>
                         <br>
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Password</p>
                         </label>
                         <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password" onkeypress="validation(event);" />
+                        <div id="message3"></div>
                         <br>
 
                         <!-- Selecciona de la base de Datos la Informacion -->
@@ -97,11 +90,9 @@ include "views/header.php";
                             <option value="6">Code Exploitation</option>
                         </select>
 
-
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="id">
                     <button type="submit" class="btn btn-success" id="registerUser"><i class="bi bi-person-add"></i> Register</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
                 </div>
@@ -127,16 +118,19 @@ include "views/header.php";
                             <p class="fw-bold">User Name</p>
                         </label>
                         <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name User" onkeypress="validation(event);" />
+                        <div id="messageEdit1"></div>
                         <br>
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Email</p>
                         </label>
                         <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                        <div id="messageEdit2"></div>
                         <br>
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Password</p>
                         </label>
                         <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password" onkeypress="validation(event);" />
+                        <div id="messageEdit3"></div>
                         <br>
 
                         <!-- Selecciona de la base de Datos la Informacion -->
@@ -155,7 +149,7 @@ include "views/header.php";
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="edit_id">
-                    <button type="submit" class="btn btn-warning" id="editButton" data-bs-dismiss="modal"><i class="bi bi-pencil-square"></i> Edit User</button>
+                    <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit User</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete User</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
@@ -172,7 +166,7 @@ include "views/header.php";
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
