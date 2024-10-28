@@ -21,7 +21,7 @@ function validateData(formData) {
  
 
   //revisa que el username tenga algun caracter y como minomo sean 4
-  var nameregex = /^[a-zA-Z0-9]{4,}$/
+  var nameregex = /^[a-zA-Z0-9\s]{4,}$/;
 
 //Valida que al menos que un @
   var emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,7 +37,7 @@ function validateData(formData) {
   }
   else{
     message1.textContent =
-    "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
+    "The field cannot be empty and must contain at least 4 characters.";
     message1.style.color = "red";
     return false;
   }
@@ -177,19 +177,6 @@ function validateDataedit(dataEdit) {
     message2.style.color = "red";
     return false;
   }
-
-  if (passregex.test(pass)) {
-    message3.textContent =
-      "Password is valid";
-    message3.style.color = "green";
-  }
-  else{
-    message3.textContent =
-      "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
-    message3.style.color = "red";
-    return false;
-  }
-
   
   return true;
 }
