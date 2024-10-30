@@ -1,5 +1,5 @@
 <?php
-include "./handler/viewHandler.php";
+include "./controllers/userController.php";
 
 // Registra una función de autoload. 
 //Esto significa que si tratas de usar una clase que no ha sido incluida todavía, 
@@ -18,8 +18,12 @@ spl_autoload_register(function ($class) {
     }
 });
 
-$handler = new viewHandler;
-$handler->handler();
+$users = new userController;
+$viewUsers = $users->index();
+
+
+
+
 
 
 

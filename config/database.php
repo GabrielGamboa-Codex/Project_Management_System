@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-require '../vendor/autoload.php';
+include __DIR__ .'/../vendor/autoload.php';
 
 $capsule = new Capsule;
 

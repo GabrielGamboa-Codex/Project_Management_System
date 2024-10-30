@@ -1,5 +1,5 @@
 <?php
-require "../config/database.php";
+include __DIR__ ."/../config/database.php";
 use Illuminate\Database\Eloquent\Model;
 
 class userModel extends Model {

@@ -1,6 +1,7 @@
 <?php
-require '../controllers/userController.php';
-require '../models/teamModels.php';
+require  __DIR__ .'/../controllers/userController.php';
+require __DIR__ .'/../models/teamModels.php';
+
 //llama al controlador para imprimir la tabla
 if(isset($_POST['action']) && $_POST['action'] == 'printTable')
 {

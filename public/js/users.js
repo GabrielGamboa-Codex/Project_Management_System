@@ -212,11 +212,11 @@ $(document).ready(function () {
 $.ajax({ 
   url: 'handler/userHandler.php', 
   method: 'POST', 
-  dataType: 'json', 
+  dataType: 'json', //Tipo de datos que se espera recibir como respuesta.
   data: { action: "printOptions" },
   success: function(data) 
-  { data.forEach(function(item) 
-    { $('#team_edit').append(`<option value="${item.id}">${item.name}</option>`); 
+  { data.forEach(function(item)  //Recorre cada elemento en el array de datos recibido como respuesta.
+    { $('#team_edit').append(`<option value="${item.id}">${item.name}</option>`); //Añade contenido al final de los elemento seleccionados
   }); 
 },
 });

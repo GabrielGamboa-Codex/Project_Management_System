@@ -1,6 +1,6 @@
 <?php
 
-require "./controllers/viewController.php";
+include __DIR__ . "/controllers/viewController.php";
 
 
 class viewHandler { 

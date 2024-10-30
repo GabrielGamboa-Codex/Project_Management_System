@@ -1,8 +1,16 @@
 <?php
-require '../models/userModels.php';
+include __DIR__ .'/../models/userModels.php';
 
 class userController
 {
+    public function index() 
+    {
+        include __DIR__ . '/../views/header.php';   
+        include __DIR__ . '/../views/footer.php';
+        include __DIR__ . '/../views/userView.php';                                  
+        return;
+    }
+
     //Funcion para guardar los datos en un arreglo e imprimirlo
     public function printTable()
     {
