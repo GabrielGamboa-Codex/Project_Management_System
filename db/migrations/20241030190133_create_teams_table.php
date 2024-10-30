@@ -12,5 +12,19 @@ final class CreateTeamsTable extends AbstractMigration
               ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
               ->create();
+
+        // Insertar datos en la tabla
+        $data = [
+            ['name' => 'Development'],
+            ['name' => 'Management'],
+            ['name' => 'Testing'],
+            ['name' => 'Design'],
+            ['name' => 'Code Explotation'],
+            ['name' => 'Reviewers'],
+        ];
+
+        $this->table('teams')->insert($data)->save();
+
+
     }
 }
