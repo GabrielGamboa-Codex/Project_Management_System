@@ -165,6 +165,9 @@
             </div>
         </div>
     </div>
+    <?php
+        include __DIR__ . '/../views/footer.php'; 
+    ?>
     <script src="public/js/users.js"></script>
 </body>
 

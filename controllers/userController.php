@@ -6,8 +6,7 @@ class userController
     public function index() 
     {
         include __DIR__ . '/../views/header.php';   
-        include __DIR__ . '/../views/footer.php';
-        include __DIR__ . '/../views/userView.php';                                  
+        include __DIR__ . '/../views/userView.php';                                 
         return;
     }
 
