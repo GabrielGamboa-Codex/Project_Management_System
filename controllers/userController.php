@@ -8,7 +8,9 @@ class userController
     {
         $user_arr = array();
         $users = userModel::join('teams', 'users.team_id', '=', 'teams.id')
-        ->select('users.id as user_id', 'users.username as user_name', 'users.email as user_email','users.created_at as user_created','users.updated_at as user_updated', 'teams.name')
+        ->select('users.id as user_id', 'users.username as user_name',
+         'users.email as user_email','users.created_at as user_created',
+         'users.updated_at as user_updated', 'teams.name as team_name', 'teams.id as team_id')
         ->get();
         
         foreach ($users as $user) {
@@ -16,7 +18,8 @@ class userController
                 "id" => $user->user_id,
                 "username" => $user->user_name,
                 "email" => $user->user_email,
-                "team_id" => $user->name,
+                "team_id" => $user->team_id,
+                "team" => $user->team_name,
                 "created_at" => $user->user_created,
                 "updated_at" => $user->user_updated
                 );

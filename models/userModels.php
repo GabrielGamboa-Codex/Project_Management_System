@@ -1,16 +1,10 @@
 <?php
 require "../config/database.php";
-require "teamModels.php";
 use Illuminate\Database\Eloquent\Model;
 
 class userModel extends Model {
 
     protected $table = 'users';
-
-    //Funcion que instancia que team_id es una llave foranea
-    public function foreignKey() {
-        return $this->belongsTo(teamModels::class, 'team_id');
-    }
 
     //funcion de crear usuarios
     public function createUser($username,$email,$pass,$team_id)

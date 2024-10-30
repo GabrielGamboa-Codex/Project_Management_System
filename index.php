@@ -1,5 +1,5 @@
 <?php
-include "controllers/viewController.php";
+include "./handler/viewHandler.php";
 
 // Registra una función de autoload. 
 //Esto significa que si tratas de usar una clase que no ha sido incluida todavía, 
@@ -18,24 +18,8 @@ spl_autoload_register(function ($class) {
     }
 });
 
-$viewController = new ViewController();
-//Variable que obtiene la ruta desde los parámetros de la URL. 
-//Por defecto, se carga la vista 'home'.
-$route = $_GET['route'] ?? 'userView';
-
-switch ($route) {
-    case 'userView':
-        include "./views/header.php";
-        include "./views/footer.php";
-        $viewController->loadView('userView');
-        break;
-    // Agrega más rutas aquí
-    default:
-        include "views/header.php";
-        include "views/footer.php";
-        $viewController->loadView('404');
-
-}
+$handler = new viewHandler;
+$handler->handler();
 
 
 

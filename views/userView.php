@@ -20,6 +20,7 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Team_id</th>
+                                <th>Team</th>
                                 <th>Created_at</th>
                                 <th>Updated_at</th>
                             </tr>
@@ -31,6 +32,7 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Team_id</th>
+                                <th>Team</th>
                                 <th>Created_at</th>
                                 <th>Updated_at</th>
                             </tr>
@@ -77,13 +79,7 @@
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Select Team</p>
                         </label>
-                        <select class="form-select" id="user_team" aria-label="selectTeam">
-                            <option value="1">Management</option>
-                            <option value="2">Development</option>
-                            <option value="3">Design</option>
-                            <option value="4">Testing</option>
-                            <option value="5">Meeting</option>
-                            <option value="6">Code Exploitation</option>
+                        <select class="form-select" id="user_team" aria-label="selectTeam"> 
                         </select>
 
                     </form>
@@ -134,12 +130,6 @@
                             <p class="fw-bold">Select Team</p>
                         </label>
                         <select class="form-select" id="team_edit" aria-label="selectTeam">
-                            <option value="1">Management</option>
-                            <option value="2">Development</option>
-                            <option value="3">Design</option>
-                            <option value="4">Testing</option>
-                            <option value="5">Meeting</option>
-                            <option value="6">Code Exploitation</option>
                         </select>
                     </form>
                 </div>

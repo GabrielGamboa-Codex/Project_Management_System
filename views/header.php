@@ -31,7 +31,10 @@
           <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">User</a>
+          <a class="nav-link" href="index.php?action=userView">User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php?action=teamView">Team</a>
         </li>
       </ul>
     </div>

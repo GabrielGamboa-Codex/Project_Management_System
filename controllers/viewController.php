@@ -1,4 +1,5 @@
 <?php
+
 //Carga la vistas
 class ViewController {
     //viewName: Nombre de la vista que deseas cargar.
@@ -9,6 +10,7 @@ class ViewController {
         extract($data);
         
         include __DIR__ . '/../views/' . $viewName . '.php';
+
     }
 }
 ?>

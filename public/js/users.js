@@ -196,17 +196,48 @@ function clearValidationMessages() {
 
 //Metodo Ajax
 $(document).ready(function () {
+//Cargar un select por ajax enviado la data desde la base de datos
+  $.ajax({ 
+    url: 'handler/userHandler.php', 
+    method: 'POST', 
+    dataType: 'json', 
+    data: { action: "printOptions" },
+    success: function(data) 
+    { data.forEach(function(item) 
+      { $('#user_team').append(`<option value="${item.id}">${item.name}</option>`); 
+    }); 
+  },
+});
+
+$.ajax({ 
+  url: 'handler/userHandler.php', 
+  method: 'POST', 
+  dataType: 'json', 
+  data: { action: "printOptions" },
+  success: function(data) 
+  { data.forEach(function(item) 
+    { $('#team_edit').append(`<option value="${item.id}">${item.name}</option>`); 
+  }); 
+},
+});
+
+
+
+
   var userTable = $("#userTable").DataTable({
     ajax: {
       url: "handler/userHandler.php",
       method: "POST",
       data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
     },
+    columnDefs: [ { "visible": false, "targets": 3 } ], // srive para ocultar la columna señalada tomando el cuenta que la primera columna es 0
     columns: [
       { data: "id" },
       { data: "username" },
       { data: "email" },
-      { data: "team_id" }, // Incluye esta columna si la necesitas
+      { data: "team_id" },
+       // Incluye esta columna si la necesitas
+      { data: "team" },
       { data: "created_at" },
       { data: "updated_at" },
     ],

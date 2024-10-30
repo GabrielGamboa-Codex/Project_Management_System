@@ -1,5 +1,6 @@
 <?php
 require '../controllers/userController.php';
+require '../models/teamModels.php';
 //llama al controlador para imprimir la tabla
 if(isset($_POST['action']) && $_POST['action'] == 'printTable')
 {
@@ -40,5 +41,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'deleteUser')
     $edit = $controller->userDelete($id);
 }
 
-
+if(isset($_POST['action']) && $_POST['action'] == 'printOptions')
+{
+$data = new teamModels;
+$teams = $data->printOptions(); 
+}
 ?>
