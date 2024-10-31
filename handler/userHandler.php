@@ -12,9 +12,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'printTable')
 if(isset($_POST['action']) && $_POST['action'] == 'createUser')
 {
     $userName = $_POST['userName']; 
-    $email = $_POST['email'];;
-    $pass = $_POST['pass'];;
-    $team_id = $_POST['team_id'];;
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+    $team_id = $_POST['team_id'];
 
     $controller = new UserController;
     $up = $controller->createUser($userName,$email,$pass,$team_id);
@@ -25,12 +25,14 @@ if(isset($_POST['action']) && $_POST['action'] == 'editUser')
 {
     $id = $_POST['id']; 
     $userName = $_POST['userName']; 
-    $email = $_POST['email'];;
-    $pass = $_POST['pass'];;
-    $team_id = $_POST['team_id'];;
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+    $team_id = $_POST['team_id'];
+    $currentUser = $_POST['currentUser'];
+    $currentEmail = $_POST['currentEmail'];
 
     $controller = new UserController;
-    $edit = $controller->editUser($id,$userName,$email,$pass,$team_id);
+    $edit = $controller->editUser($id,$userName,$email,$pass,$team_id,$currentUser,$currentEmail);
 }
 
 //llama al controlador para Eliminar un usuario

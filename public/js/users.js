@@ -331,7 +331,9 @@ $.ajax({
       var dataEdit = {
         id: $("#edit_id").val(),
         userName: $("#edit_name").val().trim(),
+        currentUser: $("#edit_name").val().trim(),
         email: $("#edit_email").val(),
+        currentEmail: $("#edit_email").val(),
         pass: $("#edit_pass").val(),
         team_id: $("#team_edit").val(),
         action: "editUser",

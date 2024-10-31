@@ -61,24 +61,25 @@ class UserController
     }
 
     //envia los datos al modelo para editar un usuario
-    public function editUser($id,$userName,$email,$pass,$team_id)
+    public function editUser($id,$userName,$email,$pass,$team_id,$currentUser,$currentEmail)
     {   
         $user = new UserModel();  
         //comprueba que los valores existan y guarda la informacion en una variable
         $userExist = UserModel::where('username',$userName)->exists(); 
         $userEmail = UserModel::where('email',$email)->exists();  
 
-       if($userExist)
+       if($userExist && $userName != $currentUser)
        {
            echo json_encode(['status' => 'errorEdit1', 'message' => 'The User is already registered.']);
        }
-       elseif ($userEmail)
+       elseif ($userEmail && $email != $currentEmail)
        {
            echo json_encode(['status' => 'errorEdit2', 'message' => 'The mail is already registered.']);
        }
        else
        {
             $user->editUser($id,$userName,$email,$pass,$team_id);
+            echo json_encode(['status' => 'success']);
        }
     }
 
