@@ -21,8 +21,6 @@
                                 <th>Email</th>
                                 <th>Team_id</th>
                                 <th>Team</th>
-                                <th>Created_at</th>
-                                <th>Updated_at</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -33,8 +31,6 @@
                                 <th>Email</th>
                                 <th>Team_id</th>
                                 <th>Team</th>
-                                <th>Created_at</th>
-                                <th>Updated_at</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -71,7 +67,7 @@
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Password</p>
                         </label>
-                        <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password" onkeypress="validation(event);" />
+                        <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password"/>
                         <div id="message3"></div>
                         <br>
 
@@ -121,7 +117,7 @@
                         <label for="nombre" class="form-label">
                             <p class="fw-bold">Password</p>
                         </label>
-                        <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password" onkeypress="validation(event);" />
+                        <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password"/>
                         <div id="messageEdit3"></div>
                         <br>
 

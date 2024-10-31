@@ -19,12 +19,20 @@ spl_autoload_register(function ($class) {
 });
 
 $users = new userController;
-$viewUsers = $users->index();
 
 
+$action = isset($_GET['action']) ? $_GET['action'] : 'userView';
 
-
-
-
-
-?>
+switch ($action) {
+    case 'loginView':
+        $viewLogin = $login->index();
+        break;
+        case 'userView':
+            $viewUsers = $users->index();
+            break;
+        // Agrega más rutas aquí
+    // default:
+    //     include "views/header.php";
+    //     include "views/footer.php";
+    //     $viewController->loadView('404');
+}

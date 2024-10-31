@@ -4,14 +4,14 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class teamModels extends Model {
+class TeamModels extends Model {
 
     protected $table = 'teams';
 
     public function printOptions()
     {
         $team_arr = array();
-        $teams = teamModels::all();
+        $teams = TeamModels::all();
         
         foreach ($teams as $team) {
             $team_arr[] = array(

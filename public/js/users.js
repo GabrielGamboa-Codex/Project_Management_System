@@ -11,7 +11,7 @@ function validation(event) {
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var username = formData.username.trim();
+  var userName = formData.userName.trim();
   var email = formData.email.trim();
   var pass = formData.pass.trim();
   //Llama a los div para que carguen los mensajes si hay algun error
@@ -20,17 +20,18 @@ function validateData(formData) {
   var message3 = document.getElementById("message3");
  
 
-  //revisa que el username tenga algun caracter y como minomo sean 4
-  var nameregex = /^[a-zA-Z0-9\s]{4,}$/;
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
 
 //Valida que al menos que un @
-  var emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-  var passregex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*]).{8,16}$/;
+  //W_ sirve para decir que permita al menos 1 caracater especial
+  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameregex.test(username)) {
+  if (nameRegex.test(userName)) {
     message1.textContent =
     "User is valid";
     message1.style.color = "green";
@@ -42,7 +43,7 @@ function validateData(formData) {
     return false;
   }
   
-  if (emailregex.test(email)) {
+  if (emailRegex.test(email)) {
     message2.textContent =
     "Email is valid";
     message2.style.color = "green";
@@ -54,7 +55,7 @@ function validateData(formData) {
     return false;
   }
 
-  if (passregex.test(pass)) {
+  if (passRegex.test(pass)) {
     message3.textContent =
       "Email is valid";
     message3.style.color = "green";
@@ -73,7 +74,7 @@ function validateData(formData) {
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var username = formData.username.trim();
+  var userName = formData.userName.trim();
   var email = formData.email.trim();
   var pass = formData.pass.trim();
   //Llama a los div para que carguen los mensajes si hay algun error
@@ -82,17 +83,17 @@ function validateData(formData) {
   var message3 = document.getElementById("message3");
  
 
-  //revisa que el username tenga algun caracter y como minomo sean 4
-  var nameregex = /^[a-zA-Z0-9]{4,}$/
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9]{4,}$/
 
 //Valida que al menos que un @
-  var emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-  var passregex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*]).{8,16}$/;
+  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameregex.test(username)) {
+  if (nameRegex.test(userName)) {
     message1.textContent =
     "User is valid";
     message1.style.color = "green";
@@ -104,7 +105,7 @@ function validateData(formData) {
     return false;
   }
   
-  if (emailregex.test(email)) {
+  if (emailRegex.test(email)) {
     message2.textContent =
     "Email is valid";
     message2.style.color = "green";
@@ -116,7 +117,7 @@ function validateData(formData) {
     return false;
   }
 
-  if (passregex.test(pass)) {
+  if (passRegex.test(pass)) {
     message3.textContent =
       "Password is valid";
     message3.style.color = "green";
@@ -135,7 +136,7 @@ function validateData(formData) {
 // Verificar que el campo no esté vacío y contenga letras
 function validateDataedit(dataEdit) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var username = dataEdit.username.trim();
+  var userName = dataEdit.userName.trim();
   var email = dataEdit.email.trim();
   var pass = dataEdit.pass.trim();
   //Llama a los div para que carguen los mensajes si hay algun error
@@ -144,17 +145,15 @@ function validateDataedit(dataEdit) {
   var message3 = document.getElementById("messageEdit3");
  
 
-  //revisa que el username tenga algun caracter y como minomo sean 4
-  var nameregex = /^[a-zA-Z0-9]{4,}$/
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9]{4,}$/
 
 //Valida que al menos que un @
-  var emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-  //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-  var passregex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameregex.test(username)) {
+  if (nameRegex.test(userName)) {
     message1.textContent =
     "User is valid";
     message1.style.color = "green";
@@ -166,7 +165,7 @@ function validateDataedit(dataEdit) {
     return false;
   }
   
-  if (emailregex.test(email)) {
+  if (emailRegex.test(email)) {
     message2.textContent =
     "Email is valid";
     message2.style.color = "green";
@@ -177,7 +176,7 @@ function validateDataedit(dataEdit) {
     message2.style.color = "red";
     return false;
   }
-  
+
   return true;
 }
 
@@ -230,7 +229,11 @@ $.ajax({
       method: "POST",
       data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
     },
-    columnDefs: [ { "visible": false, "targets": 3 } ], // srive para ocultar la columna señalada tomando el cuenta que la primera columna es 0
+    columnDefs: [ 
+      { "visible": false, "targets": 3 }, 
+      { "visible": false, "targets": 5 }, 
+      { "visible": false, "targets": 6 } 
+    ],// srive para ocultar la columna señalada tomando el cuenta que la primera columna es 0
     columns: [
       { data: "id" },
       { data: "username" },
@@ -260,7 +263,7 @@ $.ajax({
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        username: $("#user_name").val().trim(),
+        userName: $("#user_name").val().trim(),
         email: $("#user_email").val(),
         pass: $("#user_pass").val(),
         team_id: $("#user_team").val(),
@@ -276,15 +279,34 @@ $.ajax({
       $.ajax({
         url: "handler/userHandler.php",
         type: "POST",
+        dataType: "json",
         data: formData,
         success: function (response) {
-          console.log(formData)
-          $("#create_user")[0].reset();
-          $("#id").val("");
-          $("#createUsermodal").modal("hide");
-          alert("Se ha creado un Nuevo registro");
-          clearValidationMessages();
-          loadTable();
+          //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
+          if (response.status === 'error1') 
+            { 
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message1").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color","red");
+            } 
+            else if (response.status === 'error2') 
+            { 
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message2").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color","red");
+            } 
+            else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
+            { 
+              alert('Usuario creado con éxito.'); 
+              console.log(formData)
+              $("#create_user")[0].reset();
+              $("#id").val("");
+              $("#createUsermodal").modal("hide");
+              clearValidationMessages();
+              loadTable();
+            }
         },
       });
     });
@@ -308,7 +330,7 @@ $.ajax({
       e.preventDefault();
       var dataEdit = {
         id: $("#edit_id").val(),
-        username: $("#edit_name").val().trim(),
+        userName: $("#edit_name").val().trim(),
         email: $("#edit_email").val(),
         pass: $("#edit_pass").val(),
         team_id: $("#team_edit").val(),
@@ -323,13 +345,32 @@ $.ajax({
       $.ajax({
         url: "handler/userHandler.php",
         type: "POST",
+        dataType: "json",
         data: dataEdit,
         success: function (response) {
-          $("#editUsermodal").modal("hide");
-          alert("Se ha Actualizado un Registro");
-          loadTable();
-          clearValidationMessages();
-          $("#edit_user")[0].reset();
+          //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
+          if (response.status === 'errorEdit1') 
+            { 
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#messageEdit1").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color","red");
+            } 
+            else if (response.status === 'errorEdit2') 
+            { 
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#messageEdit2").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color","red");
+            } 
+            else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
+            { 
+              alert("Se ha Actualizado un Registro");
+              $("#editUsermodal").modal("hide");
+              loadTable();
+              clearValidationMessages();
+              $("#edit_user")[0].reset();
+            }
         },
       });
     });
