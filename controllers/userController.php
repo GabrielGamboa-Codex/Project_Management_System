@@ -106,7 +106,14 @@ class UserController
     //envia los datos al modelo para editar un usuario
     public function deleteUse($id)
     {
-        $user = new UserModel();
-        $user->deleteUser($id);
+        try {
+            $user = new UserModel();
+            $user->deleteUser($id);
+            echo json_encode(['status' => 200,'method' => 'success']);
+        } catch (Exception $e) {
+            $error = ['status' => 400,'method' => 'ERRORdelete', 'message' => "An error has occurred:" + $e->getMessage()];
+            echo json_encode($error);
+        }
+        
     }
 }

@@ -404,12 +404,22 @@ $.ajax({
 
       $.ajax({
         url: "handler/userHandler.php",
+        dataType: "json",
         type: "POST",
         data: deleteUser,
         success: function (response) {
-          $("#deleteModal").modal("hide");
-          alert("Se ha Eliminado un Registro");
-          loadTable();
+          if (response.status === 400 && response.method === 'ERRORdelete') 
+            { 
+              var message = $("#messageEdit2").text(response.message).show();
+              alert("No se pudo Eliminar el Usuario debido: " + message);
+              $("#deleteModal").modal("hide");
+            }
+            else if (response.status === 200 && response.method === 'success') 
+            {
+              alert("Se ha Eliminado un Registro");
+              $("#deleteModal").modal("hide");
+              loadTable();
+            } 
         },
       });
     });
