@@ -16,7 +16,7 @@ class UserModel extends Model {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
         $created = $date;
         $updated = $date;
-        $user->username = $userName;
+        $user->username  = $userName;
         $user->email = $email;
         $user->password=$hash;
         $user->team_id = $team_id;
@@ -36,8 +36,8 @@ class UserModel extends Model {
 
 
         $updated = $date;
-        $user->username = $userName;
-        $user->email = $email;
+        $user->username = $userName ->unique();;
+        $user->email = $email ->unique();;
         $user->password=$hash;
         $user->team_id = $team_id;
         $user->updated_at= $updated;

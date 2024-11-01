@@ -50,6 +50,7 @@ class UserController
             //comprueba que los valores existan y guarda la informacion en una variable
             $userExist = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
+            
             if ($userExist) 
             {
                 
