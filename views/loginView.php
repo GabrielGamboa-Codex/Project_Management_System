@@ -10,8 +10,9 @@
 </head>
 <body>   
     <form action="" id="formLogin" method="POST">
-    <img src="./public/img/logo.png" width="200" height="100" class="d-inline-block align-text-top">  
-    <h1>Project Management System</h1>
+   
+    <h1><img src="./public/img/logo.png" width="40" height="40" class="d-inline-block align-text-top"> Project <img src="./public/img/logo.png" width="40" height="40" class="d-inline-block align-text-top">
+     Management System</h1>
     <hr>
     <i class="bi bi-envelope-at-fill"></i> <label for="">Email</label>
     <input type="text" placeholder="Insert Email">
@@ -20,7 +21,7 @@
      <input type="text" placeholder="Insert password">
     <br>
     <br>
-    <button type="submit" class="btn btn-success">Start Login</button>
+    <button type="button" id="Btnlogin" class="btn btn-dark">Start Login</button>
     </form>
     
 
