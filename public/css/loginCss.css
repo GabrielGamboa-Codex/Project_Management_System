@@ -1,5 +1,8 @@
 body
 {
+    background-image: url(../img/fondo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,14 +17,50 @@ body
 
 form
 {
-    width: 500px;
+    background-image: radial-gradient(circle at 50% -20.71%, #a6ffa7 0, 
+    #90ffab 12.5%, #76ffb0 25%, #54ffb5 37.5%, #08ffbb 50%, 
+    #00fbc2 62.5%, #00f8ca 75%, #00f4d3 87.5%, #00f1dc 100%);;
+    width: 600px;
     border: 2px solid black;
-    padding:  5rem;
+    padding:  6rem;
     border-radius: 20px;
 }
 
 h1
 {
     display: block;
-    border: 2px solid;
+    
+    width: 95%;
+    padding: 10px;
+    margin: 10px;
+    
+    text-align: center;
+}
+
+img
+{
+    align-items: center;
+}
+
+label
+{
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 300;
+}
+
+input
+{
+    display: block;
+    border: 2px solid black;
+    width: 95%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+button
+{
+    display: inline-block;
+    width: 400px;
 }

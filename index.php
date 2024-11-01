@@ -22,7 +22,7 @@ spl_autoload_register(function ($class) {
 $users = new userController;
 $login = new loginController;
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
+$action = isset($_GET['action']) ? $_GET['action'] : 'userView';
 
 switch ($action) {
     case 'loginView':

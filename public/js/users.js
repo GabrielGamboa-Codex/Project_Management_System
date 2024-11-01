@@ -90,7 +90,7 @@ function validateData(formData) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*]).{8,16}$/;
+  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*.]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
   if (nameRegex.test(userName)) {
@@ -378,7 +378,7 @@ $.ajax({
               $("#create_user")[0].reset();
               $("#createUsermodal").modal("hide");
               clearValidationMessages();
-              $('body').html('<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(response.message).show());
+              $('body').html('<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(response.message));
             } 
             else if(response.status === 200 && response.method === 'success') //si funciona entonces procede a guardar el codigo
             { 
@@ -410,7 +410,7 @@ $.ajax({
         success: function (response) {
           if (response.status === 400 && response.method === 'ERRORdelete') 
             { 
-              var message = $("#messageEdit2").text(response.message).show();
+              var message = $("#message").text(response.message).show();
               alert("No se pudo Eliminar el Usuario debido: " + message);
               $("#deleteModal").modal("hide");
             }

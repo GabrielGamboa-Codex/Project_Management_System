@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Project Management System</title>
     <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/bootstrap-icons/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="public/css/loginCss.css">
 </head>
-<body>
-    <form action="">
-    <h1>Login</h1>
-    <label for="">Email</label>
-     <i class="bi bi-envelope-at-fill"></i><input type="text" placeholder="Insert Email">
+<body>   
+    <form action="" id="formLogin" method="POST">
+    <img src="./public/img/logo.png" width="200" height="100" class="d-inline-block align-text-top">  
+    <h1>Project Management System</h1>
+    <hr>
+    <i class="bi bi-envelope-at-fill"></i> <label for="">Email</label>
+    <input type="text" placeholder="Insert Email">
 
-     <label for="">Password</label>
-     <i class="bi bi-lock-fill"></i><input type="text" placeholder="Insert password">
-
-    <button type="submit">Login</button>
+    <i class="bi bi-lock-fill"></i> <label for="">Password</label>
+     <input type="text" placeholder="Insert password">
+    <br>
+    <br>
+    <button type="submit" class="btn btn-success">Start Login</button>
     </form>
-    
     
 
 
