@@ -28,11 +28,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'editUser')
     $email = $_POST['email'];
     $pass = $_POST['pass'];
     $team_id = $_POST['team_id'];
-    $currentUser = $_POST['currentUser'];
-    $currentEmail = $_POST['currentEmail'];
 
     $controller = new UserController;
-    $edit = $controller->editUser($id,$userName,$email,$pass,$team_id,$currentUser,$currentEmail);
+    $edit = $controller->editUser($id,$userName,$email,$pass,$team_id);
 }
 
 //llama al controlador para Eliminar un usuario

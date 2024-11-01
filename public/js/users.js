@@ -264,7 +264,7 @@ $.ajax({
       var formData = {
         id: $("#id").val(),
         userName: $("#user_name").val().trim(),
-        email: $("#user_email").val(),
+        email: $("#user_email").val().toLowerCase(),
         pass: $("#user_pass").val(),
         team_id: $("#user_team").val(),
         action: "createUser",
@@ -331,9 +331,7 @@ $.ajax({
       var dataEdit = {
         id: $("#edit_id").val(),
         userName: $("#edit_name").val().trim(),
-        currentUser: $("#edit_name").val().trim(),
-        email: $("#edit_email").val(),
-        currentEmail: $("#edit_email").val(),
+        email: $("#edit_email").val().toLowerCase(),
         pass: $("#edit_pass").val(),
         team_id: $("#team_edit").val(),
         action: "editUser",
