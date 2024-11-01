@@ -44,30 +44,29 @@ class UserController
     //envia los datos al modelo para crear un usuario
     public function createUser($userName, $email, $pass, $team_id)
     {
-        $user = new UserModel();
-
-        //comprueba que los valores existan y guarda la informacion en una variable
-        $userExist = UserModel::where('username', $userName)->exists();
-        $userEmail = UserModel::where('email', $email)->exists();
         try {
+            $user = new UserModel();
+
+            //comprueba que los valores existan y guarda la informacion en una variable
+            $userExist = UserModel::where('username', $userName)->exists();
+            $userEmail = UserModel::where('email', $email)->exists();
             if ($userExist) 
             {
-                http_response_code(200);
-                echo json_encode(['status' => 'error1', 'message' => 'The User is already registered.']);
+                
+                echo json_encode(['status' => 400,'method' => 'errorUser', 'message' => 'The User is already registered.']);
             } elseif ($userEmail) 
             {
-                http_response_code(200);
-                echo json_encode(['status' => 'error2', 'message' => 'The mail is already registered.']);
+                
+                echo json_encode(['status' => 400,'method' => 'errorEmail', 'message' => 'The mail is already registered.']);
             } else 
             {
                 $user->createUser($userName, $email, $pass, $team_id);
-                http_response_code(200);
-                echo json_encode(['status' => 'success']);
+                
+                echo json_encode(['status' => 200,'method' => 'success']);
             }
             //Pendiente por Revision 
         } catch (PDOException $e) {
-            http_response_code(400);
-            $error = ['status' => 'ERROR', 'message' => "An error has occurred:" + $e->getMessage()];
+            $error = ['status' => 400, 'method' => 'ERROR', 'message' => "An error has occurred:" + $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -83,11 +82,11 @@ class UserController
 
         if ($userExist->username != $userName && $userFind) 
         {
-            echo json_encode(['status' => 'errorEdit1', 'message' => 'The User is already registered.']);
+            echo json_encode(['status' => 'errorEditUser', 'message' => 'The User is already registered.']);
         } 
         elseif ($userExist->email != $email  && $userEmail) 
         {
-            echo json_encode(['status' => 'errorEdit2', 'message' => 'The mail is already registered.']);
+            echo json_encode(['status' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
         } 
         else 
         {

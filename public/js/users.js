@@ -283,28 +283,30 @@ $.ajax({
         data: formData,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-          if (response.status === 'error1') 
+          //reponse comprueba el el https_response_ en el envio
+          if (response.status === 400 && response.method === 'errorUser') 
             { 
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#message1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
             } 
-            else if (response.status === 'error2') 
+            else if (response.status === 400 && response.method === 'errorEmail') 
             { 
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#message2").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
             }
-            else if(response.status === 'ERROR') //si funciona entonces procede a guardar el codigo
+            else if(response.status === 400 && response.method === 'ERROR') //si funciona entonces procede a guardar el codigo
             { 
+              console.log("Entre")
               $("#create_user")[0].reset();
               $("#createUsermodal").modal("hide");
               clearValidationMessages();
               $('body').html('<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(response.message).show());
             }  
-            else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
+            else if(response.status === 200 && response.method=== 'success') //si funciona entonces procede a guardar el codigo
             { 
               alert('Usuario creado con éxito.'); 
               console.log(formData)
@@ -356,21 +358,21 @@ $.ajax({
         data: dataEdit,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-          if (response.status === 'errorEdit1') 
+          if (response.status === 400 && response.method === 'errorEditUser') 
             { 
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#messageEdit1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
             } 
-            else if (response.status === 'errorEdit2') 
+            else if (response.status === 400 && response.method === 'errorEditEmail') 
             { 
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#messageEdit2").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
             }
-            else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
+            else if(response.status === 200 && response.method === 'success') //si funciona entonces procede a guardar el codigo
             { 
               alert("Se ha Actualizado un Registro");
               $("#editUsermodal").modal("hide");
