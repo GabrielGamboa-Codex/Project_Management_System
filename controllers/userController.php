@@ -74,26 +74,34 @@ class UserController
     //envia los datos al modelo para editar un usuario
     public function editUser($id, $userName, $email, $pass, $team_id)
     {
-        $user = new UserModel();
-        //comprueba que los valores existan y guarda la informacion en una variable
-        $userExist = UserModel::find($id);
-        $userFind = UserModel::where('username', $userName)->exists();
-        $userEmail = UserModel::where('email', $email)->exists();
+        
 
-        if ($userExist->username != $userName && $userFind) 
-        {
-            echo json_encode(['status' => 'errorEditUser', 'message' => 'The User is already registered.']);
-        } 
-        elseif ($userExist->email != $email  && $userEmail) 
-        {
-            echo json_encode(['status' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
-        } 
-        else 
-        {
-            $user->editUser($id, $userName, $email, $pass, $team_id);
-            echo json_encode(['status' => 'success']);
+        try {
+            $user = new UserModel();
+            //comprueba que los valores existan y guarda la informacion en una variable
+            $userExist = UserModel::find($id);
+            $userFind = UserModel::where('username', $userName)->exists();
+            $userEmail = UserModel::where('email', $email)->exists();
+            if ($userExist->username != $userName && $userFind) 
+            {
+                echo json_encode(['status' => 400,'method' => 'errorEditUser', 'message' => 'The User is already registered.']);
+            } 
+            elseif ($userExist->email != $email  && $userEmail) 
+            {
+                echo json_encode(['status' => 400,'method' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
+            } 
+            else 
+            {
+                $user->editUser($id, $userName, $email, $pass, $team_id);
+                echo json_encode(['status' => 200,'method' => 'success']);
+            }
         }
-    }
+        catch (PDOException $e) {
+        $error = ['status' => 400,'method' => 'ERRORedit', 'message' => "An error has occurred:" + $e->getMessage()];
+        echo json_encode($error);
+        }
+    }  
+       
 
     //envia los datos al modelo para editar un usuario
     public function deleteUse($id)

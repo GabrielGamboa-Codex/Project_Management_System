@@ -372,6 +372,14 @@ $.ajax({
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
             }
+            else if(response.status === 400 && response.method === 'ERRORedit') //si funciona entonces procede a guardar el codigo
+            { 
+              console.log("Entre")
+              $("#create_user")[0].reset();
+              $("#createUsermodal").modal("hide");
+              clearValidationMessages();
+              $('body').html('<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(response.message).show());
+            } 
             else if(response.status === 200 && response.method === 'success') //si funciona entonces procede a guardar el codigo
             { 
               alert("Se ha Actualizado un Registro");
