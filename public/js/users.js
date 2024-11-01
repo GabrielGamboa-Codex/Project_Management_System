@@ -296,7 +296,14 @@ $.ajax({
               var message = $("#message2").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
-            } 
+            }
+            else if(response.status === 'ERROR') //si funciona entonces procede a guardar el codigo
+            { 
+              $("#create_user")[0].reset();
+              $("#createUsermodal").modal("hide");
+              clearValidationMessages();
+              $('body').html('<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(response.message).show());
+            }  
             else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
             { 
               alert('Usuario creado con éxito.'); 
@@ -362,7 +369,7 @@ $.ajax({
               var message = $("#messageEdit2").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color","red");
-            } 
+            }
             else if(response.status === 'success') //si funciona entonces procede a guardar el codigo
             { 
               alert("Se ha Actualizado un Registro");

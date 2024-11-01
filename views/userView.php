@@ -2,6 +2,7 @@
     <br>
         <h3 class="text-center">User List</h3>
     <br>
+    <div id="message"></div>
         <div class="container">
             <!-- Button Crear nuevo Usuario-->
             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">

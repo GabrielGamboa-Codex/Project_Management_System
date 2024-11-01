@@ -47,4 +47,5 @@ if(isset($_POST['action']) && $_POST['action'] == 'printOptions')
 $data = new TeamModels;
 $teams = $data->printOptions(); 
 }
+
 ?>
