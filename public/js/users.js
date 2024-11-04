@@ -288,9 +288,9 @@ $(document).ready(function () {
       };
 
       // Validar campos vacíos y contenido adecuado
-      if (!validateData(formData)) {
-        return false;
-      }
+      // if (!validateData(formData)) {
+      //   return false;
+      // }
 
       $.ajax({
         url: "handler/userHandler.php",
@@ -313,7 +313,14 @@ $(document).ready(function () {
             var message = $("#message2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
+          }
+          else if(response.status === 'errorPass')
+            {
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message3").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color", "red");
+            } 
           else if (response.status === "ERROR") 
           {
             $("#create_user")[0].reset();

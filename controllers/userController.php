@@ -37,7 +37,7 @@ class UserController
             {
                 if(!preg_match($pattern, $pass))
                 {
-                    echo json_encode(['status' => 'errorEditPass', 'message' => 'The Password is invalid It must contain at least 8 characters, including one special character, numbers and letters']);
+                    echo json_encode(['status' => 'errorPass', 'message' => 'The Password is invalid It must contain at least 8 characters, including one special character, numbers and letters']);
                 }
                 else
                 {
