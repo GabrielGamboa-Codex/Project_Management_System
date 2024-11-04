@@ -57,7 +57,7 @@
                 <div class="modal-body">
                     <form method="POST" id="create_user">
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
@@ -65,7 +65,7 @@
                             <div id="message1"></div>
                         </div>
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
@@ -73,7 +73,7 @@
                             <div id="message2"></div>
                         </div>
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
@@ -82,7 +82,7 @@
                         </div>
                         <br>
                         <!-- Selecciona de la base de Datos la Informacion -->
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
@@ -114,7 +114,7 @@
                 <div class="modal-body">
                     <form method="POST" id="edit_user">
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
@@ -122,7 +122,7 @@
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
@@ -130,7 +130,7 @@
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
@@ -140,7 +140,7 @@
                         <br>
 
                         <!-- Selecciona de la base de Datos la Informacion -->
-                        <div class="col-6 col-sm-8 col-md-12">
+                        <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
@@ -171,7 +171,7 @@
                     <h1 class="modal-title fs-5" id="deleteModalLabel">Delete User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-6 col-sm-8 col-md-12">
+                <div class="col-6 col-sm-12 col-md-12">
                     <div class="modal-body">
                         ¿Desea usted Eliminar Realmente el Usuario?
                     </div>
