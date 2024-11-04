@@ -21,6 +21,7 @@ class UserController
                 'users.email as user_email',
                 'users.created_at as user_created',
                 'users.updated_at as user_updated',
+                'users.status as user_status', 
                 'teams.name as team_name',
                 'teams.id as team_id'
             )
@@ -34,7 +35,8 @@ class UserController
                 "team_id" => $user->team_id,
                 "team" => $user->team_name,
                 "created_at" => $user->user_created,
-                "updated_at" => $user->user_updated
+                "updated_at" => $user->user_updated,
+                "status" => $user->user_status
             );
         }
         //indexas el arreglo con el string data
@@ -50,20 +52,17 @@ class UserController
             //comprueba que los valores existan y guarda la informacion en una variable
             $userExist = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
-            
-            if ($userExist) 
-            {
-                
-                echo json_encode(['status' => 400,'method' => 'errorUser', 'message' => 'The User is already registered.']);
-            } elseif ($userEmail) 
-            {
-                
-                echo json_encode(['status' => 400,'method' => 'errorEmail', 'message' => 'The mail is already registered.']);
-            } else 
-            {
+
+            if ($userExist) {
+
+                echo json_encode(['status' => 400, 'method' => 'errorUser', 'message' => 'The User is already registered.']);
+            } elseif ($userEmail) {
+
+                echo json_encode(['status' => 400, 'method' => 'errorEmail', 'message' => 'The mail is already registered.']);
+            } else {
                 $user->createUser($userName, $email, $pass, $team_id);
-                
-                echo json_encode(['status' => 200,'method' => 'success']);
+
+                echo json_encode(['status' => 200, 'method' => 'success']);
             }
             //Pendiente por Revision 
         } catch (PDOException $e) {
@@ -75,7 +74,7 @@ class UserController
     //envia los datos al modelo para editar un usuario
     public function editUser($id, $userName, $email, $pass, $team_id)
     {
-        
+
 
         try {
             $user = new UserModel();
@@ -83,26 +82,20 @@ class UserController
             $userExist = UserModel::find($id);
             $userFind = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
-            if ($userExist->username != $userName && $userFind) 
-            {
-                echo json_encode(['status' => 400,'method' => 'errorEditUser', 'message' => 'The User is already registered.']);
-            } 
-            elseif ($userExist->email != $email  && $userEmail) 
-            {
-                echo json_encode(['status' => 400,'method' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
-            } 
-            else 
-            {
+            if ($userExist->username != $userName && $userFind) {
+                echo json_encode(['status' => 400, 'method' => 'errorEditUser', 'message' => 'The User is already registered.']);
+            } elseif ($userExist->email != $email  && $userEmail) {
+                echo json_encode(['status' => 400, 'method' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
+            } else {
                 $user->editUser($id, $userName, $email, $pass, $team_id);
-                echo json_encode(['status' => 200,'method' => 'success']);
+                echo json_encode(['status' => 200, 'method' => 'success']);
             }
+        } catch (PDOException $e) {
+            $error = ['status' => 400, 'method' => 'ERRORedit', 'message' => "An error has occurred:" + $e->getMessage()];
+            echo json_encode($error);
         }
-        catch (PDOException $e) {
-        $error = ['status' => 400,'method' => 'ERRORedit', 'message' => "An error has occurred:" + $e->getMessage()];
-        echo json_encode($error);
-        }
-    }  
-       
+    }
+
 
     //envia los datos al modelo para editar un usuario
     public function deleteUse($id)
@@ -110,11 +103,10 @@ class UserController
         try {
             $user = new UserModel();
             $user->deleteUser($id);
-            echo json_encode(['status' => 200,'method' => 'success']);
+            echo json_encode(['status' => 200, 'method' => 'success']);
         } catch (Exception $e) {
-            $error = ['status' => 400,'method' => 'ERRORdelete', 'message' => "An error has occurred:" + $e->getMessage()];
+            $error = ['status' => 400, 'method' => 'ERRORdelete', 'message' => "An error has occurred:" + $e->getMessage()];
             echo json_encode($error);
         }
-        
     }
 }

@@ -1,14 +1,14 @@
 <body class="bg-body-tertiary">
     <br>
-        <h3 class="text-center">User List</h3>
+    <h3 class="text-center">User List</h3>
     <br>
     <div id="message"></div>
-        <div class="container">
-            <!-- Button Crear nuevo Usuario-->
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">
-                                <i class="bi bi-plus-circle-fill"></i> Create New User
-            </button>
-        </div>
+    <div class="container">
+        <!-- Button Crear nuevo Usuario-->
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">
+            <i class="bi bi-plus-circle-fill"></i> Create New User
+        </button>
+    </div>
     <br>
     <div class="container">
         <div class="row">
@@ -45,7 +45,7 @@
 
 
 
-    
+
     <!-- Modal Crear Usuarios -->
     <div class="modal fade" id="createUsermodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createUsermodal" aria-hidden="true">
         <div class="modal-dialog">
@@ -57,31 +57,38 @@
                 <div class="modal-body">
                     <form method="POST" id="create_user">
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">User Name</p>
-                        </label>
-                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Name User" onkeypress="validation(event);" />
-                        <div id="message1"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">User Name</p>
+                            </label>
+                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Name User" onkeypress="validation(event);" />
+                            <div id="message1"></div>
+                        </div>
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Email</p>
-                        </label>
-                        <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
-                        <div id="message2"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Email</p>
+                            </label>
+                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <div id="message2"></div>
+                        </div>
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Password</p>
-                        </label>
-                        <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password"/>
-                        <div id="message3"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Password</p>
+                            </label>
+                            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password" />
+                            <div id="message3"></div>
+                        </div>
                         <br>
-
                         <!-- Selecciona de la base de Datos la Informacion -->
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Select Team</p>
-                        </label>
-                        <select class="form-select" id="user_team" aria-label="selectTeam"> 
-                        </select>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Select Team</p>
+                            </label>
+                            <select class="form-select" id="user_team" aria-label="selectTeam">
+                            </select>
+                        </div>
 
                     </form>
                 </div>
@@ -107,31 +114,39 @@
                 <div class="modal-body">
                     <form method="POST" id="edit_user">
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">User Name</p>
-                        </label>
-                        <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name User" onkeypress="validation(event);" />
-                        <div id="messageEdit1"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">User Name</p>
+                            </label>
+                            <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name User" onkeypress="validation(event);" />
+                            <div id="messageEdit1"></div>
+                        </div>
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Email</p>
-                        </label>
-                        <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
-                        <div id="messageEdit2"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Email</p>
+                            </label>
+                            <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <div id="messageEdit2"></div>
+                        </div>
                         <br>
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Password</p>
-                        </label>
-                        <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password"/>
-                        <div id="messageEdit3"></div>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Password</p>
+                            </label>
+                            <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password" />
+                            <div id="messageEdit3"></div>
+                        </div>
                         <br>
 
                         <!-- Selecciona de la base de Datos la Informacion -->
-                        <label for="nombre" class="form-label">
-                            <p class="fw-bold">Select Team</p>
-                        </label>
-                        <select class="form-select" id="team_edit" aria-label="selectTeam">
-                        </select>
+                        <div class="col-6 col-sm-8 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Select Team</p>
+                            </label>
+                            <select class="form-select" id="team_edit" aria-label="selectTeam">
+                            </select>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -156,8 +171,10 @@
                     <h1 class="modal-title fs-5" id="deleteModalLabel">Delete User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ¿Desea usted Eliminar Realmente el Usuario?
+                <div class="col-6 col-sm-8 col-md-12">
+                    <div class="modal-body">
+                        ¿Desea usted Eliminar Realmente el Usuario?
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
@@ -167,7 +184,7 @@
         </div>
     </div>
     <?php
-        include __DIR__ . '/../views/footer.php'; 
+    include __DIR__ . '/../views/footer.php';
     ?>
     <script src="public/js/users.js"></script>
 </body>

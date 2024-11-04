@@ -6,12 +6,14 @@ use Phinx\Migration\AbstractMigration;
 
 final class CreateTeamsTable extends AbstractMigration
 {
-    public function change() {
+    public function change()
+    {
         $table = $this->table('teams');
         $table->addColumn('name', 'string', ['limit' => 50])
-              ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
-              ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
-              ->create();
+            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addIndex(['name'], ['unique' => true, 'name' => 'idx_unique_name'])
+            ->create();
 
         // Insertar datos en la tabla
         $data = [
@@ -24,7 +26,5 @@ final class CreateTeamsTable extends AbstractMigration
         ];
 
         $this->table('teams')->insert($data)->save();
-
-
     }
 }

@@ -3,7 +3,8 @@
 include __DIR__ . "/controllers/viewController.php";
 
 
-class viewHandler { 
+class viewHandler
+{
 
     function handler()
     {

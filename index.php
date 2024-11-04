@@ -28,12 +28,12 @@ switch ($action) {
     case 'loginView':
         $login->indexLogin();
         break;
-        case 'userView':
-            $viewUsers = $users->index();
-            break;
+    case 'userView':
+        $viewUsers = $users->index();
+        break;
         // Agrega más rutas aquí
-    // default:
-    //     include "views/header.php";
-    //     include "views/footer.php";
-    //     $viewController->loadView('404');
+        // default:
+        //     include "views/header.php";
+        //     include "views/footer.php";
+        //     $viewController->loadView('404');
 }
