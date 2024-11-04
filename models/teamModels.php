@@ -15,7 +15,8 @@ class TeamModels extends Model
         $team_arr = array();
         $teams = TeamModels::all();
 
-        foreach ($teams as $team) {
+        foreach ($teams as $team) 
+        {
             $team_arr[] = array(
                 "id" => $team->id,
                 "name" => $team->name,

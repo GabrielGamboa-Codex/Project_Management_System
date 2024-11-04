@@ -1,7 +1,9 @@
 //Validaciones
-function validation(event) {
+function validation(event) 
+{
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) {
+  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  {
     event.preventDefault();
     return false;
   }
@@ -30,30 +32,39 @@ function validateData(formData) {
   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) {
+  if (nameRegex.test(userName)) 
+  {
     message1.textContent = "User is valid";
     message1.style.color = "green";
-  } else {
+  }
+  else 
+  {
     message1.textContent =
       "The field cannot be empty and must contain at least 4 characters.";
     message1.style.color = "red";
     return false;
   }
 
-  if (emailRegex.test(email)) {
+  if (emailRegex.test(email)) 
+  {
     message2.textContent = "Email is valid";
     message2.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message2.textContent =
       "The Email field must not be empty and must contain the @ and example .gmail";
     message2.style.color = "red";
     return false;
   }
 
-  if (passRegex.test(pass)) {
+  if (passRegex.test(pass)) 
+  {
     message3.textContent = "Email is valid";
     message3.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message3.textContent =
       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
     message3.style.color = "red";
@@ -84,30 +95,39 @@ function validateData(formData) {
   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*.]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) {
+  if (nameRegex.test(userName)) 
+  {
     message1.textContent = "User is valid";
     message1.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message1.textContent =
       "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
     message1.style.color = "red";
     return false;
   }
 
-  if (emailRegex.test(email)) {
+  if (emailRegex.test(email)) 
+  {
     message2.textContent = "Email is valid";
     message2.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message2.textContent =
       "The Email field must not be empty and must contain the @ and example .gmail";
     message2.style.color = "red";
     return false;
   }
 
-  if (passRegex.test(pass)) {
+  if (passRegex.test(pass)) 
+  {
     message3.textContent = "Password is valid";
     message3.style.color = "green";
-  } else {
+  }
+  else 
+  {
     message3.textContent =
       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
     message3.style.color = "red";
@@ -135,20 +155,26 @@ function validateDataedit(dataEdit) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) {
+  if (nameRegex.test(userName)) 
+  {
     message1.textContent = "User is valid";
     message1.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message1.textContent =
       "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
     message1.style.color = "red";
     return false;
   }
 
-  if (emailRegex.test(email)) {
+  if (emailRegex.test(email)) 
+  {
     message2.textContent = "Email is valid";
     message2.style.color = "green";
-  } else {
+  } 
+  else
+  {
     message2.textContent =
       "The Email field must not be empty and must contain the @ and example .gmail";
     message2.style.color = "red";
@@ -159,7 +185,8 @@ function validateDataedit(dataEdit) {
 }
 
 // Función para limpiar los mensajes de validación
-function clearValidationMessages() {
+function clearValidationMessages() 
+{
   var messages = [
     "message1",
     "message2",
@@ -273,22 +300,22 @@ $(document).ready(function () {
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === 400 && response.method === "errorUser") {
+          if (response.status === "errorUser") 
+          {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } else if (
-            response.status === 400 &&
-            response.method === "errorEmail"
-          ) {
+          } 
+          else if (response.status === "errorEmail") 
+          {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } else if (response.status === 400 && response.method === "ERROR") {
-            //si funciona entonces procede a guardar el codigo
-            console.log("Entre");
+          } 
+          else if (response.status === "ERROR") 
+          {
             $("#create_user")[0].reset();
             $("#createUsermodal").modal("hide");
             clearValidationMessages();
@@ -297,7 +324,9 @@ $(document).ready(function () {
                 .text(response.message)
                 .show()
             );
-          } else if (response.status === 200 && response.method === "success") {
+          } 
+          else if (response.status === "success") 
+          {
             //si funciona entonces procede a guardar el codigo
             alert("Usuario creado con éxito.");
             console.log(formData);
@@ -349,23 +378,22 @@ $(document).ready(function () {
         data: dataEdit,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-          if (response.status === 400 && response.method === "errorEditUser") {
+          if (response.status === "errorEditUser") 
+          {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } else if (
-            response.status === 400 &&
-            response.method === "errorEditEmail"
-          ) {
+          } 
+          else if ( response.status === "errorEditEmail") 
+          {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } else if (
-            response.status === 400 &&
-            response.method === "ERRORedit"
-          ) {
+          } 
+          else if (response.status  === "ERRORedit") 
+          {
             //si funciona entonces procede a guardar el codigo
             console.log("Entre");
             $("#create_user")[0].reset();
@@ -376,7 +404,9 @@ $(document).ready(function () {
                 response.message
               )
             );
-          } else if (response.status === 200 && response.method === "success") {
+          } 
+          else if (response.status === "success") 
+          {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Actualizado un Registro");
             $("#editUsermodal").modal("hide");
@@ -404,11 +434,14 @@ $(document).ready(function () {
         type: "POST",
         data: deleteUser,
         success: function (response) {
-          if (response.status === 400 && response.method === "ERRORdelete") {
+          if (response.status === "ERRORdelete") 
+          {
             var message = $("#message").text(response.message).show();
             alert("No se pudo Eliminar el Usuario debido: " + message);
             $("#deleteModal").modal("hide");
-          } else if (response.status === 200 && response.method === "success") {
+          } 
+          else if (response.status === "success") 
+          {
             alert("Se ha Eliminado un Registro");
             $("#deleteModal").modal("hide");
             loadTable();

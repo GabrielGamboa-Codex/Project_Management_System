@@ -21,7 +21,7 @@ class UserController
                 'users.email as user_email',
                 'users.created_at as user_created',
                 'users.updated_at as user_updated',
-                'users.status as user_status', 
+                'users.status as user_status',
                 'teams.name as team_name',
                 'teams.id as team_id'
             )
@@ -53,20 +53,24 @@ class UserController
             $userExist = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
 
-            if ($userExist) {
+            if ($userExist) 
+            {
+                echo json_encode(['status' => 'errorUser', 'message' => 'The User is already registered.']);
+            } 
+            elseif ($userEmail) 
+            {
 
-                echo json_encode(['status' => 400, 'method' => 'errorUser', 'message' => 'The User is already registered.']);
-            } elseif ($userEmail) {
-
-                echo json_encode(['status' => 400, 'method' => 'errorEmail', 'message' => 'The mail is already registered.']);
-            } else {
+                echo json_encode(['status' => 'errorEmail', 'message' => 'The mail is already registered.']);
+            } 
+            else 
+            {
                 $user->createUser($userName, $email, $pass, $team_id);
 
-                echo json_encode(['status' => 200, 'method' => 'success']);
+                echo json_encode(['status' => 'success']);
             }
             //Pendiente por Revision 
         } catch (PDOException $e) {
-            $error = ['status' => 400, 'method' => 'ERROR', 'message' => "An error has occurred:" + $e->getMessage()];
+            $error = ['status' => 'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -82,16 +86,23 @@ class UserController
             $userExist = UserModel::find($id);
             $userFind = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
-            if ($userExist->username != $userName && $userFind) {
-                echo json_encode(['status' => 400, 'method' => 'errorEditUser', 'message' => 'The User is already registered.']);
-            } elseif ($userExist->email != $email  && $userEmail) {
-                echo json_encode(['status' => 400, 'method' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
-            } else {
+            if ($userExist->username != $userName && $userFind) 
+            {
+                echo json_encode(['status' => 'errorEditUser', 'message' => 'The User is already registered.']);
+            } 
+            elseif ($userExist->email != $email  && $userEmail) 
+            {
+                echo json_encode(['status' => 'errorEditEmail', 'message' => 'The mail is already registered.']);
+            } 
+            else 
+            {
                 $user->editUser($id, $userName, $email, $pass, $team_id);
-                echo json_encode(['status' => 200, 'method' => 'success']);
+                echo json_encode(['status' => 'success']);
             }
-        } catch (PDOException $e) {
-            $error = ['status' => 400, 'method' => 'ERRORedit', 'message' => "An error has occurred:" + $e->getMessage()];
+        } 
+        catch (PDOException $e) 
+        {
+            $error = ['status' => 'ERRORedit', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -103,9 +114,11 @@ class UserController
         try {
             $user = new UserModel();
             $user->deleteUser($id);
-            echo json_encode(['status' => 200, 'method' => 'success']);
-        } catch (Exception $e) {
-            $error = ['status' => 400, 'method' => 'ERRORdelete', 'message' => "An error has occurred:" + $e->getMessage()];
+            echo json_encode(['status' => 'success']);
+        } 
+        catch (Exception $e) 
+        {
+            $error = ['status' => 'ERRORdelete', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
