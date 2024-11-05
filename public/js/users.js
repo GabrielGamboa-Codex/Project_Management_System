@@ -1,188 +1,188 @@
-// //Validaciones
-// function validation(event) 
-// {
-//   var char = String.fromCharCode(event.which);
-//   if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
-//   {
-//     event.preventDefault();
-//     return false;
-//   }
-//   return true;
-// }
+//Validaciones
+function validation(event) 
+{
+  var char = String.fromCharCode(event.which);
+  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  {
+    event.preventDefault();
+    return false;
+  }
+  return true;
+}
 
-// // Verificar que el campo no esté vacío y contenga letras
-// function validateData(formData) {
-//   //Con el .trim valida que los campos no tengas espacios al principio o al final
-//   var userName = formData.userName.trim();
-//   var email = formData.email.trim();
-//   var pass = formData.pass.trim();
-//   //Llama a los div para que carguen los mensajes si hay algun error
-//   var message1 = document.getElementById("message1");
-//   //var message2 = document.getElementById("message2");
-//   var message3 = document.getElementById("message3");
+// Verificar que el campo no esté vacío y contenga letras
+function validateData(formData) {
+  //Con el .trim valida que los campos no tengas espacios al principio o al final
+  var userName = formData.userName.trim();
+  var email = formData.email.trim();
+  var pass = formData.pass.trim();
+  //Llama a los div para que carguen los mensajes si hay algun error
+  var message1 = document.getElementById("message1");
+  var message2 = document.getElementById("message2");
+  var message3 = document.getElementById("message3");
 
-//   //revisa que el userName tenga algun caracter y como minomo sean 4
-//   var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
 
-//   //Valida que al menos que un @
-//   //var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //Valida que al menos que un @
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-//   //W_ sirve para decir que permita al menos 1 caracater especial
-//   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
+  //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
+  //W_ sirve para decir que permita al menos 1 caracater especial
+  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 
-//   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-//   if (nameRegex.test(userName)) 
-//   {
-//     message1.textContent = "User is valid";
-//     message1.style.color = "green";
-//   }
-//   else 
-//   {
-//     message1.textContent =
-//       "The field cannot be empty and must contain at least 4 characters.";
-//     message1.style.color = "red";
-//     return false;
-//   }
+  //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+  if (nameRegex.test(userName)) 
+  {
+    message1.textContent = "User is valid";
+    message1.style.color = "green";
+  }
+  else 
+  {
+    message1.textContent =
+      "The field cannot be empty and must contain at least 4 characters.";
+    message1.style.color = "red";
+    return false;
+  }
 
-//   // if (emailRegex.test(email)) 
-//   // {
-//   //   message2.textContent = "Email is valid";
-//   //   message2.style.color = "green";
-//   // } 
-//   // else 
-//   // {
-//   //   message2.textContent =
-//   //     "The Email field must not be empty and must contain the @ and example .gmail";
-//   //   message2.style.color = "red";
-//   //   return false;
-//   // }
+  if (emailRegex.test(email)) 
+  {
+    message2.textContent = "Email is valid";
+    message2.style.color = "green";
+  } 
+  else 
+  {
+    message2.textContent =
+      "The Email field must not be empty and must contain the @ and example .gmail";
+    message2.style.color = "red";
+    return false;
+  }
 
-//   if (passRegex.test(pass)) 
-//   {
-//     message3.textContent = "Email is valid";
-//     message3.style.color = "green";
-//   } 
-//   else 
-//   {
-//     message3.textContent =
-//       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
-//     message3.style.color = "red";
-//     return false;
-//   }
+  if (passRegex.test(pass)) 
+  {
+    message3.textContent = "Email is valid";
+    message3.style.color = "green";
+  } 
+  else 
+  {
+    message3.textContent =
+      "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
+    message3.style.color = "red";
+    return false;
+  }
 
-//   return true;
-// }
+  return true;
+}
 
-// // Verificar que el campo no esté vacío y contenga letras
-// function validateData(formData) {
-//   //Con el .trim valida que los campos no tengas espacios al principio o al final
-//   var userName = formData.userName.trim();
-//   var email = formData.email.trim();
-//   var pass = formData.pass.trim();
-//   //Llama a los div para que carguen los mensajes si hay algun error
-//   var message1 = document.getElementById("message1");
-//   //var message2 = document.getElementById("message2");
-//   var message3 = document.getElementById("message3");
+// Verificar que el campo no esté vacío y contenga letras
+function validateData(formData) {
+  //Con el .trim valida que los campos no tengas espacios al principio o al final
+  var userName = formData.userName.trim();
+  var email = formData.email.trim();
+  var pass = formData.pass.trim();
+  //Llama a los div para que carguen los mensajes si hay algun error
+  var message1 = document.getElementById("message1");
+  var message2 = document.getElementById("message2");
+  var message3 = document.getElementById("message3");
 
-//   //revisa que el userName tenga algun caracter y como minomo sean 4
-//   var nameRegex = /^[a-zA-Z0-9]{4,}$/;
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9]{4,}$/;
 
-//   //Valida que al menos que un @
-//  // var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //Valida que al menos que un @
+ var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-//   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*.]).{8,16}$/;
+  //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
+  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*.]).{8,16}$/;
 
-//   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-//   if (nameRegex.test(userName)) 
-//   {
-//     message1.textContent = "User is valid";
-//     message1.style.color = "green";
-//   } 
-//   else 
-//   {
-//     message1.textContent =
-//       "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
-//     message1.style.color = "red";
-//     return false;
-//   }
+  //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+  if (nameRegex.test(userName)) 
+  {
+    message1.textContent = "User is valid";
+    message1.style.color = "green";
+  } 
+  else 
+  {
+    message1.textContent =
+      "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
+    message1.style.color = "red";
+    return false;
+  }
 
-//   // if (emailRegex.test(email)) 
-//   // {
-//   //   message2.textContent = "Email is valid";
-//   //   message2.style.color = "green";
-//   // } 
-//   // // else 
-//   // // {
-//   // //   message2.textContent =
-//   // //     "The Email field must not be empty and must contain the @ and example .gmail";
-//   // //   message2.style.color = "red";
-//   // //   return false;
-//   // // }
+  if (emailRegex.test(email)) 
+  {
+    message2.textContent = "Email is valid";
+    message2.style.color = "green";
+  } 
+  else 
+  {
+    message2.textContent =
+      "The Email field must not be empty and must contain the @ and example .gmail";
+    message2.style.color = "red";
+    return false;
+  }
 
-//   if (passRegex.test(pass)) 
-//   {
-//     message3.textContent = "Password is valid";
-//     message3.style.color = "green";
-//   }
-//   else 
-//   {
-//     message3.textContent =
-//       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
-//     message3.style.color = "red";
-//     return false;
-//   }
+  if (passRegex.test(pass)) 
+  {
+    message3.textContent = "Password is valid";
+    message3.style.color = "green";
+  }
+  else 
+  {
+    message3.textContent =
+      "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
+    message3.style.color = "red";
+    return false;
+  }
 
-//   return true;
-// }
+  return true;
+}
 
-// // Verificar que el campo no esté vacío y contenga letras
-// function validateDataedit(dataEdit) {
-//   //Con el .trim valida que los campos no tengas espacios al principio o al final
-//   var userName = dataEdit.userName.trim();
-//   var email = dataEdit.email.trim();
-//   var pass = dataEdit.pass.trim();
-//   //Llama a los div para que carguen los mensajes si hay algun error
-//   var message1 = document.getElementById("messageEdit1");
-//   var message2 = document.getElementById("messageEdit2");
-//   var message3 = document.getElementById("messageEdit3");
+// Verificar que el campo no esté vacío y contenga letras
+function validateDataedit(dataEdit) {
+  //Con el .trim valida que los campos no tengas espacios al principio o al final
+  var userName = dataEdit.userName.trim();
+  var email = dataEdit.email.trim();
+  var pass = dataEdit.pass.trim();
+  //Llama a los div para que carguen los mensajes si hay algun error
+  var message1 = document.getElementById("messageEdit1");
+  var message2 = document.getElementById("messageEdit2");
+  var message3 = document.getElementById("messageEdit3");
 
-//   //revisa que el userName tenga algun caracter y como minomo sean 4
-//   var nameRegex = /^[a-zA-Z0-9]{4,}$/;
+  //revisa que el userName tenga algun caracter y como minomo sean 4
+  var nameRegex = /^[a-zA-Z0-9]{4,}$/;
 
-//   //Valida que al menos que un @
-//   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //Valida que al menos que un @
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-//   if (nameRegex.test(userName)) 
-//   {
-//     message1.textContent = "User is valid";
-//     message1.style.color = "green";
-//   } 
-//   else 
-//   {
-//     message1.textContent =
-//       "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
-//     message1.style.color = "red";
-//     return false;
-//   }
+  //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+  if (nameRegex.test(userName)) 
+  {
+    message1.textContent = "User is valid";
+    message1.style.color = "green";
+  } 
+  else 
+  {
+    message1.textContent =
+      "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
+    message1.style.color = "red";
+    return false;
+  }
 
-//   if (emailRegex.test(email)) 
-//   {
-//     message2.textContent = "Email is valid";
-//     message2.style.color = "green";
-//   } 
-//   else
-//   {
-//     message2.textContent =
-//       "The Email field must not be empty and must contain the @ and example .gmail";
-//     message2.style.color = "red";
-//     return false;
-//   }
+  if (emailRegex.test(email)) 
+  {
+    message2.textContent = "Email is valid";
+    message2.style.color = "green";
+  } 
+  else
+  {
+    message2.textContent =
+      "The Email field must not be empty and must contain the @ and example .gmail";
+    message2.style.color = "red";
+    return false;
+  }
 
-//   return true;
-// }
+  return true;
+}
 
 // Función para limpiar los mensajes de validación
 function clearValidationMessages() 
@@ -249,7 +249,7 @@ $(document).ready(function () {
       { visible: false, targets: 5 },
       { visible: false, targets: 6 },
       { visible: false, targets: 7 },
-    ], // srive para ocultar la columna señalada tomando el cuenta que la primera columna es 0
+    ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
     columns: [
       { data: "id" },
       { data: "username" },
@@ -287,10 +287,10 @@ $(document).ready(function () {
         action: "createUser",
       };
 
-      // Validar campos vacíos y contenido adecuado
-      // if (!validateData(formData)) {
-      //   return false;
-      // }
+      //Validar campos vacíos y contenido adecuado
+      if (!validateData(formData)) {
+        return false;
+      }
 
       $.ajax({
         url: "handler/userHandler.php",
@@ -374,9 +374,9 @@ $(document).ready(function () {
       };
 
       // Validar campos vacíos y contenido adecuado
-      // if (!validateDataedit(dataEdit)) {
-      //   return false;
-      // }
+      if (!validateDataedit(dataEdit)) {
+        return false;
+      }
 
       $.ajax({
         url: "handler/userHandler.php",
