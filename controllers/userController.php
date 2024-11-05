@@ -32,10 +32,10 @@ class UserController
 
             if (!preg_match($patternUser, $userName)) 
             {
-                echo json_encode(['status' => 'errorUser', 'message' => 'The User is Invalid.']);
+                echo json_encode(['status' => 'errorUser', 'message' => 'The field cannot be empty and must contain at least 4 characters.']);
             }
             elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo json_encode(['status' => 'errorEmail', 'message' => 'The mail is Invalid.']);
+                echo json_encode(['status' => 'errorEmail', 'message' => 'The Email field must not be empty and must contain the @ and example gmail.com.']);
             }
             elseif(!preg_match($patternEmail, $pass))
             {
@@ -94,11 +94,11 @@ class UserController
 
             if (!preg_match($patternUser, $userName)) 
             {
-                echo json_encode(['status' => 'errorEditUser', 'message' => 'The User is Invalid.']);
+                echo json_encode(['status' => 'errorEditUser', 'message' => 'The field cannot be empty and must contain at least 4 characters.']);
             }
             elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
             {
-                echo json_encode(['status' => 'errorEditEmail', 'message' => 'The mail is Invalid.']);
+                echo json_encode(['status' => 'errorEditEmail', 'message' => 'The Email field must not be empty and must contain the @ and example gmail.com.']);
             }
             elseif(!empty($pass) && !preg_match($patternEmail, $pass))
             {
