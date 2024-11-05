@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="public/bootstrap-icons/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="public/datatable/datatables.min.css">
   <link rel="stylesheet" href="public/datatable/dataTables.bootstrap5.css">
-  <link rel="stylesheet" href="public/css/css.css">
 </head>
 
 <body>

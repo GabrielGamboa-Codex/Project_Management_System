@@ -2,4 +2,9 @@
     cursor: pointer;
 }
 
-
+.show
+{
+    font-size: 30px;
+    transform: translate(-35px);
+    cursor: pointer;
+}

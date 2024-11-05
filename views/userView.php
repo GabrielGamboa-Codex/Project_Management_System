@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="public/css/css.css">
 <body class="bg-body-tertiary">
     <br>
     <h3 class="text-center">User List</h3>
@@ -77,7 +78,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
-                            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password" />
+                            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password"/>
                             <div id="message3"></div>
                         </div>
                         <br>

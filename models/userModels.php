@@ -14,35 +14,35 @@ class UserModel extends Model
     public function printTable()
     {
         try {
-            $user_arr = array();
+            $userArr = array();
             $users = UserModel::join('teams', 'users.team_id', '=', 'teams.id')
                 ->select(
-                    'users.id as user_id',
-                    'users.username as user_name',
-                    'users.email as user_email',
-                    'users.created_at as user_created',
-                    'users.updated_at as user_updated',
-                    'users.status as user_status',
-                    'teams.name as team_name',
-                    'teams.id as team_id'
+                    'users.id',
+                    'users.username',
+                    'users.email',
+                    'users.created_at',
+                    'users.updated_at',
+                    'users.status',
+                    'teams.name',
+                    'teams.id'
                 )
                  ->where('status', true)
                  ->get();
     
             foreach ($users as $user) {
-                $user_arr[] = array(
-                    "id" => $user->user_id,
-                    "username" => $user->user_name,
-                    "email" => $user->user_email,
-                    "team_id" => $user->team_id,
-                    "team" => $user->team_name,
-                    "created_at" => $user->user_created,
-                    "updated_at" => $user->user_updated,
-                    "status" => $user->user_status
+                $userArr[] = array(
+                    "id" => $user->id,
+                    "username" => $user->username,
+                    "email" => $user->email,
+                    "team_id" => $user->id,
+                    "team" => $user->name,
+                    "created_at" => $user->created_at,
+                    "updated_at" => $user->updated_at,
+                    "status" => $user->status
                 );
             }
             //indexas el arreglo con el string data
-            echo json_encode(array("data" => $user_arr));
+            echo json_encode(array("data" => $userArr));
         } catch (PDOException $e) {
             $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
