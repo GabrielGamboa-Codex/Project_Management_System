@@ -11,7 +11,7 @@ class loginController
     public function login($email, $pass)
     {
         
-        session_start();
+        
             // Buscar el usuario por email
             $user = new UserModel;
             $user = UserModel::where('email', $email)->first();
@@ -25,12 +25,14 @@ class loginController
                 // Verificar la contraseña
                 if (password_verify($pass, $user->password)) 
                 {
+                    session_start();
                     // Guardar los datos del usuario en la sesión
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['username'] = $user->username;
-                    echo json_encode(['status' => 'success', 'message' => 'Login successful']);
-                    header('Location: userView.php');
-                    exit();
+                    // echo '<pre>';
+                    // var_dump($_SESSION);
+                    // echo '</pre>';
+                    echo json_encode(['status' => 'success']);
                 } else {
                     echo json_encode(['status' => 'errorPass', 'message' => 'Incorrect password']);
                 }

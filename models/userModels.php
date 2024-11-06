@@ -51,7 +51,7 @@ class UserModel extends Model
     }
 
     //funcion de crear usuarios
-    public function createUser($userName, $email, $pass, $team_id)
+    public function createUser($userName, $email, $pass, $teamId)
     {
         try {
             $user = new UserModel();
@@ -64,7 +64,7 @@ class UserModel extends Model
             $user->username  = $userName;
             $user->email = $email;
             $user->password = $hash;
-            $user->team_id = $team_id;
+            $user->team_id = $teamId;
             $user->created_at = $created;
             $user->updated_at = $updated;
             $user->status = true;
@@ -76,7 +76,7 @@ class UserModel extends Model
     }
 
     //funcion de editar usuarios
-    public function editUser($id, $userName, $email, $pass, $team_id)
+    public function editUser($id, $userName, $email, $pass, $teamId)
     {
         try {
             $user = new UserModel();
@@ -90,7 +90,7 @@ class UserModel extends Model
             $user->username = $userName;
             $user->email = $email;
             $user->password = $hash;
-            $user->team_id = $team_id;
+            $user->team_id = $teamId;
             $user->updated_at = $updated;
             $user->status = true;
             $user->save();

@@ -1,5 +1,13 @@
-<html>
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) 
+{ 
+header('Location: index.php?action=login.php'); 
+exit(); 
+}
 
+?>
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +45,14 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php?action=teamView">Team</a>
           </li>
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php echo $_SESSION['username']?>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Close Session</a></li>
+          </ul>
+        </li>
         </ul>
       </div>
     </div>

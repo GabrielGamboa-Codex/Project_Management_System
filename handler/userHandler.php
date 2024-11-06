@@ -14,10 +14,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'createUser')
     $userName = $_POST['userName'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-    $team_id = $_POST['team_id'];
+    $teamId = $_POST['team_id'];
 
     $controller = new UserController;
-    $up = $controller->createUser($userName, $email, $pass, $team_id);
+    $up = $controller->createUser($userName, $email, $pass, $teamId);
 }
 
 //llama al controlador para editar un Usuario
@@ -27,10 +27,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'editUser')
     $userName = $_POST['userName'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-    $team_id = $_POST['team_id'];
+    $teamId = $_POST['team_id'];
 
     $controller = new UserController;
-    $edit = $controller->editUser($id, $userName, $email, $pass, $team_id);
+    $edit = $controller->editUser($id, $userName, $email, $pass, $teamId);
 }
 
 //llama al controlador para Eliminar un usuario

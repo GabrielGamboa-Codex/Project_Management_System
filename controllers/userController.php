@@ -3,7 +3,7 @@ include __DIR__ . '/../models/userModels.php';
 
 class UserController
 {
-    public function index()
+    public function indexUser()
     {
         include __DIR__ . '/../views/header.php';
         include __DIR__ . '/../views/userView.php';
@@ -18,7 +18,7 @@ class UserController
     }
 
     //envia los datos al modelo para crear un usuario
-    public function createUser($userName, $email, $pass, $team_id)
+    public function createUser($userName, $email, $pass, $teamId)
     {
         try {
             $user = new UserModel();
@@ -61,7 +61,7 @@ class UserController
                 } 
                 else 
                 {
-                    $user->createUser($userName, $email, $pass, $team_id);
+                    $user->createUser($userName, $email, $pass, $teamId);
     
                     echo json_encode(['status' => 'success']);
                 }
@@ -75,7 +75,7 @@ class UserController
     }
 
     //envia los datos al modelo para editar un usuario
-    public function editUser($id, $userName, $email, $pass, $team_id)
+    public function editUser($id, $userName, $email, $pass, $teamId)
     {
 
 
@@ -124,7 +124,7 @@ class UserController
                 else 
                 {
                     
-                    $user->editUser($id, $userName, $email, $pass, $team_id);
+                    $user->editUser($id, $userName, $email, $pass, $teamId);
                     echo json_encode(['status' => 'success']);
                 }
             }

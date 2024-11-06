@@ -7,5 +7,8 @@
 </head>
 <body>
     <h1>Bienvenido a Team View</h1>
+    <?php
+    include __DIR__ . '/../views/footer.php';
+    ?>
 </body>
 </html>

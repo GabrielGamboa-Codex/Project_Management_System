@@ -140,6 +140,14 @@ $(document).ready(function () {
                 var message = $("#message2").text(response.message).show();
                 //con esta propiedad cambio su color a rojo
                 message.css("color", "red");
+              }
+              else if ((response.status === 'success') )
+              {
+                //window propiedad global de js que representa la ventana del navegador
+                //location es una propiedad del objeto window que contiene información sobre la URL actual del documento y 
+                //también se puede usar para redirigir el navegador a una nueva URL.
+                //href es una propiedad del objeto location. Puedes pensar en ella como la dirección URL a la que el navegador está apuntando.
+                window.location.href = 'index.php?action=userView'
               } 
       },
     });
