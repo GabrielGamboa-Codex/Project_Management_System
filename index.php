@@ -39,6 +39,9 @@ switch ($action) {
         $login->logOut();
         $login->indexLogin();
         break;
+    default:
+        $login->indexLogin();
+        break;
         // Agrega más rutas aquí
     
 }
