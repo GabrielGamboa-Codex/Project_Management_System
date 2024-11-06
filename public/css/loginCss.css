@@ -64,3 +64,13 @@ button
     display: inline-block;
     width: 400px;
 }
+
+.toggle-password {
+    position: absolute;
+    top: 68.5%;
+    right:618px; /* Ajusta según sea necesario */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333; /* Cambia el color del ícono */
+    font-size: 1.5rem; /* Cambia el tamaño del ícono */
+}

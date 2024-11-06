@@ -79,6 +79,7 @@
                                 <p class="fw-bold">Password</p>
                             </label>
                             <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password"/>
+                            <i class="bi bi-eye-slash toggle-password"></i>
                             <div id="message3"></div>
                         </div>
                         <br>
@@ -136,6 +137,7 @@
                                 <p class="fw-bold">Password</p>
                             </label>
                             <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password" />
+                            <i class="bi bi-eye-slash toggle-password2"></i>
                             <div id="messageEdit3"></div>
                         </div>
                         <br>

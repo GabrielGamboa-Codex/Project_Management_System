@@ -2,9 +2,23 @@
     cursor: pointer;
 }
 
-.show
-{
-    font-size: 30px;
-    transform: translate(-35px);
+.toggle-password {
+    position: absolute;
+    right: 25px; /* Ajusta según sea necesario */
+    top: 67%;
+    transform: translateY(-50%);
     cursor: pointer;
+    color: #333; /* Cambia el color del ícono */
+    font-size: 1.5rem; /* Cambia el tamaño del ícono */
 }
+
+.toggle-password2 {
+    position: absolute;
+    right: 25px; /* Ajusta según sea necesario */
+    top: 67%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333; /* Cambia el color del ícono */
+    font-size: 1.5rem; /* Cambia el tamaño del ícono */
+}
+
