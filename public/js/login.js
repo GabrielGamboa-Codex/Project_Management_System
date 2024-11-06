@@ -69,7 +69,7 @@ function validateData(formData) {
   
     if (passRegex.test(pass)) 
     {
-      message2.textContent = "Email is valid";
+      message2.textContent = "Password is valid";
       message2.style.color = "green";
     } 
     else 
@@ -107,19 +107,18 @@ $(document).ready(function () {
 
 //Login
   $("#Btnlogin")
-  .off()
   .click(function (e) {
     e.preventDefault();
     var formData = {
-      email: $("#user_email").val(),
-      pass: $("#user_pass").val(),
+      email: $("#login_email").val(),
+      pass: $("#login_pass").val(),
       action: "login",
     };
-
-    //Validar campos vacíos y contenido adecuado
-    if (!validateData(formData)) {
-      return false;
-    }
+    
+ //Validar campos vacíos y contenido adecuado
+          if (!validateData(formData)) {
+            return false;
+          }
 
     $.ajax({
       url: "handler/loginHandler.php",

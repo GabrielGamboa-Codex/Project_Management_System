@@ -59,6 +59,13 @@ input
     border-radius: 10px;
 }
 
+.message
+{
+   font-size: small;
+   font-weight: bold;
+   margin: 10px;
+}
+
 button
 {
     display: inline-block;

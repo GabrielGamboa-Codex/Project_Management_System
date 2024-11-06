@@ -19,14 +19,14 @@
         <div class="col-6 col-sm-12 col-md-12">
             <i class="bi bi-envelope-at-fill"></i> <label for="">Email</label>
             <input type="text" id="login_email" name="login_email" placeholder="Insert Email" onkeypress="validation(event);">
-            <div id="message1"></div>
+            <div id="message1" class="message"></div>
         </div>
 
         <div class="col-6 col-sm-12 col-md-12">
             <i class="bi bi-lock-fill"></i> <label for="">Password</label>
             <input type="password" id="login_pass" name="login_pass" placeholder="Insert password" onkeypress="validation(event);">
             <i class="bi bi-eye-slash toggle-password"></i>
-            <div id="message2"></div>
+            <div id="message2" class="message"></div>
         </div>
         <br>
         <br>
