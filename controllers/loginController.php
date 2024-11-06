@@ -36,9 +36,14 @@ class loginController
                 } else {
                     echo json_encode(['status' => 'errorPass', 'message' => 'Incorrect password']);
                 }
-            }
-         
-        
+            }    
+    }
+
+    public function logOut()
+    {
+        session_start();
+        session_unset(); // Elimina todas las variables de sesión 
+        session_destroy(); // Destruye la sesión ;
     }
  }
 

@@ -35,6 +35,10 @@ switch ($action) {
         include 'views/header.php';
         include 'views/teamView.php';
         break;
+    case 'logOut':
+        $login->logOut();
+        $login->indexLogin();
+        break;
         // Agrega más rutas aquí
     
 }

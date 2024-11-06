@@ -1,6 +1,6 @@
 body
 {
-    background-image: url(../img/fondo.png);
+    background-color: rgb(241, 243, 247);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -17,11 +17,8 @@ body
 
 form
 {
-    background-image: radial-gradient(circle at 50% -20.71%, #a6ffa7 0, 
-    #90ffab 12.5%, #76ffb0 25%, #54ffb5 37.5%, #08ffbb 50%, 
-    #00fbc2 62.5%, #00f8ca 75%, #00f4d3 87.5%, #00f1dc 100%);;
+    background-color: rgb(255, 255, 255);
     width: 600px;
-    border: 2px solid black;
     padding:  6rem;
     border-radius: 20px;
 }
@@ -29,12 +26,12 @@ form
 h1
 {
     display: block;
+    font-size: 25px;
+    width: 65%;
+    padding: 5px;
+    margin: 2px;
     
-    width: 95%;
-    padding: 10px;
-    margin: 10px;
-    
-    text-align: center;
+    text-align:justify;
 }
 
 img
@@ -42,27 +39,9 @@ img
     align-items: center;
 }
 
-label
-{
-    font-size: 18px;
-    padding: 10px;
-    font-weight: 300;
-}
-
-input
-{
-    display: block;
-    border: 2px solid black;
-    width: 95%;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-}
-
 .message
 {
    font-size: small;
-   font-weight: bold;
    margin: 10px;
 }
 
@@ -74,8 +53,8 @@ button
 
 .toggle-password {
     position: absolute;
-    top: 68.5%;
-    right:618px; /* Ajusta según sea necesario */
+    top: 59%;
+    right:8px; /* Ajusta según sea necesario */
     transform: translateY(-50%);
     cursor: pointer;
     color: #333; /* Cambia el color del ícono */

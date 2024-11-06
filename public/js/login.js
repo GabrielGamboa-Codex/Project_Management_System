@@ -148,6 +148,7 @@ $(document).ready(function () {
                 //también se puede usar para redirigir el navegador a una nueva URL.
                 //href es una propiedad del objeto location. Puedes pensar en ella como la dirección URL a la que el navegador está apuntando.
                 window.location.href = 'index.php?action=userView'
+                clearValidationMessages();
               } 
       },
     });
