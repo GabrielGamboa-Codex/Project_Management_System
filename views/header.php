@@ -25,38 +25,41 @@ exit();
 
   <nav class="navbar navbar-expand-lg bg-warning bg-opacity-75">
     <div class="container-fluid">
-      <a class="navbar-brand" href="">
-        <img src="public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        Project System Management 
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle"></i> <?php echo $_SESSION['username']?>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="index.php?action=logOut">Close Session</a></li>
-          </ul>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=userView">User</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=teamView">Team</a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="">
+            <img src="public/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Project System Management
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?action=userView">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?action=teamView">Team</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> <?php echo $_SESSION['username']?>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="index.php?action=logOut">Close Session</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
+
 
   

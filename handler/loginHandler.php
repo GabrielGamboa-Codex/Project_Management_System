@@ -7,6 +7,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login')
     $pass = $_POST['pass'];
     $code = $_POST['code'];
     $method = new loginController;
+
     if(empty($code))
     {
         $method->login($email,  $pass);
@@ -15,9 +16,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'login')
     {
         $method->verify($code);
     }
-    
-
-
 }
 
 

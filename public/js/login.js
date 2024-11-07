@@ -3,15 +3,19 @@ var passLogin = document.getElementById("login_pass");
 var icon = document.querySelector(".toggle-password");
 
 //Cuando el Icono haga click hacer
-icon.addEventListener("click", (e) => {
-  if (passLogin.type === "password") {
+icon.addEventListener("click", (e) => 
+{
+  if (passLogin.type === "password") 
+  {
     //Cambio el tipo de input
     passLogin.type = "text";
     //Remuevo la clase del Icono
     icon.classList.remove("bi-eye-slash");
     //Añado la clase al icono
     icon.classList.add("bi-eye");
-  } else {
+  } 
+  else 
+  {
     //Cambio el tipo de input
     passLogin.type = "password";
     //Remuevo la clase del Icono
@@ -22,9 +26,11 @@ icon.addEventListener("click", (e) => {
 });
 
 //Validaciones inputs
-function validation(event) {
+function validation(event) 
+{
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) {
+  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  {
     event.preventDefault();
     return false;
   }
@@ -32,9 +38,11 @@ function validation(event) {
 }
 
 //Validacion del codigo
-function validationCode(event) {
+function validationCode(event) 
+{
   var char = String.fromCharCode(event.which);
-  if (!/[0-9]/.test(char)) {
+  if (!/[0-9]/.test(char)) 
+  {
     event.preventDefault();
     return false;
   }
@@ -57,20 +65,26 @@ function validateData(formData) {
   //W_ sirve para decir que permita al menos 1 caracater especial
   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 
-  if (emailRegex.test(email)) {
+  if (emailRegex.test(email)) 
+  {
     message1.textContent = "Email is valid";
     message1.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message1.textContent =
       "The Email field must not be empty and must contain the @ and example gmail.com";
     message1.style.color = "red";
     return false;
   }
 
-  if (passRegex.test(pass)) {
+  if (passRegex.test(pass)) 
+  {
     message2.textContent = "Password is valid";
     message2.style.color = "green";
-  } else {
+  } 
+  else 
+  {
     message2.textContent =
       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
     message2.style.color = "red";
@@ -81,27 +95,37 @@ function validateData(formData) {
 }
 
 // Función para limpiar los mensajes de validación
-function clearValidationMessages() {
-  var messages = ["message1", "message2", "message3"];
+function clearValidationMessages() 
+{
+  var messages = 
+  ["message1",
+   "message2", 
+   "message3"];
   //Ejecuta esta funcion para cada uno de los id encontrados en el Array
-  messages.forEach(function (id) {
+  messages.forEach(function (id) 
+  {
     var messageElement = document.getElementById(id);
     //si el mensaje existe en el DOM hacer
-    if (messageElement) {
+    if (messageElement) 
+    {
       messageElement.textContent = "";
     }
   });
 }
 
-function clearCount() {
+//Borra la cuenta regresiva
+function clearCount() 
+{
   var countdownElement = document.getElementById("countdown");
-  if (countdownElement) {
+  if (countdownElement) 
+  {
     countdownElement.textContent = "";
   }
 }
 
 //Esconde el input para ingresar el codigo
-function showInput() {
+function showInput() 
+{
   var input = document.getElementById("codeValidate");
   input.classList.remove("hidden");
 }
@@ -110,7 +134,8 @@ function showInput() {
 
 $(document).ready(function () {
   //Login
-  $("#Btnlogin").click(function (e) {
+  $("#Btnlogin").click(function (e) 
+  {
     e.preventDefault();
     var formData = {
       email: $("#login_email").val(),
@@ -120,7 +145,8 @@ $(document).ready(function () {
     };
 
     //Validar campos vacíos y contenido adecuado
-    if (!validateData(formData)) {
+    if (!validateData(formData)) 
+    {
       return false;
     }
 
@@ -131,23 +157,30 @@ $(document).ready(function () {
       data: formData,
       success: function (response) {
         console.log(formData);
-        if (response.status === "errorEmail") {
+        if (response.status === "errorEmail") 
+        {
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message1").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
-        } else if (response.status === "errorPass") {
+        } 
+        else if (response.status === "errorPass")
+        {
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message2").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
-        } else if (response.status === "locked") {
+        } 
+        else if (response.status === "locked") 
+        {
           clearValidationMessages();
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message2").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
-        } else if (response.status === "success") {
+        } 
+        else if (response.status === "success") 
+        {
           showInput();
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message3").text(response.message).show();
@@ -155,7 +188,7 @@ $(document).ready(function () {
           var countdownTime = 300; // 5 minutos en segundos
 
           var countdownElement = document.getElementById("countdown");
-
+          //Funcion para ahcer una cuenta regresiva de 5 minutos
           function updateCountdown() {
             var minutes = Math.floor(countdownTime / 60);
             var seconds = countdownTime % 60;
@@ -172,24 +205,28 @@ $(document).ready(function () {
               clearInterval(countdownInterval);
             }
           }
+          // Actualizar la cuenta regresiva cada segundo
           var countdownInterval = setInterval(updateCountdown, 1000);
           updateCountdown(); // Llamar inmediatamente para inicializar la cuenta regresiva
-          // Actualizar la cuenta regresiva cada segundo
-
-          //con esta propiedad cambio su color a rojo
           message.css("color", "blue");
-        } else if (response.status === "errorCode") {
+        } 
+        else if (response.status === "errorCode") 
+        {
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message3").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
-        } else if (response.status === "expired") {
+        } 
+        else if (response.status === "expired") 
+        {
           clearCount();
           //selecciono el id mensaje y luego cambio su valor por el texto del json
           var message = $("#message3").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
-        } else if (response.status === "successTotal") {
+        } 
+        else if (response.status === "successTotal") 
+        {
           //window propiedad global de js que representa la ventana del navegador
           //location es una propiedad del objeto window que contiene información sobre la URL actual del documento y
           //también se puede usar para redirigir el navegador a una nueva URL.
