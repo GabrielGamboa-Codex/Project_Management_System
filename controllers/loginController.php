@@ -57,10 +57,12 @@ class loginController
                 $attempts['failedAttempts'] = 0;
                 $attempts['lastAttemptTime'] = 0;
                 $this->saveLoginAttempts($email, $attempts);
-
+                $_SESSION['user_id'] = $user ->id;
+                $_SESSION['username'] = $user->username;
                 $code = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
                 $_SESSION['verification_code'] = $code;
                 $_SESSION['code_expiry'] = time() + 300;
+
 
                // Preparar el correo electrónico 
                $userEmail = $user->email; $subject = "Tu código de verificación"; 
