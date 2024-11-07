@@ -3,11 +3,12 @@ include __DIR__ . '/../models/userModels.php';
 
 class UserController
 {
+     
     public function indexUser()
-    {
-        include __DIR__ . '/../views/header.php';
-        include __DIR__ . '/../views/userView.php';
-        return;
+    { 
+            include 'views/header.php'; 
+            include 'views/userView.php'; 
+        
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
