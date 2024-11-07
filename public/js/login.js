@@ -141,6 +141,14 @@ $(document).ready(function () {
                 //con esta propiedad cambio su color a rojo
                 message.css("color", "red");
               }
+              else if ((response.status === 'locked') )
+                {
+                clearValidationMessages();
+                //selecciono el id mensaje y luego cambio su valor por el texto del json
+                var message = $("#message2").text(response.message).show();
+                //con esta propiedad cambio su color a rojo
+                message.css("color", "red");
+                } 
               else if ((response.status === 'success') )
               {
                 //window propiedad global de js que representa la ventana del navegador

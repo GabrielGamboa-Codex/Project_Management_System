@@ -17,7 +17,7 @@ class UserModel extends Model
             $userArr = array();
             $users = UserModel::join('teams', 'users.team_id', '=', 'teams.id')
                 ->select(
-                    'users.id',
+                    'users.id as userId',
                     'users.username',
                     'users.email',
                     'users.created_at',
@@ -31,7 +31,7 @@ class UserModel extends Model
     
             foreach ($users as $user) {
                 $userArr[] = array(
-                    "id" => $user->id,
+                    "id" => $user->userId,
                     "username" => $user->username,
                     "email" => $user->email,
                     "team_id" => $user->id,
