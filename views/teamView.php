@@ -1,14 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Bienvenido a Team View</h1>
+<link rel="stylesheet" href="public/css/css.css">
+<body class="bg-body-tertiary">
+    <br>
+    <h3 class="text-center">Team List</h3>
+    <br>
+    <div id="message"></div>
+    <div class="container">
+        <!-- Button Crear nuevo Usuario-->
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createTeammodal">
+            <i class="bi bi-plus-circle-fill"></i> Create New Team
+        </button>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table id="TeamTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Team name</th>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>id</th>
+                                <th>Team name</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+
+
+    <!-- Modal Crear Usuarios -->
+    <div class="modal fade" id="createTeammodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createTeammodal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="createTeammodalLabel">Register a New Team</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="create_Team">
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Team Name</p>
+                            </label>
+                            <input type="text" class="form-control" id="Team_name" name="Team_name" placeholder="Name Team" onkeypress="validation(event);" />
+                            <div id="message1"></div>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="registerTeam"><i class="bi bi-person-add"></i>Create Team</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal Editar Usuarios -->
+    <div class="modal fade" id="editTeammodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editTeammodal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editTeammodalLabel">Team Data</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="edit_Team">
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Team Name</p>
+                            </label>
+                            <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name Team" onkeypress="validation(event);" />
+                            <div id="messageEdit1"></div>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="edit_id">
+                    <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit Team</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete Team</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal Para Confirmar la Eliminacion de un usuario-->
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Team</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-6 col-sm-12 col-md-12">
+                    <div class="modal-body">
+                        ¿Desea usted Eliminar Realmente el Usuario?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
+    <script src="public/js/teams.js"></script>
 </body>
+
 </html>

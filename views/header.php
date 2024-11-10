@@ -46,6 +46,9 @@ exit();
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?action=teamView">Team</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?action=projectView">Projects</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">

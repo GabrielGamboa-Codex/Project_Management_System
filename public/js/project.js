@@ -2,7 +2,7 @@
 function validation(event) 
 {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  if (!/[a-zA-Z0-9\s.,;-]/.test(char)) 
   {
     event.preventDefault();
     return false;
@@ -12,193 +12,167 @@ function validation(event)
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
-  //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var userName = formData.userName.trim();
-  var email = formData.email.trim();
-  var pass = formData.pass.trim();
-  //Llama a los div para que carguen los mensajes si hay algun error
-  var message1 = document.getElementById("message1");
-  var message2 = document.getElementById("message2");
-  var message3 = document.getElementById("message3");
+    //Con el .trim valida que los campos no tengas espacios al principio o al final
+    var projectName = formData.projectName.trim();
+    var description = formData.email.trim();
+    //Llama a los div para que carguen los mensajes si hay algun error
+    var message1 = document.getElementById("message1");
+    var message2 = document.getElementById("message2");
 
-  //revisa que el userName tenga algun caracter y como minomo sean 4
-  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+  
+    //revisa que el projectName tenga algun caracter y como minomo sean 4
+    var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+  
+    //Valida que al menos que un @
+    var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+  
 
-  //Valida que al menos que un @
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
-  //W_ sirve para decir que permita al menos 1 caracater especial
-  var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
-
-  //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) 
-  {
-    message1.textContent = "User is valid";
-    message1.style.color = "green";
-  }
-  else 
-  {
-    message1.textContent =
-      "The field cannot be empty and must contain at least 4 characters.";
-    message1.style.color = "red";
-    return false;
-  }
-
-  if (emailRegex.test(email)) 
-  {
-    message2.textContent = "Email is valid";
-    message2.style.color = "green";
-  } 
-  else 
-  {
-    message2.textContent =
-      "The Email field must not be empty and must contain the @ and example .gmail";
-    message2.style.color = "red";
-    return false;
-  }
-
-  if (passRegex.test(pass)) 
-  {
-    message3.textContent = "Email is valid";
-    message3.style.color = "green";
-  } 
-  else 
-  {
-    message3.textContent =
-      "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
-    message3.style.color = "red";
-    return false;
-  }
-
-  return true;
-}
-
-
-// Verificar que el campo no esté vacío y contenga letras
-function validateDataedit(dataEdit) {
-  //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var userName = dataEdit.userName.trim();
-  var email = dataEdit.email.trim();
-  var pass = dataEdit.pass.trim();
-  //Llama a los div para que carguen los mensajes si hay algun error
-  var message1 = document.getElementById("messageEdit1");
-  var message2 = document.getElementById("messageEdit2");
-  var message3 = document.getElementById("messageEdit3");
-
-  //revisa que el userName tenga algun caracter y como minomo sean 4
-  var nameRegex = /^[a-zA-Z0-9]{4,}$/;
-
-  //Valida que al menos que un @
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) 
-  {
-    message1.textContent = "User is valid";
-    message1.style.color = "green";
-  } 
-  else 
-  {
-    message1.textContent =
-      "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
-    message1.style.color = "red";
-    return false;
-  }
-
-  if (emailRegex.test(email)) 
-  {
-    message2.textContent = "Email is valid";
-    message2.style.color = "green";
-  } 
-  else
-  {
-    message2.textContent =
-      "The Email field must not be empty and must contain the @ and example .gmail";
-    message2.style.color = "red";
-    return false;
-  }
-
-  return true;
-}
-
-//Mostrar el Password al hacer click al icono
-var passCreate = document.getElementById("user_pass");
-var passEdit = document.getElementById("edit_pass");
-var icon1 = document.querySelector(".toggle-password");
-var icon2 = document.querySelector(".toggle-password2");
-
-//Cuando el Icono haga click hacer
-icon1.addEventListener("click", e => 
-  {
-    if(passCreate.type === "password")
+  
+    //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+    if (nameRegex.test(projectName)) 
     {
-      //Cambio el tipo de input
-      passCreate.type = "text";
-      //Remuevo la clase del Icono
-      icon1.classList.remove('bi-eye-slash');
-      //Añado la clase al icono
-      icon1.classList.add('bi-eye');
+      message1.textContent = "Name is valid";
+      message1.style.color = "green";
     }
-    else
+    else 
     {
-      //Cambio el tipo de input
-      passCreate.type = "password";
-      //Remuevo la clase del Icono
-      icon1.classList.remove('bi-eye');
-      //Añado la clase al icono
-      icon1.classList.add('bi-eye-slash');
+      message1.textContent =
+        "The name cannot contain special characters, only letters or numbers and must contain at least 4 characters.";
+      message1.style.color = "red";
+      return false;
     }
-  })
- 
-icon2.addEventListener("click", e => 
+  
+    if (descriptionRegex.test(email)) 
     {
-      if(passEdit.type === "password")
-      {
-        passEdit.type = "text";
-        icon2.classList.remove('bi-eye-slash');
-        icon2.classList.add('bi-eye');
+      message2.textContent = "Description is valid";
+      message2.style.color = "green";
+    } 
+    else 
+    {
+      message2.textContent =
+        "The description must contain at least 4 characters";
+      message2.style.color = "red";
+      return false;
+    }
+  
+  
+    return true;
+  }
+  
+  
+  // Verificar que el campo no esté vacío y contenga letras
+  function validateDataedit(dataEdit) {
+    //Con el .trim valida que los campos no tengas espacios al principio o al final
+    var projectName = dataEdit.projectName.trim();
+    var description = dataEdit.email.trim();
+    //Llama a los div para que carguen los mensajes si hay algun error
+    var message1 = document.getElementById("messageEdit1");
+    var message2 = document.getElementById("messageEdit2");
+  
+    //revisa que el projectName tenga algun caracter y como minomo sean 4
+    var nameRegex = /^[a-zA-Z0-9]{4,}$/;
+  
+    //Valida que al menos que un @
+    var descriptionRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+    //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
+    if (nameRegex.test(projectName)) 
+        {
+          message1.textContent = "Name is valid";
+          message1.style.color = "green";
+        }
+        else 
+        {
+          message1.textContent =
+            "The project name must contain numeric characters or letters and be at least 4 characters long.";
+          message1.style.color = "red";
+          return false;
+        }
+      
+        if (descriptionRegex.test(email)) 
+        {
+          message2.textContent = "Description is valid";
+          message2.style.color = "green";
+        } 
+        else 
+        {
+          message2.textContent =
+            "The description must contain at least 4 characters";
+          message2.style.color = "red";
+          return false;
+        }
+  
+    return true;
+  }
+  
+  
+  // Función para limpiar los mensajes de validación
+  function clearValidationMessages() 
+  {
+    var messages = [
+      "message1",
+      "message2",
+      "messageEdit1",
+      "messageEdit2",
+    ];
+    //Ejecuta esta funcion para cada uno de los id encontrados en el Array
+    messages.forEach(function (id) {
+      var messageElement = document.getElementById(id);
+      //si el mensaje existe en el DOM hacer
+      if (messageElement) {
+        messageElement.textContent = "";
       }
-      else
-      {
-        passEdit.type = "password";
-        icon2.classList.remove('bi-eye');
-        icon2.classList.add('bi-eye-slash');
-      }
-})
+    });
+  }
 
-// Función para limpiar los mensajes de validación
-function clearValidationMessages() 
-{
-  var messages = [
-    "message1",
-    "message2",
-    "message3",
-    "messageEdit1",
-    "messageEdit2",
-    "messageEdit3",
-  ];
-  //Ejecuta esta funcion para cada uno de los id encontrados en el Array
-  messages.forEach(function (id) {
-    var messageElement = document.getElementById(id);
-    //si el mensaje existe en el DOM hacer
-    if (messageElement) {
-      messageElement.textContent = "";
-    }
-  });
-}
+
+
+
 
 //Metodo Ajax
+
 $(document).ready(function () {
-  //Cargar un select por ajax enviado la data desde la base de datos
+    //Tabla de Projectos
+    var projectTable = $("#projectTable").DataTable({
+      ajax: {
+        url: "handler/projectHandler.php",
+        method: "POST",
+        data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
+      },
+      columnDefs: [
+        { visible: false, targets: 3 },
+        { visible: false, targets: 5 },
+        { visible: false, targets: 6 },
+        { visible: false, targets: 7 },
+      ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
+      columns: [
+        { data: "id" },
+        { data: "name" },
+        { data: "description" },
+        { data: "team_id" },
+        // Incluye esta columna si la necesitas
+        { data: "team" },
+        { data: "created_at" },
+        { data: "updated_at" },
+        { data: "status" },
+      ],
+    });
+
+      // funcion para recargar la tabla
+  function loadTable() {
+    projectTable.ajax.reload();
+  }
+
+     //Cargar un select por ajax enviado la data desde la base de datos
   $.ajax({
-    url: "handler/userHandler.php",
+    url: "handler/projectHandler.php",
     method: "POST",
     dataType: "json",
     data: { action: "printOptions" },
     success: function (data) {
       data.forEach(function (item) {
-        $("#user_team").append(
+        $("#project_team").append(
           `<option value="${item.id}">${item.name}</option>`
         );
       });
@@ -206,7 +180,7 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: "handler/userHandler.php",
+    url: "handler/projectHandler.php",
     method: "POST",
     dataType: "json", //Tipo de datos que se espera recibir como respuesta.
     data: { action: "printOptions" },
@@ -214,60 +188,24 @@ $(document).ready(function () {
       data.forEach(function (
         item //Recorre cada elemento en el array de datos recibido como respuesta.
       ) {
-        $("#team_edit").append(
+        $("#project_team_edit").append(
           `<option value="${item.id}">${item.name}</option>`
         ); //Añade contenido al final de los elemento seleccionados
       });
     },
   });
 
-  var userTable = $("#userTable").DataTable({
-    ajax: {
-      url: "handler/userHandler.php",
-      method: "POST",
-      data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
-    },
-    columnDefs: [
-      { visible: false, targets: 3 },
-      { visible: false, targets: 5 },
-      { visible: false, targets: 6 },
-      { visible: false, targets: 7 },
-    ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
-    columns: [
-      { data: "id" },
-      { data: "username" },
-      { data: "email" },
-      { data: "team_id" },
-      // Incluye esta columna si la necesitas
-      { data: "team" },
-      { data: "created_at" },
-      { data: "updated_at" },
-      { data: "status" },
-    ],
-  });
-
-  // Añade un cursor pointer a todas las filas de la tabla
-  $("#userTable tbody").on("mouseenter", "tr", function () {
-    $(this).addClass("pointer");
-  });
-
-  // funcion para recargar la tabla
-  function loadTable() {
-    userTable.ajax.reload();
-  }
-
-  // Crear  datos
-  $("#registerUser")
+  // Crear  Proyecto
+  $("#registerProject")
     .off()
     .click(function (e) {
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        userName: $("#user_name").val().trim(),
-        email: $("#user_email").val().toLowerCase(),
-        pass: $("#user_pass").val(),
-        team_id: $("#user_team").val(),
-        action: "createProject",
+        name: $("#project_name").val().trim(),
+        description: $("#project_description").val().trim(),
+        team_id: $("project_team").val(),
+        action: "createUser",
       };
 
       //Validar campos vacíos y contenido adecuado
@@ -276,34 +214,27 @@ $(document).ready(function () {
       }
 
       $.ajax({
-        url: "handler/userHandler.php",
+        url: "handler/projectHandler.php",
         type: "POST",
         dataType: "json",
         data: formData,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorUser") 
+          if (response.status === "errorProject") 
           {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           } 
-          else if (response.status === "errorEmail") 
+          else if (response.status === "errorDescription") 
           {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           }
-          else if(response.status === 'errorPass')
-            {
-              //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#message3").text(response.message).show();
-              //con esta propiedad cambio su color a rojo
-              message.css("color", "red");
-            } 
           else if (response.status === "ERROR") 
           {
             $("#create_user")[0].reset();
@@ -453,4 +384,5 @@ $(document).ready(function () {
         },
       });
     });
+
 });

@@ -1,6 +1,7 @@
 <?php
 include "./controllers/userController.php";
 include "./controllers/loginController.php";
+include "./controllers/projectController.php";
 
 // Registra una función de autoload. 
 //Esto significa que si tratas de usar una clase que no ha sido incluida todavía, 
@@ -21,6 +22,7 @@ spl_autoload_register(function ($class) {
 
 $users = new userController;
 $login = new loginController;
+$project =new ProjectController;
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
 
@@ -34,6 +36,9 @@ switch ($action) {
     case 'teamView':
         include 'views/header.php';
         include 'views/teamView.php';
+        break;
+    case 'projectView':
+        $project->indexProject();
         break;
     case 'logOut':
         $login->logOut();
