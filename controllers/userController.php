@@ -3,12 +3,11 @@ include __DIR__ . '/../models/userModels.php';
 
 class UserController
 {
-     
     public function indexUser()
-    { 
-            include 'views/header.php'; 
-            include 'views/userView.php'; 
-        
+    {
+        include __DIR__ . '/../views/header.php';
+        include __DIR__ . '/../views/userView.php';
+        return;
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
@@ -29,7 +28,7 @@ class UserController
             $userEmail = UserModel::where('email', $email)->exists();
             
             $patternEmail = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/';
-            $patternUser = '/^[a-zA-Z0-9\s]{4,}$/';
+            $patternUser = '/^[a-zA-Z0-9]{4,}$/';
 
             if (!preg_match($patternUser, $userName)) 
             {

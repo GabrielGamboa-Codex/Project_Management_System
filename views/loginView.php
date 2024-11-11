@@ -21,9 +21,9 @@
             </div>
         </div>
         <hr>
-        <br>
+       <br>
         <div class="col-6 col-sm-12 col-md-12">
-            <p class="text-start"><i class="bi bi-envelope-at-fill fs-5"></i> Email</p>
+        <p class="text-start"><i class="bi bi-envelope-at-fill fs-5"></i> Email</p>
             <div class="input-group mb-8">
                 <input type="text" class="form-control" id="login_email" name="login_email" placeholder="Insert Email" onkeypress="validation(event);" aria-describedby="inputGroup-sizing-default">
             </div>
@@ -31,19 +31,13 @@
         </div>
         <br>
         <div class="col-6 col-sm-12 col-md-12">
-            <p class="text-start"><i class="bi bi-lock-fill fs-5"></i> Password</p>
+        <p class="text-start"><i class="bi bi-lock-fill fs-5"></i> Password</p>
             <div class="input-group mb-6">
-                <input type="password" class="form-control" id="login_pass" name="login_pass" placeholder="Insert password" onkeypress="validation(event);">
+                <input type="password" class="form-control" id="login_pass" name="login_pass" placeholder="Insert password" onkeypress="validation(event);" >
                 <i class="bi bi-eye-slash toggle-password"></i>
             </div>
             <div id="message2" class="message"></div>
         </div>
-        <br>
-        <div class="input-group mb-6">
-            <input type="text" class="form-control hidden" id="codeValidate" name="codeValidate" placeholder="Insert Code" onkeypress="validationCode(event)">
-        </div>
-        <div id="message3" class="message"></div>
-        <div id="countdown" class="countdown"></div>
         <br>
         <button type="button" id="Btnlogin" class="btn btn-success">Start Login</button>
     </form>

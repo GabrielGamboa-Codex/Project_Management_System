@@ -1,9 +1,5 @@
 <?php
-
 include_once __DIR__ . '/../models/userModels.php';
-require __DIR__ . '/../vendor/autoload.php';
-
-use SendGrid\Mail\Mail;
 
 class loginController
 {
@@ -18,12 +14,12 @@ class loginController
 
     private function getLoginAttempts($email)
     {
-        //busca el archivo Json
         $file = __DIR__ . '/../config/loginAttempts.json';
-        //si el archivo existe
+        //si el archivo existe entonces
         if (file_exists($file)) {
-            //decodifica el json y lo vuelve un array asociativo si este tiene valores los retorna si no retorna valores por defecto
+            //va a decodificar el json para convertirlo en un array asosiativo
             $attempts = json_decode(file_get_contents($file), true);
+            //si no hay nada entonces va a devolver los valores de intentos por defecto
             return isset($attempts[$email]) ? $attempts[$email] : ['failedAttempts' => 0, 'lastAttemptTime' => 0];
         }
         return ['failedAttempts' => 0, 'lastAttemptTime' => 0];
@@ -32,10 +28,11 @@ class loginController
     private function saveLoginAttempts($email, $data)
     {
         $file = __DIR__ . '/../config/loginAttempts.json';
-        //genera un array asosciativo vacio en caso de que no tenga nada
+        //va a decodificar el json para convertirlo en un array asosiativo si el archivo no existe inicia un array vacio
         $attempts = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
-        //guarda la data en el array asosiativo y lo envia al json
+        //actualiza los datos del email especifico con la data que son los intentos
         $attempts[$email] = $data;
+        //codifica el array de intentos actualizado como una cadena JSON y lo guarda en el archivo.
         file_put_contents($file, json_encode($attempts));
     }
 
@@ -43,76 +40,46 @@ class loginController
     {
         session_start();
 
+        // Obtener intentos de inicio de sesión del archivo JSON
         $attempts = $this->getLoginAttempts($email);
 
+        // Verificar si la cuenta está bloqueada
         if ($attempts['failedAttempts'] >= $this->maxAttempts) {
             if (time() - $attempts['lastAttemptTime'] < $this->lockoutTime) {
                 echo json_encode(['status' => 'locked', 'message' => 'Too many failed attempts. Account is locked.']);
                 return;
             } else {
+                // Restablecer el contador de intentos fallidos después del tiempo de bloqueo
                 $attempts['failedAttempts'] = 0;
             }
         }
 
+        // Buscar el usuario por email
         $user = UserModel::where('email', $email)->first();
 
         if (!$user) {
             echo json_encode(['status' => 'errorEmail', 'message' => 'The email you entered is incorrect or does not exist']);
         } else {
+            // Verificar la contraseña
             if (password_verify($pass, $user->password)) {
-                //inicializa las variables y crea el arreglo
+                // Restablecer el contador de intentos fallidos al iniciar sesión correctamente
                 $attempts['failedAttempts'] = 0;
                 $attempts['lastAttemptTime'] = 0;
-                //Guarda la informacion en la clase
+                //Guarda ambos valores en un arreglo e inicializa el mismo en la funcion
                 $this->saveLoginAttempts($email, $attempts);
 
-                //guardo los datos del usuario en el Servidor
+                // Guardar los datos del usuario en la sesión
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
 
-                //creo un codigo aleatorio
-                $code = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-                //Guardo el codigo aleatorio
-                $_SESSION['verification_code'] = $code;
-                //tiempo maximo para ingresar el codigo de 5 minutos
-                $_SESSION['code_expiry'] = time() + 300;
-
-
-                // Preparar el correo electrónico 
-                $userEmail = $user->email;
-                $subject = "Tu código de verificación";
-                $message = "Hola {$user->username},\n\nTu código de verificación es: $code\n\nGracias,\nEquipo de Proyect System Management";
-                $email = new Mail();
-                $email->setFrom("no-reply@yourdomain.com", "Proyect System Management"); // Usar una dirección verificada 
-                $email->setSubject($subject);
-                $email->addTo($userEmail);
-
-                //Configuracion para enviar el email
-                $email = new Mail();
-                $email->setFrom("foxygamboafnaf2003@gmail.com", "Proyect System Management");
-                $email->setSubject($subject);
-                $email->addTo($userEmail);
-                $email->addContent("text/plain", $message);
-
-                $sendgrid = new \SendGrid('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');
-
-                try {
-                    $response = $sendgrid->send($email);
-                    if ($response->statusCode() == 202) {
-                        echo json_encode(['status' => 'success', 'message' => 'A numeric code has been sent to your email. You have a total of 5 minutes to enter it.']);
-                    } else {
-                        echo json_encode(['status' => 'error', 'message' => 'Failed to send email.']);
-                    }
-                } catch (Exception $e) {
-                    echo json_encode(['status' => 'error', 'message' => 'Caught exception: ' . $e->getMessage()]);
-                }
+                echo json_encode(['status' => 'success']);
             } else {
-                //Guarda los intentos fallidos y en que hora del dia actual fue ese intento
+                // Incrementar el contador de intentos fallidos
                 $attempts['failedAttempts']++;
                 $attempts['lastAttemptTime'] = time();
+                 //Guarda ambos valores en un arreglo
                 $this->saveLoginAttempts($email, $attempts);
 
-                //si llega al maximno de intentos fallidos bloquea la cuenta
                 if ($attempts['failedAttempts'] >= $this->maxAttempts) {
                     echo json_encode(['status' => 'locked', 'message' => 'Too many failed attempts. Account is locked.']);
                 } else {
@@ -122,28 +89,12 @@ class loginController
         }
     }
 
-//verificacion del codigo
-    public function verify($code)
-    {
-        session_start();
-
-        $storedCode = $_SESSION['verification_code'];
-        $expiryTime = $_SESSION['code_expiry'];
-
-        if (time() > $expiryTime) {
-            echo json_encode(['status' => 'expired', 'message' => 'The code has expired. Please request a new one reloading the page.']);
-        } elseif ($code === $storedCode) {
-            echo json_encode(['status' => 'successTotal', 'message' => 'You have been successfully authenticated.']);
-        } else {
-            echo json_encode(['status' => 'errorCode', 'message' => 'Incorrect verification code.']);
-        }
-    }
-
-//cerrado de Sesion
     public function logOut()
     {
         session_start();
-        session_unset();
-        session_destroy();
+        session_unset(); // Elimina todas las variables de sesión
+        session_destroy(); // Destruye la sesión
     }
 }
+
+

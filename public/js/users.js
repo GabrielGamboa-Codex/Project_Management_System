@@ -40,7 +40,7 @@ function validateData(formData) {
   else 
   {
     message1.textContent =
-      "The field cannot be empty and must contain at least 4 characters.";
+      "The Email field must not be empty and must contain the @ and example gmail.com.";
     message1.style.color = "red";
     return false;
   }
@@ -267,7 +267,7 @@ $(document).ready(function () {
         email: $("#user_email").val().toLowerCase(),
         pass: $("#user_pass").val(),
         team_id: $("#user_team").val(),
-        action: "createProject",
+        action: "createUser",
       };
 
       //Validar campos vacíos y contenido adecuado

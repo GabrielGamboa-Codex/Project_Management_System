@@ -1,7 +1,6 @@
 {
     "require": {
         "illuminate/database": "^8.0",
-        "robmorgan/phinx": "^0.14.0",
-        "sendgrid/sendgrid": "^8.1"
+        "robmorgan/phinx": "^0.14.0"
     }
 }

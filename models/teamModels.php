@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class TeamModel extends Model
+class TeamModels extends Model
 {
 
     protected $table = 'teams';
@@ -13,7 +13,7 @@ class TeamModel extends Model
     public function printOptions()
     {
         $team_arr = array();
-        $teams = TeamModel::all();
+        $teams = TeamModels::all();
 
         foreach ($teams as $team) 
         {
