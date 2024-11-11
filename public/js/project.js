@@ -13,14 +13,14 @@ function validation(event)
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
     //Con el .trim valida que los campos no tengas espacios al principio o al final
-    var projectName = formData.projectName.trim();
-    var description = formData.email.trim();
+    var name = formData.name;
+    var description = formData.description;
     //Llama a los div para que carguen los mensajes si hay algun error
     var message1 = document.getElementById("message1");
     var message2 = document.getElementById("message2");
 
   
-    //revisa que el projectName tenga algun caracter y como minomo sean 4
+    //revisa que el name tenga algun caracter y como minomo sean 4
     var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
@@ -29,20 +29,19 @@ function validateData(formData) {
 
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-    if (nameRegex.test(projectName)) 
+    if (nameRegex.test(name)) 
     {
       message1.textContent = "Name is valid";
       message1.style.color = "green";
     }
     else 
     {
-      message1.textContent =
-        "The name cannot contain special characters, only letters or numbers and must contain at least 4 characters.";
+      message1.textContent = "The name cannot contain special characters, only letters or numbers and must contain at least 4 characters.";
       message1.style.color = "red";
       return false;
     }
   
-    if (descriptionRegex.test(email)) 
+    if (descriptionRegex.test(description)) 
     {
       message2.textContent = "Description is valid";
       message2.style.color = "green";
@@ -63,21 +62,21 @@ function validateData(formData) {
   // Verificar que el campo no esté vacío y contenga letras
   function validateDataedit(dataEdit) {
     //Con el .trim valida que los campos no tengas espacios al principio o al final
-    var projectName = dataEdit.projectName.trim();
-    var description = dataEdit.email.trim();
+    var name = dataEdit.name.trim();
+    var description = dataEdit.description.trim();
     //Llama a los div para que carguen los mensajes si hay algun error
     var message1 = document.getElementById("messageEdit1");
     var message2 = document.getElementById("messageEdit2");
   
-    //revisa que el projectName tenga algun caracter y como minomo sean 4
-    var nameRegex = /^[a-zA-Z0-9]{4,}$/;
+    //revisa que el name tenga algun caracter y como minomo sean 4
+    var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-    if (nameRegex.test(projectName)) 
+    if (nameRegex.test(name)) 
         {
           message1.textContent = "Name is valid";
           message1.style.color = "green";
@@ -90,7 +89,7 @@ function validateData(formData) {
           return false;
         }
       
-        if (descriptionRegex.test(email)) 
+        if (descriptionRegex.test(description)) 
         {
           message2.textContent = "Description is valid";
           message2.style.color = "green";
@@ -204,8 +203,8 @@ $(document).ready(function () {
         id: $("#id").val(),
         name: $("#project_name").val().trim(),
         description: $("#project_description").val().trim(),
-        team_id: $("project_team").val(),
-        action: "createUser",
+        team_id: $("#project_team").val(),
+        action: "createProject",
       };
 
       //Validar campos vacíos y contenido adecuado
@@ -237,8 +236,8 @@ $(document).ready(function () {
           }
           else if (response.status === "ERROR") 
           {
-            $("#create_user")[0].reset();
-            $("#createUsermodal").modal("hide");
+            $("#create_Project")[0].reset();
+            $("#createProjectmodal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -249,11 +248,11 @@ $(document).ready(function () {
           else if (response.status === "success") 
           {
             //si funciona entonces procede a guardar el codigo
-            alert("Usuario creado con éxito.");
+            alert("Se ha Creado un Nuevo Projecto");
             console.log(formData);
-            $("#create_user")[0].reset();
+            $("#create_Project")[0].reset();
             $("#id").val("");
-            $("#createUsermodal").modal("hide");
+            $("#createProjectmodal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -262,29 +261,29 @@ $(document).ready(function () {
     });
 
   //Editar por fila atravez de una Modal
-  $("#userTable tbody").on("click", "tr", function () {
+  $("#projectTable tbody").on("click", "tr", function () {
     //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
-    var data = userTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
+    var data = projectTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
     $("#edit_id").val(data.id);
-    $("#edit_name").val(data.username);
-    $("#edit_email").val(data.email);
-    $("#team_edit").val(data.team_id);
-    $("#editUsermodal").modal("show"); //muestra la modal
+    $("#edit_name_project").val(data.name);
+    $("#description_edit").val(data.description);
+    $("#project_team_edit").val(data.team_id);
+    $("#editProjectmodal").modal("show"); //muestra la modal
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
-  $("#editButton")
+  $("#editButtonProject")
     .off()
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
         id: $("#edit_id").val(),
-        userName: $("#edit_name").val().trim(),
-        email: $("#edit_email").val().toLowerCase(),
+        name: $("#edit_name_project").val().trim(),
+        description: $("#description_edit").val(),
         pass: $("#edit_pass").val(),
-        team_id: $("#team_edit").val(),
-        action: "editUser",
+        team_id: $("#project_team_edit").val(),
+        action: "editProject",
       };
 
       // Validar campos vacíos y contenido adecuado
@@ -293,81 +292,67 @@ $(document).ready(function () {
       }
 
       $.ajax({
-        url: "handler/userHandler.php",
+        url: "handler/projectHandler.php",
         type: "POST",
         dataType: "json",
         data: dataEdit,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-          if (response.status === "errorEditUser") 
-          {
-            //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#messageEdit1").text(response.message).show();
-            //con esta propiedad cambio su color a rojo
-            message.css("color", "red");
-          } 
-          else if ( response.status === "errorEditEmail") 
-          {
-            //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#messageEdit2").text(response.message).show();
-            //con esta propiedad cambio su color a rojo
-            message.css("color", "red");
-          } 
-          else if(response.status === 'errorEditPass')
-          {
-            //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#messageEdit3").text(response.message).show();
-            //con esta propiedad cambio su color a rojo
-            message.css("color", "red");
-          }
-          else if ( response.status === 'successEditPass')
-          {
-            //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#messageEdit3").text(response.message).show();
-            //con esta propiedad cambio su color a rojo
-            message.css("color", "green");
-          }
-          else if (response.status  === "ERRORedit") 
-          {
-            //si funciona entonces procede a guardar el codigo
-            console.log("Entre");
-            $("#create_user")[0].reset();
-            $("#createUsermodal").modal("hide");
-            clearValidationMessages();
-            $("body").html(
-              '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(
-                response.message
-              )
-            );
-          } 
-          else if (response.status === "success") 
-          {
-            //si funciona entonces procede a guardar el codigo
-            alert("Se ha Actualizado un Registro");
-            $("#editUsermodal").modal("hide");
-            loadTable();
-            clearValidationMessages();
-            $("#edit_user")[0].reset();
-          }
+         //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
+          //reponse comprueba el el https_response_ en el envio
+          if (response.status === "errorEditProject") 
+            {
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message1").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color", "red");
+            } 
+            else if (response.status === "errorEditDescription") 
+            {
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message2").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color", "red");
+            }
+            else if (response.status === "ERROR") 
+            {
+              $("#edit_Project")[0].reset();
+              $("#editProjectmodal").modal("hide");
+              clearValidationMessages();
+              $("body").html(
+                '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
+                  .text(response.message)
+                  .show()
+              );
+            } 
+            else if (response.status === "success") 
+            {
+              //si funciona entonces procede a guardar el codigo
+              alert("Se ha Modificado un Projecto");
+              $("#edit_Project")[0].reset();
+              $("#editProjectmodal").modal("hide");
+              clearValidationMessages();
+              loadTable();
+            }
         },
       });
     });
 
   //Eliminar un Usuario
-  $("#deleteButton")
+  $("#deleteProject")
     .off()
     .click(function (e) {
       e.preventDefault();
-      var deleteUser = {
+      var deleteProject = {
         id: $("#edit_id").val(),
-        action: "deleteUser",
+        action: "deleteProject",
       };
 
       $.ajax({
-        url: "handler/userHandler.php",
+        url: "handler/projectHandler.php",
         dataType: "json",
         type: "POST",
-        data: deleteUser,
+        data: deleteProject,
         success: function (response) {
           if (response.status === "ERRORdelete") 
           {

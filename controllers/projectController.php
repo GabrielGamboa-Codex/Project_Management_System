@@ -19,13 +19,13 @@ class ProjectController
     }
 
     //envia los datos al modelo para crear un usuario
-    public function createProject($projectName, $description, $teamId, $userId)
+    public function createProject($projectName, $description, $teamId)
     {
         try {
             $Project = new ProjectModel();
             
-            $patterndescription = '/^[a-zA-Z0-9\s]{4,}$/';
-            $patternProject = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+            $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+            $patternProject = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternProject, $projectName)) 
             {
@@ -41,7 +41,7 @@ class ProjectController
             }
             else
             {
-                    $Project->createProject($projectName, $description, $teamId, $userId);
+                    $Project->createProject($projectName, $description, $teamId);
     
                     echo json_encode(['status' => 'success']);
                 
@@ -55,7 +55,7 @@ class ProjectController
     }
 
     //envia los datos al modelo para editar un usuario
-    public function editProject($id, $projectName, $description, $teamId, $userId)
+    public function editProject($id, $projectName, $description, $teamId)
     {
 
 
@@ -78,7 +78,7 @@ class ProjectController
             }
             else
             {   
-                    $Project->editProject($id, $projectName, $description, $teamId, $userId );
+                    $Project->editProject($id, $projectName, $description, $teamId);
                     echo json_encode(['status' => 'success']);
                 
             }
@@ -90,11 +90,11 @@ class ProjectController
 
 
     //envia los datos al modelo para editar un usuario
-    public function deleteUse($id, $userId)
+    public function deleteUse($id)
     {
         try {
             $Project = new ProjectModel();
-            $Project->deleteProject($id, $userId);
+            $Project->deleteProject($id);
             echo json_encode(['status' => 'success']);
         } catch (Exception $e) {
             $error = ['status' => 'ERRORdelete', 'message' => "An error has occurred:" . $e->getMessage()];

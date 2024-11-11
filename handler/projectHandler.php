@@ -19,26 +19,24 @@ if (isset($_POST['action']) && $_POST['action'] == 'printOptions')
 //llama al controlador para  crear un Usuario
 if (isset($_POST['action']) && $_POST['action'] == 'createProject') 
 {
-    $ProjectName = $_POST['projectName'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $ProjectName = $_POST['name'];
+    $description = $_POST['description'];
     $teamId = $_POST['team_id'];
 
     $controller = new ProjectController;
-    $up = $controller->createProject($ProjectName, $email, $pass, $teamId);
+    $up = $controller->createProject($ProjectName, $description, $teamId);
 }
 
 //llama al controlador para editar un Usuario
 if (isset($_POST['action']) && $_POST['action'] == 'editProject') 
 {
     $id = $_POST['id'];
-    $ProjectName = $_POST['ProjectName'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $projectName = $_POST['name'];
+    $description = $_POST['description'];
     $teamId = $_POST['team_id'];
 
     $controller = new ProjectController;
-    $edit = $controller->editProject($id, $ProjectName, $email, $pass, $teamId);
+    $edit = $controller->editProject($id, $projectName, $description, $teamId);
 }
 
 //llama al controlador para Eliminar un usuario
@@ -47,6 +45,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteProject')
     $id = $_POST['id'];
 
     $controller = new ProjectController;
-    $edit = $controller->deleteUse($id, $userId);
+    $edit = $controller->deleteUse($id);
 }
 
