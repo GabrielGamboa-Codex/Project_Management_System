@@ -59,9 +59,9 @@ class TeamController
 
 
         try {
-            $Team = new TeamModel();
+            $team = new teamModel();
             //comprueba que los valores existan y guarda la informacion en una variable
-            $TeamFind = TeamModel::where('name', $teamName)
+            $teamFind = teamModel::where('name', $teamName)
                 ->where('id', '!=', $id)
                 ->exists();
 
@@ -73,14 +73,14 @@ class TeamController
             }
             else
             {
-                if ($TeamFind == true) 
+                if ($teamFind == true) 
                 {
                     echo json_encode(['status' => 'errorEditTeam', 'message' => 'The Team is already registered.']);
                 } 
                 else 
                 {
                     
-                    $Team->editTeam($id, $teamName);
+                    $team->editTeam($id, $teamName);
                     echo json_encode(['status' => 'success']);
                 }
             }
