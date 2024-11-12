@@ -2,7 +2,7 @@
 function validation(event) 
 {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) 
   {
     event.preventDefault();
     return false;
@@ -25,7 +25,7 @@ function validateData(formData) {
   var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
 
   //Valida que al menos que un @
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   //revisa que el password tenga al menos 1 mayuscula 1 numero y 1 caracter especial en el password y que tenga como minimo 8 caracteres y maximo 16
   //W_ sirve para decir que permita al menos 1 caracater especial
@@ -90,7 +90,7 @@ function validateDataedit(dataEdit) {
   var nameRegex =  /^[a-zA-Z0-9\s]{4,}$/;
 
   //Valida que al menos que un @
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
   if (nameRegex.test(userName)) 
