@@ -25,7 +25,10 @@ spl_autoload_register(function ($class) {
 $users = new userController;
 $login = new loginController;
 $project = new ProjectController;
+<<<<<<< HEAD
 $team = new TeamController;
+=======
+>>>>>>> 23452c8ce477d927698253ca9ec6d9995ebef85e
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
 
@@ -37,7 +40,12 @@ switch ($action) {
         $viewUsers = $users->indexUser();
         break;
     case 'teamView':
+<<<<<<< HEAD
         $team->indexTeam();
+=======
+        include 'views/header.php';
+        include 'views/teamView.php';
+>>>>>>> 23452c8ce477d927698253ca9ec6d9995ebef85e
         break;
     case 'logOut':
         $login->logOut();

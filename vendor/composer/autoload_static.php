@@ -20,7 +20,6 @@ class ComposerStaticInit4b3f46cc5aaf35ab7ec7e7f8a4a9721e
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-        '79f66bc0a1900f77abe4a9a299057a0a' => __DIR__ . '/..' . '/starkbank/ecdsa/src/ellipticcurve.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -43,12 +42,6 @@ class ComposerStaticInit4b3f46cc5aaf35ab7ec7e7f8a4a9721e
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
-            'SendGrid\\Stats\\' => 15,
-            'SendGrid\\Mail\\' => 14,
-            'SendGrid\\Helper\\' => 16,
-            'SendGrid\\EventWebhook\\' => 22,
-            'SendGrid\\Contacts\\' => 18,
-            'SendGrid\\' => 9,
         ),
         'P' => 
         array (
@@ -137,30 +130,6 @@ class ComposerStaticInit4b3f46cc5aaf35ab7ec7e7f8a4a9721e
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
-        'SendGrid\\Stats\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/stats',
-        ),
-        'SendGrid\\Mail\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/mail',
-        ),
-        'SendGrid\\Helper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/helper',
-        ),
-        'SendGrid\\EventWebhook\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/eventwebhook',
-        ),
-        'SendGrid\\Contacts\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/contacts',
-        ),
-        'SendGrid\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
-        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -231,14 +200,11 @@ class ComposerStaticInit4b3f46cc5aaf35ab7ec7e7f8a4a9721e
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'BaseSendGridClientInterface' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/BaseSendGridClientInterface.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
-        'SendGrid' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/SendGrid.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-        'TwilioEmail' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/TwilioEmail.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
