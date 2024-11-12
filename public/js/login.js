@@ -29,7 +29,7 @@ icon.addEventListener("click", (e) =>
 function validation(event) 
 {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*.]/.test(char)) 
+  if (!/[a-zA-Z0-9\s+@#$%*.]/.test(char)) 
   {
     event.preventDefault();
     return false;
