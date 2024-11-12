@@ -12,17 +12,18 @@ final class CreateTeamsTable extends AbstractMigration
         $table->addColumn('name', 'string', ['limit' => 50])
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('status', 'string', ['limit' => 100])
             ->addIndex(['name'], ['unique' => true, 'name' => 'idx_unique_name'])
             ->create();
 
         // Insertar datos en la tabla
         $data = [
-            ['name' => 'Development'],
-            ['name' => 'Management'],
-            ['name' => 'Testing'],
-            ['name' => 'Design'],
-            ['name' => 'Code Explotation'],
-            ['name' => 'Reviewers'],
+            ['name' => 'Development', 'status' => true],
+            ['name' => 'Management', 'status' => true],
+            ['name' => 'Testing', 'status' => true],
+            ['name' => 'Design', 'status' => true],
+            ['name' => 'Code Explotation', 'status' => true],
+            ['name' => 'Reviewers', 'status' => true],
         ];
 
         $this->table('teams')->insert($data)->save();

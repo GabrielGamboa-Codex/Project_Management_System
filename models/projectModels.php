@@ -24,7 +24,7 @@ class ProjectModel extends Model
                     'teams.name',
                     'teams.id'
                 )
-                 ->where('status', true)
+                 ->where('projects.status', true)
                  ->get();
     
             foreach ($projects as $project) {
@@ -49,11 +49,11 @@ class ProjectModel extends Model
     }
 
      //funcion de crear usuarios
-     public function createProject($projectName, $description, $teamId, $userId)
+     public function createProject($projectName, $description, $teamId)
      {
          try {
              $date = date('Y-m-d H:i:s');
-             $action = "Create";
+             //$action = "Create";
             //Guardado en la tabla project
              $project = new ProjectModel();
              $created = $date;
@@ -66,16 +66,16 @@ class ProjectModel extends Model
              $project->status = true;
              $project->save();
 
-             // Obtener el ID del proyecto guardado 
-             $projectId = $project->id;
+            //  // Obtener el ID del proyecto guardado 
+            //  $projectId = $project->id;
             
-             //Guardamos la accion en la tabla project_history el registro
-             $projectHistory = new ProjectHistoryModel();
-             $projectHistory->project_id = $projectId;
-             $projectHistory->action = $action;
-             $projectHistory->user_id = $userId;
-             $projectHistory->timestamp = $date;
-             $projectHistory->save();
+            //  //Guardamos la accion en la tabla project_history el registro
+            //  $projectHistory = new ProjectHistoryModel();
+            //  $projectHistory->project_id = $projectId;
+            //  $projectHistory->action = $action;
+            //  $projectHistory->user_id = $userId;
+            //  $projectHistory->timestamp = $date;
+            //  $projectHistory->save();
 
          } catch (PDOException $e) {
              $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
@@ -84,13 +84,13 @@ class ProjectModel extends Model
      }
  
      //funcion de editar usuarios
-     public function editProject($id, $projectName, $description, $teamId,  $userId)
+     public function editProject($id, $projectName, $description, $teamId)
      {
          try {
              $project = new ProjectModel();
              $project = ProjectModel::find($id);
              $date = date('Y-m-d H:i:s');
-             $action = "Edit";
+             //$action = "Edit";
  
              $updated = $date;
              $project->name  = $projectName;
@@ -100,13 +100,13 @@ class ProjectModel extends Model
              $project->status = true;
              $project->save();
             
-              //Guardamos la accion en la tabla project_history el registro
-              $projectHistory = new ProjectHistoryModel();
-              $projectHistory->project_id = $id;
-              $projectHistory->action = $action;
-              $projectHistory->user_id = $userId;
-              $projectHistory->timestamp = $date;
-              $projectHistory->save();
+            //   //Guardamos la accion en la tabla project_history el registro
+            //   $projectHistory = new ProjectHistoryModel();
+            //   $projectHistory->project_id = $id;
+            //   $projectHistory->action = $action;
+            //   $projectHistory->user_id = $userId;
+            //   $projectHistory->timestamp = $date;
+            //   $projectHistory->save();
 
          } catch (PDOException $e) {
              $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
@@ -115,23 +115,23 @@ class ProjectModel extends Model
      }
  
      //funcion de eliminar Usuarios
-     public function deleteProject($id, $userId)
+     public function deleteProject($id)
      {
          try {
              $action = "Delete";
              $project = new ProjectModel();
              $project = ProjectModel::find($id);
-             $date = date('Y-m-d H:i:s');
+             //$date = date('Y-m-d H:i:s');
              $project->status = false;
              $project->save();
              
              //Guardamos la accion en la tabla project_history el registro
-             $projectHistory = new ProjectHistoryModel();
-             $projectHistory->project_id = $id;
-             $projectHistory->action = $action;
-             $projectHistory->user_id = $userId;
-             $projectHistory->timestamp = $date;
-             $projectHistory->save();
+            //  $projectHistory = new ProjectHistoryModel();
+            //  $projectHistory->project_id = $id;
+            //  $projectHistory->action = $action;
+            //  $projectHistory->user_id = $userId;
+            //  $projectHistory->timestamp = $date;
+            //  $projectHistory->save();
 
          } catch (PDOException $e) {
              $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];

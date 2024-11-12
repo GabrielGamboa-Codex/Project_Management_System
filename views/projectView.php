@@ -93,7 +93,7 @@
 
 
 
-    <!-- Modal Editar Usuarios -->
+    <!-- Modal Editar Project -->
     <div class="modal fade" id="editProjectmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProjectmodal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -108,7 +108,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="edit_name_project" name="edit_name_project" placeholder="Name Project" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -116,8 +116,8 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="project_description" name="description_edit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
-                            <div id="message2"></div>
+                            <textarea class="form-control" id="description_edit" name="description_edit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <div id="messageEdit2"></div>
                         </div>                      
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
@@ -131,8 +131,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="edit_id">
-                    <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit Project</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete Project</button>
+                    <button type="submit" class="btn btn-warning" id="editButtonProject"><i class="bi bi-pencil-square"></i> Edit Project</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard2-x"></i> Delete Project</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
@@ -153,11 +153,11 @@
                 </div>
                 <div class="col-6 col-sm-12 col-md-12">
                     <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente el Usuario?
+                        ¿Desea usted Eliminar Realmente el Projecto?
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
+                    <button type="submit" id="deleteProject" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>

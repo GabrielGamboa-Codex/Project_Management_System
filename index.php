@@ -2,8 +2,10 @@
 include "./controllers/userController.php";
 include "./controllers/loginController.php";
 include "./controllers/projectController.php";
+include "./controllers/teamController.php";
 
 // Registra una función de autoload. 
+
 //Esto significa que si tratas de usar una clase que no ha sido incluida todavía, 
 //esta función se encargará de buscar y cargar esa clase.
 spl_autoload_register(function ($class) {
@@ -22,7 +24,8 @@ spl_autoload_register(function ($class) {
 
 $users = new userController;
 $login = new loginController;
-$project =new ProjectController;
+$project = new ProjectController;
+$team = new TeamController;
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
 
@@ -34,16 +37,18 @@ switch ($action) {
         $viewUsers = $users->indexUser();
         break;
     case 'teamView':
-        include 'views/header.php';
-        include 'views/teamView.php';
-        break;
-    case 'projectView':
-        $project->indexProject();
+        $team->indexTeam();
         break;
     case 'logOut':
         $login->logOut();
         $login->indexLogin();
         break;
+    case 'projectView':
+        $project->indexProject();
+        break;
+    default:
+        $login->indexLogin();
+        break;
         // Agrega más rutas aquí
-    
+
 }
