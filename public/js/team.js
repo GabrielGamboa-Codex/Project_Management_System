@@ -175,7 +175,7 @@ $(document).ready(function () {
       e.preventDefault();
       var dataEdit = {
         id: $("#edit_id").val(),
-        name: $("edit_nameTeam").val(),
+        name: $("#edit_nameTeam").val(),
         action: "editTeam",
       };
 
@@ -196,7 +196,7 @@ $(document).ready(function () {
           if (response.status === "errorEditTeam") 
             {
               //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#message1").text(response.message).show();
+              var message = $("#messageEdit1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             } 

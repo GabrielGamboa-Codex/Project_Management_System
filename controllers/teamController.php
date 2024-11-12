@@ -65,7 +65,7 @@ class TeamController
                 ->where('id', '!=', $id)
                 ->exists();
 
-            $patternTeam = '/^[a-zA-Z0-9]{4,}$/';
+            $patternTeam = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternTeam, $teamName)) 
             {
