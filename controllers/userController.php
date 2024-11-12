@@ -27,7 +27,7 @@ class UserController
             $userExist = UserModel::where('username', $userName)->exists();
             $userEmail = UserModel::where('email', $email)->exists();
             
-            $patternEmail = '/^[^@\s]+@[^@\s]+\.[^@\s]+$/';
+            $patternPass = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/';
             $patternUser = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternUser, $userName)) 
@@ -37,9 +37,9 @@ class UserController
             elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo json_encode(['status' => 'errorEmail', 'message' => 'The Email field must not be empty and must contain the @ and example gmail.com.']);
             }
-            elseif(!preg_match($patternEmail, $pass))
+            elseif(!preg_match($patternPass, $pass))
             {
-                if(!preg_match($patternEmail, $pass))
+                if(!preg_match($patternPass, $pass))
                 {
                     echo json_encode(['status' => 'errorPass', 'message' => 'The Password is invalid It must contain at least 8 characters, including one special character, numbers and letters']);
                     
@@ -89,7 +89,7 @@ class UserController
             $userEmail = UserModel::where('email', $email)
                 ->where('id', '!=', $id)
                 ->exists();
-            $patternEmail = '/^[^@\s]+@[^@\s]+\.[^@\s]+$/';
+            $patternPass = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/';
             $patternUser = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternUser, $userName)) 
@@ -100,9 +100,9 @@ class UserController
             {
                 echo json_encode(['status' => 'errorEditEmail', 'message' => 'The Email field must not be empty and must contain the @ and example gmail.com.']);
             }
-            elseif(!empty($pass) && !preg_match($patternEmail, $pass))
+            elseif(!empty($pass) && !preg_match($patternPass, $pass))
             {
-                if(!preg_match($patternEmail, $pass))
+                if(!preg_match($patternPass, $pass))
                 {
                     echo json_encode(['status' => 'errorEditPass', 'message' => 'The Password is invalid It must contain at least 8 characters, including one special character, numbers and letters']);
                 }
