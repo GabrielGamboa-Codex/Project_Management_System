@@ -47,7 +47,7 @@ class loginController
 
         if ($attempts['failedAttempts'] >= $this->maxAttempts) {
             if (time() - $attempts['lastAttemptTime'] < $this->lockoutTime) {
-                echo json_encode(['status' => 'locked', 'message' => 'Too many failed attempts. Account is locked.']);
+                echo json_encode(['status' => 'locked', 'message' => 'Too many failed attempts. Account is locked. wait 15 minutes']);
                 return;
             } else {
                 $attempts['failedAttempts'] = 0;
@@ -94,7 +94,7 @@ class loginController
                 $email->addTo($userEmail);
                 $email->addContent("text/plain", $message);
 
-                $sendgrid = new \SendGrid('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');
+                $sendgrid = new \SendGrid('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');
 
                 try {
                     $response = $sendgrid->send($email);

@@ -14,8 +14,25 @@ class CreateUsersTable extends AbstractMigration
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('status', 'string', ['limit' => 100])
-            ->addIndex(['username'], ['unique' => true, 'name' => 'idx_unique_username'])
-            ->addIndex(['email'], ['unique' => true, 'name' => 'idx_unique_email']) // Añadir índice único para username ->addIndex(['email'], ['unique' => true, 'name' => 'idx_unique_email'
+            ->addIndex(['username'], ['unique' => true, 'name' => 'idx_unique_username'])  // Añadir índice único para username
+            ->addIndex(['email'], ['unique' => true, 'name' => 'idx_unique_email'])
             ->create();
+
+
+        // Insertar datos en la tabla con contraseña hasheada
+        $data = [
+            [
+                'username' => 'Master',
+                'password' => password_hash('contrasena', PASSWORD_DEFAULT),
+                'email' => 'correo@example.com',
+                'team_id' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'status' => true
+            ],
+            // Agrega más usuarios si es necesario
+        ];
+
+        $this->table('users')->insert($data)->save();
     }
 }

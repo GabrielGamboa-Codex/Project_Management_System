@@ -16,7 +16,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'createProject')
     $teamId = $_POST['team_id'];
 
     $controller = new ProjectController;
-    $up = $controller->createProject($projectName, $description, $teamId, $userId);
+    $up = $controller->createProject($projectName, $description, $teamId);
 }
 
 //llama al controlador para editar un Usuario
@@ -28,7 +28,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'editProject')
     $teamId = $_POST['team_id'];
 
     $controller = new ProjectController;
-    $controller->editProject($id, $projectName, $description, $teamId, $userId);
+    $controller->editProject($id, $projectName, $description, $teamId);
 }
 
 //llama al controlador para Eliminar un usuario
@@ -37,7 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteProject')
     $id = $_POST['id'];
 
     $controller = new ProjectController;
-    $controller->deleteProject($id, $userId);
+    $controller->deleteProject($id);
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'printOptions') 

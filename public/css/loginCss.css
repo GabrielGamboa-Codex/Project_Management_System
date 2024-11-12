@@ -30,13 +30,12 @@ h1
     width: 65%;
     padding: 5px;
     margin: 2px;
-    
-    text-align:justify;
+    text-align:inherit;
 }
 
 img
 {
-    align-items: center;
+    align-items: left;
 }
 
 .message
@@ -53,10 +52,14 @@ button
 
 .toggle-password {
     position: absolute;
-    top: 59%;
-    right:8px; /* Ajusta según sea necesario */
+    top: 66.5%;
+    right:305px; /* Ajusta según sea necesario */
     transform: translateY(-50%);
     cursor: pointer;
     color: #333; /* Cambia el color del ícono */
     font-size: 1.5rem; /* Cambia el tamaño del ícono */
+}
+
+.hidden { 
+    display: none;
 }

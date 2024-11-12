@@ -164,7 +164,7 @@ $(document).ready(function () {
     var data = teamTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
     $("#edit_id").val(data.id);
-    $("#edit_team_name").val(data.name);
+    $("#edit_nameTeam").val(data.name);
     $("#editTeammodal").modal("show"); //muestra la modal
   });
 
@@ -175,7 +175,7 @@ $(document).ready(function () {
       e.preventDefault();
       var dataEdit = {
         id: $("#edit_id").val(),
-        name: $("#edit_team_name").val().trim(),
+        name: $("edit_nameTeam").val(),
         action: "editTeam",
       };
 

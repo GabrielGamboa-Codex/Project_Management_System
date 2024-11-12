@@ -40,8 +40,6 @@ switch ($action) {
         break;
     case 'teamView':
         $team->indexTeam();
-        include 'views/header.php';
-        include 'views/teamView.php';
         break;
     case 'logOut':
         $login->logOut();

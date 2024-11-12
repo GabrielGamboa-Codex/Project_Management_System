@@ -72,7 +72,7 @@ class TeamModel extends Model
      }
  
      //funcion de editar usuarios
-     public function editTeam($id, $TeamName)
+     public function editTeam($id, $teamName)
      {
          try {
              $team = new TeamModel();
@@ -80,7 +80,7 @@ class TeamModel extends Model
              $date = date('Y-m-d H:i:s');
 
              $updated = $date;
-             $team->name = $TeamName;
+             $team->name = $teamName;
              $team->updated_at = $updated;
              $team->status = true;
              $team->save();
@@ -94,10 +94,10 @@ class TeamModel extends Model
      public function deleteTeam($id)
      {
          try {
-             $Team = new TeamModel();
-             $Team = TeamModel::find($id);
-             $Team->status = false;
-             $Team->save();
+             $team = new TeamModel();
+             $team = TeamModel::find($id);
+             $team->status = false;
+             $team->save();
          } catch (PDOException $e) {
              $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
              echo json_encode($error);
