@@ -35,7 +35,7 @@ function validateData(formData) {
 // Verificar que el campo no esté vacío y contenga letras
 function validateDataedit(dataEdit) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
-  var name = dataEdit.name.trim();
+  var name = dataEdit.name;
   //Llama a los div para que carguen los mensajes si hay algun error
   var message1 = document.getElementById("messageEdit1");
 
@@ -169,7 +169,7 @@ $(document).ready(function () {
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
-  $("#editButtonTeam")
+  $("#editTeamButton")
     .off()
     .click(function (e) {
       e.preventDefault();
@@ -219,6 +219,7 @@ $(document).ready(function () {
               $("#editTeammodal").modal("hide");
               clearValidationMessages();
               loadTable();
+              console.log(dataEdit);
             }
         },
       });

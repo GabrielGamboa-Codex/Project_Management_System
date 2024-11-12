@@ -33,15 +33,7 @@ exit();
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle"></i> <?php echo $_SESSION['username']?>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="index.php?action=logOut">Close Session</a></li>
-          </ul>
-        </li>
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"></a>
           </li>
@@ -57,6 +49,21 @@ exit();
           <li class="nav-item">
             <a class="nav-link" href="index.php?action=projectView">Project</a>
           </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> <?php echo $_SESSION['username']?>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.php?action=logOut">Close Session</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
         </ul>
       </div>
     </div>

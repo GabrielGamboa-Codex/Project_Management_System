@@ -19,7 +19,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'createTeam')
 //llama al controlador para editar un Usuario
 if (isset($_POST['action']) && $_POST['action'] == 'editTeam') 
 {
-    var_dump($_POST["action"]);
     $id = $_POST['id'];
     $teamName = $_POST['name'];
 
