@@ -44,6 +44,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteUser')
 
 if (isset($_POST['action']) && $_POST['action'] == 'printOptions') 
 {
-    $data = new TeamModels;
+    $data = new TeamModel;
     $teams = $data->printOptions();
 }
