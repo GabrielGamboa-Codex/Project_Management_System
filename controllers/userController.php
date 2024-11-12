@@ -28,7 +28,7 @@ class UserController
             $userEmail = UserModel::where('email', $email)->exists();
             
             $patternEmail = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/';
-            $patternUser = '/^[a-zA-Z0-9]{4,}$/';
+            $patternUser = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternUser, $userName)) 
             {
@@ -90,7 +90,7 @@ class UserController
                 ->where('id', '!=', $id)
                 ->exists();
             $patternEmail = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/';
-            $patternUser = '/^[a-zA-Z0-9]{4,}$/';
+            $patternUser = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternUser, $userName)) 
             {

@@ -26,7 +26,7 @@ class UserModel extends Model
                     'teams.name',
                     'teams.id'
                 )
-                 ->where('status', true)
+                 ->where('users.status', true)
                  ->get();
     
             foreach ($users as $user) {

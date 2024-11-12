@@ -3,7 +3,11 @@
 include_once __DIR__ . '/../models/userModels.php';
 require __DIR__ . '/../vendor/autoload.php';
 
-use SendGrid\Mail\Mail;
+use Dotenv\Dotenv; 
+use SendGrid\Mail\Mail; 
+// Cargar variables de entorno desde el archivo .env 
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); 
+$dotenv->load();
 
 class loginController
 {
@@ -53,7 +57,7 @@ class loginController
                 $attempts['failedAttempts'] = 0;
             }
         }
-
+        
         $user = UserModel::where('email', $email)->first();
 
         if (!$user) {
@@ -94,7 +98,8 @@ class loginController
                 $email->addTo($userEmail);
                 $email->addContent("text/plain", $message);
 
-                $sendgrid = new \SendGrid('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');
+                // Usar la clave API de SendGrid desde las variables de entorno 
+                $sendgrid = new \SendGrid($_ENV['SENDGRID_API_KEY']);
 
                 try {
                     $response = $sendgrid->send($email);

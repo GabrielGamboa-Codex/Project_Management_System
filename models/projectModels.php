@@ -118,7 +118,7 @@ class ProjectModel extends Model
      public function deleteProject($id)
      {
          try {
-             $action = "Delete";
+             //$action = "Delete";
              $project = new ProjectModel();
              $project = ProjectModel::find($id);
              //$date = date('Y-m-d H:i:s');
