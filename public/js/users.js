@@ -87,7 +87,7 @@ function validateDataedit(dataEdit) {
   var message3 = document.getElementById("messageEdit3");
 
   //revisa que el userName tenga algun caracter y como minomo sean 4
-  var nameRegex = /^[a-zA-Z0-9]{4,}$/;
+  var nameRegex =  /^[a-zA-Z0-9\s]{4,}$/;
 
   //Valida que al menos que un @
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
