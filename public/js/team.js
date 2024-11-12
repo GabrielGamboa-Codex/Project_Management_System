@@ -60,9 +60,17 @@ function validateDataedit(dataEdit) {
 // Función para limpiar los mensajes de validación
 function clearValidationMessages() {
   var messages = [
-    "message1", 
-    "messageEdit1"
-    ];
+      "message1", 
+      "messageEdit1"
+  ];
+  
+  messages.forEach(function(messageId) {
+      var messageElement = document.getElementById(messageId);
+      if (messageElement) {
+          messageElement.textContent = "";
+          messageElement.style.color = ""; // Restablece el color al valor por defecto
+      }
+  });
 }
 
 //Metodo Ajax
@@ -219,7 +227,6 @@ $(document).ready(function () {
               $("#editTeammodal").modal("hide");
               clearValidationMessages();
               loadTable();
-              console.log(dataEdit);
             }
         },
       });

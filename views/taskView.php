@@ -19,10 +19,12 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Team_id</th>
-                                <th>Team</th>
+                                <th>Project</th>
+                                <th>Description</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                <th>Completed</th>
+                                <th>Priority</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
