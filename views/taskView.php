@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="public/css/css.css">
+
 <body class="bg-body-tertiary">
     <br>
     <h3 class="text-center">Task List</h3>
@@ -67,28 +68,54 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Project</p>
                             </label>
-                            <select class="form-select" id="project_team" aria-label="selectProject">
+                            <select class="form-select" id="projectTeam" aria-label="selectProject">
                             </select>
                         </div>
                         <br>
-                        <div class="form-group"> 
+                        <div class="form-group">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description_edit" name="description_edit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
-                            <div id="messageEdit2"></div>
-                        </div>      
-                        <br>
-                        <div class="col-6 col-sm-12 col-md-12">
-                            
-                            <label for="datepicker">
-                            <p class="fw-bold">Select Date</p>
-                            </label> 
-                            <input type="text" id="datepicker" class="form-control">
-                        
+                            <textarea class="form-control" id="description" name="description" placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea>
+                            <div id="message1"></div>
                         </div>
                         <br>
-
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="datepicker">
+                                <p class="fw-bold">Select Date</p>
+                            </label>
+                            <input type="text" id="datepicker" class="form-control">
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Priority</p>
+                            </label>
+                            <select class="form-select" id="priority" aria-label="selectProject">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Task Status</p>
+                            </label>
+                            <select class="form-select" id="Task Status" aria-label="selectProject">
+                                <option value="true">Completed</option>
+                                <option value="false">Pending</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Assigner User</p>
+                            </label>
+                            <select class="form-select" id="assignerUser" aria-label="selectProject">
+                            </select>
+                        </div>
+                        <br>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -129,11 +156,11 @@
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
-                        <div class="col-6 col-sm-12 col-md-12">
-                            <label for="datepicker">
-                            <p class="fw-bold">Select Date</p>
-                            </label> 
-                            <input type="text" id="datepicker" class="form-control">
+                        <div class="input-group date">
+                            <input type="text" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
                         </div>
                         <br>
 

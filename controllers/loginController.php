@@ -104,7 +104,7 @@ class loginController
                 try {
                     $response = $sendgrid->send($email);
                     if ($response->statusCode() == 202) {
-                        echo json_encode(['status' => 'success', 'message' => 'A numeric code has been sent to your email. You have a total of 5 minutes to enter it.']);
+                        echo json_encode(['status' => 'success', 'message' => 'A numeric code has been sent to your email. You have a total of 5 minutes to enter it.' . $code]);
                     } else {
                         echo json_encode(['status' => 'error', 'message' => 'Failed to send email.']);
                     }

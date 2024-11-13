@@ -20,7 +20,7 @@ class UserModel extends Model
         {
             $userArr[] = array(
                 "id" => $user->id,
-                "username" => $user->name,
+                "username" => $user->username, // debe tener el mismo nombre que tiene la columna de la base de datos
             );
         }
         //indexas el arreglo con el string data

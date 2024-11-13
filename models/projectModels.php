@@ -12,7 +12,7 @@ class ProjectModel extends Model
      public function printOptionsProject()
     {
         $projectArr = array();
-        $projects = UserModel::all();
+        $projects = ProjectModel::all();
 
         foreach ($projects as $project) 
         {
