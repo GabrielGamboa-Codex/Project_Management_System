@@ -9,6 +9,22 @@ class ProjectModel extends Model
 
     protected $table = 'projects';
 
+     public function printOptionsProject()
+    {
+        $projectArr = array();
+        $projects = UserModel::all();
+
+        foreach ($projects as $project) 
+        {
+            $projectArr[] = array(
+                "id" => $project->id,
+                "name" => $project->name,
+            );
+        }
+        //indexas el arreglo con el string data
+        echo json_encode($projectArr);
+    }
+
     public function printTable()
     {
         try {

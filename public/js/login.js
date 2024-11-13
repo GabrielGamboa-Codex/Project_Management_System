@@ -88,6 +88,7 @@ function validateData(formData) {
     message2.textContent =
       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
     message2.style.color = "red";
+    moveIcon2();
     return false;
   }
 
@@ -130,8 +131,22 @@ function showInput()
   input.classList.remove("hidden");
 }
 
-//Ajax
+// Función para mostrar el segundo mensaje y mover el icono
+function moveIcon() {
+  var icon = document.getElementById("icon");
+  // Mover el icono hacia arriba
+  icon.classList.add("move-up");
+}
 
+function moveIcon2() {
+  var icon = document.getElementById("icon");
+  // Mover el icono hacia arriba
+  icon.classList.add("move-up2");
+}
+
+
+
+//Ajax
 $(document).ready(function () {
   //Login
   $("#Btnlogin").click(function (e) 
@@ -170,6 +185,7 @@ $(document).ready(function () {
           var message = $("#message2").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
+          moveIcon();
         } 
         else if (response.status === "locked") 
         {
@@ -178,6 +194,7 @@ $(document).ready(function () {
           var message = $("#message2").text(response.message).show();
           //con esta propiedad cambio su color a rojo
           message.css("color", "red");
+          moveIcon();
         } 
         else if (response.status === "success") 
         {
@@ -209,6 +226,7 @@ $(document).ready(function () {
           var countdownInterval = setInterval(updateCountdown, 1000);
           updateCountdown(); // Llamar inmediatamente para inicializar la cuenta regresiva
           message.css("color", "blue");
+          moveIcon();
         } 
         else if (response.status === "errorCode") 
         {

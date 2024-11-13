@@ -38,10 +38,16 @@ img
     align-items: left;
 }
 
-.message
+.message1
 {
    font-size: small;
    margin: 10px;
+}
+
+.message2
+{
+   font-size: small;
+   margin-top: 10px
 }
 
 button
@@ -50,16 +56,29 @@ button
     width: 400px;
 }
 
-.toggle-password {
-    position: absolute;
-    top: 66.5%;
-    right:305px; /* Ajusta según sea necesario */
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #333; /* Cambia el color del ícono */
-    font-size: 1.5rem; /* Cambia el tamaño del ícono */
-}
+
 
 .hidden { 
     display: none;
+}
+
+.position-relative {
+    position: relative;
+    min-height: 60px; /* Asegúrate de que haya suficiente espacio */
+}
+
+.position-absolute {
+    position: absolute;
+    top: 70%;
+    right: 10px; /* Ajusta según tus necesidades */
+    transform: translateY(-50%);
+    cursor: pointer; /* Opcional: para indicar que el icono es interactivo */
+}
+
+.move-up { 
+    top: calc(50% - 4px); 
+}
+
+.move-up2 { 
+    top: calc(50% - 24px); 
 }

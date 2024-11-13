@@ -12,18 +12,18 @@ class TeamModel extends Model
 
     public function printOptions()
     {
-        $team_arr = array();
+        $teamArr = array();
         $teams = TeamModel::all();
 
         foreach ($teams as $team) 
         {
-            $team_arr[] = array(
+            $teamArr[] = array(
                 "id" => $team->id,
                 "name" => $team->name,
             );
         }
         //indexas el arreglo con el string data
-        echo json_encode($team_arr);
+        echo json_encode($teamArr);
     }
 
     public function printTable()

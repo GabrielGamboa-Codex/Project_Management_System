@@ -48,6 +48,10 @@ switch ($action) {
     case 'projectView':
         $project->indexProject();
         break;
+    case 'taskView':
+        include "./views/header.php";
+        include "./views/taskView.php";
+        break;
     default:
         $login->indexLogin();
         break;
