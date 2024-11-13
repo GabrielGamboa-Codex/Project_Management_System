@@ -53,7 +53,7 @@
 
 
     <!-- Modal Crear Tareas -->
-    <div class="modal fade" id="createtaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createtaskmodal" aria-hidden="true">
+    <div class="modal fade" id="createTaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createtaskmodal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -130,7 +130,7 @@
 
 
     <!-- Modal Editar Tareas -->
-    <div class="modal fade" id="edittaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edittaskmodal" aria-hidden="true">
+    <div class="modal fade" id="editTaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edittaskmodal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -200,7 +200,7 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="edit_id">
-                <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit task</button>
+                <button type="submit" class="btn btn-warning" id="editButtonTask"><i class="bi bi-pencil-square"></i> Edit task</button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete task</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
             </div>
@@ -226,7 +226,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
+                    <button type="submit" id="deleteTask" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>

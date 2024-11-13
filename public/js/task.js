@@ -234,31 +234,24 @@ $(document).ready(function () {
       }
 
       $.ajax({
-        url: "handler/projectHandler.php",
+        url: "handler/taskHandler.php",
         type: "POST",
         dataType: "json",
         data: formData,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorProject") 
+          if (response.status === "errorDescription") 
           {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           } 
-          else if (response.status === "errorDescription") 
-          {
-            //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#message2").text(response.message).show();
-            //con esta propiedad cambio su color a rojo
-            message.css("color", "red");
-          }
           else if (response.status === "ERROR") 
           {
-            $("#create_Project")[0].reset();
-            $("#createProjectmodal").modal("hide");
+            $("#create_task")[0].reset();
+            $("#createTaskmodal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -271,9 +264,9 @@ $(document).ready(function () {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Projecto");
             console.log(formData);
-            $("#create_Project")[0].reset();
+            $("#create_task")[0].reset();
             $("#id").val("");
-            $("#createProjectmodal").modal("hide");
+            $("#createTaskmodal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -282,29 +275,34 @@ $(document).ready(function () {
     });
 
   //Editar por fila atravez de una Modal
-  $("#projectTable tbody").on("click", "tr", function () {
+  $("#taskTable tbody").on("click", "tr", function () {
     //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
-    var data = projectTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
+    var data = taskTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
     $("#edit_id").val(data.id);
-    $("#edit_name_project").val(data.name);
-    $("#description_edit").val(data.description);
-    $("#project_team_edit").val(data.team_id);
-    $("#editProjectmodal").modal("show"); //muestra la modal
+    $("#projectTeamEdit").val(data.project_id);
+    $("#descriptionEdit").val(data.description);
+    $("#datepickerEdit").val(data.due_date);
+    $("#priorityEdit").val(data.priority);
+    $("#taskStatusEdit").val(data.completed);
+    $("#assignerUserEdit").val(data.assigned_user_id);
+    $("#editTaskmodal").modal("show"); //muestra la modal
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
-  $("#editButtonProject")
+  $("#editButtonTask")
     .off()
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#edit_id").val(),
-        name: $("#edit_name_project").val().trim(),
-        description: $("#description_edit").val(),
-        pass: $("#edit_pass").val(),
-        team_id: $("#project_team_edit").val(),
-        action: "editProject",
+        id: $("#id").val(),
+        projectId: $("#projectTeam").val().trim(),
+        description: $("#description").val().trim(),
+        date: $("#datepicker").val(),
+        priority: $("#priority").val(),
+        completed: $("#taskStatus").val(),
+        assigner: $("#assignerUser").val(),
+        action: "editTask",
       };
 
       // Validar campos vacíos y contenido adecuado
@@ -313,7 +311,7 @@ $(document).ready(function () {
       }
 
       $.ajax({
-        url: "handler/projectHandler.php",
+        url: "handler/taskHandler.php",
         type: "POST",
         dataType: "json",
         data: dataEdit,
@@ -321,17 +319,10 @@ $(document).ready(function () {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
          //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorEditProject") 
+            if (response.status === "errorEditDescription") 
             {
               //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#message1").text(response.message).show();
-              //con esta propiedad cambio su color a rojo
-              message.css("color", "red");
-            } 
-            else if (response.status === "errorEditDescription") 
-            {
-              //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#message2").text(response.message).show();
+              var message = $("#messageEdit1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             }
@@ -350,8 +341,8 @@ $(document).ready(function () {
             {
               //si funciona entonces procede a guardar el codigo
               alert("Se ha Modificado un Projecto");
-              $("#edit_Project")[0].reset();
-              $("#editProjectmodal").modal("hide");
+              $("#edit_task")[0].reset();
+              $("#editTaskmodal").modal("hide");
               clearValidationMessages();
               loadTable();
             }
@@ -360,20 +351,20 @@ $(document).ready(function () {
     });
 
   //Eliminar un Usuario
-  $("#deleteProject")
+  $("#deleteTask")
     .off()
     .click(function (e) {
       e.preventDefault();
-      var deleteProject = {
+      var deleteTask = {
         id: $("#edit_id").val(),
-        action: "deleteProject",
+        action: "deleteTask",
       };
 
       $.ajax({
-        url: "handler/projectHandler.php",
+        url: "handler/taskHandler.php",
         dataType: "json",
         type: "POST",
-        data: deleteProject,
+        data: deleteTask,
         success: function (response) {
           if (response.status === "ERRORdelete") 
           {
