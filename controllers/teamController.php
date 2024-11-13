@@ -85,7 +85,7 @@ class TeamController
                 }
             }
         } catch (PDOException $e) {
-            $error = ['status' => 'ERRORedit', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorEdit', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -99,7 +99,7 @@ class TeamController
             $team->deleteTeam($id);
             echo json_encode(['status' => 'success']);
         } catch (Exception $e) {
-            $error = ['status' => 'ERRORdelete', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorDelete', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }

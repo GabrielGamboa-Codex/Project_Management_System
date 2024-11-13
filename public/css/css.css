@@ -22,3 +22,22 @@
     font-size: 1.5rem; /* Cambia el tamaño del ícono */
 }
 
+.datepicker 
+.day, 
+.datepicker 
+.month, 
+.datepicker 
+.year 
+{ 
+    font-size: 12px; /* Reduce el tamaño de la fuente para los números */ 
+} 
+
+.datepicker 
+.datepicker-switch, 
+.datepicker .prev, 
+.datepicker .next, 
+.datepicker th 
+{ 
+    font-size: 14px; /* Reduce el tamaño de la fuente para los controles */ 
+}
+

@@ -22,7 +22,7 @@ class ProjectController
     public function createProject($projectName, $description, $teamId)
     {
         try {
-            $Project = new ProjectModel();
+            $project = new ProjectModel();
             
             $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
             $patternProject = '/^[a-zA-Z0-9\s]{4,}$/';
@@ -41,7 +41,7 @@ class ProjectController
             }
             else
             {
-                    $Project->createProject($projectName, $description, $teamId);
+                    $project->createProject($projectName, $description, $teamId);
     
                     echo json_encode(['status' => 'success']);
                 
@@ -60,7 +60,7 @@ class ProjectController
 
 
         try {
-            $Project = new ProjectModel();
+            $project = new ProjectModel();
             $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
             $patternProject = '/^[a-zA-Z0-9\s]{4,}$/';
 
@@ -78,12 +78,12 @@ class ProjectController
             }
             else
             {   
-                    $Project->editProject($id, $projectName, $description, $teamId);
+                    $project->editProject($id, $projectName, $description, $teamId);
                     echo json_encode(['status' => 'success']);
                 
             }
         } catch (PDOException $e) {
-            $error = ['status' => 'ERRORedit', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorEdit', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -93,11 +93,11 @@ class ProjectController
     public function deleteProject($id)
     {
         try {
-            $Project = new ProjectModel();
-            $Project->deleteProject($id);
+            $project = new ProjectModel();
+            $project->deleteProject($id);
             echo json_encode(['status' => 'success']);
         } catch (Exception $e) {
-            $error = ['status' => 'ERRORdelete', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorDelete', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }

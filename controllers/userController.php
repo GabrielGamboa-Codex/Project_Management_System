@@ -129,7 +129,7 @@ class UserController
                 }
             }
         } catch (PDOException $e) {
-            $error = ['status' => 'ERRORedit', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorEdit', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -143,7 +143,7 @@ class UserController
             $user->deleteUser($id);
             echo json_encode(['status' => 'success']);
         } catch (Exception $e) {
-            $error = ['status' => 'ERRORdelete', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'errorDelete', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }

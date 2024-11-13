@@ -51,7 +51,7 @@ class TeamModel extends Model
        
     }
 
-     //funcion de crear usuarios
+     //funcion de crear Teams
      public function createTeam($teamName)
      {
          try {
@@ -71,7 +71,7 @@ class TeamModel extends Model
          }
      }
  
-     //funcion de editar usuarios
+     //funcion de editar Teams
      public function editTeam($id, $teamName)
      {
          try {
@@ -90,7 +90,7 @@ class TeamModel extends Model
          }
      }
  
-     //funcion de eliminar Usuarios
+     //funcion de eliminar Teams
      public function deleteTeam($id)
      {
          try {

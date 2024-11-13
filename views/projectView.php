@@ -132,7 +132,7 @@
                 <div class="modal-footer">
                     <input type="hidden" id="edit_id">
                     <button type="submit" class="btn btn-warning" id="editButtonProject"><i class="bi bi-pencil-square"></i> Edit Project</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard2-x"></i> Delete Project</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i> Delete Project</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="deleteProject" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
+                    <button type="submit" id="deleteProject" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>

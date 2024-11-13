@@ -64,7 +64,7 @@ class ProjectModel extends Model
        
     }
 
-     //funcion de crear usuarios
+     //funcion de crear Projectos
      public function createProject($projectName, $description, $teamId)
      {
          try {
@@ -99,7 +99,7 @@ class ProjectModel extends Model
          }
      }
  
-     //funcion de editar usuarios
+     //funcion de editar Projectos
      public function editProject($id, $projectName, $description, $teamId)
      {
          try {
@@ -130,7 +130,7 @@ class ProjectModel extends Model
          }
      }
  
-     //funcion de eliminar Usuarios
+     //funcion de eliminar Projectos
      public function deleteProject($id)
      {
          try {

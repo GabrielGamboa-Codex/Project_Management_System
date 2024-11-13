@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="public/css/css.css">
+
 <body class="bg-body-tertiary">
     <br>
     <h3 class="text-center">Task List</h3>
@@ -71,19 +72,19 @@
                             </select>
                         </div>
                         <br>
-                        <div class="form-group"> 
+                        <div class="form-group">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description" name="description"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5" onkeypress="validation(event);"></textarea>
                             <div id="message1"></div>
-                        </div>      
+                        </div>
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="datepicker">
-                            <p class="fw-bold">Select Date</p>
-                            </label> 
-                            <input type="text" id="datepicker" class="form-control">
+                                <p class="fw-bold">Date Due</p>
+                            </label>
+                            <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
                         </div>
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
@@ -91,9 +92,9 @@
                                 <p class="fw-bold">Priority</p>
                             </label>
                             <select class="form-select" id="priority" aria-label="selectProject">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
                             </select>
                         </div>
                         <br>
@@ -101,7 +102,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Task Status</p>
                             </label>
-                            <select class="form-select" id="Task Status" aria-label="selectProject">
+                            <select class="form-select" id="taskStatus" aria-label="selectProject">
                                 <option value="true">Completed</option>
                                 <option value="false">Pending</option>
                             </select>
@@ -118,7 +119,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="registertask"><i class="bi bi-person-add"></i> Register</button>
+                    <button type="submit" class="btn btn-success" id="registertask"><i class="bi bi-clipboard2-plus"></i>Register</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
                 </div>
             </div>
@@ -139,48 +140,72 @@
                 <div class="modal-body">
                     <form method="POST" id="edit_task">
                         <br>
+                        <!-- Selecciona de la base de Datos la Informacion -->
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
-                                <p class="fw-bold">task Name</p>
+                                <p class="fw-bold">Select Project</p>
                             </label>
-                            <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name task" onkeypress="validation(event);" />
+                            <select class="form-select" id="projectTeamEdit" aria-label="selectProject">
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Description</p>
+                            </label>
+                            <textarea class="form-control" id="descriptionEdit" name="description" placeholder="Description" rows="5" onkeypress="validation(event);"></textarea>
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
-                            <label for="nombre" class="form-label">
-                                <p class="fw-bold">Email</p>
+                            <label for="datepicker">
+                                <p class="fw-bold">Date Due</p>
                             </label>
-                            <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
-                            <div id="messageEdit2"></div>
+                            <input type="text" id="datepickerEdit" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
                         </div>
                         <br>
-                        <div class="input-group date">
-    <input type="text" class="form-control" value="12-02-2012">
-    <div class="input-group-addon">
-        <span class="glyphicon glyphicon-th"></span>
-    </div>
-</div>
-                        <br>
-
-                        <!-- Selecciona de la base de Datos la Informacion -->
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
-                                <p class="fw-bold">Select Team</p>
+                                <p class="fw-bold">Priority</p>
                             </label>
-                            <select class="form-select" id="team_edit" aria-label="selectTeam">
+                            <select class="form-select" id="priorityEdit" aria-label="selectProject">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
                             </select>
                         </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Task Status</p>
+                            </label>
+                            <select class="form-select" id="taskStatusEdit" aria-label="selectProject">
+                                <option value="true">Completed</option>
+                                <option value="false">Pending</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Assigner User</p>
+                            </label>
+                            <select class="form-select" id="assignerUserEdit" aria-label="selectUser">
+                            </select>
+                        </div>
+                        <br>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" id="edit_id">
-                    <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit task</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete task</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
-                </div>
+                <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="edit_id">
+                <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit task</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete task</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -201,7 +226,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
+                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
