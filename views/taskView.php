@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="public/css/css.css">
-
 <body class="bg-body-tertiary">
     <br>
     <h3 class="text-center">Task List</h3>
@@ -72,18 +71,18 @@
                             </select>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group"> 
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description" name="description" placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea>
+                            <textarea class="form-control" id="description" name="description"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
                             <div id="message1"></div>
-                        </div>
+                        </div>      
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="datepicker">
-                                <p class="fw-bold">Select Date</p>
-                            </label>
+                            <p class="fw-bold">Select Date</p>
+                            </label> 
                             <input type="text" id="datepicker" class="form-control">
                         </div>
                         <br>
@@ -92,9 +91,9 @@
                                 <p class="fw-bold">Priority</p>
                             </label>
                             <select class="form-select" id="priority" aria-label="selectProject">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
                             </select>
                         </div>
                         <br>
@@ -157,11 +156,11 @@
                         </div>
                         <br>
                         <div class="input-group date">
-                            <input type="text" class="form-control">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
-                            </div>
-                        </div>
+    <input type="text" class="form-control" value="12-02-2012">
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+    </div>
+</div>
                         <br>
 
                         <!-- Selecciona de la base de Datos la Informacion -->

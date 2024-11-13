@@ -24,8 +24,8 @@ $(document).ready(function () {
             autoclose: true,
             minViewMode: 0,
             format: 'mm-dd-yyyy',
-            todayHighlight: true
-        });
+            todayHighlight: true
+          });
 
         $.ajax({
             url: "handler/taskHandler.php",
