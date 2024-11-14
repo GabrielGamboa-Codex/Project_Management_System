@@ -3,6 +3,7 @@ include "./controllers/userController.php";
 include "./controllers/loginController.php";
 include "./controllers/projectController.php";
 include "./controllers/teamController.php";
+include "./controllers/taskController.php";
 
 // Registra una función de autoload. 
 
@@ -25,8 +26,8 @@ spl_autoload_register(function ($class) {
 $users = new userController;
 $login = new loginController;
 $project = new ProjectController;
-
 $team = new TeamController;
+$task = new TaskController;
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
@@ -49,8 +50,7 @@ switch ($action) {
         $project->indexProject();
         break;
     case 'taskView':
-        include "./views/header.php";
-        include "./views/taskView.php";
+        $task ->indexTask();
         break;
     default:
         $login->indexLogin();
