@@ -38,6 +38,6 @@
 .datepicker .next, 
 .datepicker th 
 { 
-    font-size: 14px; /* Reduce el tamaño de la fuente para los controles */ 
+    font-size: 12px; /* Reduce el tamaño de la fuente para los controles */ 
 }
 

@@ -319,7 +319,6 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Usuario creado con éxito.");
-            console.log(formData);
             $("#create_user")[0].reset();
             $("#id").val("");
             $("#createUsermodal").modal("hide");
@@ -399,7 +398,6 @@ $(document).ready(function () {
           else if (response.status  === "ERRORedit") 
           {
             //si funciona entonces procede a guardar el codigo
-            console.log("Entre");
             $("#create_user")[0].reset();
             $("#createUsermodal").modal("hide");
             clearValidationMessages();

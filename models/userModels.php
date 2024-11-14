@@ -14,16 +14,22 @@ class UserModel extends Model
     public function printOptionsUser()
     {
         $userArr = array();
+        
+        // Obtener todos los proyectos
         $users = UserModel::all();
-
+    
+        // Recorrer cada proyecto
         foreach ($users as $user) 
         {
-            $userArr[] = array(
-                "id" => $user->id,
-                "username" => $user->username, // debe tener el mismo nombre que tiene la columna de la base de datos
-            );
+            // Verificar si el status es true
+            if ($user->status == true) {
+                $userArr[] = array(
+                    "id" => $user->id,
+                    "username" => $user->username,
+                );
+            }
         }
-        //indexas el arreglo con el string data
+        // Convertir el arreglo a JSON y mostrarlo
         echo json_encode($userArr);
     }
 

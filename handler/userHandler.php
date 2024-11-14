@@ -42,6 +42,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteUser')
     $edit = $controller->deleteUse($id);
 }
 
+//Imprime las Opciones del select
 if (isset($_POST['action']) && $_POST['action'] == 'printOptions') 
 {
     $data = new TeamModel;

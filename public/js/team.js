@@ -154,7 +154,6 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Team");
-            console.log(formData);
             $("#create_Team")[0].reset();
             $("#id").val("");
             $("#createTeammodal").modal("hide");

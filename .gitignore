@@ -1,3 +1,4 @@
 # .gitignore
 .env
 config/loginAttempts.json
+config/database.php

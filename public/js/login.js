@@ -171,7 +171,6 @@ $(document).ready(function () {
       dataType: "json",
       data: formData,
       success: function (response) {
-        console.log(formData);
         if (response.status === "errorEmail") 
         {
           //selecciono el id mensaje y luego cambio su valor por el texto del json

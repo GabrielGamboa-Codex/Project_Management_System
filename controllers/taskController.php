@@ -23,13 +23,22 @@ class TaskController
             try {
                 $task = new TaskModel();
                 
-                $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';    
+                $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+                $patterdate = '/^[0-9-]{1,10}$/';    
 
                 if(!preg_match($patterndescription, $description))
                 {
                     if(!preg_match($patterndescription, $description))
                     {
-                        echo json_encode(['status' => 'errorDescription', 'message' => 'The description must contain at least 4 characters']);
+                        echo json_encode(['status' => 'errorDescription', 'message' => 'The description must contain at least 4 characters.']);
+                        
+                    }
+                }
+                elseif(!preg_match($patterdate,$dueDate))
+                {
+                    if(!preg_match($patterdate,$dueDate))
+                    {
+                        echo json_encode(['status' => 'errorDate', 'message' => 'The Date is empty or the format entered is incorrect.']);
                         
                     }
                 }
@@ -56,12 +65,21 @@ class TaskController
             try {
                 $task = new TaskModel();
                 $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+                $patterdate = '/^[0-9-]{1,10}$/';   
 
                 if(!preg_match($patterndescription, $description))
                 {
                     if(!preg_match($patterndescription, $description))
                     {
                         echo json_encode(['status' => 'errorEditDescription', 'message' => 'The description must contain at least 4 characters']);
+                        
+                    }
+                }
+                elseif(!preg_match($patterdate,$dueDate))
+                {
+                    if(!preg_match($patterdate,$dueDate))
+                    {
+                        echo json_encode(['status' => 'errorEditDate', 'message' => 'The Date is empty or the format entered is incorrect.']);
                         
                     }
                 }

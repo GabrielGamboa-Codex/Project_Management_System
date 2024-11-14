@@ -35,12 +35,15 @@ class TaskModel extends Model
             foreach ($tasks as $task) {
                 $taskArr[] = array(
                     "id" => $task->taskId,
-                    "project_id" => $task->projectName,
+                    "project_id" => $task->projectId,
+                    "project" => $task->projectName,
                     "description" => $task->description,
                     "due_date" => $task->due_date,
                     "priority" => $task->priority,
-                    "completed" => $task->completed,
-                    "assigned_user_id" => $task->userName,
+                    //Se utiliza un valor ternario si es 1 osea true se asigna completed si es 0 false Pending
+                    "completed" => $task->completed ? 'Completed' : 'Pending',
+                    "assigned_user_id" => $task->userId,
+                    "assigned" => $task->userName,
                     "created_at" => $task->created_at,
                     "updated_at" => $task->updated_at,
                     "status"=> $task->status,
@@ -107,14 +110,14 @@ class TaskModel extends Model
     }
 
     //funcion de eliminar Tareas
-    public function deleteProject($id)
+    public function deleteTask($id)
     {
         try {
         
-            $project = new TaskModel();
-            $project = TaskModel::find($id);
-            $project->status = false;
-            $project->save();
+            $task = new TaskModel();
+            $task = TaskModel::find($id);
+            $task->status = false;
+            $task->save();
 
         } catch (PDOException $e) {
             $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];

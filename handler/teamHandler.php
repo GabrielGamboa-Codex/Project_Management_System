@@ -7,7 +7,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'printTable')
     $show = $conn->printTable();
 }
 
-//llama al controlador para  crear un Usuario
+//llama al controlador para  crear un Team
 if (isset($_POST['action']) && $_POST['action'] == 'createTeam') 
 {
     $teamName = $_POST['name'];
@@ -16,7 +16,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'createTeam')
     $up = $controller->createTeam($teamName);
 }
 
-//llama al controlador para editar un Usuario
+//llama al controlador para editar un Team
 if (isset($_POST['action']) && $_POST['action'] == 'editTeam') 
 {
     $id = $_POST['id'];
@@ -26,7 +26,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'editTeam')
     $controller->editTeam($id, $teamName);
 }
 
-//llama al controlador para Eliminar un usuario
+//llama al controlador para Eliminar un Team
 if (isset($_POST['action']) && $_POST['action'] == 'deleteTeam') 
 {
     $id = $_POST['id'];

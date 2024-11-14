@@ -23,10 +23,13 @@ function validationPicker(event)
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
   var description = formData.description;
+  var date = formData.date;
   //Llama a los div para que carguen los mensajes si hay algun error
   var message1 = document.getElementById("message1");
+  var message2 = document.getElementById("message2");
 
   var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+  var dateRegex = /^[0-9-]{1,10}$/;
 
   if (descriptionRegex.test(description)) 
   {
@@ -36,10 +39,23 @@ function validateData(formData) {
   else 
   {
     message1.textContent =
-      "The description must contain at least 4 characters";
+      "The description must contain at least 4 characters.";
     message1.style.color = "red";
     return false;
   }
+
+  if (dateRegex.test(date)) 
+    {
+      message2.textContent = "Date is valid";
+      message2.style.color = "green";
+    } 
+    else 
+    {
+      message2.textContent =
+        "The Date is empty or the format entered is incorrect.";
+      message2.style.color = "red";
+      return false;
+    }
 
 
   return true;
@@ -50,11 +66,13 @@ function validateData(formData) {
 function validateDataedit(dataEdit) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
   var description = dataEdit.description.trim();
+  var date = dataEdit.date;
   //Llama a los div para que carguen los mensajes si hay algun error
   var message1 = document.getElementById("messageEdit1");
+  var message2 = document.getElementById("messageEdit2");
  
   var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
-
+  var dateRegex = /^[0-9-]{1,10}$/;
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"    
       if (descriptionRegex.test(description)) 
       {
@@ -69,6 +87,19 @@ function validateDataedit(dataEdit) {
         return false;
       }
 
+      if (dateRegex.test(date)) 
+        {
+          message2.textContent = "Date is valid";
+          message2.style.color = "green";
+        } 
+        else 
+        {
+          message2.textContent =
+            "The Date is empty or the format entered is incorrect.";
+          message2.style.color = "red";
+          return false;
+        }    
+
   return true;
 }
 
@@ -78,7 +109,9 @@ function clearValidationMessages()
 {
   var messages = [
     "message1",
+    "message2",
     "messageEdit1",
+    "messageEdit2",
   ];
   //Ejecuta esta funcion para cada uno de los id encontrados en el Array
   messages.forEach(function (id) {
@@ -97,16 +130,16 @@ $(document).ready(function () {
   jQuery("#datepicker").datepicker({
     autoclose: true, //hace que el calendario se cierre automáticamente después de seleccionar una fecha.
     minViewMode: 0,
-    format: "mm-dd-yyyy", //formato de fecha
+    format: "yyyy-mm-dd", //formato de fecha
     todayHighlight: true, //Este parámetro hace que el día actual se destaque en el calendario.
     startDate: new Date(),//solo toma la fecha apartir del dia de hoy en adelante
   });
 
   //Data Picker
-  jQuery("#datepicker_edit").datepicker({
+  jQuery("#datepickerEdit").datepicker({
     autoclose: true,
     minViewMode: 0,
-    format: "mm-dd-yyyy",
+    format: "yyyy-mm-dd",
     todayHighlight: true,
     startDate: new Date(),
   });
@@ -175,31 +208,61 @@ $(document).ready(function () {
       },
     });
 
-  var taskTable = $("#taskTable").DataTable({
-    ajax: {
-      url: "handler/taskHandler.php",
-      method: "POST",
-      data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
-    },
-    columnDefs: [
-      { visible: false, targets: 7 },
-      { visible: false, targets: 8 },
-      { visible: false, targets: 9 },
-    ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
-    columns: [
-      { data: "id" },
-      { data: "project_id" },
-      { data: "description" },
-      { data: "due_date" },
-      // Incluye esta columna si la necesitas
-      { data: "priority" },
-      { data: "completed" },
-      { data: "assigned_user_id" },
-      { data: "created_at" },
-      { data: "updated_at" },
-      { data: "status" },
-    ],
+    var taskTable = $("#taskTable").DataTable({
+      ajax: {
+          url: "handler/taskHandler.php",
+          method: "POST",
+          data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
+      },
+      columnDefs: [
+          { visible: false, targets: 2 },
+          { visible: false, targets: 7 },
+          { visible: false, targets: 9 },
+          { visible: false, targets: 10 },
+          { visible: false, targets: 11 },
+          {
+              // Configuración para la columna 'priority'
+              targets: 5,
+              orderData: [5],
+              render: function (data, type, row) {
+                  var priorityOrder = {
+                      'Low': 1,
+                      'Medium': 2,
+                      'High': 3
+                  };
+                  //devuelve el valor numérico correspondiente usando el objeto es decir si es 1 2 3 o 3 2 1
+                  return type === 'sort' ? priorityOrder[data] : data;
+              }
+          },
+          {
+              // Configuración para la columna 'completed'
+              targets: 6,
+              orderData: [6],
+              render: function (data, type, row) {
+                  var completedOrder = {
+                      'Pending': 1,
+                      'Completed': 2
+                  };
+                  return type === 'sort' ? completedOrder[data] : data;
+              }
+          }
+      ],
+      columns: [
+          { data: "id" },
+          { data: "project" },
+          { data: "project_id" },
+          { data: "description" },
+          { data: "due_date" },
+          { data: "priority" },
+          { data: "completed" },
+          { data: "assigned_user_id" },
+          { data: "assigned" },
+          { data: "created_at" },
+          { data: "updated_at" },
+          { data: "status" },
+      ]
   });
+  
 
     // Añade un cursor pointer a todas las filas de la tabla
     $("#taskTable tbody").on("mouseenter", "tr", function () {
@@ -213,7 +276,7 @@ $(document).ready(function () {
     }
 
   // Crear  Proyecto
-  $("#create_task")
+  $("#registerTask")
     .off()
     .click(function (e) {
       e.preventDefault();
@@ -223,7 +286,7 @@ $(document).ready(function () {
         description: $("#description").val().trim(),
         date: $("#datepicker").val(),
         priority: $("#priority").val(),
-        completed: $("#taskStatus").val(),
+        completed: $("#taskStatus").val(), 
         assigner: $("#assignerUser").val(),
         action: "createTask",
       };
@@ -247,7 +310,14 @@ $(document).ready(function () {
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
+          }
+          else if (response.status === "errorDate") 
+            {
+              //selecciono el id mensaje y luego cambio su valor por el texto del json
+              var message = $("#message2").text(response.message).show();
+              //con esta propiedad cambio su color a rojo
+              message.css("color", "red");
+            }  
           else if (response.status === "ERROR") 
           {
             $("#create_task")[0].reset();
@@ -263,7 +333,6 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Projecto");
-            console.log(formData);
             $("#create_task")[0].reset();
             $("#id").val("");
             $("#createTaskmodal").modal("hide");
@@ -274,20 +343,24 @@ $(document).ready(function () {
       });
     });
 
-  //Editar por fila atravez de una Modal
-  $("#taskTable tbody").on("click", "tr", function () {
-    //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
-    var data = taskTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
-    // cada uno retorna la data en el input o select referenciando la columnna
-    $("#edit_id").val(data.id);
-    $("#projectTeamEdit").val(data.project_id);
-    $("#descriptionEdit").val(data.description);
-    $("#datepickerEdit").val(data.due_date);
-    $("#priorityEdit").val(data.priority);
-    $("#taskStatusEdit").val(data.completed);
-    $("#assignerUserEdit").val(data.assigned_user_id);
-    $("#editTaskmodal").modal("show"); //muestra la modal
-  });
+// Editar por fila a través de una Modal
+$("#taskTable tbody").on("click", "tr", function () {
+  // Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
+  var data = taskTable.row(this).data(); // selecciona la fila y la retorna la data que se seleccionó como un objeto
+
+  // cada uno retorna la data en el input o select referenciando la columna
+  $("#edit_id").val(data.id);
+  $("#projectTeamEdit").val(data.project_id);
+  $("#descriptionEdit").val(data.description);
+  $("#datepickerEdit").val(data.due_date);
+  $("#priorityEdit").val(data.priority);
+  // Transformar el valor de "completed"
+  var completedValue = data.completed === 'Completed' ? '1' : '0';
+  $("#taskStatusEdit").val(completedValue);
+  $("#assignerUserEdit").val(data.assigned_user_id);
+  $("#editTaskmodal").modal("show"); // muestra la modal
+});
+
 
   //Click al Boton para mandar el formulario con los nuevos datos
   $("#editButtonTask")
@@ -295,13 +368,13 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#id").val(),
-        projectId: $("#projectTeam").val().trim(),
-        description: $("#description").val().trim(),
-        date: $("#datepicker").val(),
-        priority: $("#priority").val(),
-        completed: $("#taskStatus").val(),
-        assigner: $("#assignerUser").val(),
+        id: $("#edit_id").val(),
+        projectId: $("#projectTeam").val(),
+        description: $("#descriptionEdit").val().trim(),
+        date: $("#datepickerEdit").val(),
+        priority: $("#priorityEdit").val(),
+        completed: $("#taskStatusEdit").val(),
+        assigner: $("#assignerUserEdit").val(),
         action: "editTask",
       };
 
@@ -326,6 +399,13 @@ $(document).ready(function () {
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             }
+            else if (response.status === "errorEditDate") 
+              {
+                //selecciono el id mensaje y luego cambio su valor por el texto del json
+                var message = $("#messageEdit2").text(response.message).show();
+                //con esta propiedad cambio su color a rojo
+                message.css("color", "red");
+              }
             else if (response.status === "ERROR") 
             {
               $("#edit_Project")[0].reset();

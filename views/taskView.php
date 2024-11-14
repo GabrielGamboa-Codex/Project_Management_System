@@ -21,10 +21,12 @@
                             <tr>
                                 <th>id</th>
                                 <th>Project</th>
+                                <th>Project ID</th>
                                 <th>Description</th>
                                 <th>Due Date</th>
                                 <th>Priority</th>
                                 <th>Completed</th>
+                                <th>Assigned User ID</th>
                                 <th>Assigned User</th>
                             </tr>
                         </thead>
@@ -33,10 +35,12 @@
                             <tr>
                                 <th>id</th>
                                 <th>Project</th>
+                                <th>Project ID</th>
                                 <th>Description</th>
                                 <th>Due Date</th>
                                 <th>Priority</th>
                                 <th>Completed</th>
+                                <th>Assigned User ID</th>
                                 <th>Assigned User</th>
                             </tr>
                         </tfoot>
@@ -85,6 +89,7 @@
                                 <p class="fw-bold">Date Due</p>
                             </label>
                             <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                            <div id="message2"></div>
                         </div>
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
@@ -103,8 +108,8 @@
                                 <p class="fw-bold">Task Status</p>
                             </label>
                             <select class="form-select" id="taskStatus" aria-label="selectProject">
-                                <option value="true">Completed</option>
-                                <option value="false">Pending</option>
+                                <option value="1">Completed</option>
+                                <option value="0">Pending</option>
                             </select>
                         </div>
                         <br>
@@ -119,7 +124,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="registertask"><i class="bi bi-clipboard2-plus"></i>Register</button>
+                    <button type="submit" class="btn btn-success" id="registerTask"><i class="bi bi-clipboard2-plus"></i>Register</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
                 </div>
             </div>
@@ -162,6 +167,7 @@
                                 <p class="fw-bold">Date Due</p>
                             </label>
                             <input type="text" id="datepickerEdit" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                            <div id="messageEdit2"></div>
                         </div>
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
@@ -180,8 +186,8 @@
                                 <p class="fw-bold">Task Status</p>
                             </label>
                             <select class="form-select" id="taskStatusEdit" aria-label="selectProject">
-                                <option value="true">Completed</option>
-                                <option value="false">Pending</option>
+                                <option value="1">Completed</option>
+                                <option value="0">Pending</option>
                             </select>
                         </div>
                         <br>
@@ -192,17 +198,15 @@
                             <select class="form-select" id="assignerUserEdit" aria-label="selectUser">
                             </select>
                         </div>
-                        <br>
                     </form>
                 </div>
-                <br>
-                </form>
-            </div>
-            <div class="modal-footer">
+                <div class="modal-footer">
                 <input type="hidden" id="edit_id">
                 <button type="submit" class="btn btn-warning" id="editButtonTask"><i class="bi bi-pencil-square"></i> Edit task</button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete task</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>

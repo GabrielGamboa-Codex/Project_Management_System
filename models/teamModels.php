@@ -17,10 +17,13 @@ class TeamModel extends Model
 
         foreach ($teams as $team) 
         {
-            $teamArr[] = array(
-                "id" => $team->id,
-                "name" => $team->name,
-            );
+            // Verificar si el status es true
+            if ($team->status == true) {
+                $teamArr[] = array(
+                    "id" => $team->id,
+                    "name" => $team->name,
+                );
+            }
         }
         //indexas el arreglo con el string data
         echo json_encode($teamArr);

@@ -255,7 +255,6 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Projecto");
-            console.log(formData);
             $("#create_Project")[0].reset();
             $("#id").val("");
             $("#createProjectmodal").modal("hide");

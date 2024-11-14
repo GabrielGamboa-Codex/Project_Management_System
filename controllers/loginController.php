@@ -87,12 +87,6 @@ class loginController
                 $subject = "Tu código de verificación";
                 $message = "Hola {$user->username},\n\nTu código de verificación es: $code\n\nGracias,\nEquipo de Proyect System Management";
                 $email = new Mail();
-                $email->setFrom("no-reply@yourdomain.com", "Proyect System Management"); // Usar una dirección verificada 
-                $email->setSubject($subject);
-                $email->addTo($userEmail);
-
-                //Configuracion para enviar el email
-                $email = new Mail();
                 $email->setFrom("foxygamboafnaf2003@gmail.com", "Proyect System Management");
                 $email->setSubject($subject);
                 $email->addTo($userEmail);
@@ -127,7 +121,7 @@ class loginController
         }
     }
 
-//verificacion del codigo
+    //verificacion del codigo
     public function verify($code)
     {
         session_start();
@@ -144,7 +138,7 @@ class loginController
         }
     }
 
-//cerrado de Sesion
+    //cerrado de Sesion
     public function logOut()
     {
         session_start();
