@@ -6,8 +6,8 @@
     <br>
     <div id="message"></div>
     <div class="container">
-        <!-- Button Crear nuevo Usuario-->
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createtaskmodal">
+        <!-- Button Crear nuevo Tarea-->
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createTaskModal">
             <i class="bi bi-plus-circle-fill"></i> Create New Task
         </button>
     </div>
@@ -57,15 +57,15 @@
 
 
     <!-- Modal Crear Tareas -->
-    <div class="modal fade" id="createTaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createtaskmodal" aria-hidden="true">
+    <div class="modal fade" id="createTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createTaskModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createtaskmodalLabel">Register a New task</h1>
+                    <h1 class="modal-title fs-5" id="createTaskModalLabel">Register a New task</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="create_task">
+                    <form method="POST" id="createTask">
                         <br>
                         <!-- Selecciona de la base de Datos la Informacion -->
                         <div class="col-6 col-sm-12 col-md-12">
@@ -135,15 +135,15 @@
 
 
     <!-- Modal Editar Tareas -->
-    <div class="modal fade" id="editTaskmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edittaskmodal" aria-hidden="true">
+    <div class="modal fade" id="editTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editTaskModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="edittaskmodalLabel">task Data</h1>
+                    <h1 class="modal-title fs-5" id="editTaskModalLabel">task Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="edit_task">
+                    <form method="POST" id="editTask">
                         <br>
                         <!-- Selecciona de la base de Datos la Informacion -->
                         <div class="col-6 col-sm-12 col-md-12">
@@ -201,9 +201,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <input type="hidden" id="edit_id">
+                <input type="hidden" id="editId">
                 <button type="submit" class="btn btn-warning" id="editButtonTask"><i class="bi bi-pencil-square"></i> Edit task</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete task</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete Task</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
                 </form>
@@ -216,7 +216,7 @@
 
 
 
-    <!-- Modal Para Confirmar la Eliminacion de un usuario-->
+    <!-- Modal Para Confirmar la Eliminacion de un Tarea-->
     <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -226,7 +226,7 @@
                 </div>
                 <div class="col-6 col-sm-12 col-md-12">
                     <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente el Usuario?
+                        ¿Desea usted Eliminar Realmente Esta Tarea?
                     </div>
                 </div>
                 <div class="modal-footer">

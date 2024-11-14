@@ -23,14 +23,14 @@
 
             <div class="col-6 col-sm-8 col-md-12">
             <i class="bi bi-envelope-at-fill"></i> <label for="">Email</label>
-                <input type="text" id="login_email" class="form-control" placeholder="Insert Email" onkeypress=" validation(event)">
+                <input type="text" id="loginEmail" class="form-control" placeholder="Insert Email" onkeypress=" validation(event)">
                 <div id="message1" class="message1"></div>
             </div>
             <br>
 
             <div class="col-8 col-sm-8 col-md-12 position-relative">
             <i class="bi bi-lock-fill"></i> <label for="">Password</label>
-                <input type="password" id="login_pass" class="form-control" placeholder="Insert password" onkeypress="validation(event)">
+                <input type="password" id="loginPass" class="form-control" placeholder="Insert password" onkeypress="validation(event)">
                 <i class="bi bi-eye-slash toggle-password position-absolute" id="icon"></i>
                 <div id="message2" class="message2"></div>
             </div>

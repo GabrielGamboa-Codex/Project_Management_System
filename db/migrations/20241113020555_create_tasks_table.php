@@ -10,7 +10,7 @@ final class CreateTasksTable extends AbstractMigration
     {
         $table = $this->table('tasks');
         $table->addColumn('project_id', 'integer', ['limit' => 100])
-            ->addColumn('description', 'string', ['limit' => 250])
+            ->addColumn('description', 'text')
             ->addColumn('due_date', 'date') 
             ->addColumn('priority', 'string', ['limit' => 100])
             ->addColumn('completed', 'boolean')

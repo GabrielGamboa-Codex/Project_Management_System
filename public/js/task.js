@@ -1,7 +1,7 @@
 function validation(event) 
 {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s.,;-]/.test(char)) 
+  if (!/^[a-zA-Z0-9\s\W]+$/.test(char)) 
   {
     event.preventDefault();
     return false;
@@ -9,16 +9,6 @@ function validation(event)
   return true;
 }
 
-function validationPicker(event) 
-{
-  var char = String.fromCharCode(event.which);
-  if (!/[0-9\s-]/.test(char)) 
-  {
-    event.preventDefault();
-    return false;
-  }
-  return true;
-}
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
@@ -28,7 +18,7 @@ function validateData(formData) {
   var message1 = document.getElementById("message1");
   var message2 = document.getElementById("message2");
 
-  var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+  var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
   var dateRegex = /^[0-9-]{1,10}$/;
 
   if (descriptionRegex.test(description)) 
@@ -71,7 +61,7 @@ function validateDataedit(dataEdit) {
   var message1 = document.getElementById("messageEdit1");
   var message2 = document.getElementById("messageEdit2");
  
-  var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+  var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
   var dateRegex = /^[0-9-]{1,10}$/;
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"    
       if (descriptionRegex.test(description)) 
@@ -82,7 +72,7 @@ function validateDataedit(dataEdit) {
       else 
       {
         message1.textContent =
-          "The description must contain at least 4 characters";
+          "The description must contain at least 4 characters.";
         message1.style.color = "red";
         return false;
       }
@@ -144,69 +134,105 @@ $(document).ready(function () {
     startDate: new Date(),
   });
   
-  //Carga los usuarios a seleccionar
-  $.ajax({
-    url: "handler/taskHandler.php",
-    method: "POST",
-    dataType: "json",
-    data: { action: "printOptionsUser" },
-    success: function (data) {
-      data.forEach(function (item) {
-        $("#assignerUser").append(
-          `<option value="${item.id}">${item.username}</option>`
-        );
-      });
-    },
-  });
 
-//carga los projectos a seleccionar
-  $.ajax({
-    url: "handler/taskHandler.php",
-    method: "POST",
-    dataType: "json", //Tipo de datos que se espera recibir como respuesta.
-    data: { action: "printOptionsProject" },
-    success: function (data) {
-      data.forEach(function (
-        item //Recorre cada elemento en el array de datos recibido como respuesta.
-      ) {
-        $("#projectTeam").append(
-          `<option value="${item.id}">${item.name}</option>`
-        ); //Añade contenido al final de los elemento seleccionados
-      });
-    },
-  });
 
-    //Carga los usuarios a seleccionar
+    var projectData = []; // Variable para almacenar los datos de proyectos
+  
+    // Cargar los proyectos a seleccionar
     $.ajax({
       url: "handler/taskHandler.php",
       method: "POST",
       dataType: "json",
-      data: { action: "printOptionsUser" },
+      data: { action: "printOptionsProject" },
       success: function (data) {
-        data.forEach(function (item) {
-          $("#assignerUserEdit").append(
-            `<option value="${item.id}">${item.username}</option>`
-          );
+        projectData = data; // Asignar los datos recibidos a la variable projectData
+  
+        // Agregar opciones de proyectos al select de proyectos
+        data.forEach(function (project) {
+          var projectOption = `<option value="${project.id}">${project.name}</option>`;
+          $("#projectTeam").append(projectOption);
+        });
+  
+        // primera carga por defecto
+        if (data.length > 0) {
+          var firstProjectUsers = data[0].users;
+          var userSelect = $("#assignerUser");
+          userSelect.empty(); // Limpiar la lista de usuarios
+  
+          firstProjectUsers.forEach(function (user) {
+            var userOption = `<option value="${user.id}">${user.username}</option>`;
+            userSelect.append(userOption);
+          });
+        }
+      },
+    });
+  
+    // Detectar cambio en la selección de proyecto para cargar usuarios
+    $("#projectTeam").change(function () {
+      var projectId = $(this).val();
+      var selectedProject = projectData.find(project => project.id == projectId); // Usar projectData en lugar de data
+      var userSelect = $("#assignerUser");
+      userSelect.empty(); // Limpiar la lista de usuarios
+  
+      if (selectedProject) {
+        selectedProject.users.forEach(function (user) {
+          var userOption = `<option value="${user.id}">${user.username}</option>`;
+          userSelect.append(userOption);
+        });
+      }
+    });
+
+  
+
+  
+    //IMPRIMIR  proyectos con su usuario correspondiente en el editar
+    var projectData = []; // Variable para almacenar los datos de proyectos
+    // Cargar los proyectos a seleccionar
+    $.ajax({
+      url: "handler/taskHandler.php",
+      method: "POST",
+      dataType: "json",
+      data: { action: "printOptionsProject" },
+      success: function (data) {
+        projectData = data; // Asignar los datos recibidos a la variable projectData
+        data.forEach(function (project) {
+          //valores a imprimir en el select
+          var projectOption = `<option value="${project.id}">${project.name}</option>`;
+          $("#projectTeamEdit").append(projectOption);
+  
+          // Manejar usuarios del proyecto
+          var userSelect = $("#assignerUserEdit");
+          userSelect.empty(); // Limpiar la lista de usuarios
+          project.users.forEach(function (user) {
+            //valores a imprimir en el select
+            var userOption = `<option value="${user.id}">${user.username}</option>`;
+            userSelect.append(userOption);
+          });
         });
       },
     });
   
-  //carga los projectos a seleccionar
-    $.ajax({
-      url: "handler/taskHandler.php",
-      method: "POST",
-      dataType: "json", //Tipo de datos que se espera recibir como respuesta.
-      data: { action: "printOptionsProject" },
-      success: function (data) {
-        data.forEach(function (
-          item //Recorre cada elemento en el array de datos recibido como respuesta.
-        ) {
-          $("#projectTeamEdit").append(
-            `<option value="${item.id}">${item.name}</option>`
-          ); //Añade contenido al final de los elemento seleccionados
+    // Detectar cambio en la selección de proyecto para cargar usuarios
+    $("#projectTeamEdit").change(function () {
+      var projectId = $(this).val();
+      //aqui cuando seleccionas un proyecto diferente este por el id se carga 
+      var selectedProject = projectData.find(project => project.id == projectId); 
+      var userSelect = $("#assignerUserEdit");
+      userSelect.empty(); // Limpiar la lista de usuarios del proyecto anterior
+      
+      //Carga los datos del nuevo proyecto seleccionado
+      if (selectedProject) {
+        selectedProject.users.forEach(function (user) {
+          //valores a imprimir en el select
+          var userOption = `<option value="${user.id}">${user.username}</option>`;
+          userSelect.append(userOption);
         });
-      },
+      }
     });
+
+  
+
+
 
     var taskTable = $("#taskTable").DataTable({
       ajax: {
@@ -333,9 +359,9 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Projecto");
-            $("#create_task")[0].reset();
+            $("#createTask")[0].reset();
             $("#id").val("");
-            $("#createTaskmodal").modal("hide");
+            $("#createTaskModal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -349,7 +375,7 @@ $("#taskTable tbody").on("click", "tr", function () {
   var data = taskTable.row(this).data(); // selecciona la fila y la retorna la data que se seleccionó como un objeto
 
   // cada uno retorna la data en el input o select referenciando la columna
-  $("#edit_id").val(data.id);
+  $("#editId").val(data.id);
   $("#projectTeamEdit").val(data.project_id);
   $("#descriptionEdit").val(data.description);
   $("#datepickerEdit").val(data.due_date);
@@ -357,9 +383,21 @@ $("#taskTable tbody").on("click", "tr", function () {
   // Transformar el valor de "completed"
   var completedValue = data.completed === 'Completed' ? '1' : '0';
   $("#taskStatusEdit").val(completedValue);
-  $("#assignerUserEdit").val(data.assigned_user_id);
-  $("#editTaskmodal").modal("show"); // muestra la modal
-});
+  // Cargar los usuarios del proyecto seleccionado 
+  var selectedProject = projectData.find(project => project.id == data.project_id); 
+  var userSelect = $("#assignerUserEdit"); userSelect.empty(); 
+  // Limpiar la lista de usuarios 
+  if (selectedProject) 
+    { 
+      selectedProject.users.forEach(function (user) 
+      { var userOption = `<option value="${user.id}">${user.username}</option>`; userSelect.append(userOption); }); 
+      // Seleccionar el usuario asignado 
+      $("#assignerUserEdit").val(data.assigned_user_id); 
+    } 
+    // Mostrar la modal 
+    $("#editTaskModal").modal("show"); 
+  }); 
+
 
 
   //Click al Boton para mandar el formulario con los nuevos datos
@@ -368,7 +406,7 @@ $("#taskTable tbody").on("click", "tr", function () {
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#edit_id").val(),
+        id: $("#editId").val(),
         projectId: $("#projectTeam").val(),
         description: $("#descriptionEdit").val().trim(),
         date: $("#datepickerEdit").val(),
@@ -408,8 +446,8 @@ $("#taskTable tbody").on("click", "tr", function () {
               }
             else if (response.status === "ERROR") 
             {
-              $("#edit_Project")[0].reset();
-              $("#editProjectmodal").modal("hide");
+              $("#editTask")[0].reset();
+              $("#editTaskModal").modal("hide");
               clearValidationMessages();
               $("body").html(
                 '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -421,8 +459,8 @@ $("#taskTable tbody").on("click", "tr", function () {
             {
               //si funciona entonces procede a guardar el codigo
               alert("Se ha Modificado un Projecto");
-              $("#edit_task")[0].reset();
-              $("#editTaskmodal").modal("hide");
+              $("#editTask")[0].reset();
+              $("#editTaskModal").modal("hide");
               clearValidationMessages();
               loadTable();
             }
@@ -436,7 +474,7 @@ $("#taskTable tbody").on("click", "tr", function () {
     .click(function (e) {
       e.preventDefault();
       var deleteTask = {
-        id: $("#edit_id").val(),
+        id: $("#editId").val(),
         action: "deleteTask",
       };
 
@@ -446,7 +484,7 @@ $("#taskTable tbody").on("click", "tr", function () {
         type: "POST",
         data: deleteTask,
         success: function (response) {
-          if (response.status === "ERRORdelete") 
+          if (response.status === "errorDelete") 
           {
             var message = $("#message").text(response.message).show();
             alert("No se pudo Eliminar el Usuario debido: " + message);

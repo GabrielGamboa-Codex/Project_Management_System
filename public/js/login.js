@@ -1,5 +1,5 @@
 //Mostrar el Password al hacer click al icono
-var passLogin = document.getElementById("login_pass");
+var passLogin = document.getElementById("loginPass");
 var icon = document.querySelector(".toggle-password");
 
 //Cuando el Icono haga click hacer
@@ -153,8 +153,8 @@ $(document).ready(function () {
   {
     e.preventDefault();
     var formData = {
-      email: $("#login_email").val(),
-      pass: $("#login_pass").val(),
+      email: $("#loginEmail").val(),
+      pass: $("#loginPass").val(),
       code: $("#codeValidate").val(),
       action: "login",
     };

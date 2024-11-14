@@ -24,16 +24,16 @@ class ProjectController
         try {
             $project = new ProjectModel();
             
-            $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+            $patternDescription = '/^[a-zA-Z0-9\s\W]+$/';
             $patternProject = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternProject, $projectName)) 
             {
                 echo json_encode(['status' => 'errorProject', 'message' => 'The project name must contain numeric characters or letters and be at least 4 characters long.']);
             }
-            elseif(!preg_match($patterndescription, $description))
+            elseif(!preg_match($patternDescription, $description))
             {
-                if(!preg_match($patterndescription, $description))
+                if(!preg_match($patternDescription, $description))
                 {
                     echo json_encode(['status' => 'errorDescription', 'message' => 'The description must contain at least 4 characters']);
                     
@@ -61,16 +61,16 @@ class ProjectController
 
         try {
             $project = new ProjectModel();
-            $patterndescription = '/^[a-zA-Z0-9\s.,;-]{4,}$/';
+            $patternDescription = '/^[a-zA-Z0-9\s\W]+$/';
             $patternProject = '/^[a-zA-Z0-9\s]{4,}$/';
 
             if (!preg_match($patternProject, $projectName)) 
             {
                 echo json_encode(['status' => 'errorEditProject', 'message' => 'The project name must contain numeric characters or letters and be at least 4 characters long.']);
             }
-            elseif(!preg_match($patterndescription, $description))
+            elseif(!preg_match($patternDescription, $description))
             {
-                if(!preg_match($patterndescription, $description))
+                if(!preg_match($patternDescription, $description))
                 {
                     echo json_encode(['status' => 'errorEditDescription', 'message' => 'The description must contain at least 4 characters']);
                     

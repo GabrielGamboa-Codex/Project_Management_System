@@ -27,7 +27,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'editUser')
     $userName = $_POST['userName'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-    $teamId = $_POST['team_id'];
+    $teamId = $_POST['teamId'];
 
     $controller = new UserController;
     $edit = $controller->editUser($id, $userName, $email, $pass, $teamId);

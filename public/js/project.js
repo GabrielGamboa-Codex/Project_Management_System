@@ -2,7 +2,7 @@
 function validation(event) 
 {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s.,;-]/.test(char)) 
+  if (!/^[a-zA-Z0-9\s\W]+$/.test(char)) 
   {
     event.preventDefault();
     return false;
@@ -24,7 +24,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+    var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
   
 
   
@@ -63,7 +63,7 @@ function validateData(formData) {
   function validateDataedit(dataEdit) {
     //Con el .trim valida que los campos no tengas espacios al principio o al final
     var name = dataEdit.name.trim();
-    var description = dataEdit.description.trim();
+    var description = dataEdit.description;
     //Llama a los div para que carguen los mensajes si hay algun error
     var message1 = document.getElementById("messageEdit1");
     var message2 = document.getElementById("messageEdit2");
@@ -72,7 +72,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^[a-zA-Z0-9\s.,;-]{4,}$/;
+    var descriptionRegex = /^.{4,}$/;
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
@@ -177,7 +177,7 @@ $(document).ready(function () {
     data: { action: "printOptions" },
     success: function (data) {
       data.forEach(function (item) {
-        $("#project_team").append(
+        $("#projecTeam").append(
           `<option value="${item.id}">${item.name}</option>`
         );
       });
@@ -193,7 +193,7 @@ $(document).ready(function () {
       data.forEach(function (
         item //Recorre cada elemento en el array de datos recibido como respuesta.
       ) {
-        $("#project_team_edit").append(
+        $("#projecTeamEdit").append(
           `<option value="${item.id}">${item.name}</option>`
         ); //Añade contenido al final de los elemento seleccionados
       });
@@ -207,9 +207,9 @@ $(document).ready(function () {
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        name: $("#project_name").val().trim(),
-        description: $("#project_description").val().trim(),
-        team_id: $("#project_team").val(),
+        name: $("#projectName").val().trim(),
+        description: $("#projectDescription").val().trim(),
+        teamId: $("#projecTeam").val(),
         action: "createProject",
       };
 
@@ -242,8 +242,8 @@ $(document).ready(function () {
           }
           else if (response.status === "ERROR") 
           {
-            $("#create_Project")[0].reset();
-            $("#createProjectmodal").modal("hide");
+            $("#createProject")[0].reset();
+            $("#createProjectModal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -255,9 +255,9 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Projecto");
-            $("#create_Project")[0].reset();
+            $("#createProject")[0].reset();
             $("#id").val("");
-            $("#createProjectmodal").modal("hide");
+            $("#createProjectModal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -270,11 +270,11 @@ $(document).ready(function () {
     //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
     var data = projectTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
-    $("#edit_id").val(data.id);
-    $("#edit_name_project").val(data.name);
-    $("#description_edit").val(data.description);
-    $("#project_team_edit").val(data.team_id);
-    $("#editProjectmodal").modal("show"); //muestra la modal
+    $("#editId").val(data.id);
+    $("#editNameProject").val(data.name);
+    $("#descriptionEdit").val(data.description);
+    $("#projecTeamEdit").val(data.team_id);
+    $("#editProjectModal").modal("show"); //muestra la modal
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
@@ -283,11 +283,10 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#edit_id").val(),
-        name: $("#edit_name_project").val().trim(),
-        description: $("#description_edit").val(),
-        pass: $("#edit_pass").val(),
-        team_id: $("#project_team_edit").val(),
+        id: $("#editId").val(),
+        name: $("#editNameProject").val().trim(),
+        description: $("#descriptionEdit").val(),
+        teamId: $("#projecTeamEdit").val(),
         action: "editProject",
       };
 
@@ -321,8 +320,8 @@ $(document).ready(function () {
             }
             else if (response.status === "ERROR") 
             {
-              $("#edit_Project")[0].reset();
-              $("#editProjectmodal").modal("hide");
+              $("#editProject")[0].reset();
+              $("#editProjectModal").modal("hide");
               clearValidationMessages();
               $("body").html(
                 '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -334,8 +333,8 @@ $(document).ready(function () {
             {
               //si funciona entonces procede a guardar el codigo
               alert("Se ha Modificado un Projecto");
-              $("#edit_Project")[0].reset();
-              $("#editProjectmodal").modal("hide");
+              $("#editProject")[0].reset();
+              $("#editProjectModal").modal("hide");
               clearValidationMessages();
               loadTable();
             }
@@ -349,7 +348,7 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var deleteProject = {
-        id: $("#edit_id").val(),
+        id: $("#editId").val(),
         action: "deleteProject",
       };
 

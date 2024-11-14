@@ -13,7 +13,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'createProject')
 {
     $projectName = $_POST['name'];
     $description = $_POST['description'];
-    $teamId = $_POST['team_id'];
+    $teamId = $_POST['teamId'];
 
     $controller = new ProjectController;
     $up = $controller->createProject($projectName, $description, $teamId);
@@ -25,7 +25,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'editProject')
     $id = $_POST['id'];
     $projectName = $_POST['name'];
     $description = $_POST['description'];
-    $teamId = $_POST['team_id'];
+    $teamId = $_POST['teamId'];
 
     $controller = new ProjectController;
     $controller->editProject($id, $projectName, $description, $teamId);

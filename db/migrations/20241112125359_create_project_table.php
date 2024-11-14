@@ -10,7 +10,7 @@ final class CreateProjectTable extends AbstractMigration
     {
         $table = $this->table('projects');
         $table->addColumn('name', 'string', ['limit' => 50])
-            ->addColumn('description', 'string', ['limit' => 250])
+            ->addColumn('description', 'text')
             ->addColumn('team_id', 'integer', ['limit' => 100])
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])

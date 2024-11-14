@@ -1,14 +1,7 @@
 <?php
 require __DIR__ . '/../models/projectModels.php';
-require __DIR__ . '/../models/userModels.php';
 require __DIR__ . '/../controllers/taskController.php';
 
-//Opciones de los Usuarios
-if (isset($_POST['action']) && $_POST['action'] == 'printOptionsUser') 
-{
-    $data = new UserModel;
-    $data->printOptionsUser();
-}
 
 //Opciones de los Projectos
 if (isset($_POST['action']) && $_POST['action'] == 'printOptionsProject') 

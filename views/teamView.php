@@ -6,7 +6,7 @@
     <div id="message"></div>
     <div class="container">
         <!-- Button Crear nuevo Usuario-->
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createTeammodal">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createTeamModal">
             <i class="bi bi-plus-circle-fill"></i> Create New Team
         </button>
     </div>
@@ -42,21 +42,21 @@
 
 
     <!-- Modal Crear Teams -->
-    <div class="modal fade" id="createTeammodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createTeammodal" aria-hidden="true">
+    <div class="modal fade" id="createTeamModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createTeamModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createTeammodalLabel">Register a New Team</h1>
+                    <h1 class="modal-title fs-5" id="createTeamModalLabel">Register a New Team</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="create_Team">
+                    <form method="POST" id="createTeam">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Team Name</p>
                             </label>
-                            <input type="text" class="form-control" id="team_Name" name="team_Name" placeholder="Team Name" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="teamName" name="teamName" placeholder="Team Name" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                     </form>
@@ -73,29 +73,29 @@
 
 
     <!-- Modal Editar Teams -->
-    <div class="modal fade" id="editTeammodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editTeammodal" aria-hidden="true">
+    <div class="modal fade" id="editTeamModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editTeamModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editTeammodalLabel">Team Data</h1>
+                    <h1 class="modal-title fs-5" id="editTeamModalLabel">Team Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="edit_team">
+                    <form method="POST" id="editTeam">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Team Name</p>
                             </label>
-                            <input type="text" class="form-control" id="edit_nameTeam" name="edit_nameTeam" placeholder="Name Team" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editNameTeam" name="editNameTeam" placeholder="Name Team" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="edit_id">
+                    <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editTeamButton"><i class="bi bi-pencil-square"></i> Edit Team</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal"><i class="bi bi-person-dash"></i> Delete Team</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete Team</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> ><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
@@ -107,11 +107,11 @@
 
 
     <!-- modal Para Confirmar la Eliminacion de un usuario-->
-    <div class="modal fade" id="deletemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletemodalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deletemodalLabel">Delete Team</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Team</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="col-6 col-sm-12 col-md-12">

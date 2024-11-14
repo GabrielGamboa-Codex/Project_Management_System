@@ -12,25 +12,46 @@ class ProjectModel extends Model
     public function printOptionsProject()
     {
         $projectArr = array();
-
-        // Obtener todos los proyectos
-        $projects = ProjectModel::all();
     
-        // Recorrer cada proyecto
-        foreach ($projects as $project) 
-        {
-            // Verificar si el status es true
-            if ($project->status == true) {
-                $projectArr[] = array(
-                    "id" => $project->id,
-                    "name" => $project->name,
+        // Obtener todos los proyectos con sus respectivos usuarios si el proyecto no tiene un usuario
+        //asociado no lo imprime el proyecto
+        $projects = ProjectModel::join('teams', 'projects.team_id', '=', 'teams.id')
+            ->join('users', 'users.team_id', '=', 'teams.id')
+            ->select(
+                'projects.id as projectId',
+                'projects.name as projectName',
+                'projects.status as projectStatus',
+                'users.id as userId',
+                'users.username as userName',
+                'users.status as userStatus',
+                'teams.id as teamId'
+            )
+            ->where('projects.status', true)
+            ->where('users.status', true)
+            ->get();
+    
+        // Agrupar usuarios por proyecto
+        foreach ($projects as $project) {
+            if (!isset($projectArr[$project->projectId])) {
+                $projectArr[$project->projectId] = array(
+                    "id" => $project->projectId,
+                    "name" => $project->projectName,
+                    "users" => array()
                 );
             }
+    
+            // Agregar usuarios al proyecto correspondiente
+            $projectArr[$project->projectId]['users'][] = array(
+                "id" => $project->userId,
+                "username" => $project->userName
+            );
         }
+    
         // Convertir el arreglo a JSON y mostrarlo
-        echo json_encode($projectArr);
+        echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
     }
     
+
 
     public function printTable()
     {

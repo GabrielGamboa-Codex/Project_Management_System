@@ -19,7 +19,7 @@ class TaskModel extends Model
                     'projects.id as projectId',
                     'projects.name as projectName',
                     'tasks.description',
-                    'tasks.due_date',
+                    'tasks.due_date as dueDate',
                     'tasks.priority',
                     'tasks.completed',
                     'users.id as userId',
@@ -38,7 +38,7 @@ class TaskModel extends Model
                     "project_id" => $task->projectId,
                     "project" => $task->projectName,
                     "description" => $task->description,
-                    "due_date" => $task->due_date,
+                    "due_date" => $task->dueDate,
                     "priority" => $task->priority,
                     //Se utiliza un valor ternario si es 1 osea true se asigna completed si es 0 false Pending
                     "completed" => $task->completed ? 'Completed' : 'Pending',

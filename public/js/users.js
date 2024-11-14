@@ -123,8 +123,8 @@ function validateDataedit(dataEdit) {
 }
 
 //Mostrar el Password al hacer click al icono
-var passCreate = document.getElementById("user_pass");
-var passEdit = document.getElementById("edit_pass");
+var passCreate = document.getElementById("userPass");
+var passEdit = document.getElementById("editPass");
 var icon1 = document.querySelector(".toggle-password");
 var icon2 = document.querySelector(".toggle-password2");
 
@@ -198,7 +198,7 @@ $(document).ready(function () {
     data: { action: "printOptions" },
     success: function (data) {
       data.forEach(function (item) {
-        $("#user_team").append(
+    $("#selectTeam").append(
           `<option value="${item.id}">${item.name}</option>`
         );
       });
@@ -214,7 +214,7 @@ $(document).ready(function () {
       data.forEach(function (
         item //Recorre cada elemento en el array de datos recibido como respuesta.
       ) {
-        $("#team_edit").append(
+        $("#teamEdit").append(
           `<option value="${item.id}">${item.name}</option>`
         ); //Añade contenido al final de los elemento seleccionados
       });
@@ -263,10 +263,10 @@ $(document).ready(function () {
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        userName: $("#user_name").val().trim(),
-        email: $("#user_email").val().toLowerCase(),
-        pass: $("#user_pass").val(),
-        team_id: $("#user_team").val(),
+        userName: $("#userName").val().trim(),
+        email: $("#userEmail").val().toLowerCase(),
+        pass: $("#userPass").val(),
+        team_id: $("#selectTeam").val(),
         action: "createUser",
       };
 
@@ -306,8 +306,8 @@ $(document).ready(function () {
             } 
           else if (response.status === "ERROR") 
           {
-            $("#create_user")[0].reset();
-            $("#createUsermodal").modal("hide");
+            $("#createUser")[0].reset();
+            $("#createUserModal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -319,9 +319,9 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Usuario creado con éxito.");
-            $("#create_user")[0].reset();
+            $("#createUser")[0].reset();
             $("#id").val("");
-            $("#createUsermodal").modal("hide");
+            $("#createUserModal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -334,11 +334,11 @@ $(document).ready(function () {
     //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
     var data = userTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
-    $("#edit_id").val(data.id);
-    $("#edit_name").val(data.username);
-    $("#edit_email").val(data.email);
-    $("#team_edit").val(data.team_id);
-    $("#editUsermodal").modal("show"); //muestra la modal
+    $("#editId").val(data.id);
+    $("#editName").val(data.username);
+    $("#editEmail").val(data.email);
+    $("#teamEdit").val(data.team_id);
+    $("#editUserModal").modal("show"); //muestra la modal
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
@@ -347,11 +347,11 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#edit_id").val(),
-        userName: $("#edit_name").val().trim(),
-        email: $("#edit_email").val().toLowerCase(),
-        pass: $("#edit_pass").val(),
-        team_id: $("#team_edit").val(),
+        id: $("#editId").val(),
+        userName: $("#editName").val().trim(),
+        email: $("#editEmail").val().toLowerCase(),
+        pass: $("#editPass").val(),
+        teamId: $("#teamEdit").val(),
         action: "editUser",
       };
 
@@ -398,8 +398,8 @@ $(document).ready(function () {
           else if (response.status  === "ERRORedit") 
           {
             //si funciona entonces procede a guardar el codigo
-            $("#create_user")[0].reset();
-            $("#createUsermodal").modal("hide");
+            $("#editUse")[0].reset();
+            $("#editUserModal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '.text(
@@ -411,10 +411,10 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Actualizado un Registro");
-            $("#editUsermodal").modal("hide");
+            $("#editUserModal").modal("hide");
             loadTable();
+            $("#editUser")[0].reset();
             clearValidationMessages();
-            $("#edit_user")[0].reset();
           }
         },
       });
@@ -426,7 +426,7 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var deleteUser = {
-        id: $("#edit_id").val(),
+        id: $("#editId").val(),
         action: "deleteUser",
       };
 

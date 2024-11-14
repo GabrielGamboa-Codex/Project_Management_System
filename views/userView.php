@@ -6,7 +6,7 @@
     <div id="message"></div>
     <div class="container">
         <!-- Button Crear nuevo Usuario-->
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUsermodal">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createUserModal">
             <i class="bi bi-plus-circle-fill"></i> Create New User
         </button>
     </div>
@@ -48,21 +48,21 @@
 
 
     <!-- Modal Crear Usuarios -->
-    <div class="modal fade" id="createUsermodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createUsermodal" aria-hidden="true">
+    <div class="modal fade" id="createUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createUserModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createUsermodalLabel">Register a New User</h1>
+                    <h1 class="modal-title fs-5" id="createUserModalLabel">Register a New User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="create_user">
+                    <form method="POST" id="createUser">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Name User" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name User" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -70,7 +70,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
                             <div id="message2"></div>
                         </div>
                         <br>
@@ -78,7 +78,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
-                            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password"/>
+                            <input type="password" class="form-control" id="userPass" name="userPass" placeholder="Password"/>
                             <i class="bi bi-eye-slash toggle-password"></i>
                             <div id="message3"></div>
                         </div>
@@ -88,7 +88,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
-                            <select class="form-select" id="user_team" aria-label="selectTeam">
+                            <select class="form-select" id="selectTeam" aria-label="selectTeam">
                             </select>
                         </div>
 
@@ -106,21 +106,21 @@
 
 
     <!-- Modal Editar Usuarios -->
-    <div class="modal fade" id="editUsermodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editUsermodal" aria-hidden="true">
+    <div class="modal fade" id="editUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editUserModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editUsermodalLabel">User Data</h1>
+                    <h1 class="modal-title fs-5" id="editUserModalLabel">User Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="edit_user">
+                    <form method="POST" id="editUser">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="edit_name" name="edit_name" placeholder="Name User" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name User" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -128,7 +128,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
@@ -136,7 +136,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
-                            <input type="password" class="form-control" id="edit_pass" name="edit_pass" placeholder="Password" />
+                            <input type="password" class="form-control" id="editPass" name="editPass" placeholder="Password" />
                             <i class="bi bi-eye-slash toggle-password2"></i>
                             <div id="messageEdit3"></div>
                         </div>
@@ -147,13 +147,13 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
-                            <select class="form-select" id="team_edit" aria-label="selectTeam">
+                            <select class="form-select" id="teamEdit" aria-label="selectTeam">
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="edit_id">
+                    <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit User</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete User</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>

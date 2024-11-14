@@ -115,7 +115,7 @@ $(document).ready(function () {
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        name: $("#team_Name").val().trim(),
+        name: $("#teamName").val().trim(),
         action: "createTeam",
       };
 
@@ -141,8 +141,8 @@ $(document).ready(function () {
           } 
           else if (response.status === "ERROR") 
           {
-            $("#create_Team")[0].reset();
-            $("#createTeammodal").modal("hide");
+            $("#createTeam")[0].reset();
+            $("#createTeamModal").modal("hide");
             clearValidationMessages();
             $("body").html(
               '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -154,9 +154,9 @@ $(document).ready(function () {
           {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Creado un Nuevo Team");
-            $("#create_Team")[0].reset();
+            $("#createTeam")[0].reset();
             $("#id").val("");
-            $("#createTeammodal").modal("hide");
+            $("#createTeamModal").modal("hide");
             clearValidationMessages();
             loadTable();
           }
@@ -170,9 +170,9 @@ $(document).ready(function () {
     //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
     var data = teamTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
     // cada uno retorna la data en el input o select referenciando la columnna
-    $("#edit_id").val(data.id);
-    $("#edit_nameTeam").val(data.name);
-    $("#editTeammodal").modal("show"); //muestra la modal
+    $("#editId").val(data.id);
+    $("#editNameTeam").val(data.name);
+    $("#editTeamModal").modal("show"); //muestra la modal
   });
 
   //Click al Boton para mandar el formulario con los nuevos datos
@@ -181,8 +181,8 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var dataEdit = {
-        id: $("#edit_id").val(),
-        name: $("#edit_nameTeam").val(),
+        id: $("#editId").val(),
+        name: $("#editNameTeam").val(),
         action: "editTeam",
       };
 
@@ -209,8 +209,8 @@ $(document).ready(function () {
             } 
             else if (response.status === "ERROR") 
             {
-              $("#edit_team")[0].reset();
-              $("#editTeammodal").modal("hide");
+              $("#editTeam")[0].reset();
+              $("#editTeamModal").modal("hide");
               clearValidationMessages();
               $("body").html(
                 '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
@@ -222,8 +222,8 @@ $(document).ready(function () {
             {
               //si funciona entonces procede a guardar el codigo
               alert("Se ha Modificado un Team");
-              $("#edit_team")[0].reset();
-              $("#editTeammodal").modal("hide");
+              $("#editTeam")[0].reset();
+              $("#editTeamModal").modal("hide");
               clearValidationMessages();
               loadTable();
             }
@@ -237,7 +237,7 @@ $(document).ready(function () {
     .click(function (e) {
       e.preventDefault();
       var deleteTeam = {
-        id: $("#edit_id").val(),
+        id: $("#editId").val(),
         action: "deleteTeam",
       };
 
@@ -251,12 +251,12 @@ $(document).ready(function () {
           {
             var message = $("#message").text(response.message).show();
             alert("No se pudo Eliminar el Usuario debido: " + message);
-            $("#deletemodal").modal("hide");
+            $("#deleteModal").modal("hide");
           } 
           else if (response.status === "success") 
           {
             alert("Se ha Eliminado un Team");
-            $("#deletemodal").modal("hide");
+            $("#deleteModal").modal("hide");
             loadTable();
           }
         },

@@ -6,7 +6,7 @@
     <div id="message"></div>
     <div class="container">
         <!-- Button Crear nuevo Project-->
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createProjectmodal">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createProjectModal">
             <i class="bi bi-plus-circle-fill"></i> Create New Project
         </button>
     </div>
@@ -47,21 +47,21 @@
 
 
     <!-- Modal Crear Projectos -->
-    <div class="modal fade" id="createProjectmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectmodal" aria-hidden="true">
+    <div class="modal fade" id="createProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createProjectmodalLabel">Register a New Project</h1>
+                    <h1 class="modal-title fs-5" id="createProjectModalLabel">Register a New Project</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="create_Project">
+                    <form method="POST" id="createProject">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -69,7 +69,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="project_description" name="project_description"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="projectDescription" name="projectDescription"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
                             <div id="message2"></div>
                         </div>                      
                         <br>
@@ -77,7 +77,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
-                            <select class="form-select" id="project_team" aria-label="selectTeam">
+                            <select class="form-select" id="projecTeam" aria-label="selectTeam">
                             </select>
                         </div>
                     </form>
@@ -94,21 +94,21 @@
 
 
     <!-- Modal Editar Project -->
-    <div class="modal fade" id="editProjectmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProjectmodal" aria-hidden="true">
+    <div class="modal fade" id="editProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProjectModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editProjectmodalLabel">Project Data</h1>
+                    <h1 class="modal-title fs-5" id="editProjectModalLabel">Project Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="edit_Project">
+                    <form method="POST" id="editProject">
                         <br>
                         <div class="col-6 col-sm-12 col-md-12">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="edit_name_project" name="edit_name_project" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editNameProject" name="editNameProject" placeholder="Name Project" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -116,7 +116,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description_edit" name="description_edit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
                             <div id="messageEdit2"></div>
                         </div>                      
                         <br>
@@ -124,13 +124,13 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Team</p>
                             </label>
-                            <select class="form-select" id="project_team_edit" aria-label="selectTeam">
+                            <select class="form-select" id="projecTeamEdit" aria-label="selectTeam">
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="edit_id">
+                    <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editButtonProject"><i class="bi bi-pencil-square"></i> Edit Project</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i> Delete Project</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
