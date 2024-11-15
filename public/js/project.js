@@ -72,7 +72,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^.{4,}$/;
+    var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
