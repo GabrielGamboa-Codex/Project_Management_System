@@ -26,7 +26,7 @@ class TeamController
             //comprueba que los valores existan y guarda la informacion en una variable
             $teamExist = TeamModel::where('name', $teamName)->exists();
             
-            $patternTeam = '/^[a-zA-Z0-9\s]{4,}$/';
+            $patternTeam = '/^[a-zA-Z0-9\s\W]{4,}$/';
 
             if (!preg_match($patternTeam, $teamName)) 
             {
@@ -64,7 +64,7 @@ class TeamController
                 ->where('id', '!=', $id)
                 ->exists();
 
-            $patternTeam = '/^[a-zA-Z0-9\s]{4,}$/';
+            $patternTeam = '/^[a-zA-Z0-9\s\W]{4,}$/';
 
             if (!preg_match($patternTeam, $teamName)) 
             {

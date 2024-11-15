@@ -21,7 +21,7 @@ function validateData(formData) {
 
   
     //revisa que el name tenga algun caracter y como minomo sean 4
-    var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+    var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   
     //Valida que al menos que un @
     var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
@@ -69,7 +69,7 @@ function validateData(formData) {
     var message2 = document.getElementById("messageEdit2");
   
     //revisa que el name tenga algun caracter y como minomo sean 4
-    var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+    var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   
     //Valida que al menos que un @
     var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;

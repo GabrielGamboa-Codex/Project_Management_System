@@ -1,7 +1,7 @@
 //Validaciones
 function validation(event) {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s]/.test(char)) {
+  if (!/[a-zA-Z0-9\s\W]+$/.test(char)) {
     event.preventDefault();
     return false;
   }
@@ -16,7 +16,7 @@ function validateData(formData) {
   var message1 = document.getElementById("message1");
 
   //revisa que el name tenga algun caracter y como minomo sean 4
-  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+  var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
   if (nameRegex.test(name)) {
@@ -40,7 +40,7 @@ function validateDataedit(dataEdit) {
   var message1 = document.getElementById("messageEdit1");
 
   //revisa que el name tenga algun caracter y como minimo sean 4
-  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
+  var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
