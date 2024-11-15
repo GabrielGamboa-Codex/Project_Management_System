@@ -52,7 +52,8 @@ class TaskController
                 
                 //Pendiente por Revision 
             } catch (PDOException $e) {
-                $error = ['status' => 'error', 'message' => "An error has occurred:" . $e->getMessage()];
+                header('Content-Type: application/json'); 
+                $error = ['status' => 'error', 'message' =>  $e->getMessage()];
                 echo json_encode($error);
             }
         }
@@ -90,7 +91,8 @@ class TaskController
                     
                 }
             } catch (PDOException $e) {
-                $error = ['status' => 'errorEdit', 'message' => "An error has occurred:" . $e->getMessage()];
+                header('Content-Type: application/json'); 
+                $error = ['status' => 'errorEdit', 'message' => $e->getMessage()];
                 echo json_encode($error);
             }
         }

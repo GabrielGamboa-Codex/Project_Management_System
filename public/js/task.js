@@ -370,18 +370,39 @@ $(document).ready(function () {
             loadTable();
           }
         },
-        //en caso de que la respuesta sea un error
-        error: function (jqXHR, textStatus, errorThrown) 
-        {
-           // Manejo de errores de red o del servidor console.error
-           ("Error: ", textStatus, errorThrown); 
-           var errorMessage = "An unexpected error occurred: " + textStatus; 
-           if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
-            { 
-              errorMessage = jqXHR.responseJSON.message; 
-            } 
-            var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
-      } 
+        error: function (jqXHR, textStatus, errorThrown) {
+          
+          var errorMessage = "An unexpected error occurred: " + textStatus;
+  
+          if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+              errorMessage = jqXHR.responseJSON.message;
+          } else if (jqXHR.responseText) {
+              try {
+                  var jsonResponse = JSON.parse(jqXHR.responseText);
+                  errorMessage = jsonResponse.message || errorMessage;
+              } catch (e) {
+                  errorMessage = jqXHR.responseText;
+              }
+          }
+  
+          // Mapear los patrones de error a los campos del formulario
+          var errorMapping = [
+              { pattern: /Data too long for column 'description'/, message: "The data for the description is too long.", field: "message1" },
+              { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "message1" },
+              { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "message1" },
+          ];
+  
+          var matched = false;
+          for (var i = 0; i < errorMapping.length; i++) {
+              var errorPattern = errorMapping[i].pattern;
+              if (errorMessage.match(errorPattern)) {
+                  errorMessage = errorMapping[i].message;
+                  $("#" + errorMapping[i].field).text(errorMessage).show().css("color", "red");
+                  matched = true;
+                  break;
+              }
+          }
+      }
       });
     });
 
@@ -477,20 +498,41 @@ $("#taskTable tbody").on("click", "tr", function () {
               loadTable();
             }
         },
-      //en caso de que la respuesta sea un error
-      error: function (jqXHR, textStatus, errorThrown) 
-      {
-         // Manejo de errores de red o del servidor console.error
-         ("Error: ", textStatus, errorThrown); 
-         var errorMessage = "An unexpected error occurred: " + textStatus; 
-         if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
-          { 
-            errorMessage = jqXHR.responseJSON.message; 
-          } 
-          var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
-    } 
-  }); 
+        error: function (jqXHR, textStatus, errorThrown) {
+          
+          var errorMessage = "An unexpected error occurred: " + textStatus;
+  
+          if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+              errorMessage = jqXHR.responseJSON.message;
+          } else if (jqXHR.responseText) {
+              try {
+                  var jsonResponse = JSON.parse(jqXHR.responseText);
+                  errorMessage = jsonResponse.message || errorMessage;
+              } catch (e) {
+                  errorMessage = jqXHR.responseText;
+              }
+          }
+  
+          // Mapear los patrones de error a los campos del formulario
+          var errorMapping = [
+              { pattern: /Data too long for column 'description'/, message: "The data for the description is too long.", field: "messageEdit1" },
+              { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "messageEdit1" },
+              { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "messageEdit1" },
+          ];
+  
+          var matched = false;
+          for (var i = 0; i < errorMapping.length; i++) {
+              var errorPattern = errorMapping[i].pattern;
+              if (errorMessage.match(errorPattern)) {
+                  errorMessage = errorMapping[i].message;
+                  $("#" + errorMapping[i].field).text(errorMessage).show().css("color", "red");
+                  matched = true;
+                  break;
+              }
+          }
+      }
     });
+  });
 
   //Eliminar un Usuario
   $("#deleteTask")

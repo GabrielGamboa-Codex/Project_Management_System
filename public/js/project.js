@@ -272,23 +272,46 @@ $(document).ready(function () {
             loadTable();
           }
         },
-
-
-                //en caso de que la respuesta sea un error
-                error: function (jqXHR, textStatus, errorThrown) 
-                {
-                   // Manejo de errores de red o del servidor console.error
-                   ("Error: ", textStatus, errorThrown); 
-                   var errorMessage = "An unexpected error occurred: " + textStatus; 
-                   if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
-                    { 
-                      errorMessage = jqXHR.responseJSON.message; 
-                    } 
-                    var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
-              } 
-            }); 
+        error: function (jqXHR, textStatus, errorThrown) {
+        
+          //inicializa un error generico
+            var errorMessage = "An unexpected error occurred: " + textStatus;
+    
+            if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                errorMessage = jqXHR.responseJSON.message;
+            } else if (jqXHR.responseText) {
+                try {
+                    var jsonResponse = JSON.parse(jqXHR.responseText);
+                    errorMessage = jsonResponse.message || errorMessage;
+                } catch (e) {
+                    errorMessage = jqXHR.responseText;
+                }
+            }
+    
+            // Mapear los patrones de error a los campos del formulario
+            var errorMapping = [
+                { pattern: /Data too long for column 'description'/, message: "The data for the description is too long.", field: "message2" },
+                { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "message2" },
+                { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "message2" },
+                { pattern: /Data too long for column 'name'/, message: "The data for the project name is too long.", field: "message1" },
+            ];
+    
+            var matched = false;
+            for (var i = 0; i < errorMapping.length; i++) {
+                var errorPattern = errorMapping[i].pattern;
+                if (errorMessage.match(errorPattern)) {
+                    errorMessage = errorMapping[i].message;
+                    $("#" + errorMapping[i].field).text(errorMessage).show().css("color", "red");
+                    matched = true;
+                    break;
+                }
+            }
+        }
     });
-
+});
+    
+    
+    
 
   //Editar por fila atravez de una Modal
   $("#projectTable tbody").on("click", "tr", function () {
@@ -360,21 +383,53 @@ $(document).ready(function () {
               loadTable();
             }
         },
-
-        //en caso de que la respuesta sea un error
-        error: function (jqXHR, textStatus, errorThrown) 
-        {
-           // Manejo de errores de red o del servidor console.error
-           ("Error: ", textStatus, errorThrown); 
-           var errorMessage = "An unexpected error occurred: " + textStatus; 
-           if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
-            { 
-              errorMessage = jqXHR.responseJSON.message; 
-            } 
-            var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
-      } 
+        //jqXHR: El objeto jqXHR (abreviatura de jQuery XML HTTP Request) que representa la respuesta de la solicitud AJAX.
+        //textStatus: Una cadena que describe el tipo de error que ocurrió (por ejemplo, "timeout", "error", "abort", "parsererror").
+       //errorThrown: Un objeto que contiene el error lanzado por la solicitud.
+        error: function (jqXHR, textStatus, errorThrown) {
+      
+          //inicializa un error generico
+          var errorMessage = "An unexpected error occurred: " + textStatus;
+          
+          //analiza si el mensaje del json y repuesta del json existen o tienen valores
+          if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+            //reescribes el valor del error mensaje por el mensaje del json
+              errorMessage = jqXHR.responseJSON.message;
+              //si el respose text exista analiza el json y cambia el mensaje o reescribe el mensaje
+          } else if (jqXHR.responseText) {
+              try {
+                  var jsonResponse = JSON.parse(jqXHR.responseText);
+                  errorMessage = jsonResponse.message || errorMessage;
+              } catch (e) {
+                  errorMessage = jqXHR.responseText;
+              }
+          }
+  
+          // Mapear los patrones de error a los campos del formulario
+          //haciendo una lista de objetos que define a través de expresiones regulares a mensajes de error específicos y campos de formulario a los cuales.
+          //se les asigna dicho error
+          var errorMapping = [
+              { pattern: /Data too long for column 'description'/, message: "The data for the description is too long.", field: "messageEdit2" },
+              { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "messageEdit2" },
+              { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "messageEdit2" },
+              { pattern: /Data too long for column 'name'/, message: "The data for the project name is too long.", field: "messageEdit1" },
+          ];
+  
+          var matched = false;
+          //verifica que el error maping coincidad con algun patron definido
+          for (var i = 0; i < errorMapping.length; i++) {
+              var errorPattern = errorMapping[i].pattern;
+              if (errorMessage.match(errorPattern)) {
+                  errorMessage = errorMapping[i].message;
+                  //si conincide con un patron manda el error al campo especifico y rompe el bucle
+                  $("#" + errorMapping[i].field).text(errorMessage).show().css("color", "red");
+                  matched = true;
+                  break;
+              }
+          }
+      }
     }); 
-    });
+  });
 
   //Eliminar un Usuario
   $("#deleteProject")

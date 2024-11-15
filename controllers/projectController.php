@@ -49,7 +49,9 @@ class ProjectController
             
             
         } catch (PDOException $e) {
-            $error = ['status' => 'error', 'message' => "An error has occurred:" . $e->getMessage()];
+            //instacio al cliente como procesar la respuesta en este caso un json
+            header('Content-Type: application/json'); 
+            $error = ['status' => 'error', 'message' => $e->getMessage()]; 
             echo json_encode($error);
         }
     }
@@ -83,7 +85,9 @@ class ProjectController
                 
             }
         } catch (PDOException $e) {
-            $error = ['status' => 'errorEdit', 'message' => "An error has occurred:" . $e->getMessage()];
+            //instacio al cliente como procesar la respuesta en este caso un json
+            header('Content-Type: application/json'); 
+            $error = ['status' => 'errorEdit', 'message' =>  $e->getMessage()];
             echo json_encode($error);
         }
     }
