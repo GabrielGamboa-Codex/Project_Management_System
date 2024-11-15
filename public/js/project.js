@@ -72,7 +72,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^.{4,}$/;
+    var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
@@ -272,8 +272,21 @@ $(document).ready(function () {
             loadTable();
           }
         },
-      });
+        //en caso de que la respuesta sea un error
+          error: function (jqXHR, textStatus, errorThrown) 
+          {
+             // Manejo de errores de red o del servidor console.error
+             ("Error: ", textStatus, errorThrown); 
+             var errorMessage = "An unexpected error occurred: " + textStatus; 
+             if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
+              { 
+                errorMessage = jqXHR.responseJSON.message; 
+              } 
+              var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
+        } 
+      }); 
     });
+
 
   //Editar por fila atravez de una Modal
   $("#projectTable tbody").on("click", "tr", function () {
@@ -345,7 +358,19 @@ $(document).ready(function () {
               loadTable();
             }
         },
-      });
+        //en caso de que la respuesta sea un error
+        error: function (jqXHR, textStatus, errorThrown) 
+        {
+           // Manejo de errores de red o del servidor console.error
+           ("Error: ", textStatus, errorThrown); 
+           var errorMessage = "An unexpected error occurred: " + textStatus; 
+           if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
+            { 
+              errorMessage = jqXHR.responseJSON.message; 
+            } 
+            var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
+      } 
+    }); 
     });
 
   //Eliminar un Usuario
