@@ -52,7 +52,7 @@ class TaskController
                 
                 //Pendiente por Revision 
             } catch (PDOException $e) {
-                $error = ['status' => 'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
+                $error = ['status' => 'error', 'message' => "An error has occurred:" . $e->getMessage()];
                 echo json_encode($error);
             }
         }

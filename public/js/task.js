@@ -236,58 +236,66 @@ $(document).ready(function () {
 
     var taskTable = $("#taskTable").DataTable({
       ajax: {
-          url: "handler/taskHandler.php",
-          method: "POST",
-          data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
+        url: "handler/taskHandler.php",
+        method: "POST",
+        data: { action: "printTable" },
       },
       columnDefs: [
-          { visible: false, targets: 2 },
-          { visible: false, targets: 7 },
-          { visible: false, targets: 9 },
-          { visible: false, targets: 10 },
-          { visible: false, targets: 11 },
-          {
-              // Configuración para la columna 'priority'
-              targets: 5,
-              orderData: [5],
-              render: function (data, type, row) {
-                  var priorityOrder = {
-                      'Low': 1,
-                      'Medium': 2,
-                      'High': 3
-                  };
-                  //devuelve el valor numérico correspondiente usando el objeto es decir si es 1 2 3 o 3 2 1
-                  return type === 'sort' ? priorityOrder[data] : data;
-              }
-          },
-          {
-              // Configuración para la columna 'completed'
-              targets: 6,
-              orderData: [6],
-              render: function (data, type, row) {
-                  var completedOrder = {
-                      'Pending': 1,
-                      'Completed': 2
-                  };
-                  return type === 'sort' ? completedOrder[data] : data;
-              }
+        { visible: false, targets: 2 },
+        { visible: false, targets: 7 },
+        { visible: false, targets: 9 },
+        { visible: false, targets: 10 },
+        { visible: false, targets: 11 },
+        {
+          targets: 5,
+          orderData: [5],
+          render: function (data, type, row) {
+            var priorityOrder = {
+              'Low': 1,
+              'Medium': 2,
+              'High': 3
+            };
+            return type === 'sort' ? priorityOrder[data] : data;
           }
+        },
+        {
+          targets: 6,
+          orderData: [6],
+          render: function (data, type, row) {
+            var completedOrder = {
+              'Pending': 1,
+              'Completed': 2
+            };
+            return type === 'sort' ? completedOrder[data] : data;
+          }
+        },
+        //Define que le maximo de caracteres visible sean 30
+        {
+          targets: 3,
+          render: function (data, type, row) {
+            if (type === 'display') {
+              return data.length > 30 ? data.substr(0, 30) + '...' : data;
+            }
+            return data;
+          }
+        }
       ],
       columns: [
-          { data: "id" },
-          { data: "project" },
-          { data: "project_id" },
-          { data: "description" },
-          { data: "due_date" },
-          { data: "priority" },
-          { data: "completed" },
-          { data: "assigned_user_id" },
-          { data: "assigned" },
-          { data: "created_at" },
-          { data: "updated_at" },
-          { data: "status" },
+        { data: "id" },
+        { data: "project" },
+        { data: "project_id" },
+        { data: "description" },
+        { data: "due_date" },
+        { data: "priority" },
+        { data: "completed" },
+        { data: "assigned_user_id" },
+        { data: "assigned" },
+        { data: "created_at" },
+        { data: "updated_at" },
+        { data: "status" },
       ]
-  });
+    });
+    
   
 
     // Añade un cursor pointer a todas las filas de la tabla
@@ -344,16 +352,12 @@ $(document).ready(function () {
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             }  
-          else if (response.status === "ERROR") 
+          else if (response.status === "error") 
           {
-            $("#create_task")[0].reset();
+            $("#createTask")[0].reset();
             $("#createTaskmodal").modal("hide");
             clearValidationMessages();
-            $("body").html(
-              '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                .text(response.message)
-                .show()
-            );
+            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
           } 
           else if (response.status === "success") 
           {
@@ -407,7 +411,7 @@ $("#taskTable tbody").on("click", "tr", function () {
       e.preventDefault();
       var dataEdit = {
         id: $("#editId").val(),
-        projectId: $("#projectTeam").val(),
+        projectId: $("#projectTeamEdit").val(),
         description: $("#descriptionEdit").val().trim(),
         date: $("#datepickerEdit").val(),
         priority: $("#priorityEdit").val(),
@@ -444,16 +448,12 @@ $("#taskTable tbody").on("click", "tr", function () {
                 //con esta propiedad cambio su color a rojo
                 message.css("color", "red");
               }
-            else if (response.status === "ERROR") 
+            else if (response.status === "errorEdit") 
             {
               $("#editTask")[0].reset();
               $("#editTaskModal").modal("hide");
               clearValidationMessages();
-              $("body").html(
-                '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                  .text(response.message)
-                  .show()
-              );
+              $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
             } 
             else if (response.status === "success") 
             {
@@ -486,7 +486,7 @@ $("#taskTable tbody").on("click", "tr", function () {
         success: function (response) {
           if (response.status === "errorDelete") 
           {
-            var message = $("#message").text(response.message).show();
+            var message = response.message;
             alert("No se pudo Eliminar el Usuario debido: " + message);
             $("#deleteModal").modal("hide");
           } 

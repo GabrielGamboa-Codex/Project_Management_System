@@ -139,16 +139,12 @@ $(document).ready(function () {
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           } 
-          else if (response.status === "ERROR") 
+          else if (response.status === "error") 
           {
             $("#createTeam")[0].reset();
             $("#createTeamModal").modal("hide");
             clearValidationMessages();
-            $("body").html(
-              '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                .text(response.message)
-                .show()
-            );
+            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
           } 
           else if (response.status === "success") 
           {
@@ -207,16 +203,12 @@ $(document).ready(function () {
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             } 
-            else if (response.status === "ERROR") 
+            else if (response.status === "errorEdit") 
             {
               $("#editTeam")[0].reset();
               $("#editTeamModal").modal("hide");
               clearValidationMessages();
-              $("body").html(
-                '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                  .text(response.message)
-                  .show()
-              );
+              $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
             } 
             else if (response.status === "success") 
             {
@@ -247,10 +239,10 @@ $(document).ready(function () {
         type: "POST",
         data: deleteTeam,
         success: function (response) {
-          if (response.status === "ERRORdelete") 
+          if (response.status === "errorDelete") 
           {
-            var message = $("#message").text(response.message).show();
-            alert("No se pudo Eliminar el Usuario debido: " + message);
+            var message = response.message;
+            alert("Failed to Delete User due to " + message);
             $("#deleteModal").modal("hide");
           } 
           else if (response.status === "success") 

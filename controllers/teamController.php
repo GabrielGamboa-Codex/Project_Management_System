@@ -48,7 +48,7 @@ class TeamController
             
             //Pendiente por Revision 
         } catch (PDOException $e) {
-            $error = ['status' => 'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'error', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);
         }
     }
@@ -56,7 +56,6 @@ class TeamController
     //envia los datos al modelo para editar un usuario
     public function editTeam($id, $teamName)
     {
-
 
         try {
             $team = new teamModel();

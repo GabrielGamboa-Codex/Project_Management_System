@@ -144,6 +144,20 @@ $(document).ready(function () {
         { visible: false, targets: 5 },
         { visible: false, targets: 6 },
         { visible: false, targets: 7 },
+        //Define que le maximo de caracteres visible sean 30
+        {
+          //selecciono la columna
+          targets: 2,
+          //renderizado para la columna
+          render: function (data, type, row) {
+            if (type === 'display') {
+              //subtrare los primeros 30 caracteres y luego lo demas le suma un ... que es lo que va a ver el usuario
+              return data.length > 30 ? data.substr(0, 30) + '...' : data;
+            }
+            return data;
+          }
+        }
+      
       ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
       columns: [
         { data: "id" },
@@ -240,16 +254,12 @@ $(document).ready(function () {
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           }
-          else if (response.status === "ERROR") 
+          else if (response.status === "error") 
           {
             $("#createProject")[0].reset();
             $("#createProjectModal").modal("hide");
             clearValidationMessages();
-            $("body").html(
-              '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                .text(response.message)
-                .show()
-            );
+            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
           } 
           else if (response.status === "success") 
           {
@@ -318,16 +328,12 @@ $(document).ready(function () {
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
             }
-            else if (response.status === "ERROR") 
+            else if (response.status === "errorEdit") 
             {
               $("#editProject")[0].reset();
               $("#editProjectModal").modal("hide");
               clearValidationMessages();
-              $("body").html(
-                '<div style="color: red;">Se produjo un error crítico y la página no puede continuar. Error: '
-                  .text(response.message)
-                  .show()
-              );
+              $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
             } 
             else if (response.status === "success") 
             {
@@ -358,9 +364,9 @@ $(document).ready(function () {
         type: "POST",
         data: deleteProject,
         success: function (response) {
-          if (response.status === "ERRORdelete") 
+          if (response.status === "errorDelete") 
           {
-            var message = $("#message").text(response.message).show();
+            var message = response.message;
             alert("No se pudo Eliminar el Usuario debido: " + message);
             $("#deleteModal").modal("hide");
           } 
