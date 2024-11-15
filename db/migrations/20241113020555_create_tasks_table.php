@@ -11,7 +11,7 @@ final class CreateTasksTable extends AbstractMigration
         $table = $this->table('tasks');
         $table->addColumn('project_id', 'integer', ['limit' => 100])
             //te permite con ese comando meter un total de 4gb de espacio de datos
-            ->addColumn('description', 'text', ['limit' => \Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG])
+            ->addColumn('description', 'text')
             ->addColumn('due_date', 'date') 
             ->addColumn('priority', 'string', ['limit' => 100])
             ->addColumn('completed', 'boolean')

@@ -11,7 +11,7 @@ final class CreateProjectTable extends AbstractMigration
         $table = $this->table('projects');
         $table->addColumn('name', 'string', ['limit' => 50])
             //te permite con ese comando meter un total de 4gb de espacio de datos
-             ->addColumn('description', 'text', ['limit' => \Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG])
+             ->addColumn('description', 'text')
             ->addColumn('team_id', 'integer', ['limit' => 100])
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])

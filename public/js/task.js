@@ -370,6 +370,18 @@ $(document).ready(function () {
             loadTable();
           }
         },
+        //en caso de que la respuesta sea un error
+        error: function (jqXHR, textStatus, errorThrown) 
+        {
+           // Manejo de errores de red o del servidor console.error
+           ("Error: ", textStatus, errorThrown); 
+           var errorMessage = "An unexpected error occurred: " + textStatus; 
+           if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
+            { 
+              errorMessage = jqXHR.responseJSON.message; 
+            } 
+            var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
+      } 
       });
     });
 
@@ -465,7 +477,19 @@ $("#taskTable tbody").on("click", "tr", function () {
               loadTable();
             }
         },
-      });
+      //en caso de que la respuesta sea un error
+      error: function (jqXHR, textStatus, errorThrown) 
+      {
+         // Manejo de errores de red o del servidor console.error
+         ("Error: ", textStatus, errorThrown); 
+         var errorMessage = "An unexpected error occurred: " + textStatus; 
+         if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
+          { 
+            errorMessage = jqXHR.responseJSON.message; 
+          } 
+          var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
+    } 
+  }); 
     });
 
   //Eliminar un Usuario
