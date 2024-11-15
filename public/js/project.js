@@ -24,8 +24,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
-  
+    var descriptionRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
 
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
@@ -43,14 +42,18 @@ function validateData(formData) {
   
     if (descriptionRegex.test(description)) 
     {
-      message2.textContent = "Description is valid";
-      message2.style.color = "green";
+      message2.textContent = " ";
+      // message2.style.color = "green";
+      $('#projectDescription').css({
+        'border': '3px solid green'
+    });
     } 
     else 
     {
       message2.textContent =
         "The description must contain at least 4 characters";
       message2.style.color = "red";
+      removeBorder('projectDescription');
       return false;
     }
   
@@ -72,7 +75,7 @@ function validateData(formData) {
     var nameRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   
     //Valida que al menos que un @
-    var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
+    var descriptionRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
     //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
@@ -91,14 +94,18 @@ function validateData(formData) {
       
         if (descriptionRegex.test(description)) 
         {
-          message2.textContent = "Description is valid";
-          message2.style.color = "green";
+          message2.textContent = " ";
+          // message2.style.color = "green";
+          $('#descriptionEdit').css({
+            'border': '3px solid green'
+        });
         } 
         else 
         {
           message2.textContent =
             "The description must contain at least 4 characters";
           message2.style.color = "red";
+          removeBorder('descriptionEdit');
           return false;
         }
   
@@ -125,6 +132,10 @@ function validateData(formData) {
     });
   }
 
+  //Remueve el border
+  function removeBorder(elementId) {
+    $('#' + elementId).css('border', '');
+}
 
 
 
@@ -249,6 +260,7 @@ $(document).ready(function () {
           } 
           else if (response.status === "errorDescription") 
           {
+            removeBorder('projectDescription');
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
@@ -268,12 +280,12 @@ $(document).ready(function () {
             $("#createProject")[0].reset();
             $("#id").val("");
             $("#createProjectModal").modal("hide");
+            removeBorder('projectDescription');
             clearValidationMessages();
             loadTable();
           }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-        
           //inicializa un error generico
             var errorMessage = "An unexpected error occurred: " + textStatus;
     
@@ -295,7 +307,7 @@ $(document).ready(function () {
                 { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "message2" },
                 { pattern: /Data too long for column 'name'/, message: "The data for the project name is too long.", field: "message1" },
             ];
-    
+            removeBorder('projectDescription');
             var matched = false;
             for (var i = 0; i < errorMapping.length; i++) {
                 var errorPattern = errorMapping[i].pattern;
@@ -354,6 +366,7 @@ $(document).ready(function () {
           //reponse comprueba el el https_response_ en el envio
           if (response.status === "errorEditProject") 
             {
+              removeBorder('descriptionEdit');
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#message1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
@@ -379,6 +392,7 @@ $(document).ready(function () {
               alert("Se ha Modificado un Projecto");
               $("#editProject")[0].reset();
               $("#editProjectModal").modal("hide");
+              removeBorder('descriptionEdit');
               clearValidationMessages();
               loadTable();
             }
@@ -414,7 +428,7 @@ $(document).ready(function () {
               { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "messageEdit2" },
               { pattern: /Data too long for column 'name'/, message: "The data for the project name is too long.", field: "messageEdit1" },
           ];
-  
+          removeBorder('descriptionEdit');
           var matched = false;
           //verifica que el error maping coincidad con algun patron definido
           for (var i = 0; i < errorMapping.length; i++) {

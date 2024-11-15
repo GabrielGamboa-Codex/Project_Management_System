@@ -56,7 +56,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Team Name</p>
                             </label>
-                            <input type="text" class="form-control" id="teamName" name="teamName" placeholder="Team Name" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="teamName" name="teamName"   maxlength="50" placeholder="Team Name" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                     </form>
@@ -87,7 +87,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Team Name</p>
                             </label>
-                            <input type="text" class="form-control" id="editNameTeam" name="editNameTeam" placeholder="Name Team" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editNameTeam" name="editNameTeam" placeholder="Name Team"   maxlength="50" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                     </form>

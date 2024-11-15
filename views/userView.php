@@ -62,7 +62,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name User" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name User"  maxlength="50" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -70,7 +70,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Example Email: 123@email.com"  maxlength="100" onkeypress="validation(event);" />
                             <div id="message2"></div>
                         </div>
                         <br>
@@ -78,7 +78,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
-                            <input type="password" class="form-control" id="userPass" name="userPass" placeholder="Password"/>
+                            <input type="password" class="form-control" id="userPass" name="userPass"  maxlength="255" placeholder="Password"/>
                             <i class="bi bi-eye-slash toggle-password"></i>
                             <div id="message3"></div>
                         </div>
@@ -120,7 +120,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name User" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name User" maxlength="50" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -128,7 +128,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Example Email: 123@email.com" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Example Email: 123@email.com"  maxlength="100" onkeypress="validation(event);" />
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
@@ -136,7 +136,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Password</p>
                             </label>
-                            <input type="password" class="form-control" id="editPass" name="editPass" placeholder="Password" />
+                            <input type="password" class="form-control" id="editPass" name="editPass"  maxlength="255" placeholder="Password" />
                             <i class="bi bi-eye-slash toggle-password2"></i>
                             <div id="messageEdit3"></div>
                         </div>

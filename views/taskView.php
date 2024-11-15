@@ -80,7 +80,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5" onkeypress="validation(event);"></textarea>
+                            <textarea class="form-control" id="description" name="description" placeholder="Description"  maxlength="65535" rows="5" onkeypress="validation(event);"></textarea>
                             <div id="message1"></div>
                         </div>
                         <br>

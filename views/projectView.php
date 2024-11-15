@@ -61,7 +61,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project"  maxlength="50" onkeypress="validation(event);" />
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -69,7 +69,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="projectDescription" name="projectDescription"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="projectDescription" name="projectDescription"  placeholder="Description Project"  maxlength="65535" rows="5" onkeypress="validation(event);"></textarea> 
                             <div id="message2"></div>
                         </div>                      
                         <br>
@@ -108,7 +108,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="editNameProject" name="editNameProject" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editNameProject" name="editNameProject"  maxlength="50" placeholder="Name Project" onkeypress="validation(event);" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -116,7 +116,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit"  placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit"   maxlength="65535" placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
                             <div id="messageEdit2"></div>
                         </div>                      
                         <br>

@@ -24,7 +24,7 @@ class ProjectController
         try {
             $project = new ProjectModel();
             
-            $patternDescription = '/^[a-zA-Z0-9\s\W]+$/';
+            $patternDescription = '/^[a-zA-Z0-9\s\W]{4,}$/';
             $patternProject = '/^[a-zA-Z0-9\s\W]{4,}$/';
 
             if (!preg_match($patternProject, $projectName)) 
@@ -63,7 +63,7 @@ class ProjectController
 
         try {
             $project = new ProjectModel();
-            $patternDescription = '/^[a-zA-Z0-9\s\W]+$/';
+            $patternDescription = '/^[a-zA-Z0-9\s\W]{4,}$/';
             $patternProject = '/^[a-zA-Z0-9\s\W]{4,}$/';
 
             if (!preg_match($patternProject, $projectName)) 

@@ -18,16 +18,20 @@ function validateData(formData) {
   var message1 = document.getElementById("message1");
   var message2 = document.getElementById("message2");
 
-  var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
+  var descriptionRegex = /^[a-zA-Z0-9\s\W]{4,}$/;
   var dateRegex = /^[0-9-]{1,10}$/;
 
   if (descriptionRegex.test(description)) 
   {
-    message1.textContent = "Description is valid";
-    message1.style.color = "green";
+    message1.textContent = " ";
+    // message1.style.color = "green";
+    $('#description').css({
+      'border': '3px solid green'
+  });
   } 
   else 
   {
+    removeBorder('description');
     message1.textContent =
       "The description must contain at least 4 characters.";
     message1.style.color = "red";
@@ -66,11 +70,15 @@ function validateDataedit(dataEdit) {
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"    
       if (descriptionRegex.test(description)) 
       {
-        message1.textContent = "Description is valid";
-        message1.style.color = "green";
+        message1.textContent = " ";
+        //message1.style.color = "green";
+        $('#descriptionEdit').css({
+          'border': '3px solid green'
+      });
       } 
       else 
       {
+        removeBorder('descriptionEdit');
         message1.textContent =
           "The description must contain at least 4 characters.";
         message1.style.color = "red";
@@ -91,6 +99,11 @@ function validateDataedit(dataEdit) {
         }    
 
   return true;
+}
+
+  //Remueve el border
+  function removeBorder(elementId) {
+    $('#' + elementId).css('border', '');
 }
 
 
@@ -340,6 +353,7 @@ $(document).ready(function () {
           //reponse comprueba el el https_response_ en el envio
           if (response.status === "errorDescription") 
           {
+            removeBorder('description');
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
@@ -366,6 +380,7 @@ $(document).ready(function () {
             $("#createTask")[0].reset();
             $("#id").val("");
             $("#createTaskModal").modal("hide");
+            removeBorder('description');
             clearValidationMessages();
             loadTable();
           }
@@ -391,7 +406,7 @@ $(document).ready(function () {
               { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "message1" },
               { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "message1" },
           ];
-  
+          removeBorder('description');  
           var matched = false;
           for (var i = 0; i < errorMapping.length; i++) {
               var errorPattern = errorMapping[i].pattern;
@@ -469,6 +484,7 @@ $("#taskTable tbody").on("click", "tr", function () {
           //reponse comprueba el el https_response_ en el envio
             if (response.status === "errorEditDescription") 
             {
+              removeBorder('descriptionEdit');
               //selecciono el id mensaje y luego cambio su valor por el texto del json
               var message = $("#messageEdit1").text(response.message).show();
               //con esta propiedad cambio su color a rojo
@@ -494,6 +510,7 @@ $("#taskTable tbody").on("click", "tr", function () {
               alert("Se ha Modificado un Projecto");
               $("#editTask")[0].reset();
               $("#editTaskModal").modal("hide");
+              removeBorder('descriptionEdit');
               clearValidationMessages();
               loadTable();
             }
@@ -519,7 +536,7 @@ $("#taskTable tbody").on("click", "tr", function () {
               { pattern: /Duplicate entry '[^']+' for key '[^']+'/, message: "Duplicate entry error.", field: "messageEdit1" },
               { pattern: /Unknown column '[^']+' in 'field list'/, message: "Unknown column in the field list.", field: "messageEdit1" },
           ];
-  
+          removeBorder('descriptionEdit');
           var matched = false;
           for (var i = 0; i < errorMapping.length; i++) {
               var errorPattern = errorMapping[i].pattern;
