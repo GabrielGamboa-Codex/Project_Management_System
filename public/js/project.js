@@ -272,19 +272,21 @@ $(document).ready(function () {
             loadTable();
           }
         },
-        //en caso de que la respuesta sea un error
-          error: function (jqXHR, textStatus, errorThrown) 
-          {
-             // Manejo de errores de red o del servidor console.error
-             ("Error: ", textStatus, errorThrown); 
-             var errorMessage = "An unexpected error occurred: " + textStatus; 
-             if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
-              { 
-                errorMessage = jqXHR.responseJSON.message; 
+
+
+                //en caso de que la respuesta sea un error
+                error: function (jqXHR, textStatus, errorThrown) 
+                {
+                   // Manejo de errores de red o del servidor console.error
+                   ("Error: ", textStatus, errorThrown); 
+                   var errorMessage = "An unexpected error occurred: " + textStatus; 
+                   if (jqXHR.responseJSON && jqXHR.responseJSON.message) 
+                    { 
+                      errorMessage = jqXHR.responseJSON.message; 
+                    } 
+                    var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
               } 
-              var message = $("#message2").text(errorMessage).show(); message.css("color", "red");
-        } 
-      }); 
+            }); 
     });
 
 
@@ -358,6 +360,7 @@ $(document).ready(function () {
               loadTable();
             }
         },
+
         //en caso de que la respuesta sea un error
         error: function (jqXHR, textStatus, errorThrown) 
         {
