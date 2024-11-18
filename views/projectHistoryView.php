@@ -18,7 +18,15 @@
                                 <th>id</th>
                                 <th>id Project</th>
                                 <th>Project Name</th>
-                                <th>Action</th>
+                                <th> 
+                                    <select id="actionFilter">
+                                        <option value="">All Action</option> 
+                                        <option value="Create">Create</option> 
+                                        <option value="Edit">Edit</option> 
+                                        <option value="Delete">Delete</option> 
+                                    </select>
+                                </th>
+                                </th>
                                 <th>id User</th>
                                 <th>User</th>
                                 <th>Timestamp</th>

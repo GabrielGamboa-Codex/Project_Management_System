@@ -306,8 +306,28 @@ $(document).ready(function () {
         { data: "created_at" },
         { data: "updated_at" },
         { data: "status" },
-      ]
-    });
+      ],
+       initComplete: function () { 
+        var search = this.api(); 
+        // Función para aplicar filtros 
+        function applyFilter() 
+        { 
+          //Extrae los valores de los select para poder filtrarlos
+          var priorityVal = $.fn.dataTable.util.escapeRegex($("#priorityFilter").val()); 
+          var statusVal = $.fn.dataTable.util.escapeRegex($("#statusFilter").val()); 
+          // Aplica los filtros a las respectivas columnas 
+          search.column(6).search(priorityVal ? "^" + priorityVal + "$" : "", true, false);
+          search.column(5).search(statusVal ? "^" + actionVal + "$" : "", true, false); 
+          
+          // Redibuja la tabla con los nuevos filtros 
+          search.draw(); 
+        } 
+        // Añadir eventos de cambio a los selectores 
+        $("#priorityFilter, #statusFilter").on("change", applyFilter); 
+        // Inicializar filtros
+    }
+  });  
+    
     
   
 
