@@ -316,8 +316,8 @@ $(document).ready(function () {
           var priorityVal = $.fn.dataTable.util.escapeRegex($("#priorityFilter").val()); 
           var statusVal = $.fn.dataTable.util.escapeRegex($("#statusFilter").val()); 
           // Aplica los filtros a las respectivas columnas 
-          search.column(6).search(priorityVal ? "^" + priorityVal + "$" : "", true, false);
-          search.column(5).search(statusVal ? "^" + actionVal + "$" : "", true, false); 
+          search.column(5).search(priorityVal ? "^" + priorityVal + "$" : "", true, false);
+          search.column(6).search(statusVal ? "^" + statusVal + "$" : "", true, false); 
           
           // Redibuja la tabla con los nuevos filtros 
           search.draw(); 
