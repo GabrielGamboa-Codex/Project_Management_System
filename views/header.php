@@ -54,6 +54,9 @@ exit();
           <li class="nav-item">
             <a class="nav-link" href="index.php?action=taskView">Tasks</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?action=projectHistoryView">History</a>
+          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">

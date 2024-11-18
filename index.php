@@ -4,6 +4,7 @@ include "./controllers/loginController.php";
 include "./controllers/projectController.php";
 include "./controllers/teamController.php";
 include "./controllers/taskController.php";
+include "./controllers/projectHistoryController.php";
 
 // Registra una función de autoload. 
 
@@ -28,6 +29,7 @@ $login = new loginController;
 $project = new ProjectController;
 $team = new TeamController;
 $task = new TaskController;
+$history = new ProjectHistoryController;
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'loginView';
@@ -52,9 +54,11 @@ switch ($action) {
     case 'taskView':
         $task ->indexTask();
         break;
+    case 'projectHistoryView':
+        $history ->indexProjectHistory();
+        break;
     default:
         $login->indexLogin();
         break;
         // Agrega más rutas aquí
-
 }
