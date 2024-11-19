@@ -46,8 +46,7 @@ class ProjectHistoryController
             }
 
             if (!empty($status)) {
-                $statusArray = explode(',', $status);
-                $query->orWhereIn('project_history.action', $statusArray);
+                $query->orWhere('project_history.action', $status);
             }
 
             if (!empty($date)) {
