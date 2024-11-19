@@ -9,6 +9,25 @@ class ProjectModel extends Model
 
     protected $table = 'projects';
 
+    public function printProject()
+    {
+        $projectArr = array();
+        $projects = ProjectModel::all();
+
+        foreach ($projects as $project) 
+        {
+            // Verificar si el status es true
+            if ($project->status == true) {
+                $projectArr[] = array(
+                    "id" => $project->id,
+                    "name" => $project->name,
+                );
+            }
+        }
+        //indexas el arreglo con el string data
+        echo json_encode($projectArr);
+    }
+
     public function printOptionsProject()
     {
         $projectArr = array();

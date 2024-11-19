@@ -9,6 +9,17 @@ function validation(event)
   return true;
 }
 
+function validationPicker(event) 
+{
+  var char = String.fromCharCode(event.which);
+  if (!/^[0-9\s-]+$/.test(char)) 
+  {
+    event.preventDefault();
+    return false;
+  }
+  return true;
+}
+
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {

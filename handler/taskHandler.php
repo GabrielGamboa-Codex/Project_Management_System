@@ -55,5 +55,4 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteTask')
     $controller->deleteTask($id);
 }
 
-
 ?>
