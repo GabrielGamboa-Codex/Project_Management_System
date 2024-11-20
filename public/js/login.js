@@ -220,6 +220,7 @@ $(document).ready(function () {
               countdownElement.innerHTML = "Time expired Try Again";
               clearInterval(countdownInterval);
             }
+            
           }
           // Actualizar la cuenta regresiva cada segundo
           var countdownInterval = setInterval(updateCountdown, 1000);
