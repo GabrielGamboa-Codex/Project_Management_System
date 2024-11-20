@@ -118,10 +118,10 @@ class ProjectModel extends Model
             
              $date = date('Y-m-d H:i:s');
              $action = "Create";
-            // Obtener el ID del proyecto guardado ;
-             $projectId = $project->id;
             //Guardado en la tabla project
              $project = new ProjectModel;
+            // Obtener el ID del proyecto guardado 
+             $projectId = $project->id;
              $created = $date;
              $updated = $date;
              $project->name  = $projectName;
