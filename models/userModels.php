@@ -11,25 +11,6 @@ class UserModel extends Model
     //Define los atributos asignados de manera masiva
     protected $fillable = ['username', 'email', 'password', 'team_id', 'created_at', 'updated_at', 'status'];
 
-    public function printUser()
-    {
-        $userArr = array();
-        $users = UserModel::all();
-
-        foreach ($users as $user) 
-        {
-            // Verificar si el status es true
-            if ($user->status == true) {
-                $userArr[] = array(
-                    "id" => $user->id,
-                    "username" => $user->username,
-                );
-            }
-        }
-        //indexas el arreglo con el string data
-        echo json_encode($userArr);
-    }
-
     public function printTable()
     {
         try {

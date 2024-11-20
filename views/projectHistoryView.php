@@ -24,15 +24,7 @@
                                 <th>id</th>
                                 <th>id Project</th>
                                 <th>Project Name</th>
-                                <th> 
-                                    <select id="actionFilter">
-                                        <option value="">All Action</option> 
-                                        <option value="Create">Create</option> 
-                                        <option value="Edit">Edit</option> 
-                                        <option value="Delete">Delete</option> 
-                                    </select>
-                                </th>
-                                </th>
+                                <th>Actions</th>
                                 <th>id User</th>
                                 <th>User</th>
                                 <th>Timestamp</th>
@@ -72,6 +64,7 @@
                                 <p class="fw-bold">Select Project Name</p>
                             </label>
                             <select class="form-select" id="selectProject" aria-label="selectProject">
+                                <option value="">Select</option>
                             </select>
                         </div>
                         <br>
@@ -80,9 +73,10 @@
                                 <p class="fw-bold">Select Action</p>
                             </label>
                             <select class="form-select" id="selectAction" aria-label="selectAction">
-                                        <option value="Create">Create</option> 
-                                        <option value="Edit">Edit</option> 
-                                        <option value="Delete">Delete</option> 
+                                    <option value="">Select</option>
+                                    <option value="Create">Create</option> 
+                                    <option value="Edit">Edit</option> 
+                                    <option value="Delete">Delete</option> 
                             </select>
                         </div>
                         <br>
@@ -91,6 +85,7 @@
                                 <p class="fw-bold">Select User</p>
                             </label>
                             <select class="form-select" id="selectUser" aria-label="selectUser">
+                                <option value="">Select</option>
                             </select>
                         </div>
                         <br>
@@ -100,9 +95,7 @@
                                 <p class="fw-bold">Select Date</p>
                             </label>
                             <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
-                            <div id="message1"></div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">

@@ -148,6 +148,26 @@ function moveIcon2() {
 
 //Ajax
 $(document).ready(function () {
+
+// Detectar la tecla Enter en el input de código 
+$("#loginPass").on("keypress", function (e) 
+{ 
+  if (e.which == 13) 
+  {
+   // 13 es el código de la tecla Enter 
+   $("#Btnlogin").click(); 
+  }
+}); 
+  
+// Detectar la tecla Enter en el input de código 
+$("#codeValidate").on("keypress", function (e) 
+{ 
+  if (e.which == 13) 
+  {
+   // 13 es el código de la tecla Enter 
+   $("#Btnlogin").click(); 
+  }
+}); 
   //Login
   $("#Btnlogin").click(function (e) 
   {

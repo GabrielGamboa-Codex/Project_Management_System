@@ -12,30 +12,10 @@ class ProjectModel extends Model
     public function printProject()
     {
         $projectArr = array();
-        $projects = ProjectModel::all();
-
-        foreach ($projects as $project) 
-        {
-            // Verificar si el status es true
-            if ($project->status == true) {
-                $projectArr[] = array(
-                    "id" => $project->id,
-                    "name" => $project->name,
-                );
-            }
-        }
-        //indexas el arreglo con el string data
-        echo json_encode($projectArr);
-    }
-
-    public function printOptionsProject()
-    {
-        $projectArr = array();
     
-        // Obtener todos los proyectos con sus respectivos usuarios si el proyecto no tiene un usuario
-        //asociado no lo imprime el proyecto
-        $projects = ProjectModel::join('teams', 'projects.team_id', '=', 'teams.id')
-            ->join('users', 'users.team_id', '=', 'teams.id')
+        // Obtener todos los proyectos con sus respectivos usuarios, asegurando incluir proyectos sin usuarios
+        $projects = ProjectModel::leftJoin('teams', 'projects.team_id', '=', 'teams.id')
+            ->leftJoin('users', 'users.team_id', '=', 'teams.id')
             ->select(
                 'projects.id as projectId',
                 'projects.name as projectName',
@@ -45,8 +25,6 @@ class ProjectModel extends Model
                 'users.status as userStatus',
                 'teams.id as teamId'
             )
-            ->where('projects.status', true)
-            ->where('users.status', true)
             ->get();
     
         // Agrupar usuarios por proyecto
@@ -60,15 +38,82 @@ class ProjectModel extends Model
             }
     
             // Agregar usuarios al proyecto correspondiente
-            $projectArr[$project->projectId]['users'][] = array(
-                "id" => $project->userId,
-                "username" => $project->userName
-            );
+            if (!empty($project->userId)) {
+                $projectArr[$project->projectId]['users'][] = array(
+                    "id" => $project->userId,
+                    "username" => $project->userName
+                );
+            }
+        }
+    
+        // Añadir "Sin usuarios asignados" a proyectos sin usuarios
+        foreach ($projectArr as &$project) {
+            if (empty($project['users'])) {
+                $project['users'][] = array(
+                    "id" => "",
+                    "username" => "There is no User for that Project"
+                );
+            }
         }
     
         // Convertir el arreglo a JSON y mostrarlo
         echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
     }
+    
+
+    public function printOptionsProject()
+    {
+        $projectArr = array();
+    
+        // Obtener todos los proyectos con sus respectivos usuarios, asegurando incluir proyectos sin usuarios
+        $projects = ProjectModel::leftJoin('teams', 'projects.team_id', '=', 'teams.id')
+            ->leftJoin('users', 'users.team_id', '=', 'teams.id')
+            ->select(
+                'projects.id as projectId',
+                'projects.name as projectName',
+                'projects.status as projectStatus',
+                'users.id as userId',
+                'users.username as userName',
+                'users.status as userStatus',
+                'teams.id as teamId'
+            )
+            ->where('projects.status', true)
+            ->get();
+    
+        // Agrupar usuarios por proyecto
+        foreach ($projects as $project) {
+            if (!isset($projectArr[$project->projectId])) {
+                $projectArr[$project->projectId] = array(
+                    "id" => $project->projectId,
+                    "name" => $project->projectName,
+                    "users" => array()
+                );
+            }
+    
+            // Agregar usuarios al proyecto correspondiente
+            if (!empty($project->userId) && $project->userStatus == true) {
+                $projectArr[$project->projectId]['users'][] = array(
+                    "id" => $project->userId,
+                    "username" => $project->userName
+                );
+            }
+        }
+    
+        // Añadir "Sin usuarios asignados" a proyectos sin usuarios
+        foreach ($projectArr as &$project) {
+            if (empty($project['users'])) {
+                $project['users'][] = array(
+                    "id" => "",
+                    "username" => "There is no User for that Project"
+                );
+            }
+        }
+    
+        // Convertir el arreglo a JSON y mostrarlo
+        echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
+    }
+    
+     
     
 
 
@@ -120,8 +165,6 @@ class ProjectModel extends Model
              $action = "Create";
             //Guardado en la tabla project
              $project = new ProjectModel;
-            // Obtener el ID del proyecto guardado 
-             $projectId = $project->id;
              $created = $date;
              $updated = $date;
              $project->name  = $projectName;
@@ -131,7 +174,8 @@ class ProjectModel extends Model
              $project->updated_at = $updated;
              $project->status = true;
              $project->save();
-
+             // Obtener el ID del proyecto guardado 
+             $projectId = $project->id;
              //Guarda en project History las acciones hechas
              $projectHistory = new ProjectHistoryModel;
              $projectHistory->saveHistorial($projectId, $action);

@@ -38,19 +38,19 @@ class ProjectHistoryController
 
             // Usar 'orWhere' para buscar coincidencias parciales en cada campo
             if (!empty($projectId)) {
-                $query->orWhere('projects.id', 'LIKE', '%' . $projectId . '%');
+                $query->Where('projects.id', 'LIKE', '%' . $projectId . '%');
             }
 
             if (!empty($userId)) {
-                $query->orWhere('users.id', 'LIKE', '%' . $userId . '%');
+                $query->Where('users.id', 'LIKE', '%' . $userId . '%');
             }
 
             if (!empty($status)) {
-                $query->orWhere('project_history.action', $status);
+                $query->Where('project_history.action', $status);
             }
 
             if (!empty($date)) {
-                $query->orWhereDate('project_history.timestamp', $date);
+                $query->WhereDate('project_history.timestamp', $date);
             }
 
             $results = $query->get();

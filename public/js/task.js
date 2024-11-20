@@ -318,25 +318,6 @@ $(document).ready(function () {
         { data: "updated_at" },
         { data: "status" },
       ],
-       initComplete: function () { 
-        var search = this.api(); 
-        // Función para aplicar filtros 
-        function applyFilter() 
-        { 
-          //Extrae los valores de los select para poder filtrarlos
-          var priorityVal = $.fn.dataTable.util.escapeRegex($("#priorityFilter").val()); 
-          var statusVal = $.fn.dataTable.util.escapeRegex($("#statusFilter").val()); 
-          // Aplica los filtros a las respectivas columnas 
-          search.column(5).search(priorityVal ? "^" + priorityVal + "$" : "", true, false);
-          search.column(6).search(statusVal ? "^" + statusVal + "$" : "", true, false); 
-          
-          // Redibuja la tabla con los nuevos filtros 
-          search.draw(); 
-        } 
-        // Añadir eventos de cambio a los selectores 
-        $("#priorityFilter, #statusFilter").on("change", applyFilter); 
-        // Inicializar filtros
-    }
   });  
     
     
@@ -396,7 +377,14 @@ $(document).ready(function () {
               var message = $("#message2").text(response.message).show();
               //con esta propiedad cambio su color a rojo
               message.css("color", "red");
-            }  
+            }
+          else if (response.status === "errorUser") 
+            {
+                //selecciono el id mensaje y luego cambio su valor por el texto del json
+                var message = $("#message3").text(response.message).show();
+                //con esta propiedad cambio su color a rojo
+                message.css("color", "red");
+            }   
           else if (response.status === "error") 
           {
             $("#createTask")[0].reset();
@@ -534,7 +522,14 @@ $("#taskTable tbody").on("click", "tr", function () {
               $("#editTaskModal").modal("hide");
               clearValidationMessages();
               $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
-            } 
+            }
+            else if (response.status === "errorUser") 
+            {
+                  //selecciono el id mensaje y luego cambio su valor por el texto del json
+                  var message = $("#messageEdit3").text(response.message).show();
+                  //con esta propiedad cambio su color a rojo
+                  message.css("color", "red");
+            }   
             else if (response.status === "success") 
             {
               //si funciona entonces procede a guardar el codigo

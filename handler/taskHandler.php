@@ -20,6 +20,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'printTable')
 //llama al controlador para  crear un Tarea
 if (isset($_POST['action']) && $_POST['action'] == 'createTask') 
 {
+    
     $projectId = $_POST['projectId'];
     $description = $_POST['description'];
     $dueDate = $_POST['date'];

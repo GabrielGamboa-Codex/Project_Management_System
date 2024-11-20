@@ -24,21 +24,8 @@
                                 <th>Project ID</th>
                                 <th>Description</th>
                                 <th>Due Date</th>
-                                <th>
-                                    <select id="priorityFilter"> 
-                                        <option value="">All Priority</option> 
-                                        <option value="High">High</option> 
-                                        <option value="Medium">Medium</option> 
-                                        <option value="Low">Low</option> 
-                                    </select> 
-                                </th> 
-                                <th> 
-                                    <select id="statusFilter"> 
-                                        <option value="">All Status</option> 
-                                        <option value="Completed">Completed</option> 
-                                        <option value="Pending">Pending</option>
-                                    </select>
-                                </th>
+                                <th>Priority</th> 
+                                <th>Status</th>
                                 <th>Assigned User ID</th>
                                 <th>Assigned User</th>
                             </tr>
@@ -132,6 +119,7 @@
                             </label>
                             <select class="form-select" id="assignerUser" aria-label="selectProject">
                             </select>
+                            <div id="message3"></div>
                         </div>
                         <br>
                     </form>
@@ -210,6 +198,7 @@
                             </label>
                             <select class="form-select" id="assignerUserEdit" aria-label="selectUser">
                             </select>
+                            <div id="messageEdit3"></div>
                         </div>
                     </form>
                 </div>

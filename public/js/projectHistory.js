@@ -9,29 +9,6 @@ function validationPicker(event)
   return true;
 }
 
-// Verificar que el campo no esté vacío y contenga letras
-function validateData(formData) {
-  var date = formData.date;
-  //Llama a los div para que carguen los mensajes si hay algun error
-  var message1 = document.getElementById("message1");
-
-  var dateRegex = /^[0-9-]{1,10}$/;
-
-  if (dateRegex.test(date)) 
-    {
-      message1.textContent = "Date is valid";
-      message1.style.color = "green";
-    } 
-    else 
-    {
-      message1.textContent =
-        "The Date is empty or the format entered is incorrect.";
-      message1.style.color = "red";
-      return false;
-    }
-
-  return true;
-}
 
 // Función para limpiar los mensajes de validación
 function clearValidationMessages() {
@@ -52,34 +29,41 @@ function clearValidationMessages() {
 
 $(document).ready(function () {
   // Cargar el select de proyectos
+  var projectData = []; // Variable para almacenar los datos de proyectos
+  
+  // Cargar los proyectos a seleccionar
   $.ajax({
     url: "handler/projectHistoryHandler.php",
     method: "POST",
     dataType: "json",
-    data: { action: "printProject" },
+    data: { action: "printOptionsProject" },
     success: function (data) {
-      data.forEach(function (item) {
-        $("#selectProject").append(
-          `<option value="${item.id}">${item.name}</option>`
-        );
+      projectData = data; // Asignar los datos recibidos a la variable projectData
+
+      // Agregar opciones de proyectos al select de proyectos
+      data.forEach(function (project) {
+        var projectOption = `<option value="${project.id}">${project.name}</option>`;
+        $("#selectProject").append(projectOption);
       });
     },
   });
 
-  // Cargar el select de usuarios
-  $.ajax({
-    url: "handler/projectHistoryHandler.php",
-    method: "POST",
-    dataType: "json",
-    data: { action: "printUser" },
-    success: function (data) {
-      data.forEach(function (item) {
-        $("#selectUser").append(
-          `<option value="${item.id}">${item.username}</option>`
-        );
+  // Detectar cambio en la selección de proyecto para cargar usuarios
+  $("#selectProject").change(function () {
+    var projectId = $(this).val();
+    var selectedProject = projectData.find(project => project.id == projectId); // Usar projectData en lugar de data
+    var userSelect = $("#selectUser");
+    userSelect.empty(); // Limpiar la lista de usuarios
+
+    if (selectedProject) {
+      selectedProject.users.forEach(function (user) {
+        var userOption = `<option value="${user.id}">${user.username}</option>`;
+        userSelect.append(userOption);
       });
-    },
+    }
   });
+
+
 
   // Configuración de Date Picker
   jQuery("#datepicker").datepicker({
@@ -110,32 +94,6 @@ $(document).ready(function () {
       { data: "userName" },
       { data: "timestamp" },
     ],
-    //initComplete hace algo por defecto cuando la tabla cargue
-    initComplete: function () {
-      //instancia la api para ejecutar los metodos en el resto del codigo
-      var search = this.api();
-
-      // Recorre cada columna para hacer la búsqueda
-      search.columns().every(function () {
-        var column = this;
-
-        // Verifica que el select tenga algún valor en esa columna
-        if ($(column.header()).find("select").length > 0) {
-          // Si tiene un valor, se activa un evento change que es para cambiar dependiendo del valor en el select
-          $("select", column.header()).on("change", function () {
-            // escapeRegex es una función de dataTable que sirve para ignorar cualquier caracter especial en la búsqueda
-            // fn.dataTable es la forma en que se accede a las funcionalidades y utilidades del plugin DataTables.
-            // util nombre del acceso para entrar en las utilidades
-            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-            // Val si hay un valor va a filtrarlo en base a eso y con draw redibuja la tabla. Si no hay nada, la vuelve a dejar como
-            // originalmente estaba
-            // true significa que la búsqueda es un patrón irregular
-            // false signficia que no debe ser sensible a mayúsculas y minúsculas
-            column.search(val ? "^" + val + "$" : "", true, false).draw();
-          });
-        }
-      });
-    }
   });
 
   // Evento de búsqueda
@@ -150,11 +108,6 @@ $(document).ready(function () {
       action: "search",
     };
 
-          //Validar campos vacíos y contenido adecuado
-          if (!validateData(formData)) {
-            return false;
-          }
-
     // Enviar la solicitud de búsqueda por separado
     $.ajax({
       url: 'handler/projectHistoryHandler.php',
@@ -166,9 +119,9 @@ $(document).ready(function () {
         {
           //limpia la tabla con clear, luego selecciona con rows las columnas y dibuja el la data del json con la propiedad draw()
           projectHistoryTable.clear().rows.add(json.data).draw();
+          console.log(formData);
           $("#filterDataModal").modal("hide");
           $("#searchData")[0].reset();
-          clearValidationMessages();
         } 
         else if (response.status === "error") 
         {
@@ -178,8 +131,10 @@ $(document).ready(function () {
             $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
          } 
       },
-      error: function (xhr, status, error) {
-        console.error("Error: ", error);
+      error: function (xhr, status, error) 
+      { 
+        console.error("Error en la solicitud AJAX:", error); 
+        console.error("Respuesta del servidor:", xhr.responseText); 
       }
     });
   });

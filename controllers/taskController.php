@@ -42,6 +42,10 @@ class TaskController
                         
                     }
                 }
+                elseif(empty($userId))
+                {
+                        echo json_encode(['status' => 'errorUser', 'message' => 'You cannot register a task without User for that Project.']);       
+                }
                 else
                 {
                         $task->createTask($projectId, $description, $dueDate, $priority, $completed, $userId);
@@ -83,6 +87,10 @@ class TaskController
                         echo json_encode(['status' => 'errorEditDate', 'message' => 'The Date is empty or the format entered is incorrect.']);
                         
                     }
+                }
+                elseif(empty($userId))
+                {
+                        echo json_encode(['status' => 'errorUser', 'message' => 'You cannot register a task without User for that Project.']);       
                 }
                 else
                 {   

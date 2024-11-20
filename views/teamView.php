@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success" id="registerTeam"><i class="bi bi-person-add"></i> Register</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                     <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editTeamButton"><i class="bi bi-pencil-square"></i> Edit Team</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete Team</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> ><i class="bi bi-x"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
         </div>
