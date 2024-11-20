@@ -23,8 +23,8 @@ class CreateUsersTable extends AbstractMigration
         $data = [
             [
                 'username' => 'Master',
-                'password' => password_hash('contrasena', PASSWORD_DEFAULT),
-                'email' => 'correo@example.com',
+                'password' => password_hash('Contrasena123**', PASSWORD_DEFAULT),
+                'email' => 'foxygamboafnaf2003@gmail.com',
                 'team_id' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),

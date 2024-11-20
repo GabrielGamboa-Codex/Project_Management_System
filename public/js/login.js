@@ -86,7 +86,7 @@ function validateData(formData) {
   else 
   {
     message2.textContent =
-      "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
+      "The password is invalid.";
     message2.style.color = "red";
     moveIcon2();
     return false;
