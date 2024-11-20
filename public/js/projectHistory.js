@@ -23,9 +23,7 @@ $(document).ready(function () {
       { data: "userId" },
       { data: "userName" },
       { data: "timestamp" },
-    ],
-    order: [[6, "desc"]], // Ordenar por la columna de timestamp de forma descendente por defecto
-    //initComplete 
+    ], 
     initComplete: function () {
       //instancia la api para ejecutar los metodos en el resto del codigo
       var search = this.api();

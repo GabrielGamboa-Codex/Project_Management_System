@@ -51,5 +51,19 @@ class ProjectHistoryModel extends Model
         }
         
     }
+
+    public function saveHistorial($project_id, $action)
+    {
+        $date = date('Y-m-d H:i:s');
+        session_start();
+        //Guardamos la accion en la tabla project_history el registro
+        $userId = $_SESSION['user_id'];
+        $projectHistory = new ProjectHistoryModel();
+        $projectHistory->project_id = $project_id;
+        $projectHistory->action = $action;
+        $projectHistory->user_id = $userId;
+         $projectHistory->timestamp = $date;
+        $projectHistory->save();
+    }
 }
     
