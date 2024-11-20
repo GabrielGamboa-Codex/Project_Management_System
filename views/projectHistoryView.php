@@ -90,14 +90,21 @@
                         </div>
                         <br>
                         <!-- Selecciona de la base de Datos la Informacion -->
-                        <div class="col-6 col-sm-12 col-md-12">
-                            <label for="datepicker">
-                                <p class="fw-bold">Select Date</p>
-                            </label>
-                            <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                        <div class="row"> 
+                            <div class="col-6 col-sm-12 col-md-6"> 
+                                <label for="startDate"> 
+                                    <p class="fw-bold">Select Start Range Date</p> 
+                                </label> 
+                                <input type="text" id="startDate" class="form-control" placeholder="Insert a Start Date" onkeypress="validationPicker(event);"> 
+                            </div> 
+                            <div class="col-6 col-sm-12 col-md-6"> 
+                                <label for="endDate"> 
+                                    <p class="fw-bold">Select Range End Date</p> 
+                                </label> 
+                                <input type="text" id="endDate" class="form-control" placeholder="Insert an End Date" onkeypress="validationPicker(event);"> 
+                            </div> 
                         </div>
-                    </form>
-                </div>
+                        <br>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success" id="search"><i class="bi bi-search"></i> Search</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>

@@ -8,9 +8,10 @@ class ProjectHistoryModel extends Model
 
     protected $table = 'project_history';
 
-    // Deshabilitar timestamps automáticos 
-    public $timestamps = false;
-        
+    // Deshabilitar timestamps automáticos como created_at updated_at
+    public $timestamps = false; 
+    
+       
     public function printTable()
     {
         try {

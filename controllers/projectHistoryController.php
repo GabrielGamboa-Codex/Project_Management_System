@@ -21,7 +21,7 @@ class ProjectHistoryController
         $project->printTable();
     }
 
-    public function search($projectId, $userId, $status, $date)
+    public function search($projectId, $userId, $status, $startDate, $endDate)
     {
         try {
             $query = ProjectHistoryModel::join('projects', 'project_history.project_id', '=', 'projects.id')
@@ -35,46 +35,54 @@ class ProjectHistoryController
                     'users.username as userName',
                     'project_history.timestamp'
                 );
-
-            // Usar 'orWhere' para buscar coincidencias parciales en cada campo
+    
+            // Filtrar por projectId
             if (!empty($projectId)) {
-                $query->Where('projects.id', 'LIKE', '%' . $projectId . '%');
+                $query->where('projects.id', 'LIKE', '%' . $projectId . '%');
             }
-
+    
+            // Filtrar por userId
             if (!empty($userId)) {
-                $query->Where('users.id', 'LIKE', '%' . $userId . '%');
+                $query->where('users.id', 'LIKE', '%' . $userId . '%');
             }
-
+    
+            // Filtrar por status
             if (!empty($status)) {
-                $query->Where('project_history.action', $status);
+                $query->where('project_history.action', $status);
             }
-
-            if (!empty($date)) {
-                $query->WhereDate('project_history.timestamp', $date);
+    
+            // Filtrar por rango de fechas
+            if (!empty($startDate) && !empty($endDate)) {
+                $query->whereBetween('project_history.timestamp', [$startDate, $endDate]);
+            } elseif (!empty($startDate)) {
+                $query->where('project_history.timestamp', '>=', $startDate);
+            } elseif (!empty($endDate)) {
+                $query->where('project_history.timestamp', '<=', $endDate);
             }
-
+            
+            //obtener los resultados
             $results = $query->get();
-
+    
+            //inicializa un arreglo
             $projectHistoryArr = [];
-
+    
             foreach ($results as $history) {
                 $projectHistoryArr[] = array(
                     "id" => $history->id,
                     "projectId" => $history->projectId,
-                    "projectName" =>  $history->projectName,
+                    "projectName" => $history->projectName,
                     "action" => $history->action,
                     "userId" => $history->userId,
                     "userName" => $history->userName,
                     "timestamp" => $history->timestamp,
                 );
             }
-
+    
             echo json_encode(['status' => 'success', 'data' => $projectHistoryArr]);
         } catch (PDOException $e) {
-            //instacio al cliente como procesar la respuesta en este caso un json
             header('Content-Type: application/json'); 
             $error = ['status' => 'error', 'message' => $e->getMessage()]; 
             echo json_encode($error);
         }
     }
-}
+}    

@@ -55,6 +55,7 @@ $(document).ready(function () {
     var userSelect = $("#selectUser");
     userSelect.empty(); // Limpiar la lista de usuarios
 
+    
     if (selectedProject) {
       selectedProject.users.forEach(function (user) {
         var userOption = `<option value="${user.id}">${user.username}</option>`;
@@ -63,16 +64,25 @@ $(document).ready(function () {
     }
   });
 
-
-
-  // Configuración de Date Picker
-  jQuery("#datepicker").datepicker({
-    autoclose: true,
-    minViewMode: 0,
-    format: "yyyy-mm-dd",
-    todayHighlight: true,
-    startDate: "2000-01-01",
-  });
+    // Configuración de Date Picker para fecha de inicio
+    jQuery("#startDate").datepicker({
+      autoclose: true,
+      minViewMode: 0,
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+      startDate: "2000-01-01",
+    });
+  
+    // Configuración de Date Picker para fecha de fin
+    jQuery("#endDate").datepicker({
+      autoclose: true,
+      minViewMode: 0,
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+      startDate: "2000-01-01",
+    });
+ 
+  
 
   // Inicializar DataTable
   var projectHistoryTable = $("#historyTable").DataTable({
@@ -104,7 +114,8 @@ $(document).ready(function () {
       projectId: $("#selectProject").val(),
       userId: $("#selectUser").val(),
       status: $("#selectAction").val(),
-      date: $("#datepicker").val(),
+      dateStart: $("#startDate").val(),
+      dateEnd: $("#endDate").val(),
       action: "search",
     };
 
@@ -119,14 +130,16 @@ $(document).ready(function () {
         {
           //limpia la tabla con clear, luego selecciona con rows las columnas y dibuja el la data del json con la propiedad draw()
           projectHistoryTable.clear().rows.add(json.data).draw();
-          console.log(formData);
+          // Limpiar las opciones excepto la opción "Select"
+          // filtra las opciones exceptuando la primera 
+          $("#selectUser").html('<option value="">Select</option>');
           $("#filterDataModal").modal("hide");
           $("#searchData")[0].reset();
         } 
         else if (response.status === "error") 
         {
-            $("#createTask")[0].reset();
-            $("#createTaskmodal").modal("hide");
+            $("#searchData")[0].reset();
+            $("#filterDataModal").modal("hide");
             clearValidationMessages();
             $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
          } 
@@ -144,7 +157,6 @@ $(document).ready(function () {
   { 
     projectHistoryTable.ajax.reload(); 
   });
-
 
 });
 

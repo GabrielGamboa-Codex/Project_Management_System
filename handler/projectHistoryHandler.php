@@ -1,14 +1,13 @@
 <?php
 require  __DIR__ . '/../controllers/projectHistoryController.php';
-require __DIR__ . '/../models/projectModels.php';
-require __DIR__ . '/../models/userModels.php';
+require_once __DIR__ . '/../models/projectModels.php';
 
 
 //Opciones de los Projecto y usuarios conjutos
 if (isset($_POST['action']) && $_POST['action'] == 'printOptionsProject') 
 {
     $data = new ProjectModel();
-    $data->printProject();
+    $data->printOptions();
 }
 
 
@@ -24,7 +23,7 @@ if  (isset($_POST['action']) && $_POST['action'] == 'printTable')
 if(isset($_POST['action']) && $_POST['action'] == 'search')
 {
     $controller = new ProjectHistoryController();
-    $controller->search($_POST['projectId'], $_POST['userId'], $_POST['status'], $_POST['date']);
+    $controller->search($_POST['projectId'], $_POST['userId'], $_POST['status'], $_POST['dateStart'], $_POST['dateEnd']);
 }
 
 

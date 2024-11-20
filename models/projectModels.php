@@ -9,21 +9,21 @@ class ProjectModel extends Model
 
     protected $table = 'projects';
 
-    public function printProject()
+    public function printOptions()
     {
         $projectArr = array();
     
-        // Obtener todos los proyectos con sus respectivos usuarios, asegurando incluir proyectos sin usuarios
-        $projects = ProjectModel::leftJoin('teams', 'projects.team_id', '=', 'teams.id')
-            ->leftJoin('users', 'users.team_id', '=', 'teams.id')
+        // Obtener todos los proyectos con sus respectivos usuarios desde project_history
+        $projects = ProjectModel::leftJoin('project_history', 'projects.id', '=', 'project_history.project_id')
+            ->leftJoin('users', 'project_history.user_id', '=', 'users.id')
             ->select(
                 'projects.id as projectId',
                 'projects.name as projectName',
                 'projects.status as projectStatus',
                 'users.id as userId',
                 'users.username as userName',
-                'users.status as userStatus',
-                'teams.id as teamId'
+                'project_history.action as userAction',
+                'project_history.timestamp as actionTimestamp'
             )
             ->get();
     
@@ -41,7 +41,7 @@ class ProjectModel extends Model
             if (!empty($project->userId)) {
                 $projectArr[$project->projectId]['users'][] = array(
                     "id" => $project->userId,
-                    "username" => $project->userName
+                    "username" => $project->userName,
                 );
             }
         }
@@ -51,7 +51,7 @@ class ProjectModel extends Model
             if (empty($project['users'])) {
                 $project['users'][] = array(
                     "id" => "",
-                    "username" => "There is no User for that Project"
+                    "username" => "There is no User for that Project",
                 );
             }
         }
@@ -60,6 +60,7 @@ class ProjectModel extends Model
         echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
     }
     
+
 
     public function printOptionsProject()
     {
