@@ -5,7 +5,13 @@
     <br>
     <div id="message"></div>
     <div class="container">
-
+                    <!-- Button Filtrar un Registro-->
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterDataModal">
+        <i class="bi bi-search"></i> Filtrar Registro
+        </button>
+        <button type="button" class="btn btn-primary" id="reloadTable">
+        <i class="bi bi-arrow-clockwise"></i> Resetear Tabla
+        </button>
     </div>
     <br>
     <div class="container">
@@ -44,6 +50,64 @@
                             </tr>
                         </tfoot>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal de Filtrar Registros -->
+    <div class="modal fade" id="filterDataModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="filterDataModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="filterDataModalLabel">Search a Register</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="searchData">
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Select Project Name</p>
+                            </label>
+                            <select class="form-select" id="selectProject" aria-label="selectProject">
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Select Action</p>
+                            </label>
+                            <select class="form-select" id="selectAction" aria-label="selectAction">
+                                        <option value="Create">Create</option> 
+                                        <option value="Edit">Edit</option> 
+                                        <option value="Delete">Delete</option> 
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="nombre" class="form-label">
+                                <p class="fw-bold">Select User</p>
+                            </label>
+                            <select class="form-select" id="selectUser" aria-label="selectUser">
+                            </select>
+                        </div>
+                        <br>
+                        <!-- Selecciona de la base de Datos la Informacion -->
+                        <div class="col-6 col-sm-12 col-md-12">
+                            <label for="datepicker">
+                                <p class="fw-bold">Select Date</p>
+                            </label>
+                            <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                            <div id="message1"></div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="search"><i class="bi bi-search"></i> Search</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
                 </div>
             </div>
         </div>
