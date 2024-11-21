@@ -16,6 +16,7 @@ exit();
   <link rel="stylesheet" href="public/bootstrap-icons/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="public/datatable/datatables.min.css">
   <link rel="stylesheet" href="public/datatable/dataTables.bootstrap5.css">
+  <link rel="stylesheet" href="public/select2/dist/css/select2.min.css">
   <!-- Bootstrap Datepicker CSS --> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css">
   
 </head>

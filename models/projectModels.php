@@ -27,22 +27,29 @@ class ProjectModel extends Model
             )
             ->get();
     
-        // Agrupar usuarios por proyecto
+        // Agrupar usuarios por proyecto sin duplicados
         foreach ($projects as $project) {
             if (!isset($projectArr[$project->projectId])) {
                 $projectArr[$project->projectId] = array(
                     "id" => $project->projectId,
                     "name" => $project->projectName,
-                    "users" => array()
+                    "users" => array(),
+                    "user_ids" => array() // array auxiliar para rastrear usuarios añadidos
                 );
             }
     
-            // Agregar usuarios al proyecto correspondiente
-            if (!empty($project->userId)) {
+            // Agregar usuarios al proyecto correspondiente si no está ya agregado
+            //in_arry es una condicion que asegura que los datos hayan sido agregados en el proyecto al menso 1 vez
+            //y el array user_id se encagarga de que no haya registros duplicados en los usuarios agregados
+            //y estos solo se agregen una vez 
+            if (!empty($project->userId) && !in_array($project->userId, $projectArr[$project->projectId]['user_ids'])) {
                 $projectArr[$project->projectId]['users'][] = array(
                     "id" => $project->userId,
                     "username" => $project->userName,
                 );
+                
+                // Agregar userId al array auxiliar para evitar duplicados
+                $projectArr[$project->projectId]['user_ids'][] = $project->userId;
             }
         }
     
@@ -54,11 +61,14 @@ class ProjectModel extends Model
                     "username" => "There is no User for that Project",
                 );
             }
+            // Remover el array auxiliar antes de convertir a JSON
+            unset($project['user_ids']);
         }
     
         // Convertir el arreglo a JSON y mostrarlo
         echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
     }
+    
     
 
 

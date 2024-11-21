@@ -47,7 +47,6 @@
         </div>
     </div>
 
-    
     <!-- Modal de Filtrar Registros -->
     <div class="modal fade" id="filterDataModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="filterDataModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -63,7 +62,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Project Name</p>
                             </label>
-                            <select class="form-select" id="selectProject" aria-label="selectProject">
+                            <select class="form-select project" id="selectProject" aria-label="selectProject">
                                 <option value="">Select</option>
                             </select>
                         </div>
