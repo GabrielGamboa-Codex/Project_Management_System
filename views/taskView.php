@@ -72,7 +72,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Project</p>
                             </label>
-                            <select class="form-select" id="projectTeam" aria-label="selectProject">
+                            <select class="form-select" id="projectTeam" aria-label="projectTeam">
                             </select>
                         </div>
                         <br>
@@ -96,7 +96,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Priority</p>
                             </label>
-                            <select class="form-select" id="priority" aria-label="selectProject">
+                            <select class="form-select" id="priority" aria-label="priority">
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
@@ -107,7 +107,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Task Status</p>
                             </label>
-                            <select class="form-select" id="taskStatus" aria-label="selectProject">
+                            <select class="form-select" id="taskStatus" aria-label="taskStatus">
                                 <option value="1">Completed</option>
                                 <option value="0">Pending</option>
                             </select>
@@ -117,7 +117,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Assigner User</p>
                             </label>
-                            <select class="form-select" id="assignerUser" aria-label="selectProject">
+                            <select class="form-select" id="assignerUser" aria-label="assignerUser">
                             </select>
                             <div id="message3"></div>
                         </div>
@@ -151,7 +151,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Select Project</p>
                             </label>
-                            <select class="form-select" id="projectTeamEdit" aria-label="selectProject">
+                            <select class="form-select" id="projectTeamEdit" aria-label="projectTeamEdit">
                             </select>
                         </div>
                         <br>
@@ -175,7 +175,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Priority</p>
                             </label>
-                            <select class="form-select" id="priorityEdit" aria-label="selectProject">
+                            <select class="form-select" id="priorityEdit" aria-label="priorityEdit">
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
@@ -186,7 +186,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Task Status</p>
                             </label>
-                            <select class="form-select" id="taskStatusEdit" aria-label="selectProject">
+                            <select class="form-select" id="taskStatusEdit" aria-label="taskStatusEdit">
                                 <option value="1">Completed</option>
                                 <option value="0">Pending</option>
                             </select>

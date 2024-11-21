@@ -23,9 +23,10 @@ function clearValidationMessages() {
 //Metodo Ajax
 
 $(document).ready(function () {
+
   var projectData = []; // Variable para almacenar los datos de proyectos
 
-  // Manejar evento de mostrar modal es un evento que se dispara al abrir la modal
+    // Manejar evento de mostrar modal para cargar la data
   $("#filterDataModal").on("shown.bs.modal", function () {
     $.ajax({
       url: "handler/projectHistoryHandler.php",
@@ -74,6 +75,7 @@ $(document).ready(function () {
       if (selectedProject && selectedProject.users) {
         var userSelect = $("#selectUser");
         userSelect.empty(); // Limpiar la lista de usuarios
+
         selectedProject.users.forEach(function (user) {
           var userOption = `<option value="${user.id}">${user.username}</option>`;
           userSelect.append(userOption);

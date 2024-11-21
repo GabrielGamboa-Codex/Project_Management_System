@@ -1,9 +1,7 @@
 //Validaciones
-function validation(event) 
-{
+function validation(event) {
   var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) 
-  {
+  if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) {
     event.preventDefault();
     return false;
   }
@@ -32,39 +30,30 @@ function validateData(formData) {
   var passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) 
-  {
+  if (nameRegex.test(userName)) {
     message1.textContent = "User is valid";
     message1.style.color = "green";
-  }
-  else 
-  {
+  } else {
     message1.textContent =
       "The Email field must not be empty and must contain the @ and example gmail.com.";
     message1.style.color = "red";
     return false;
   }
 
-  if (emailRegex.test(email)) 
-  {
+  if (emailRegex.test(email)) {
     message2.textContent = "Email is valid";
     message2.style.color = "green";
-  } 
-  else 
-  {
+  } else {
     message2.textContent =
       "The Email field must not be empty and must contain the @ and example .gmail";
     message2.style.color = "red";
     return false;
   }
 
-  if (passRegex.test(pass)) 
-  {
+  if (passRegex.test(pass)) {
     message3.textContent = "Email is valid";
     message3.style.color = "green";
-  } 
-  else 
-  {
+  } else {
     message3.textContent =
       "The password must have at least one capital letter, one number and one special character and must contain at least 8 characters and a maximum of 16 characters.";
     message3.style.color = "red";
@@ -73,7 +62,6 @@ function validateData(formData) {
 
   return true;
 }
-
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateDataedit(dataEdit) {
@@ -87,32 +75,26 @@ function validateDataedit(dataEdit) {
   var message3 = document.getElementById("messageEdit3");
 
   //revisa que el userName tenga algun caracter y como minomo sean 4
-  var nameRegex =  /^[a-zA-Z0-9\s]{4,}$/;
+  var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
 
   //Valida que al menos que un @
   var emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   //el .test valida que se cumpra una cadena de una expresion irregular por ejemplo "/[a-zA-Z]/"
-  if (nameRegex.test(userName)) 
-  {
+  if (nameRegex.test(userName)) {
     message1.textContent = "User is valid";
     message1.style.color = "green";
-  } 
-  else 
-  {
+  } else {
     message1.textContent =
       "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
     message1.style.color = "red";
     return false;
   }
 
-  if (emailRegex.test(email)) 
-  {
+  if (emailRegex.test(email)) {
     message2.textContent = "Email is valid";
     message2.style.color = "green";
-  } 
-  else
-  {
+  } else {
     message2.textContent =
       "The Email field must not be empty and must contain the @ and example .gmail";
     message2.style.color = "red";
@@ -129,47 +111,38 @@ var icon1 = document.querySelector(".toggle-password");
 var icon2 = document.querySelector(".toggle-password2");
 
 //Cuando el Icono haga click hacer
-icon1.addEventListener("click", e => 
-  {
-    if(passCreate.type === "password")
-    {
-      //Cambio el tipo de input
-      passCreate.type = "text";
-      //Remuevo la clase del Icono
-      icon1.classList.remove('bi-eye-slash');
-      //Añado la clase al icono
-      icon1.classList.add('bi-eye');
-    }
-    else
-    {
-      //Cambio el tipo de input
-      passCreate.type = "password";
-      //Remuevo la clase del Icono
-      icon1.classList.remove('bi-eye');
-      //Añado la clase al icono
-      icon1.classList.add('bi-eye-slash');
-    }
-  })
- 
-icon2.addEventListener("click", e => 
-    {
-      if(passEdit.type === "password")
-      {
-        passEdit.type = "text";
-        icon2.classList.remove('bi-eye-slash');
-        icon2.classList.add('bi-eye');
-      }
-      else
-      {
-        passEdit.type = "password";
-        icon2.classList.remove('bi-eye');
-        icon2.classList.add('bi-eye-slash');
-      }
-})
+icon1.addEventListener("click", (e) => {
+  if (passCreate.type === "password") {
+    //Cambio el tipo de input
+    passCreate.type = "text";
+    //Remuevo la clase del Icono
+    icon1.classList.remove("bi-eye-slash");
+    //Añado la clase al icono
+    icon1.classList.add("bi-eye");
+  } else {
+    //Cambio el tipo de input
+    passCreate.type = "password";
+    //Remuevo la clase del Icono
+    icon1.classList.remove("bi-eye");
+    //Añado la clase al icono
+    icon1.classList.add("bi-eye-slash");
+  }
+});
+
+icon2.addEventListener("click", (e) => {
+  if (passEdit.type === "password") {
+    passEdit.type = "text";
+    icon2.classList.remove("bi-eye-slash");
+    icon2.classList.add("bi-eye");
+  } else {
+    passEdit.type = "password";
+    icon2.classList.remove("bi-eye");
+    icon2.classList.add("bi-eye-slash");
+  }
+});
 
 // Función para limpiar los mensajes de validación
-function clearValidationMessages() 
-{
+function clearValidationMessages() {
   var messages = [
     "message1",
     "message2",
@@ -190,21 +163,39 @@ function clearValidationMessages()
 
 //Metodo Ajax
 $(document).ready(function () {
-  //Cargar un select por ajax enviado la data desde la base de datos
-  $.ajax({
-    url: "handler/userHandler.php",
-    method: "POST",
-    dataType: "json",
-    data: { action: "printOptions" },
-    success: function (data) {
-      data.forEach(function (item) {
-    $("#selectTeam").append(
-          `<option value="${item.id}">${item.name}</option>`
-        );
-      });
-    },
+
+  // Manejar evento de mostrar modal para cargar la data
+  $("#createUserModal").on("shown.bs.modal", function () {
+    // Inicializar Select2
+    $("#selectTeam").select2({
+      dropdownParent: $("#createUserModal"),
+    });
+    //se vacia el select
+    $("#selectTeam").empty();
+    //Cargar un select por ajax enviado la data desde la base de datos
+    $.ajax({
+      url: "handler/userHandler.php",
+      method: "POST",
+      dataType: "json",
+      data: { action: "printOptions" },
+      success: function (data) {
+        data.forEach(function (item) {
+          $("#selectTeam").append(
+            `<option value="${item.id}">${item.name}</option>`
+          );
+        });
+      },
+    });
   });
 
+    // Manejar evento de mostrar modal para cargar la data
+  $("#editUserModal").on("shown.bs.modal", function () {
+    // Inicializar Select2
+    $("#teamEdit").select2({
+      dropdownParent: $("#editUserModal"),
+    });
+    //se vacia el select
+    $("#teamEdit").empty();
   $.ajax({
     url: "handler/userHandler.php",
     method: "POST",
@@ -220,6 +211,7 @@ $(document).ready(function () {
       });
     },
   });
+});
 
   var userTable = $("#userTable").DataTable({
     ajax: {
@@ -283,36 +275,31 @@ $(document).ready(function () {
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorUser") 
-          {
+          if (response.status === "errorUser") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
-          else if (response.status === "errorEmail") 
-          {
+          } else if (response.status === "errorEmail") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          }
-          else if(response.status === 'errorPass')
-            {
-              //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#message3").text(response.message).show();
-              //con esta propiedad cambio su color a rojo
-              message.css("color", "red");
-            } 
-          else if (response.status === "error") 
-          {
+          } else if (response.status === "errorPass") {
+            //selecciono el id mensaje y luego cambio su valor por el texto del json
+            var message = $("#message3").text(response.message).show();
+            //con esta propiedad cambio su color a rojo
+            message.css("color", "red");
+          } else if (response.status === "error") {
             $("#createUser")[0].reset();
             $("#createUserModal").modal("hide");
             clearValidationMessages();
-            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
-          } 
-          else if (response.status === "success") 
-          {
+            $("body").html(
+              '<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' +
+                response.message +
+                "</div>"
+            );
+          } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
             alert("Usuario creado con éxito.");
             $("#createUser")[0].reset();
@@ -363,44 +350,37 @@ $(document).ready(function () {
         data: dataEdit,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-          if (response.status === "errorEditUser") 
-          {
+          if (response.status === "errorEditUser") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
-          else if ( response.status === "errorEditEmail") 
-          {
+          } else if (response.status === "errorEditEmail") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit2").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
-          else if(response.status === 'errorEditPass')
-          {
+          } else if (response.status === "errorEditPass") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit3").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          }
-          else if ( response.status === 'successEditPass')
-          {
+          } else if (response.status === "successEditPass") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#messageEdit3").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "green");
-          }
-          else if (response.status  === "errorEdit") 
-          {
+          } else if (response.status === "errorEdit") {
             //si funciona entonces procede a guardar el codigo
             $("#editUser")[0].reset();
             $("#editUserModal").modal("hide");
             clearValidationMessages();
-            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
-          } 
-          else if (response.status === "success") 
-          {
+            $("body").html(
+              '<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' +
+                response.message +
+                "</div>"
+            );
+          } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
             alert("Se ha Actualizado un Registro");
             $("#editUserModal").modal("hide");
@@ -428,14 +408,11 @@ $(document).ready(function () {
         type: "POST",
         data: deleteUser,
         success: function (response) {
-          if (response.status === "errorDelete") 
-          {
+          if (response.status === "errorDelete") {
             var message = response.message;
             alert("Failed to Delete User due to " + message);
             $("#deleteModal").modal("hide");
-          } 
-          else if (response.status === "success") 
-          {
+          } else if (response.status === "success") {
             alert("Se ha Eliminado un Registro");
             $("#deleteModal").modal("hide");
             loadTable();
