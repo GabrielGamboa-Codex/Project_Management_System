@@ -47,4 +47,5 @@ if (isset($_POST['action']) && $_POST['action'] == 'printOptions')
 {
     $data = new TeamModel;
     $teams = $data->printOptions();
+    echo json_encode($teams);
 }

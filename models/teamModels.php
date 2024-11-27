@@ -14,7 +14,7 @@ class TeamModel extends Model
     {
         $teamArr = array();
         $teams = TeamModel::all();
-
+    
         foreach ($teams as $team) 
         {
             // Verificar si el status es true
@@ -25,9 +25,9 @@ class TeamModel extends Model
                 );
             }
         }
-        //indexas el arreglo con el string data
-        echo json_encode($teamArr);
+        return $teamArr; // Retornar el array en lugar de imprimirlo
     }
+    
 
     public function printTable()
     {
