@@ -166,7 +166,7 @@
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
-    <script src="public/js/project.js"></script>
+    <script src="public/js/project.js" type="module"></script>
 </body>
 
 </html>
