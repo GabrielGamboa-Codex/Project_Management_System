@@ -60,7 +60,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'printOptions') {
     $limit = 5; // Número de resultados por página
     $offset = ($page - 1) * $limit;
 
-    // Realizar el slice del array
+    // Realizar el slice del array extra una porcion de ese array para mostrarlo tomando el indice($offset) y cuantos elementos quiero extraer($limit)
     $data = array_slice($teams, $offset, $limit);
 
     echo json_encode($data);

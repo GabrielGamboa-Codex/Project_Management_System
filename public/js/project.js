@@ -1,3 +1,9 @@
+//Importa la funcion del select desde el servidor
+//atravez del archivo select.js
+
+import {initializeSelect} from "./select.js";
+
+
 //Validaciones
 function validation(event) 
 {
@@ -194,76 +200,8 @@ $(document).ready(function () {
     projectTable.ajax.reload();
   }
 
-
-
-
- 
-
-    // Manejar evento de mostrar modal para cargar la data
-    $("#createProjectModal").on("shown.bs.modal", function () {
-        // Inicializar Select2
-        $("#projecTeam").select2({
-            dropdownParent: $("#createProjectModal"),
-            placeholder: "Select an option",
-            ajax: {
-                url: "handler/projectHandler.php",
-                method: "POST",
-                dataType: "json",
-                delay: 250, // Retraso para esperar a que el usuario deje de escribir
-                data: function(params) {
-                    // Parámetros enviados en la solicitud AJAX
-                    return {
-                        action: "printOptions",
-                        q: params.term, // Término de búsqueda
-                        page: params.page || 1 // Página actual
-                    };
-                },
-                processResults: function(data, params) {
-                    // Parámetros de paginación para Select2
-                    params.page = params.page || 1;
-
-                    // Formatear los resultados para Select2
-                    var results = data.map(function(item) {
-                        return {
-                            id: item.id,
-                            text: item.name
-                        };
-                    });
-
-                    // Devolver los resultados y la información de paginación
-                    return {
-                        results: results,
-                        pagination: {
-                            more: data.length === 5 // Hay más resultados si se devolvieron 5 elementos
-                        }
-                    };
-                },
-                cache: true // Cachear los resultados para mejorar el rendimiento
-            },
-        });
-
-        // Limpiar el select al abrir el modal
-        $("#projecTeam").empty();
-    });
-
-
-     
-
-  $.ajax({
-    url: "handler/projectHandler.php",
-    method: "POST",
-    dataType: "json", //Tipo de datos que se espera recibir como respuesta.
-    data: { action: "printOptions" },
-    success: function (data) {
-      data.forEach(function (
-        item //Recorre cada elemento en el array de datos recibido como respuesta.
-      ) {
-        $("#projecTeamEdit").append(
-          `<option value="${item.id}">${item.name}</option>`
-        ); //Añade contenido al final de los elemento seleccionados
-      });
-    },
-  });
+//Funcion para inicializar y llamar al Select2 para crear un proyecto
+initializeSelect("#createProjectModal","#projecTeam","handler/projectHandler.php","printOptions");
 
   // Crear  Proyecto
   $("#registerProject")
@@ -365,17 +303,25 @@ $(document).ready(function () {
     
     
 
-  //Editar por fila atravez de una Modal
+  // Evento de clic en la tabla para mostrar los datos en el modal
   $("#projectTable tbody").on("click", "tr", function () {
-    //Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
-    var data = projectTable.row(this).data(); // selecciona la fila y la retorna la data que se selecciono como un objeto
-    // cada uno retorna la data en el input o select referenciando la columnna
-    $("#editId").val(data.id);
-    $("#editNameProject").val(data.name);
-    $("#descriptionEdit").val(data.description);
-    $("#projecTeamEdit").val(data.team_id);
-    $("#editProjectModal").modal("show"); //muestra la modal
+      var data = projectTable.row(this).data();
+      $("#editId").val(data.id);
+      $("#editNameProject").val(data.name);
+      $("#descriptionEdit").val(data.description);
+  
+      // Inicializar Select2 antes de mostrar el modal
+      initializeSelect("#editProjectModal", "#projecTeamEdit", "handler/projectHandler.php", "printOptions");
+      
+      // Asegurarse de que el select se inicializa correctamente con el valor predefinido
+      $("#projecTeamEdit").empty().append(new Option(data.team, data.team_id, true, true)).trigger('change');
+      //empty para asegurar que el select este vacio
+      //con New option agrega una opcion por defecto donde data.tema es el texto que va a selecionar el select2
+      //team_id es el id seleccionado los true se ponen para que cargue ambos valores por defecto
+      //change para que cualquier logica ligada al select se ejecute correctamente
+      $("#editProjectModal").modal("show");
   });
+  
 
   //Click al Boton para mandar el formulario con los nuevos datos
   $("#editButtonProject")

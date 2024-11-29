@@ -121,7 +121,7 @@ class ProjectModel extends Model
         }
     
         // Convertir el arreglo a JSON y mostrarlo
-        echo json_encode(array_values($projectArr)); // usar array_values para reindexar el arreglo
+        return array_values($projectArr); // usar array_values para reindexar el arreglo
     }
     
      

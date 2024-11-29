@@ -189,7 +189,7 @@
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
-    <script src="public/js/users.js"></script>
+    <script src="public/js/users.js" type="module"></script>
 </body>
 
 </html>

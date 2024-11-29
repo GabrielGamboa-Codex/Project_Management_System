@@ -241,7 +241,7 @@
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
-    <script src="public/js/task.js"></script>
+    <script src="public/js/task.js" type="module"></script>
 </body>
 
 </html>

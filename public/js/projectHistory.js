@@ -70,7 +70,7 @@ $(document).ready(function () {
       var projectId = $(this).val();
       var selectedProject = projectData.find(
         (project) => project.id == projectId
-      ); // Usar projectData en lugar de data
+      ); 
 
       if (selectedProject && selectedProject.users) {
         var userSelect = $("#selectUser");

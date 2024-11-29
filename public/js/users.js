@@ -1,3 +1,7 @@
+//Importa la funcion del select desde el servidor
+//atravez del archivo select.js
+import {initializeSelect} from "./select.js";
+
 //Validaciones
 function validation(event) {
   var char = String.fromCharCode(event.which);
@@ -164,54 +168,9 @@ function clearValidationMessages() {
 //Metodo Ajax
 $(document).ready(function () {
 
-  // Manejar evento de mostrar modal para cargar la data
-  $("#createUserModal").on("shown.bs.modal", function () {
-    // Inicializar Select2
-    $("#selectTeam").select2({
-      dropdownParent: $("#createUserModal"),
-    });
-    //se vacia el select
-    $("#selectTeam").empty();
-    //Cargar un select por ajax enviado la data desde la base de datos
-    $.ajax({
-      url: "handler/userHandler.php",
-      method: "POST",
-      dataType: "json",
-      data: { action: "printOptions" },
-      success: function (data) {
-        data.forEach(function (item) {
-          $("#selectTeam").append(
-            `<option value="${item.id}">${item.name}</option>`
-          );
-        });
-      },
-    });
-  });
 
-    // Manejar evento de mostrar modal para cargar la data
-  $("#editUserModal").on("shown.bs.modal", function () {
-    // Inicializar Select2
-    $("#teamEdit").select2({
-      dropdownParent: $("#editUserModal"),
-    });
-    //se vacia el select
-    $("#teamEdit").empty();
-  $.ajax({
-    url: "handler/userHandler.php",
-    method: "POST",
-    dataType: "json", //Tipo de datos que se espera recibir como respuesta.
-    data: { action: "printOptions" },
-    success: function (data) {
-      data.forEach(function (
-        item //Recorre cada elemento en el array de datos recibido como respuesta.
-      ) {
-        $("#teamEdit").append(
-          `<option value="${item.id}">${item.name}</option>`
-        ); //Añade contenido al final de los elemento seleccionados
-      });
-    },
-  });
-});
+//Funcion para inicializar y llamar al Select2 para crear un proyecto
+initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","printOptions");
 
   var userTable = $("#userTable").DataTable({
     ajax: {
@@ -320,7 +279,15 @@ $(document).ready(function () {
     $("#editId").val(data.id);
     $("#editName").val(data.username);
     $("#editEmail").val(data.email);
-    $("#teamEdit").val(data.team_id);
+    // Inicializar Select2 antes de mostrar el modal
+    initializeSelect("#editUserModal", "#teamEdit", "handler/userHandler.php", "printOptions");
+      
+    // Asegurarse de que el select se inicializa correctamente con el valor predefinido
+    $("#teamEdit").empty().append(new Option(data.team, data.team_id, true, true)).trigger('change');
+    //empty para asegurar que el select este vacio
+    //con New option agrega una opcion por defecto donde data.tema es el texto que va a selecionar el select2
+    //team_id es el id seleccionado los true se ponen para que cargue ambos valores por defecto
+    //change para que cualquier logica ligada al select se ejecute correctamente
     $("#editUserModal").modal("show"); //muestra la modal
   });
 

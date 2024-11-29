@@ -45,50 +45,49 @@
 
 
 
-
-    <!-- Modal Crear Projectos -->
-    <div class="modal fade" id="createProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="createProjectModalLabel">Register a New Project</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" id="createProject">
-                        <br>
-                        <div class="col-6 col-sm-12 col-md-12">
-                            <label for="nombre" class="form-label">
-                                <p class="fw-bold">Project Name</p>
-                            </label>
-                            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project"  maxlength="50" onkeypress="validation(event);" />
-                            <div id="message1"></div>
-                        </div>
-                        <br>
-                        <div class="form-group"> 
-                            <label for="nombre" class="form-label">
-                                <p class="fw-bold">Description</p>
-                            </label>
-                            <textarea class="form-control" id="projectDescription" name="projectDescription"  placeholder="Description Project"  maxlength="65535" rows="5" onkeypress="validation(event);"></textarea> 
-                            <div id="message2"></div>
-                        </div>                      
-                        <br>
-                        <div class="col-6 col-sm-12 col-md-12">
-                            <label for="nombre" class="form-label">
-                                <p class="fw-bold">Select Team</p>
-                            </label>
-                            <select class="form-select" id="projecTeam" aria-label="selectTeam">
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="registerProject"><i class="bi bi-clipboard2-plus"></i> Create Project</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
-                </div>
+<!-- Modal Crear Proyectos -->
+<div class="modal fade" id="createProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="createProjectModalLabel">Register a New Project</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="createProject">
+                    <br>
+                    <div class="col-6 col-sm-12 col-md-12">
+                        <label for="projectName" class="form-label">
+                            <p class="fw-bold">Project Name</p>
+                        </label>
+                        <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project" maxlength="50" onkeypress="validation(event);" />
+                        <div id="message1"></div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="projectDescription" class="form-label">
+                            <p class="fw-bold">Description</p>
+                        </label>
+                        <textarea class="form-control" id="projectDescription" name="projectDescription" placeholder="Description Project" maxlength="65535" rows="5" onkeypress="validation(event);"></textarea>
+                        <div id="message2"></div>
+                    </div>
+                    <br>
+                    <div class="col-6 col-sm-12 col-md-12">
+                        <label for="projecTeam" class="form-label">
+                            <p class="fw-bold">Select Team</p>
+                        </label>
+                        <select class="form-select" id="projecTeam" aria-label="selectTeam">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="registerProject"><i class="bi bi-clipboard2-plus"></i> Create Project</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i>Close</button>
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -166,7 +165,7 @@
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
-    <script src="public/js/project.js"></script>
+    <script src="public/js/project.js" type="module"></script>
 </body>
 
 </html>

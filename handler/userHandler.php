@@ -47,5 +47,24 @@ if (isset($_POST['action']) && $_POST['action'] == 'printOptions')
 {
     $data = new TeamModel;
     $teams = $data->printOptions();
-    echo json_encode($teams);
+     // Filtrar los resultados basados en el término de búsqueda
+    //Verifica si el parametro q esta definido en la solicitud post
+    if (isset($_POST['q'])) {
+        $q = $_POST['q'];
+        $teams = array_filter($teams, function($team) use ($q) {
+         //stripos($team['name'], $q): Busca la posición de la primera aparición del término de 
+         //búsqueda $q en el nombre del equipo $team['name'], ignorando mayúsculas y minúsculas.   
+            return stripos($team['name'], $q) !== false;
+            //si es falso significa que no se encontro
+        });
+    }
+
+    $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
+    $limit = 5; // Número de resultados por página
+    $offset = ($page - 1) * $limit;
+
+    // Realizar el slice del array extra una porcion de ese array para mostrarlo tomando el indice($offset) y cuantos elementos quiero extraer($limit)
+    $data = array_slice($teams, $offset, $limit);
+
+    echo json_encode($data);
 }

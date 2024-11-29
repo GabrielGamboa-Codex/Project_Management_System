@@ -3,12 +3,32 @@ require __DIR__ . '/../models/projectModels.php';
 require __DIR__ . '/../controllers/taskController.php';
 
 
-//Opciones de los Projectos
+// Opciones de los Projectos
 if (isset($_POST['action']) && $_POST['action'] == 'printOptionsProject') 
 {
-    $data = new ProjectModel();
-    $data->printOptionsProject();
+    $projectsModel = new ProjectModel();
+    $projects = $projectsModel->printOptionsProject(); // Asigna el valor devuelto a $projects
+
+    // Filtrar los resultados basados en el término de búsqueda
+    if (isset($_POST['q'])) {
+        $q = $_POST['q'];
+        $projects = array_filter($projects, function($project) use ($q) {
+            // stripos: Busca la posición de la primera aparición del término de búsqueda $q en el nombre del proyecto, ignorando mayúsculas y minúsculas.
+            return stripos($project['name'], $q) !== false;
+            // Si es falso significa que no se encontró
+        });
+    }
+
+    $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
+    $limit = 5; // Número de resultados por página
+    $offset = ($page - 1) * $limit;
+
+    // Realizar el slice del array para mostrar una porción del mismo
+    $data = array_slice($projects, $offset, $limit);
+
+    echo json_encode($data);
 }
+
 
 //Imprimir Tabla Tareas
 if (isset($_POST['action']) && $_POST['action'] == 'printTable') 

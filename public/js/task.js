@@ -1,3 +1,9 @@
+//Importa la funcion del select desde el servidor
+//atravez del archivo select.js
+
+import {initializeTaskModal} from "./select.js";
+
+
 function validation(event) {
   var char = String.fromCharCode(event.which);
   if (!/^[a-zA-Z0-9\s\W]+$/.test(char)) {
@@ -131,214 +137,8 @@ $(document).ready(function () {
     startDate: new Date(),
   });
 
-   // Manejar evento de mostrar modal para cargar la data
-  $("#createTaskModal").on("shown.bs.modal", function () {
-    // Inicializar Select2 
-    $("#projectTeam").select2({
-      dropdownParent: $("#createTaskModal"),
-    });
-
-    // Cargar los proyectos a seleccionar
-    $.ajax({
-      url: "handler/taskHandler.php",
-      method: "POST",
-      dataType: "json",
-      data: { action: "printOptionsProject" },
-      success: function (data) {
-        projectData = data; // Asignar los datos recibidos a la variable projectData
-
-        // Agregar opciones de proyectos al select de proyectos
-        data.forEach(function (project) {
-          var projectOption = `<option value="${project.id}">${project.name}</option>`;
-          $("#projectTeam").append(projectOption);
-        });
-
-        // Primera carga por defecto
-        if (data.length > 0) {
-          var firstProjectUsers = data[0].users;
-          var userSelect = $("#assignerUser");
-          userSelect.empty(); // Limpiar la lista de usuarios
-
-          firstProjectUsers.forEach(function (user) {
-            var userOption = `<option value="${user.id}">${user.username}</option>`;
-            userSelect.append(userOption);
-          });
-
-          // Inicializar Select2 después de agregar opciones
-          userSelect
-            .select2({
-              dropdownParent: $("#createTask"),
-            })
-            .trigger("change")
-            .on("select2:open", function () {
-              // Forzar reposicionamiento del dropdown
-              const select2Position = $(this)
-                .data("select2")
-                .$dropdown.offset();
-              const select2Height = $(this)
-                .data("select2")
-                .$dropdown.outerHeight();
-              $(this)
-                .data("select2")
-                .$dropdown.css({
-                  top: select2Position.top + select2Height,
-                });
-            });
-        }
-
-        // Detectar cambio en la selección de proyecto para cargar usuarios
-        $("#projectTeam").change(function () {
-          var projectId = $(this).val();
-          var selectedProject = projectData.find(
-            (project) => project.id == projectId
-          );
-
-          if (selectedProject && selectedProject.users) {
-            var userSelect = $("#assignerUser");
-            userSelect.empty(); // Limpiar la lista de usuarios
-
-            selectedProject.users.forEach(function (user) {
-              var userOption = `<option value="${user.id}">${user.username}</option>`;
-              userSelect.append(userOption);
-            });
-
-            // Inicializar Select2 después de agregar opciones
-            userSelect
-              .select2({
-                dropdownParent: $("#createTask"),
-              })
-              .trigger("change")
-              .on("select2:open", function () {
-                // Forzar reposicionamiento del dropdown
-                const select2Position = $(this)
-                  .data("select2")
-                  .$dropdown.offset();
-                const select2Height = $(this)
-                  .data("select2")
-                  .$dropdown.outerHeight();
-                $(this)
-                  .data("select2")
-                  .$dropdown.css({
-                    top: select2Position.top + select2Height,
-                  });
-              });
-          } else {
-            console.error("No users found for the selected project");
-          }
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error("AJAX error:", error);
-      },
-    });
-  });
-
-
-
-  //IMPRIMIR  proyectos con su usuario correspondiente en el editar
-  var projectData = []; // Variable para almacenar los datos de proyectos
-
-      // Manejar evento de mostrar modal para cargar la data
-  $("#editTaskModal").on("shown.bs.modal", function () {
-    // Inicializar Select2 
-    $("#projectTeamEdit").select2({
-      dropdownParent: $("#editTaskModal"),
-    });
-
-    // Cargar los proyectos a seleccionar
-    $.ajax({
-      url: "handler/taskHandler.php",
-      method: "POST",
-      dataType: "json",
-      data: { action: "printOptionsProject" },
-      success: function (data) {
-        projectData = data; // Asignar los datos recibidos a la variable projectData
-
-        // Agregar opciones de proyectos al select de proyectos
-        data.forEach(function (project) {
-          var projectOption = `<option value="${project.id}">${project.name}</option>`;
-          $("#projectTeamEdit").append(projectOption);
-        });
-
-        // Primera carga por defecto
-        if (data.length > 0) {
-          var firstProjectUsers = data[0].users;
-          var userSelect = $("#assignerUserEdit");
-          userSelect.empty(); // Limpiar la lista de usuarios
-
-          firstProjectUsers.forEach(function (user) {
-            var userOption = `<option value="${user.id}">${user.username}</option>`;
-            userSelect.append(userOption);
-          });
-
-          // Inicializar Select2 después de agregar opciones
-          userSelect
-            .select2({
-              dropdownParent: $("#editTask"),
-            })
-            .trigger("change")
-            .on("select2:open", function () {
-              // Forzar reposicionamiento del dropdown
-              const select2Position = $(this)
-                .data("select2")
-                .$dropdown.offset();
-              const select2Height = $(this)
-                .data("select2")
-                .$dropdown.outerHeight();
-              $(this)
-                .data("select2")
-                .$dropdown.css({
-                  top: select2Position.top + select2Height,
-                });
-            });
-        }
-
-        // Detectar cambio en la selección de proyecto para cargar usuarios
-        $("#projectTeamEdit").change(function () {
-          var projectId = $(this).val();
-          var selectedProject = projectData.find(
-            (project) => project.id == projectId
-          );
-
-          if (selectedProject && selectedProject.users) {
-            var userSelect = $("#assignerUserEdit");
-            userSelect.empty(); // Limpiar la lista de usuarios
-
-            selectedProject.users.forEach(function (user) {
-              var userOption = `<option value="${user.id}">${user.username}</option>`;
-              userSelect.append(userOption);
-            });
-
-            // Inicializar Select2 después de agregar opciones
-            userSelect
-              .select2({
-                dropdownParent: $("#editTask"),
-              })
-              .trigger("change")
-              .on("select2:open", function () {
-                // Forzar reposicionamiento del dropdown
-                const select2Position = $(this)
-                  .data("select2")
-                  .$dropdown.offset();
-                const select2Height = $(this)
-                  .data("select2")
-                  .$dropdown.outerHeight();
-                $(this)
-                  .data("select2")
-                  .$dropdown.css({
-                    top: select2Position.top + select2Height,
-                  });
-              });
-          } else {
-            console.error("No users found for the selected project");
-          }
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error("AJAX error:", error);
-      },
-    });
-  });
+   // Inicializar Select2 y cargar datos cuando se abre el modal de creación de tareas
+initializeTaskModal("#createTaskModal", "#projectTeam", "#assignerUser", "handler/taskHandler.php", "printOptionsProject");
 
   //Imprimir Tabla
   var taskTable = $("#taskTable").DataTable({
@@ -528,38 +328,56 @@ $(document).ready(function () {
       });
     });
 
-  // Editar por fila a través de una Modal
-  $("#taskTable tbody").on("click", "tr", function () {
-    // Manejador de Eventos de la tabla Usuarios seleccionando el Tbody
-    var data = taskTable.row(this).data(); // selecciona la fila y la retorna la data que se seleccionó como un objeto
+    let projectData = []; // Definir projectData en el ámbito global
 
-    // cada uno retorna la data en el input o select referenciando la columna
-    $("#editId").val(data.id);
-    $("#projectTeamEdit").val(data.project_id);
-    $("#descriptionEdit").val(data.description);
-    $("#datepickerEdit").val(data.due_date);
-    $("#priorityEdit").val(data.priority);
-    // Transformar el valor de "completed"
-    var completedValue = data.completed === "Completed" ? "1" : "0";
-    $("#taskStatusEdit").val(completedValue);
-    // Cargar los usuarios del proyecto seleccionado
-    var selectedProject = projectData.find(
-      (project) => project.id == data.project_id
-    );
-    var userSelect = $("#assignerUserEdit");
-    userSelect.empty();
-    // Limpiar la lista de usuarios
-    if (selectedProject) {
-      selectedProject.users.forEach(function (user) {
-        var userOption = `<option value="${user.id}">${user.username}</option>`;
-        userSelect.append(userOption);
-      });
-      // Seleccionar el usuario asignado
-      $("#assignerUserEdit").val(data.assigned_user_id);
-    }
-    // Mostrar la modal
-    $("#editTaskModal").modal("show");
-  });
+    // Inicializar los datos de los proyectos y usuarios antes de cualquier interacción
+    $.ajax({
+        url: "handler/taskHandler.php",
+        method: "POST",
+        dataType: "json",
+        data: { action: "printOptionsProject" },
+        success: function (data) {
+            projectData = data; // Asignar los datos recibidos a la variable global projectData
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error:", error);
+        },
+    });
+    
+    // Evento de clic en la tabla para editar los datos en el modal
+    $("#taskTable tbody").on("click", "tr", function () {
+        var data = taskTable.row(this).data(); // Selecciona la fila y retorna los datos como un objeto
+    
+        // Rellenar los inputs con los datos de la fila seleccionada
+        $("#editId").val(data.id);
+        $("#descriptionEdit").val(data.description);
+        $("#datepickerEdit").val(data.due_date);
+        $("#priorityEdit").val(data.priority);
+        var completedValue = data.completed === "Completed" ? "1" : "0";
+        $("#taskStatusEdit").val(completedValue);
+    
+        // Cargar los datos del proyecto seleccionado en el select de proyecto
+        var selectedProject = projectData.find(project => project.id == data.project_id);
+    
+        if (selectedProject) {
+            // Cargar el proyecto en el select de proyecto
+            $("#projectTeamEdit").empty().append(new Option(selectedProject.name, selectedProject.id, true, true)).trigger('change');
+    
+            // Cargar los usuarios del proyecto en el select de usuarios
+            var userSelect = $("#assignerUserEdit");
+            userSelect.empty();
+            selectedProject.users.forEach(function (user) {
+                var userOption = new Option(user.username, user.id, true, true);
+                userSelect.append(userOption);
+            });
+            $("#assignerUserEdit").val(data.assigned_user_id).trigger('change'); // Asegurarse de que el valor sea actualizado por Select2
+        }
+    
+        // Mostrar el modal
+        $("#editTaskModal").modal("show");
+    });
+    
+    
 
   //Click al Boton para mandar el formulario con los nuevos datos
   $("#editButtonTask")
