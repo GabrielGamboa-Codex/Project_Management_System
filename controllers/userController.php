@@ -37,6 +37,10 @@ class UserController
             elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo json_encode(['status' => 'errorEmail', 'message' => 'The Email field must not be empty and must contain the @ and example gmail.com.']);
             }
+            if (empty($teamId)) 
+            {
+                echo json_encode(['status' => 'errorSelect', 'message' => 'The Select Team cannot be empty.']);
+            }
             elseif(!preg_match($patternPass, $pass))
             {
                 if(!preg_match($patternPass, $pass))

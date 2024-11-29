@@ -13,6 +13,11 @@ function validation(event) {
   return true;
 }
 
+// Añade un evento de escucha a un campo de texto para utilizar la función de validación
+document.querySelector('#description').addEventListener('keypress', validation);
+document.querySelector('#descriptionEdit').addEventListener('keypress', validation);
+
+
 function validationPicker(event) {
   var char = String.fromCharCode(event.which);
   if (!/^[0-9\s-]+$/.test(char)) {
@@ -21,6 +26,9 @@ function validationPicker(event) {
   }
   return true;
 }
+
+document.querySelector('#datepicker').addEventListener('keypress', validationPicker);
+document.querySelector('#datepickerEdit').addEventListener('keypress', validationPicker);
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
@@ -106,7 +114,7 @@ function removeBorder(elementId) {
 
 // Función para limpiar los mensajes de validación
 function clearValidationMessages() {
-  var messages = ["message1", "message2", "messageEdit1", "messageEdit2"];
+  var messages = ["message1", "message2", "message3", "message4", "messageEdit1", "messageEdit2"];
   //Ejecuta esta funcion para cada uno de los id encontrados en el Array
   messages.forEach(function (id) {
     var messageElement = document.getElementById(id);
@@ -220,7 +228,7 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
       e.preventDefault();
       var formData = {
         id: $("#id").val(),
-        projectId: $("#projectTeam").val().trim(),
+        projectId: $("#projectTeam").val(),
         description: $("#description").val().trim(),
         date: $("#datepicker").val(),
         priority: $("#priority").val(),
@@ -258,7 +266,16 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
             var message = $("#message3").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } else if (response.status === "error") {
+          } else if (response.status === "errorSelect") {
+            //selecciono el id mensaje y luego cambio su valor por el texto del json
+            var message = $("#message3").text(response.message).show();
+            //con esta propiedad cambio su color a rojo
+            message.css("color", "red");
+            //selecciono el id mensaje y luego cambio su valor por el texto del json
+            var message = $("#message4").text(response.message).show();
+            //con esta propiedad cambio su color a rojo
+            message.css("color", "red");
+          }else if (response.status === "error") {
             $("#createTask")[0].reset();
             $("#createTaskmodal").modal("hide");
             clearValidationMessages();
@@ -269,7 +286,7 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
             );
           } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
-            alert("Se ha Creado un Nuevo Projecto");
+            Swal.fire("Success!", "Se ha Creado una Tarea Exitosamente!", "success");
             $("#createTask")[0].reset();
             $("#id").val("");
             $("#createTaskModal").modal("hide");
@@ -442,7 +459,7 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
             message.css("color", "red");
           } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
-            alert("Se ha Modificado un Projecto");
+            Swal.fire("Success!", "Se ha Editado una Tarea Exitosamente!", "success");
             $("#editTask")[0].reset();
             $("#editTaskModal").modal("hide");
             removeBorder("descriptionEdit");
@@ -500,32 +517,51 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
       });
     });
 
-  //Eliminar un Usuario
-  $("#deleteTask")
-    .off()
-    .click(function (e) {
-      e.preventDefault();
-      var deleteTask = {
-        id: $("#editId").val(),
-        action: "deleteTask",
-      };
-
-      $.ajax({
-        url: "handler/taskHandler.php",
-        dataType: "json",
-        type: "POST",
-        data: deleteTask,
-        success: function (response) {
-          if (response.status === "errorDelete") {
-            var message = response.message;
-            alert("No se pudo Eliminar el Usuario debido: " + message);
-            $("#deleteModal").modal("hide");
-          } else if (response.status === "success") {
-            alert("Se ha Eliminado un Project");
-            $("#deleteModal").modal("hide");
-            loadTable();
+      // Mi modal de Sweet alert para eliminar
+  document.getElementById('deleteButtonTask').addEventListener('click', function () {
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "No vas a poder Revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Aquí se ejecuta la lógica para eliminar el usuario
+        var deleteTask = {
+          id: $("#editId").val(),
+          action: "deleteTask",
+        };
+        //Se ejecuta el ajax que manda la peticion para borrar el usuario
+        $.ajax({
+          url: "handler/taskHandler.php",
+          dataType: "json",
+          type: "POST",
+          data: deleteTask,
+          success: function (response) {
+            if (response.status === "errorDelete") {
+              var message = response.message;
+              Swal.fire("Error", "Failed to Delete User due to " + message, "error");
+            } else if (response.status === "success") {
+              Swal.fire({
+                title: "Deleted!",
+                text: "El Projecto ha sido Borrado Existosamente.",
+                icon: "success"
+              });
+              $("#editTaskModal").modal("hide");
+              clearValidationMessages();
+              loadTable();
+            }
+          },
+          error: function (xhr, status, error) {
+            Swal.fire("Error", "An error occurred: " + error, "error");
           }
-        },
-      });
+        });
+      }
     });
+  });
+
+
 });

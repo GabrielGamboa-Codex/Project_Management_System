@@ -95,37 +95,13 @@
                 <div class="modal-footer">
                     <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editTeamButton"><i class="bi bi-pencil-square"></i> Edit Team</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete Team</button>
+                    <button type="button" class="btn btn-danger"  id="deleteTeamButton"><i class="bi bi-person-dash"></i> Delete Team</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-    <!-- modal Para Confirmar la Eliminacion de un usuario-->
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Team</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="col-6 col-sm-12 col-md-12">
-                    <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente el Team?
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="deleteTeamButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>

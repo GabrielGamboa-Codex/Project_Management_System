@@ -11,15 +11,11 @@ function validation(event) {
     return true;
 }
 
-
-
 // Añade un evento de escucha a un campo de texto para utilizar la función de validación
 document.querySelector('#userName').addEventListener('keypress', validation);
-// Añade un evento de escucha a un campo de texto para utilizar la función de validación
 document.querySelector('#userEmail').addEventListener('keypress', validation);
-
-
-
+document.querySelector('#editName').addEventListener('keypress', validation);
+document.querySelector('#editEmail').addEventListener('keypress', validation);
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
@@ -76,6 +72,7 @@ function validateData(formData) {
   return true;
 }
 
+
 // Verificar que el campo no esté vacío y contenga letras
 function validateDataedit(dataEdit) {
   //Con el .trim valida que los campos no tengas espacios al principio o al final
@@ -85,7 +82,6 @@ function validateDataedit(dataEdit) {
   //Llama a los div para que carguen los mensajes si hay algun error
   var message1 = document.getElementById("messageEdit1");
   var message2 = document.getElementById("messageEdit2");
-  var message3 = document.getElementById("messageEdit3");
 
   //revisa que el userName tenga algun caracter y como minomo sean 4
   var nameRegex = /^[a-zA-Z0-9\s]{4,}$/;
@@ -160,6 +156,7 @@ function clearValidationMessages() {
     "message1",
     "message2",
     "message3",
+    "message4",
     "messageEdit1",
     "messageEdit2",
     "messageEdit3",
@@ -259,6 +256,11 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
             var message = $("#message3").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
+          } else if (response.status === "errorSelect") {
+            //selecciono el id mensaje y luego cambio su valor por el texto del json
+            var message = $("#message4").text(response.message).show();
+            //con esta propiedad cambio su color a rojo
+            message.css("color", "red");
           } else if (response.status === "error") {
             $("#createUser")[0].reset();
             $("#createUserModal").modal("hide");
@@ -271,7 +273,7 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
           } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
             //Alert the Sweet Alert2
-            swal("Success!", "Se ha Guardado un nuevo Usuario Exitosamente!", "success");
+            Swal.fire("Success!", "Se ha Creado un nuevo Usuario Exitosamente!", "success");
             $("#createUser")[0].reset();
             $("#id").val("");
             $("#createUserModal").modal("hide");
@@ -360,7 +362,7 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
             );
           } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
-            alert("Se ha Actualizado un Registro");
+            Swal.fire("Success!", "Se ha Editado el Usuario Exitosamente!", "success");
             $("#editUserModal").modal("hide");
             loadTable();
             $("#editUser")[0].reset();
@@ -370,32 +372,50 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
       });
     });
 
-  //Eliminar un Usuario
-  $("#deleteButton")
-    .off()
-    .click(function (e) {
-      e.preventDefault();
-      var deleteUser = {
-        id: $("#editId").val(),
-        action: "deleteUser",
-      };
-
-      $.ajax({
-        url: "handler/userHandler.php",
-        dataType: "json",
-        type: "POST",
-        data: deleteUser,
-        success: function (response) {
-          if (response.status === "errorDelete") {
-            var message = response.message;
-            alert("Failed to Delete User due to " + message);
-            $("#deleteModal").modal("hide");
-          } else if (response.status === "success") {
-            alert("Se ha Eliminado un Registro");
-            $("#deleteModal").modal("hide");
-            loadTable();
+// Mi modal de Sweet alert para eliminar
+  document.getElementById('deleteUserButton').addEventListener('click', function() {
+      Swal.fire({
+          title: "Estas seguro?",
+          text: "No vas a poder Revertir esto!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              // Aquí se ejecuta la lógica para eliminar el usuario
+              var deleteUser = {
+                  id: $("#editId").val(),
+                  action: "deleteUser",
+              };
+              //Se ejecuta el ajax que manda la peticion para borrar el usuario
+              $.ajax({
+                  url: "handler/userHandler.php",
+                  dataType: "json",
+                  type: "POST",
+                  data: deleteUser,
+                  success: function (response) {
+                      if (response.status === "errorDelete") {
+                          var message = response.message;
+                          Swal.fire("Error", "Failed to Delete User due to " + message, "error");
+                      } else if (response.status === "success") {
+                          Swal.fire({
+                              title: "Deleted!",
+                              text: "El Usuario ha sido Borrado Existosamente.",
+                              icon: "success"
+                          });
+                          $("#editUserModal").modal("hide");
+                          clearValidationMessages();
+                          loadTable();
+                      }
+                  },
+                  error: function (xhr, status, error) {
+                      Swal.fire("Error", "An error occurred: " + error, "error");
+                  }
+              });
           }
-        },
       });
-    });
+  });
+  
 });

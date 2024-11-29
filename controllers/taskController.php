@@ -34,6 +34,10 @@ class TaskController
                         
                     }
                 }
+                if (empty($projectId)) 
+                {
+                    echo json_encode(['status' => 'errorSelect', 'message' => 'The Select cannot be empty.']);
+                }
                 elseif(!preg_match($patterDate,$dueDate))
                 {
                     if(!preg_match($patterDate,$dueDate))

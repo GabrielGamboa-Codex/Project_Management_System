@@ -60,54 +60,54 @@ function validateDataedit(dataEdit) {
 // Función para limpiar los mensajes de validación
 function clearValidationMessages() {
   var messages = [
-      "message1", 
-      "messageEdit1"
+    "message1",
+    "messageEdit1"
   ];
-  
-  messages.forEach(function(messageId) {
-      var messageElement = document.getElementById(messageId);
-      if (messageElement) {
-          messageElement.textContent = "";
-          messageElement.style.color = ""; // Restablece el color al valor por defecto
-      }
+
+  messages.forEach(function (messageId) {
+    var messageElement = document.getElementById(messageId);
+    if (messageElement) {
+      messageElement.textContent = "";
+      messageElement.style.color = ""; // Restablece el color al valor por defecto
+    }
   });
 }
 
 //Metodo Ajax
 
 $(document).ready(function () {
-    //Tabla de Projectos
-    var teamTable = $("#teamTable").DataTable({
-      ajax: {
-        url: "handler/teamHandler.php",
-        method: "POST",
-        data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
-      },
-      columnDefs: [
-        { visible: false, targets: 2 },
-        { visible: false, targets: 3 },
-        { visible: false, targets: 4 },
-      ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
-      columns: [
-        { data: "id" },
-        { data: "name" },
-        // Incluye esta columna si la necesitas
-        { data: "created_at" },
-        { data: "updated_at" },
-        { data: "status" },
-      ],
-    });
+  //Tabla de Projectos
+  var teamTable = $("#teamTable").DataTable({
+    ajax: {
+      url: "handler/teamHandler.php",
+      method: "POST",
+      data: { action: "printTable" }, // Con data envio un action el cual envia un valor llamado printTable
+    },
+    columnDefs: [
+      { visible: false, targets: 2 },
+      { visible: false, targets: 3 },
+      { visible: false, targets: 4 },
+    ], // sirve para ocultar la columna señalada tomando el cuenta que la primera columna es 0
+    columns: [
+      { data: "id" },
+      { data: "name" },
+      // Incluye esta columna si la necesitas
+      { data: "created_at" },
+      { data: "updated_at" },
+      { data: "status" },
+    ],
+  });
 
-      // funcion para recargar la tabla
+  // funcion para recargar la tabla
   function loadTable() {
     teamTable.ajax.reload();
   }
 
-    // Añade un cursor pointer a todas las filas de la tabla
-    $("#teamTable tbody").on("mouseenter", "tr", function () {
-      $(this).addClass("pointer");
-    });
-  
+  // Añade un cursor pointer a todas las filas de la tabla
+  $("#teamTable tbody").on("mouseenter", "tr", function () {
+    $(this).addClass("pointer");
+  });
+
   // Crear  Proyecto
   $("#registerTeam")
     .off()
@@ -132,24 +132,21 @@ $(document).ready(function () {
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorTeam") 
-          {
+          if (response.status === "errorTeam") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
             var message = $("#message1").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
-          } 
-          else if (response.status === "error") 
-          {
+          }
+          else if (response.status === "error") {
             $("#createTeam")[0].reset();
             $("#createTeamModal").modal("hide");
             clearValidationMessages();
-            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
-          } 
-          else if (response.status === "success") 
-          {
+            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>');
+          }
+          else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
-            alert("Se ha Creado un Nuevo Team");
+            Swal.fire("Success!", "Se Creado un nuevo Team!", "success");
             $("#createTeam")[0].reset();
             $("#id").val("");
             $("#createTeamModal").modal("hide");
@@ -194,65 +191,77 @@ $(document).ready(function () {
         data: dataEdit,
         success: function (response) {
           //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
-         //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
+          //si la respuesta es error para el submit y no guarda los datos y envia algo por pantalla
           //reponse comprueba el el https_response_ en el envio
-          if (response.status === "errorEditTeam") 
-            {
-              //selecciono el id mensaje y luego cambio su valor por el texto del json
-              var message = $("#messageEdit1").text(response.message).show();
-              //con esta propiedad cambio su color a rojo
-              message.css("color", "red");
-            } 
-            else if (response.status === "errorEdit") 
-            {
-              $("#editTeam")[0].reset();
-              $("#editTeamModal").modal("hide");
-              clearValidationMessages();
-              $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>'); 
-            } 
-            else if (response.status === "success") 
-            {
-              //si funciona entonces procede a guardar el codigo
-              alert("Se ha Modificado un Team");
-              $("#editTeam")[0].reset();
-              $("#editTeamModal").modal("hide");
-              clearValidationMessages();
-              loadTable();
-            }
-        },
-      });
-    });
-
-  //Eliminar un Usuario
-  $("#deleteTeamButton")
-    .off()
-    .click(function (e) {
-      e.preventDefault();
-      var deleteTeam = {
-        id: $("#editId").val(),
-        action: "deleteTeam",
-      };
-
-      $.ajax({
-        url: "handler/teamHandler.php",
-        dataType: "json",
-        type: "POST",
-        data: deleteTeam,
-        success: function (response) {
-          if (response.status === "errorDelete") 
-          {
-            var message = response.message;
-            alert("Failed to Delete User due to " + message);
-            $("#deleteModal").modal("hide");
-          } 
-          else if (response.status === "success") 
-          {
-            alert("Se ha Eliminado un Team");
-            $("#deleteModal").modal("hide");
+          if (response.status === "errorEditTeam") {
+            //selecciono el id mensaje y luego cambio su valor por el texto del json
+            var message = $("#messageEdit1").text(response.message).show();
+            //con esta propiedad cambio su color a rojo
+            message.css("color", "red");
+          }
+          else if (response.status === "errorEdit") {
+            $("#editTeam")[0].reset();
+            $("#editTeamModal").modal("hide");
+            clearValidationMessages();
+            $("body").html('<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' + response.message + '</div>');
+          }
+          else if (response.status === "success") {
+            //si funciona entonces procede a guardar el codigo
+            Swal.fire("Success!", "Se ha Editado el Team Exitosamente!", "success");
+            $("#editTeam")[0].reset();
+            $("#editTeamModal").modal("hide");
+            clearValidationMessages();
             loadTable();
           }
         },
       });
     });
+
+  // Mi modal de Sweet alert para eliminar
+  document.getElementById('deleteTeamButton').addEventListener('click', function () {
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "No vas a poder Revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Aquí se ejecuta la lógica para eliminar el usuario
+        var deleteTeam = {
+          id: $("#editId").val(),
+          action: "deleteTeam",
+        };
+        //Se ejecuta el ajax que manda la peticion para borrar el usuario
+        $.ajax({
+          url: "handler/teamHandler.php",
+          dataType: "json",
+          type: "POST",
+          data: deleteTeam,
+          success: function (response) {
+            if (response.status === "errorDelete") {
+              var message = response.message;
+              Swal.fire("Error", "Failed to Delete User due to " + message, "error");
+            } else if (response.status === "success") {
+              Swal.fire({
+                title: "Deleted!",
+                text: "El Team ha sido Borrado Existosamente.",
+                icon: "success"
+              });
+              $("#editTeamModal").modal("hide");
+              clearValidationMessages();
+              loadTable();
+            }
+          },
+          error: function (xhr, status, error) {
+            Swal.fire("Error", "An error occurred: " + error, "error");
+          }
+        });
+      }
+    });
+  });
+
 
 });

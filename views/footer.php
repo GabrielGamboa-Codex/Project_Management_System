@@ -5,5 +5,6 @@
   <!-- Bootstrap Datepicker JS --> <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 <script src="public/select2/dist/js/select2.min.js"></script>
 <!-- Sweet Alert 2 -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 

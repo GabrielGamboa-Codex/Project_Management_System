@@ -90,6 +90,7 @@
                             </label>
                             <select class="form-select" id="selectTeam" aria-label="selectTeam">
                             </select>
+                            <div id="message4"></div>
                         </div>
 
                     </form>
@@ -120,7 +121,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name User" maxlength="50" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name User" maxlength="50"/>
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -128,7 +129,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Example Email: 123@email.com"  maxlength="100" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Example Email: 123@email.com"  maxlength="100" />
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
@@ -155,7 +156,7 @@
                 <div class="modal-footer">
                     <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editButton"><i class="bi bi-pencil-square"></i> Edit User</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-person-dash"></i> Delete User</button>
+                    <button type="button" class="btn btn-danger" id="deleteUserButton"><i class="bi bi-person-dash"></i> Delete User</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
@@ -164,28 +165,6 @@
 
 
 
-
-
-    <!-- Modal Para Confirmar la Eliminacion de un usuario-->
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete User</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="col-6 col-sm-12 col-md-12">
-                    <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente el Usuario?
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="deleteButton" class="btn btn-danger"><i class="bi bi-person-fill-x"></i> Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>

@@ -60,7 +60,7 @@
                         <label for="projectName" class="form-label">
                             <p class="fw-bold">Project Name</p>
                         </label>
-                        <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project" maxlength="50" onkeypress="validation(event);" />
+                        <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Name Project" maxlength="50" />
                         <div id="message1"></div>
                     </div>
                     <br>
@@ -68,7 +68,7 @@
                         <label for="projectDescription" class="form-label">
                             <p class="fw-bold">Description</p>
                         </label>
-                        <textarea class="form-control" id="projectDescription" name="projectDescription" placeholder="Description Project" maxlength="65535" rows="5" onkeypress="validation(event);"></textarea>
+                        <textarea class="form-control" id="projectDescription" name="projectDescription" placeholder="Description Project" maxlength="65535" rows="5"></textarea>
                         <div id="message2"></div>
                     </div>
                     <br>
@@ -78,6 +78,7 @@
                         </label>
                         <select class="form-select" id="projecTeam" aria-label="selectTeam">
                         </select>
+                        <div id="message3"></div>
                     </div>
                 </form>
             </div>
@@ -107,7 +108,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Project Name</p>
                             </label>
-                            <input type="text" class="form-control" id="editNameProject" name="editNameProject"  maxlength="50" placeholder="Name Project" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="editNameProject" name="editNameProject"  maxlength="50" placeholder="Name Project" />
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -115,7 +116,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit"   maxlength="65535" placeholder="Description Project" rows="5" onkeypress="validation(event);"></textarea> 
+                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit"   maxlength="65535" placeholder="Description Project" rows="5"></textarea> 
                             <div id="messageEdit2"></div>
                         </div>                      
                         <br>
@@ -131,37 +132,13 @@
                 <div class="modal-footer">
                     <input type="hidden" id="editId">
                     <button type="submit" class="btn btn-warning" id="editButtonProject"><i class="bi bi-pencil-square"></i> Edit Project</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i> Delete Project</button>
+                    <button type="button" class="btn btn-danger" id="deleteButtonProject"><i class="bi bi-clipboard-minus"></i> Delete Project</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-    <!-- Modal Para Confirmar la Eliminacion de un usuario-->
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Project</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="col-6 col-sm-12 col-md-12">
-                    <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente el Projecto?
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="deleteProject" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>

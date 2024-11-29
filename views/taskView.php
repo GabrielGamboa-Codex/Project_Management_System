@@ -74,13 +74,14 @@
                             </label>
                             <select class="form-select" id="projectTeam" aria-label="projectTeam">
                             </select>
+                            <div id="message3"></div>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="description" name="description" placeholder="Description"  maxlength="65535" rows="5" onkeypress="validation(event);"></textarea>
+                            <textarea class="form-control" id="description" name="description" placeholder="Description"  maxlength="65535" rows="5"></textarea>
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -88,7 +89,7 @@
                             <label for="datepicker">
                                 <p class="fw-bold">Date Due</p>
                             </label>
-                            <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                            <input type="text" id="datepicker" class="form-control" placeholder="Insert a Date">
                             <div id="message2"></div>
                         </div>
                         <br>
@@ -119,7 +120,7 @@
                             </label>
                             <select class="form-select" id="assignerUser" aria-label="assignerUser">
                             </select>
-                            <div id="message3"></div>
+                            <div id="message4"></div>
                         </div>
                         <br>
                     </form>
@@ -159,7 +160,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Description</p>
                             </label>
-                            <textarea class="form-control" id="descriptionEdit" name="description" placeholder="Description" rows="5" onkeypress="validation(event);"></textarea>
+                            <textarea class="form-control" id="descriptionEdit" name="description" placeholder="Description" rows="5"></textarea>
                             <div id="messageEdit1"></div>
                         </div>
                         <br>
@@ -167,7 +168,7 @@
                             <label for="datepicker">
                                 <p class="fw-bold">Date Due</p>
                             </label>
-                            <input type="text" id="datepickerEdit" class="form-control" placeholder="Insert a Date" onkeypress="validationPicker(event);">
+                            <input type="text" id="datepickerEdit" class="form-control" placeholder="Insert a Date">
                             <div id="messageEdit2"></div>
                         </div>
                         <br>
@@ -205,7 +206,7 @@
                 <div class="modal-footer">
                 <input type="hidden" id="editId">
                 <button type="submit" class="btn btn-warning" id="editButtonTask"><i class="bi bi-pencil-square"></i> Edit task</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-clipboard-minus"></i></i> Delete Task</button>
+                <button type="button" class="btn btn-danger"  id="deleteButtonTask"><i class="bi bi-clipboard-minus"></i></i> Delete Task</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                 </div>
                 </form>
@@ -214,30 +215,6 @@
     </div>
     </div>
 
-
-
-
-
-    <!-- Modal Para Confirmar la Eliminacion de un Tarea-->
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete task</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="col-6 col-sm-12 col-md-12">
-                    <div class="modal-body">
-                        ¿Desea usted Eliminar Realmente Esta Tarea?
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="deleteTask" class="btn btn-danger"><i class="bi bi-clipboard2-x"></i> Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>

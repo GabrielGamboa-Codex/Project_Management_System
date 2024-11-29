@@ -31,6 +31,11 @@ class ProjectController
             {
                 echo json_encode(['status' => 'errorProject', 'message' => 'The project name must contain numeric characters or letters and be at least 4 characters long.']);
             }
+
+            if (empty($teamId)) 
+            {
+                echo json_encode(['status' => 'errorSelect', 'message' => 'The Select Team cannot be empty.']);
+            }
             elseif(!preg_match($patternDescription, $description))
             {
                 if(!preg_match($patternDescription, $description))
