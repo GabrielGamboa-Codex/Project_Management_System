@@ -115,5 +115,5 @@
     <?php
     include __DIR__ . '/../views/footer.php';
     ?>
-    <script src="public/js/projectHistory.js"></script>
+    <script src="public/js/projectHistory.js" type="module"></script>
 </body>

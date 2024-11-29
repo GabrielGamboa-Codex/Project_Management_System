@@ -2,15 +2,26 @@
 //atravez del archivo select.js
 import {initializeSelect} from "./select.js";
 
-//Validaciones
+
+// Tu código de validación
 function validation(event) {
-  var char = String.fromCharCode(event.which);
-  if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) {
-    event.preventDefault();
-    return false;
-  }
-  return true;
+    var char = String.fromCharCode(event.which);
+    if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
 }
+
+
+
+// Añade un evento de escucha a un campo de texto para utilizar la función de validación
+document.querySelector('#userName').addEventListener('keypress', validation);
+// Añade un evento de escucha a un campo de texto para utilizar la función de validación
+document.querySelector('#userEmail').addEventListener('keypress', validation);
+
+
+
 
 // Verificar que el campo no esté vacío y contenga letras
 function validateData(formData) {
@@ -165,6 +176,7 @@ function clearValidationMessages() {
   });
 }
 
+
 //Metodo Ajax
 $(document).ready(function () {
 
@@ -260,7 +272,8 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
             );
           } else if (response.status === "success") {
             //si funciona entonces procede a guardar el codigo
-            alert("Usuario creado con éxito.");
+            //Alert the Sweet Alert2
+            swal("Success!", "Se ha Guardado un nuevo Usuario Exitosamente!", "success");
             $("#createUser")[0].reset();
             $("#id").val("");
             $("#createUserModal").modal("hide");

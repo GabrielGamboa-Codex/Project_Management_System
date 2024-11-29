@@ -62,7 +62,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">User Name</p>
                             </label>
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name User"  maxlength="50" onkeypress="validation(event);" />
+                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name User"  maxlength="50"/>
                             <div id="message1"></div>
                         </div>
                         <br>
@@ -70,7 +70,7 @@
                             <label for="nombre" class="form-label">
                                 <p class="fw-bold">Email</p>
                             </label>
-                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Example Email: 123@email.com"  maxlength="100" onkeypress="validation(event);" />
+                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Example Email: 123@email.com"  maxlength="100"/>
                             <div id="message2"></div>
                         </div>
                         <br>

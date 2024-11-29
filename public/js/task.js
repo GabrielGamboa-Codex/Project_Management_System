@@ -1,7 +1,7 @@
 //Importa la funcion del select desde el servidor
 //atravez del archivo select.js
 
-import {initializeTaskModal} from "./select.js";
+import {initializeProjectAndUser} from "./select.js";
 
 
 function validation(event) {
@@ -138,7 +138,7 @@ $(document).ready(function () {
   });
 
    // Inicializar Select2 y cargar datos cuando se abre el modal de creación de tareas
-initializeTaskModal("#createTaskModal", "#projectTeam", "#assignerUser", "handler/taskHandler.php", "printOptionsProject");
+initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "handler/taskHandler.php", "printOptionsProject");
 
   //Imprimir Tabla
   var taskTable = $("#taskTable").DataTable({
@@ -356,25 +356,31 @@ initializeTaskModal("#createTaskModal", "#projectTeam", "#assignerUser", "handle
         var completedValue = data.completed === "Completed" ? "1" : "0";
         $("#taskStatusEdit").val(completedValue);
     
-        // Cargar los datos del proyecto seleccionado en el select de proyecto
-        var selectedProject = projectData.find(project => project.id == data.project_id);
-    
-        if (selectedProject) {
-            // Cargar el proyecto en el select de proyecto
-            $("#projectTeamEdit").empty().append(new Option(selectedProject.name, selectedProject.id, true, true)).trigger('change');
-    
-            // Cargar los usuarios del proyecto en el select de usuarios
-            var userSelect = $("#assignerUserEdit");
-            userSelect.empty();
-            selectedProject.users.forEach(function (user) {
-                var userOption = new Option(user.username, user.id, true, true);
-                userSelect.append(userOption);
-            });
-            $("#assignerUserEdit").val(data.assigned_user_id).trigger('change'); // Asegurarse de que el valor sea actualizado por Select2
-        }
+        // Inicializar el modal con Select2 y cargar los datos
+        initializeProjectAndUser("#editTaskModal", "#projectTeamEdit", "#assignerUserEdit", "handler/taskHandler.php", "printOptionsProject");
     
         // Mostrar el modal
         $("#editTaskModal").modal("show");
+    
+        // Esperar a que se muestre el modal antes de cargar los selectores para asegurar que no se sobrescriban
+        $("#editTaskModal").on("shown.bs.modal", function () {
+            // Cargar los datos del proyecto seleccionado en el select de proyecto
+            var selectedProject = projectData.find(project => project.id == data.project_id);
+    
+            if (selectedProject) {
+                // Cargar el proyecto en el select de proyecto
+                $("#projectTeamEdit").empty().append(new Option(selectedProject.name, selectedProject.id, true, true)).trigger('change');
+    
+                // Cargar los usuarios del proyecto en el select de usuarios
+                var userSelect = $("#assignerUserEdit");
+                userSelect.empty();
+                selectedProject.users.forEach(function (user) {
+                    var userOption = new Option(user.username, user.id, true, true);
+                    userSelect.append(userOption);
+                });
+                $("#assignerUserEdit").val(data.assigned_user_id).trigger('change'); // Asegurarse de que el valor sea actualizado por Select2
+            }
+        });
     });
     
     
