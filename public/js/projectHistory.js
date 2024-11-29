@@ -33,6 +33,7 @@ $(document).ready(function () {
     //Carga la data para el select de Busqueda
   dataSearch("#filterDataModal", "#selectProject", "#selectUser", "handler/projectHistoryHandler.php", "printOptionsProject");
 
+
   // Configuración de Date Picker para fecha de inicio
   jQuery("#startDate").datepicker({
     autoclose: true,

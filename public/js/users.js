@@ -2,8 +2,6 @@
 //atravez del archivo select.js
 import {initializeSelect} from "./select.js";
 
-
-// Tu código de validación
 function validation(event) {
     var char = String.fromCharCode(event.which);
     if (!/[a-zA-Z0-9\s@#$%*+-.]/.test(char)) {
@@ -292,15 +290,7 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
     $("#editId").val(data.id);
     $("#editName").val(data.username);
     $("#editEmail").val(data.email);
-    // Inicializar Select2 antes de mostrar el modal
-    initializeSelect("#editUserModal", "#teamEdit", "handler/userHandler.php", "printOptions");
-      
-    // Asegurarse de que el select se inicializa correctamente con el valor predefinido
-    $("#teamEdit").empty().append(new Option(data.team, data.team_id, true, true)).trigger('change');
-    //empty para asegurar que el select este vacio
-    //con New option agrega una opcion por defecto donde data.tema es el texto que va a selecionar el select2
-    //team_id es el id seleccionado los true se ponen para que cargue ambos valores por defecto
-    //change para que cualquier logica ligada al select se ejecute correctamente
+    $("#teamEdit").val(data.team_id);
     $("#editUserModal").modal("show"); //muestra la modal
   });
 
