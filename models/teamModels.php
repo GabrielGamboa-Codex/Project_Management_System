@@ -29,30 +29,56 @@ class TeamModel extends Model
     }
     
 
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue) 
     {
         try {
-            $teamArr = array();
-            $teams = TeamModel::where('status', true)
-            ->get();
+            $teams = TeamModel::where('status', true);
+
+            // Ordenación
+            $teams->orderBy('id', 'asc');
     
-            foreach ($teams as $team) {
+            // Número total de registros sin filtrar
+            $totalRecords = $teams->count();
+    
+            // Búsqueda
+            if (!empty($searchValue)) {
+                $teams->where(function ($search) use ($searchValue) {
+                    $search->where('name', 'like', '%' . $searchValue . '%')
+                    ->orWhere('id', 'like', '%' . $searchValue . '%');
+                });
+            }
+    
+            // Número total de registros después de aplicar los filtros de búsqueda
+            $recordsFiltered = $teams->count();
+       
+            // Aplica la paginación
+            $data = $teams->skip($start)->take($length)->get();
+    
+            // Formatear los datos para DataTables
+            $teamArr = [];
+            foreach ($data as $team) {
                 $teamArr[] = array(
                     "id" => $team->id,
                     "name" => $team->name,
                     "created_at" => $team->created_at,
                     "updated_at" => $team->updated_at,
-                    "status"=> $team->status,
+                    "status" => $team->status,
                 );
             }
-            //indexas el arreglo con el string data
-            echo json_encode(array("data" => $teamArr));
+    
+            // Respuesta JSON para DataTables
+            echo json_encode([
+                "draw" => $draw,
+                "recordsTotal" => $totalRecords,
+                "recordsFiltered" => $recordsFiltered,
+                "data" => $teamArr
+            ]);
         } catch (PDOException $e) {
-            $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' => 'ERROR', 'message' => "An error has occurred: " . $e->getMessage()];
             echo json_encode($error);
         }
-       
     }
+    
 
      //funcion de crear Teams
      public function createTeam($teamName)

@@ -12,10 +12,10 @@ class ProjectController
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue) 
     {
         $project = new ProjectModel();
-        $project->printTable();
+        $project->printTable($draw, $start, $length, $searchValue);
     }
 
     //envia los datos al modelo para crear un usuario

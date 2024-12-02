@@ -44,7 +44,7 @@ function validateData(formData) {
     message1.style.color = "green";
   } else {
     message1.textContent =
-      "The Email field must not be empty and must contain the @ and example gmail.com.";
+      "The field cannot be empty and must contain at least 4 characters which can be numbers or letters.";
     message1.style.color = "red";
     return false;
   }
@@ -180,6 +180,8 @@ $(document).ready(function () {
 initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","printOptions");
 
   var userTable = $("#userTable").DataTable({
+    processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
+    serverSide: true,  // Habilita el procesamiento del lado del servidor
     ajax: {
       url: "handler/userHandler.php",
       method: "POST",
@@ -204,6 +206,7 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
     ],
   });
 
+ 
   // Añade un cursor pointer a todas las filas de la tabla
   $("#userTable tbody").on("mouseenter", "tr", function () {
     $(this).addClass("pointer");
@@ -275,6 +278,9 @@ initializeSelect("#createUserModal","#selectTeam","handler/userHandler.php","pri
             //Alert the Sweet Alert2
             Swal.fire("Success!", "Se ha Creado un nuevo Usuario Exitosamente!", "success");
             $("#createUser")[0].reset();
+            // Resetear el select y asignar placeholder 
+            $("#selectTeam").val("").trigger('change'); 
+            $("#selectTeam").append('<option value="" disabled selected>Select an option</option>');
             $("#id").val("");
             $("#createUserModal").modal("hide");
             clearValidationMessages();

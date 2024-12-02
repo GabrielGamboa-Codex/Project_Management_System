@@ -122,13 +122,10 @@ class ProjectModel extends Model
     
         // Convertir el arreglo a JSON y mostrarlo
         return array_values($projectArr); // usar array_values para reindexar el arreglo
-    }
-    
-     
-    
+    }   
 
 
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue) 
     {
         try {
             $projectArr = array();
@@ -143,10 +140,31 @@ class ProjectModel extends Model
                     'teams.name',
                     'teams.id'
                 )
-                 ->where('projects.status', true)
-                 ->get();
+                 ->where('projects.status', true);
+
+            // Ordenación
+            $projects->orderBy('projects.id', 'asc');
     
-            foreach ($projects as $project) {
+            // Número total de registros sin filtrar
+            $totalRecords =  $projects->count();
+    
+            // Búsqueda
+            if (!empty($searchValue)) {
+                 $projects->where(function ($search) use ($searchValue) {
+                    $search->where('projects.name', 'like', '%' . $searchValue . '%')
+                    ->orWhere('projects.id', 'like', '%' . $searchValue . '%')
+                    ->orWhere('teams.name', 'like', '%' . $searchValue . '%')
+                    ->orWhere('projects.description', 'like', '%' . $searchValue . '%');
+                });
+            }
+    
+            // Número total de registros después de aplicar los filtros de búsqueda
+            $recordsFiltered =  $projects->count();
+       
+            // Aplica la paginación
+            $data =  $projects->skip($start)->take($length)->get();
+    
+            foreach ($data as $project) {
                 $projectArr[] = array(
                     "id" => $project->projectId,
                     "name" => $project->projectName,
@@ -158,8 +176,13 @@ class ProjectModel extends Model
                     "status"=> $project->status,
                 );
             }
-            //indexas el arreglo con el string data
-            echo json_encode(array("data" => $projectArr));
+            // Respuesta JSON para DataTables
+            echo json_encode([
+                "draw" => $draw,
+                "recordsTotal" => $totalRecords,
+                "recordsFiltered" => $recordsFiltered,
+                "data" => $projectArr
+            ]);
         } catch (PDOException $e) {
             $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);

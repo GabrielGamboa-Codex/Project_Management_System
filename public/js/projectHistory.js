@@ -54,6 +54,8 @@ $(document).ready(function () {
 
   // Inicializar DataTable
   var projectHistoryTable = $("#historyTable").DataTable({
+    processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
+    serverSide: true,  // Habilita el procesamiento del lado del servidor
     ajax: {
       url: "handler/projectHistoryHandler.php",
       method: "POST",

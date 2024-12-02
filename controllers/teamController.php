@@ -11,10 +11,10 @@ class TeamController
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue)
     {
         $team = new TeamModel();
-        $team->printTable();
+        $team->printTable($draw, $start, $length, $searchValue);
     }
 
     //envia los datos al modelo para crear un usuario

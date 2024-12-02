@@ -12,7 +12,7 @@ class ProjectHistoryModel extends Model
     public $timestamps = false; 
     
        
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue)
     {
         try {
             $projectHistoryArr = array();
@@ -29,10 +29,35 @@ class ProjectHistoryModel extends Model
                 'users.id as  userId',
                 'users.username as userName',
                 'project_history.timestamp',
-            )
-            ->get();
+            );
+                      
+                // Ordenación
+                $projectHistory->orderBy('tasks.id', 'asc');
     
-            foreach ($projectHistory as $history) {
+                // Número total de registros sin filtrar
+                $totalRecords =  $projectHistory->count();
+        
+            // Búsqueda
+            if (!empty($searchValue)) {
+                $projectHistory->where(function ($search) use ($searchValue) {
+                    $search->where('tasks.id', 'like', '%' . $searchValue . '%')
+                          ->orWhere('projects.name', 'like', '%' . $searchValue . '%')
+                          ->orWhere('users.username', 'like', '%' . $searchValue . '%')
+                          ->orWhere('tasks.description', 'like', '%' . $searchValue . '%')
+                          ->orWhere('tasks.due_date', 'like', '%' . $searchValue . '%')
+                          ->orWhere('tasks.priority', 'like', '%' . $searchValue . '%');
+                });
+            }
+    
+        
+                // Número total de registros después de aplicar los filtros de búsqueda
+                $recordsFiltered =  $projectHistory->count();
+           
+                // Aplica la paginación
+                $data =  $projectHistory->skip($start)->take($length)->get();
+    
+    
+            foreach ($data as $history) {
                 $projectHistoryArr[] = array(
                     "id" => $history->id,
                     "projectId" => $history->projectId,
@@ -44,8 +69,14 @@ class ProjectHistoryModel extends Model
                 );
             }
     
-            //indexas el arreglo con el string data
-            echo json_encode(array("data" => $projectHistoryArr)); // usar array_values para reindexar el arreglo
+            // Respuesta JSON para DataTables
+            echo json_encode([
+                "draw" => $draw,
+                "recordsTotal" => $totalRecords,
+                "recordsFiltered" => $recordsFiltered,
+                "data" => $projectHistoryArr
+            ]);
+            
         } catch (PDOException $e) {
             $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);

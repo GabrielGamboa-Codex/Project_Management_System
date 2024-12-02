@@ -11,10 +11,10 @@ class UserController
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue)
     {
         $user = new UserModel();
-        $user->printTable();
+        $user->printTable($draw, $start, $length, $searchValue);
     }
 
     //envia los datos al modelo para crear un usuario

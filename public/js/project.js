@@ -148,6 +148,8 @@ function removeBorder(elementId) {
 $(document).ready(function () {
   //Tabla de Projectos
   var projectTable = $("#projectTable").DataTable({
+    processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
+    serverSide: true,  // Habilita el procesamiento del lado del servidor
     ajax: {
       url: "handler/projectHandler.php",
       method: "POST",
@@ -256,6 +258,8 @@ $(document).ready(function () {
             Swal.fire("Success!", "Se ha Creado un nuevo Projecto Exitosamente!", "success");
             $("#createProject")[0].reset();
             $("#id").val("");
+            $("#projecTeam").val("").trigger('change'); 
+            $("#projecTeam").append('<option value="" disabled selected>Select an option</option>');
             $("#createProjectModal").modal("hide");
             removeBorder('projectDescription');
             clearValidationMessages();

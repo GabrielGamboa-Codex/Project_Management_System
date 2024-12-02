@@ -8,7 +8,7 @@ class TaskModel extends Model
 
     protected $table = 'Tasks';
 
-    public function printTable()
+    public function printTable($draw, $start, $length, $searchValue)
     {
         try {
             $taskArr = array();
@@ -28,11 +28,42 @@ class TaskModel extends Model
                     'tasks.updated_at',
                     'tasks.status',
                 )
-                ->where('tasks.status', true)
-                ->get();
+                ->where('tasks.status', true);
+                
+                // Ordenación
+            $tasks->orderBy('tasks.id', 'asc');
+    
+            // Número total de registros sin filtrar
+            $totalRecords =  $tasks->count();
+    
+        // Búsqueda
+        if (!empty($searchValue)) {
+            $tasks->where(function ($query) use ($searchValue) {
+                $query->where('tasks.id', 'like', '%' . $searchValue . '%')
+                      ->orWhere('projects.name', 'like', '%' . $searchValue . '%')
+                      ->orWhere('users.username', 'like', '%' . $searchValue . '%')
+                      ->orWhere('tasks.description', 'like', '%' . $searchValue . '%')
+                      ->orWhere('tasks.due_date', 'like', '%' . $searchValue . '%')
+                      ->orWhere('tasks.priority', 'like', '%' . $searchValue . '%');
+
+                // Interpretar "complete" y "pending" para buscar en la columna `completed`
+                if (stripos('complete', $searchValue) !== false) {
+                    $query->orWhere('tasks.completed', 1);
+                } elseif (stripos('pending', $searchValue) !== false) {
+                    $query->orWhere('tasks.completed', 0);
+                }
+            });
+        }
 
     
-            foreach ($tasks as $task) {
+            // Número total de registros después de aplicar los filtros de búsqueda
+            $recordsFiltered =  $tasks->count();
+       
+            // Aplica la paginación
+            $data =  $tasks->skip($start)->take($length)->get();
+
+    
+            foreach ($data as $task) {
                 $taskArr[] = array(
                     "id" => $task->taskId,
                     "project_id" => $task->projectId,
@@ -49,8 +80,14 @@ class TaskModel extends Model
                     "status"=> $task->status,
                 );
             }
-            //indexas el arreglo con el string data
-            echo json_encode(array("data" => $taskArr));
+
+            // Respuesta JSON para DataTables
+            echo json_encode([
+                "draw" => $draw,
+                "recordsTotal" => $totalRecords,
+                "recordsFiltered" => $recordsFiltered,
+                "data" => $taskArr
+            ]);
         } catch (PDOException $e) {
             $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
             echo json_encode($error);

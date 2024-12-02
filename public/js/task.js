@@ -150,6 +150,8 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
 
   //Imprimir Tabla
   var taskTable = $("#taskTable").DataTable({
+    processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
+    serverSide: true,  // Habilita el procesamiento del lado del servidor
     ajax: {
       url: "handler/taskHandler.php",
       method: "POST",
@@ -263,7 +265,7 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
             message.css("color", "red");
           } else if (response.status === "errorUser") {
             //selecciono el id mensaje y luego cambio su valor por el texto del json
-            var message = $("#message3").text(response.message).show();
+            var message = $("#message4").text(response.message).show();
             //con esta propiedad cambio su color a rojo
             message.css("color", "red");
           } else if (response.status === "errorSelect") {
@@ -290,6 +292,10 @@ initializeProjectAndUser("#createTaskModal", "#projectTeam", "#assignerUser", "h
             $("#createTask")[0].reset();
             $("#id").val("");
             $("#createTaskModal").modal("hide");
+            $("#projectTeam").val("").trigger('change'); 
+            $("#projectTeam").append('<option value="" disabled selected>Select an option</option>');
+            $("#assignerUser").val("").trigger('change'); 
+            $("#assignerUser").append('<option value="" disabled selected>Select an option</option>');
             removeBorder("description");
             clearValidationMessages();
             loadTable();
