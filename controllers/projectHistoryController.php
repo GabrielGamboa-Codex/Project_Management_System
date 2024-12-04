@@ -15,10 +15,10 @@ class ProjectHistoryController
     }
 
     //Funcion para guardar los datos en un arreglo e imprimirlo
-    public function printTable($draw, $start, $length, $searchValue, $projectId, $userId , $status , $startDate , $endDate )
+    public function printTable($draw, $start, $length, $projectId, $userId , $status , $startDate , $endDate )
     {
         $project = new ProjectHistoryModel();
-        $project->printTable($draw, $start, $length, $searchValue, $projectId, $userId , $status , $startDate , $endDate );
+        $project->printTable($draw, $start, $length, $projectId, $userId , $status , $startDate , $endDate );
     }
 
     public function search($projectId, $userId, $status, $startDate, $endDate)

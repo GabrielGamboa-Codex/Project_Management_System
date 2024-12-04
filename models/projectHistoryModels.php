@@ -13,7 +13,7 @@ class ProjectHistoryModel extends Model
     
        
 
-        public function printTable($draw, $start, $length, $searchValue, $projectId, $userId , $status , $startDate , $endDate ) {
+        public function printTable($draw, $start, $length, $projectId, $userId , $status , $startDate , $endDate ) {
             try {
                 $query = ProjectHistoryModel::join('projects', 'project_history.project_id', '=', 'projects.id')
                     ->join('users', 'project_history.user_id', '=', 'users.id')

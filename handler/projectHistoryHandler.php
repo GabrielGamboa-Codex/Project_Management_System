@@ -19,7 +19,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'printTable') {
     $draw = isset($_POST['draw']) ? intval($_POST['draw']) : 0;
     $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
     $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
-    $searchValue = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
 
     //Recoje los Datos de la Modal
     $projectId = isset($_POST['projectId']) ? $_POST['projectId'] : null;
@@ -28,7 +27,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'printTable') {
     $startDate = isset($_POST['dateStart']) ? $_POST['dateStart'] : null;
     $endDate = isset($_POST['dateEnd']) ? $_POST['dateEnd'] : null;
 
-    $controller->printTable($draw, $start, $length, $searchValue, $projectId, $userId, $status, $startDate, $endDate);
+    $controller->printTable($draw, $start, $length, $projectId, $userId, $status, $startDate, $endDate);
 }
 
 
