@@ -55,7 +55,6 @@ $(document).ready(function () {
   // Inicializar DataTable
   var projectHistoryTable = $("#historyTable").DataTable({
     processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
-    serverSide: true,  // Habilita el procesamiento del lado del servidor
     ajax: {
       url: "handler/projectHistoryHandler.php",
       method: "POST",
@@ -96,6 +95,7 @@ $(document).ready(function () {
       dataType: "json",
       data: formData,
       success: function (json) {
+        console.log(json);
         if (json.status === "success") 
         {
           //limpia la tabla con clear, luego selecciona con rows las columnas y dibuja el la data del json con la propiedad draw()

@@ -12,52 +12,26 @@ class ProjectHistoryModel extends Model
     public $timestamps = false; 
     
        
-    public function printTable($draw, $start, $length, $searchValue)
+    public function printTable()
     {
         try {
             $projectHistoryArr = array();
     
-            // Obtener todos los proyectos con sus respectivos usuarios si el proyecto no tiene un usuario
-            //asociado no lo imprime el proyecto
+            // Obtener todos los proyectos con sus respectivos usuarios
             $projectHistory = ProjectHistoryModel::join('projects', 'project_history.project_id', '=', 'projects.id')
-            ->join('users', 'project_history.user_id', '=', 'users.id')
-            ->select(
-                'project_history.id',
-                'projects.id as projectId',
-                'projects.name as projectName',
-                'project_history.action',
-                'users.id as  userId',
-                'users.username as userName',
-                'project_history.timestamp',
-            );
-                      
-                // Ordenación
-                $projectHistory->orderBy('tasks.id', 'asc');
-    
-                // Número total de registros sin filtrar
-                $totalRecords =  $projectHistory->count();
-        
-            // Búsqueda
-            if (!empty($searchValue)) {
-                $projectHistory->where(function ($search) use ($searchValue) {
-                    $search->where('tasks.id', 'like', '%' . $searchValue . '%')
-                          ->orWhere('projects.name', 'like', '%' . $searchValue . '%')
-                          ->orWhere('users.username', 'like', '%' . $searchValue . '%')
-                          ->orWhere('tasks.description', 'like', '%' . $searchValue . '%')
-                          ->orWhere('tasks.due_date', 'like', '%' . $searchValue . '%')
-                          ->orWhere('tasks.priority', 'like', '%' . $searchValue . '%');
-                });
-            }
-    
-        
-                // Número total de registros después de aplicar los filtros de búsqueda
-                $recordsFiltered =  $projectHistory->count();
-           
-                // Aplica la paginación
-                $data =  $projectHistory->skip($start)->take($length)->get();
-    
-    
-            foreach ($data as $history) {
+                ->join('users', 'project_history.user_id', '=', 'users.id')
+                ->select(
+                    'project_history.id',
+                    'projects.id as projectId',
+                    'projects.name as projectName',
+                    'project_history.action',
+                    'users.id as userId',
+                    'users.username as userName',
+                    'project_history.timestamp'
+                )
+                ->get();        
+            
+            foreach ($projectHistory as $history) {
                 $projectHistoryArr[] = array(
                     "id" => $history->id,
                     "projectId" => $history->projectId,
@@ -68,21 +42,20 @@ class ProjectHistoryModel extends Model
                     "timestamp" => $history->timestamp,
                 );
             }
-    
+            
             // Respuesta JSON para DataTables
-            echo json_encode([
-                "draw" => $draw,
-                "recordsTotal" => $totalRecords,
-                "recordsFiltered" => $recordsFiltered,
+            $response = [
                 "data" => $projectHistoryArr
-            ]);
+            ];
+    
+            echo json_encode($response);
             
         } catch (PDOException $e) {
-            $error = ['status' =>  'ERROR', 'message' => "An error has occurred:" . $e->getMessage()];
+            $error = ['status' =>  'ERROR', 'message' => "An error has occurred: " . $e->getMessage()];
             echo json_encode($error);
         }
-        
     }
+    
 
     public function saveHistorial($project_id, $action)
     {
