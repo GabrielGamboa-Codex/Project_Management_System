@@ -1,7 +1,7 @@
 //Importa la funcion del select desde el servidor
 //atravez del archivo select.js
 
-import {dataSearch} from "./select.js";
+import { dataSearch } from "./select.js";
 
 function validationPicker(event) {
   var char = String.fromCharCode(event.which);
@@ -28,11 +28,14 @@ function clearValidationMessages() {
 //Metodo Ajax
 
 $(document).ready(function () {
-
-
-    //Carga la data para el select de Busqueda
-  dataSearch("#filterDataModal", "#selectProject", "#selectUser", "handler/projectHistoryHandler.php", "printOptionsProject");
-
+  //Carga la data para el select de Busqueda
+  dataSearch(
+    "#filterDataModal",
+    "#selectProject",
+    "#selectUser",
+    "handler/projectHistoryHandler.php",
+    "printOptionsProject"
+  );
 
   // Configuración de Date Picker para fecha de inicio
   jQuery("#startDate").datepicker({
@@ -54,16 +57,27 @@ $(document).ready(function () {
 
   // Inicializar DataTable
   var projectHistoryTable = $("#historyTable").DataTable({
-    processing: true,  // Muestra un mensaje de procesamiento durante las operaciones
+    processing: true,
+    serverSide: true,
+    search: false,
     ajax: {
       url: "handler/projectHistoryHandler.php",
       method: "POST",
-      data: { action: "printTable" },
+      data: function (d) {
+        d.action = "printTable";
+        d.projectId = $("#selectProject").val();
+        d.userId = $("#selectUser").val();
+        d.status = $("#selectAction").val();
+        d.dateStart = $("#startDate").val();
+        d.dateEnd = $("#endDate").val();
+      },
     },
     columnDefs: [
       { visible: false, targets: 1 },
       { visible: false, targets: 4 },
     ],
+    //oculta el imput de search del dataTable
+    dom: 'lrtip',
     columns: [
       { data: "id" },
       { data: "projectId" },
@@ -78,54 +92,13 @@ $(document).ready(function () {
   // Evento de búsqueda
   $("#search").on("click", function (e) {
     e.preventDefault();
-
-    var formData = {
-      projectId: $("#selectProject").val(),
-      userId: $("#selectUser").val(),
-      status: $("#selectAction").val(),
-      dateStart: $("#startDate").val(),
-      dateEnd: $("#endDate").val(),
-      action: "search",
-    };
-
-    // Enviar la solicitud de búsqueda por separado
-    $.ajax({
-      url: "handler/projectHistoryHandler.php",
-      method: "POST",
-      dataType: "json",
-      data: formData,
-      success: function (json) {
-        console.log(json);
-        if (json.status === "success") 
-        {
-          //limpia la tabla con clear, luego selecciona con rows las columnas y dibuja el la data del json con la propiedad draw()
-          projectHistoryTable.clear().rows.add(json.data).draw();
-          // Limpiar las opciones excepto la opción "Select"
-          // filtra las opciones exceptuando la primera
-          $("#selectUser").html('<option value="">Select</option>');
-          $("#filterDataModal").modal("hide");
-          $("#searchData")[0].reset();
-        } 
-        else if (response.status === "error") 
-        {
-          $("#searchData")[0].reset();
-          $("#filterDataModal").modal("hide");
-          clearValidationMessages();
-          $("body").html(
-            '<div style="color: red;">A critical error has occurred and the page cannot continue. Error: ' +
-              response.message +
-              "</div>"
-          );
-        }
-      },
-      error: function (xhr, status, error) {
-        console.error("Error en la solicitud AJAX:", error);
-        console.error("Respuesta del servidor:", xhr.responseText);
-      },
-    });
+    projectHistoryTable.ajax.reload(null, false); // Recargar la tabla con los nuevos parámetros
+    $("#filterDataModal").modal("hide");
+    $("#selectUser").html('<option value="">Select</option>');
+    $("#searchData")[0].reset();
   });
 
-  // Rea=carga los datos del Datatable
+  // Recarga los datos del DataTable
   $("#reloadTable").on("click", function () {
     projectHistoryTable.ajax.reload();
   });
