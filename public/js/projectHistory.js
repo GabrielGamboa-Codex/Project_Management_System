@@ -59,7 +59,6 @@ $(document).ready(function () {
   var projectHistoryTable = $("#historyTable").DataTable({
     processing: true,
     serverSide: true,
-    search: false,
     ajax: {
       url: "handler/projectHistoryHandler.php",
       method: "POST",
